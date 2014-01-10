@@ -87,7 +87,7 @@
             
             <table class="relaciongasto" border="1">
                 <tr>
-                    <th>Nro. Comprobante</th>
+                    <th>Nro. Co</th>
                     <th>Fecha Factura</th>
                     <th>Imputación</th>
                     <th>Descripción</th>
@@ -96,22 +96,22 @@
                     <th>Nro. factura</th>
                     <th>Monto</th>
                     <th>Dólares</th>
+                    <th>Accion</th>
                     
                 </tr>
-                <tr>
+                <tr align="center">
                     <td>{{ form_widget(form.numerocomprobante) }}</td>
                     <td>{{ form_widget(form.fechafactura) }}</td>
-                    <td></td>
+                    <td>{{ form_widget(form.imputacionpresupuestaria) }}</td>
                     <td>{{ form_widget(form.descripcion) }}</td>
                     <td>{{ form_widget(form.nombrerazonsocial) }}</td>
                     <td>{{ form_widget(form.identificacionfiscal) }}</td>
                     <td>{{ form_widget(form.numerofactura) }}</td>
                     <td>{{ form_widget(form.montomonnac) }}</td>
                     <td>{{ form_widget(form.montodolar) }}</td>
+                    <td align="center"><img width="30px" src="{{ asset('images/aprobado.jpg') }}"></td>
                     
                 </tr>                
-                
-                
             </table>
             
         </div>

@@ -20,11 +20,35 @@
 }
 
 .relaciongasto{
-    width: 1050px;
+    width: 1098px;
     font-size: 12px;
     font-family: Georgia;
 }
 
 #relaciongastos_numerocomprobante{
     width: 50px;
+}
+
+#relaciongastos_montomonnac{
+    width: 50px;
+}
+
+#relaciongastos_montodolar{
+    width: 50px;    
+}
+
+#relaciongastos_identificacionfiscal{
+    width: 100px;     
+}
+
+#relaciongastos_numerofactura{
+    width: 100px;     
+}
+
+#relaciongastos_fechafactura{
+    width: 100px;  
+}
+
+#relaciongastos_nombrerazonsocial{
+    width: 110px;
 }

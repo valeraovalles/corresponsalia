@@ -3,6 +3,10 @@ corresponsalia_inicio:
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
 
 
+corresponsalia_ajax_gasfun:
+    pattern:  /ajax/gasfun/{datos}
+    defaults: { _controller: CorresponsaliaBundle:Ajax:gasfun }
+
 ################################################################################
 
 tipocorresponsalia:
