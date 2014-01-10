@@ -1,0 +1,7 @@
+parameters:
+#    corresponsalia.example.class: Frontend\CorresponsaliaBundle\Example
+
+services:
+#    corresponsalia.example:
+#        class: %corresponsalia.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

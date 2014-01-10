@@ -1,0 +1,30 @@
+.inicio{
+    text-align: justify;
+    padding: 20px;
+}
+
+.estatusfondo{
+    width: 900px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-family: Georgia;
+}
+
+.estatusfondo th{
+    text-align: center;
+    padding: 5px;
+}
+
+.estatusfondo td{
+    padding: 2px;
+}
+
+.relaciongasto{
+    width: 1050px;
+    font-size: 12px;
+    font-family: Georgia;
+}
+
+#relaciongastos_numerocomprobante{
+    width: 50px;
+}

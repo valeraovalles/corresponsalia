@@ -1,0 +1,3 @@
+corresponsalia:
+    resource: "@CorresponsaliaBundle/Resources/config/routing.yml"
+    prefix:   /corresponsalia

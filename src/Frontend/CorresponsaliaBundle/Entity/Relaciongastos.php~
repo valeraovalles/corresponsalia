@@ -1,0 +1,123 @@
+<?php
+
+namespace Frontend\CorresponsaliaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Relaciongastos
+ *
+ * @ORM\Table(name="relaciongastos")
+ * @ORM\Entity
+ */
+class Relaciongastos
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="idx", type="string", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="relaciongastos_idx_seq", allocationSize=1, initialValue=1)
+     */
+    private $idx;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numerocomprobante", type="integer", nullable=false)
+     */
+    private $numerocomprobante;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafactura", type="date", nullable=false)
+     */
+    private $fechafactura;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imputacionpresupuestaria", type="string", nullable=false)
+     */
+    private $imputacionpresupuestaria;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombrerazonsocial", type="string", nullable=false)
+     */
+    private $nombrerazonsocial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="identificacionfiscal", type="string", nullable=false)
+     */
+    private $identificacionfiscal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numerofactura", type="string", nullable=false)
+     */
+    private $numerofactura;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montomonnac", type="decimal", nullable=false)
+     */
+    private $montomonnac;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montodolar", type="decimal", nullable=false)
+     */
+    private $montodolar;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio", type="integer", nullable=false)
+     */
+    private $anio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes", type="integer", nullable=false)
+     */
+    private $mes;
+
+    /**
+     * @var \Corresponsalia
+     *
+     * @ORM\ManyToOne(targetEntity="Corresponsalia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
+     * })
+     */
+    private $corresponsalia;
+
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Tipogasto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id")
+     * })
+     */
+    private $tipogasto;
+
+
+}
