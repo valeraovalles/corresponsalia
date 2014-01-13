@@ -5,22 +5,22 @@ namespace Frontend\CorresponsaliaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Relaciongastos
+ * Relaciongastotmp
  *
- * @ORM\Table(name="relaciongastos")
+ * @ORM\Table(name="relaciongastotmp")
  * @ORM\Entity
  */
-class Relaciongastos
+class Relaciongastotmp
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="idx", type="string", nullable=false)
+     * @ORM\Column(name="id", type="string", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="relaciongastos_idx_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="relaciongastotmp_id_seq", allocationSize=1, initialValue=1)
      */
-    private $idx;
+    private $id;
 
     /**
      * @var integer
@@ -122,13 +122,13 @@ class Relaciongastos
 
 
     /**
-     * Get idx
+     * Get id
      *
      * @return string 
      */
-    public function getIdx()
+    public function getId()
     {
-        return $this->idx;
+        return $this->id;
     }
 
     /**

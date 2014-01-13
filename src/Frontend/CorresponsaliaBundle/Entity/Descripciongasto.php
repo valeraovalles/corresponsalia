@@ -1,17 +1,17 @@
  <?php
 
- 
 namespace Frontend\CorresponsaliaBundle\Entity;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tipogasto
+ * Descripciongasto
  *
- * @ORM\Table(name="tipogasto")
+ * @ORM\Table(name="descripciongasto")
  * @ORM\Entity
  */
-class Tipogasto
+class Descripciongasto
 {
     /**
      * @var integer
@@ -19,7 +19,7 @@ class Tipogasto
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="tipogasto_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="descripciongasto_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -31,7 +31,15 @@ class Tipogasto
      */
     private $descripcion;
 
-
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Tipogasto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id")
+     * })
+     */
+    private $tipogasto;
 
     /**
      * Get id
@@ -47,7 +55,7 @@ class Tipogasto
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Tipogasto
+     * @return Descripciongasto
      */
     public function setDescripcion($descripcion)
     {
@@ -64,5 +72,28 @@ class Tipogasto
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+    
+    /**
+     * Set tipogasto
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto
+     * @return Relaciongastos
+     */
+    public function setTipogasto(\Frontend\TipogastoBundle\Entity\Tipogasto $tipogasto = null)
+    {
+        $this->tipogasto = $tipogasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipogasto
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tipogasto 
+     */
+    public function getTipogasto()
+    {
+        return $this->tipogasto;
     }
 }

@@ -22,7 +22,7 @@ class RelaciongastosType extends AbstractType
                     'format' => 'yyyy-MM-dd'))
                 
             ->add('imputacionpresupuestaria')
-            ->add('descripcion','textarea')
+            ->add('descripcion')
             ->add('nombrerazonsocial')
             ->add('identificacionfiscal')
             ->add('numerofactura')

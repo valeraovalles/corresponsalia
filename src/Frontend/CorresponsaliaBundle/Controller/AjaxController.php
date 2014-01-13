@@ -8,6 +8,8 @@ class AjaxController extends Controller
 {
     public function gasfunAction($datos)
     {
-        return $this->render('CorresponsaliaBundle:Default:inicio.html.twig');
+        echo "sss";
+        die;
+        return $this->render('CorresponsaliaBundle:Ajax:gasfun.html.twig');
     }
 }

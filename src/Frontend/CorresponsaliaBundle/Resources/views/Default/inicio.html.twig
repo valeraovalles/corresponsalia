@@ -10,7 +10,8 @@
 
     <h2>RENDICIÓN DE GASTOS MES DE ENERO</h2><br>
 
-    <table border="1" class="estatusfondo">
+    <div class="table-responsive">
+    <table border="1" class="estatusfondo table table-striped">
         <tr>
             <th colspan="6">ESTATUS DEL FONDO ENVIADO</th>
         </tr>
@@ -56,6 +57,8 @@
             
         </tr>
     </table>
+    </div>  
+        
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
       <li><a href="#home" data-toggle="tab">TUTORIAL</a></li>
@@ -87,32 +90,35 @@
             
             <table class="relaciongasto" border="1">
                 <tr>
-                    <th>Nro. Co</th>
-                    <th>Fecha Factura</th>
-                    <th>Imputación</th>
                     <th>Descripción</th>
-                    <th>Nombre/Razón</th>
-                    <th>Identif. fiscal</th>
-                    <th>Nro. factura</th>
-                    <th>Monto</th>
-                    <th>Dólares</th>
-                    <th>Accion</th>
-                    
-                </tr>
-                <tr align="center">
-                    <td>{{ form_widget(form.numerocomprobante) }}</td>
-                    <td>{{ form_widget(form.fechafactura) }}</td>
-                    <td>{{ form_widget(form.imputacionpresupuestaria) }}</td>
                     <td>{{ form_widget(form.descripcion) }}</td>
+                    <th>Nro. Comprobante</th>
+                    <td>{{ form_widget(form.numerocomprobante) }}</td>
+                    <th>Fecha Factura</th>
+                    <td>{{ form_widget(form.fechafactura) }}</td>
+
+
+                </tr>
+                <tr>
+                    <th>Imputación</th>
+                    <td>{{ form_widget(form.imputacionpresupuestaria) }}</td>
+                    <th>Nombre/Razón</th>
                     <td>{{ form_widget(form.nombrerazonsocial) }}</td>
+                    <th>Identif. fiscal</th>
                     <td>{{ form_widget(form.identificacionfiscal) }}</td>
+                </tr>
+                <tr>
+
+                    <th>Nro. factura</th>
                     <td>{{ form_widget(form.numerofactura) }}</td>
+                    <th>Monto</th>
                     <td>{{ form_widget(form.montomonnac) }}</td>
+                    <th>Dólares</th>
                     <td>{{ form_widget(form.montodolar) }}</td>
-                    <td align="center"><img width="30px" src="{{ asset('images/aprobado.jpg') }}"></td>
-                    
-                </tr>                
+                </tr>
             </table>
+            
+            <br><div><img style="cursor:pointer" id="agregar" width="30px" src="{{ asset('images/aprobado.jpg') }}"></div>
             
         </div>
         <div class="tab-pane fade" id="gasto2">
@@ -122,4 +128,19 @@
             <br><h4>HONORARIOS PROFESIONALES</h4><br>
         </div>
     </div>
+    
+    <div id="tablagasfun">xxx</div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#agregar').click(function(){
+                
+                var dato = $("#relaciongastos_numerocomprobante").val();
+                var ruta = "{{ path('corresponsalia_ajax_gasfun', {'datos': 'variable'}) }}";
+                ruta = ruta.replace("variable", "dato");
+                $('#tablagasfun').load(ruta);
+            });
+        });
+    </script>
+    
 {% endblock %}
