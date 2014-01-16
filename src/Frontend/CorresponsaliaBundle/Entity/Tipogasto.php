@@ -1,9 +1,9 @@
- <?php
-
- 
+<?php
 namespace Frontend\CorresponsaliaBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+
+
 
 /**
  * Tipogasto
@@ -64,5 +64,9 @@ class Tipogasto
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+    
+    public function __toString(){
+        return $this->getDescripcion();
     }
 }

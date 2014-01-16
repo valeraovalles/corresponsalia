@@ -139,6 +139,28 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::inicioAction',  '_route' => 'corresponsalia_inicio',);
             }
 
+            // corresponsalia_guardatemprendicion
+            if (rtrim($pathinfo, '/') === '/corresponsalia/guardatemprendicion') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'corresponsalia_guardatemprendicion');
+                }
+
+                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardatemprendicionAction',  '_route' => 'corresponsalia_guardatemprendicion',);
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/ajax')) {
+                // corresponsalia_ajax_gasfun
+                if (0 === strpos($pathinfo, '/corresponsalia/ajax/gasfun') && preg_match('#^/corresponsalia/ajax/gasfun/(?P<datos>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_ajax_gasfun')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\AjaxController::gasfunAction',));
+                }
+
+                // corresponsalia_ajax_formdescripciongasto
+                if (0 === strpos($pathinfo, '/corresponsalia/ajax/formdescripciongasto') && preg_match('#^/corresponsalia/ajax/formdescripciongasto/(?P<idtipo>[^/]++)/(?P<data>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_ajax_formdescripciongasto')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\AjaxController::formdescripciongastoAction',));
+                }
+
+            }
+
             // tipocorresponsalia
             if ($pathinfo === '/corresponsalia/tipocorresponsalia/lista') {
                 return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipocorresponsaliaController::indexAction',  '_route' => 'tipocorresponsalia',);

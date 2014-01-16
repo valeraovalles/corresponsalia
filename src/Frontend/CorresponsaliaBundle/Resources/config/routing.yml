@@ -3,9 +3,18 @@ corresponsalia_inicio:
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
 
 
+corresponsalia_guardatemprendicion:
+    pattern:  /guardatemprendicion/
+    defaults: { _controller: CorresponsaliaBundle:Default:guardatemprendicion }
+
+
 corresponsalia_ajax_gasfun:
     pattern:  /ajax/gasfun/{datos}
     defaults: { _controller: CorresponsaliaBundle:Ajax:gasfun }
+    
+corresponsalia_ajax_formdescripciongasto:
+    pattern:  /ajax/formdescripciongasto/{idtipo}/{data}
+    defaults: { _controller: CorresponsaliaBundle:Ajax:formdescripciongasto }
 
 ################################################################################
 

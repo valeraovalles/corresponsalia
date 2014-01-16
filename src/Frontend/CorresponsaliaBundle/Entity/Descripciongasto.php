@@ -1,9 +1,11 @@
- <?php
+<?php
 
 namespace Frontend\CorresponsaliaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+
+
 
 /**
  * Descripciongasto
@@ -80,7 +82,7 @@ class Descripciongasto
      * @param \Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto
      * @return Relaciongastos
      */
-    public function setTipogasto(\Frontend\TipogastoBundle\Entity\Tipogasto $tipogasto = null)
+    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = null)
     {
         $this->tipogasto = $tipogasto;
     
@@ -95,5 +97,9 @@ class Descripciongasto
     public function getTipogasto()
     {
         return $this->tipogasto;
+    }
+    
+    public function __toString(){
+        return $this->getDescripcion().' '.$this->getTipogasto()->getId();
     }
 }

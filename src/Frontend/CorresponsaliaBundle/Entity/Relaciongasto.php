@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relaciongasto
@@ -26,6 +27,7 @@ class Relaciongasto
      * @var integer
      *
      * @ORM\Column(name="numerocomprobante", type="integer", nullable=false)
+     * * @Assert\NotBlank(message="Debe escribir el número de comprobante.")
      */
     private $numerocomprobante;
 
@@ -33,6 +35,7 @@ class Relaciongasto
      * @var \DateTime
      *
      * @ORM\Column(name="fechafactura", type="date", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar la fecha de la factura.")
      */
     private $fechafactura;
 
@@ -44,16 +47,21 @@ class Relaciongasto
     private $imputacionpresupuestaria;
 
     /**
-     * @var string
+     * @var \Descripciongasto
      *
-     * @ORM\Column(name="descripcion", type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Descripciongasto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank(message="Debe colocar la descripción del gasto.")
      */
-    private $descripcion;
+    private $descripciongasto;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nombrerazonsocial", type="string", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar la razon social.")
      */
     private $nombrerazonsocial;
 
@@ -61,6 +69,7 @@ class Relaciongasto
      * @var string
      *
      * @ORM\Column(name="identificacionfiscal", type="string", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar la identificación fiscal.")
      */
     private $identificacionfiscal;
 
@@ -68,13 +77,15 @@ class Relaciongasto
      * @var string
      *
      * @ORM\Column(name="numerofactura", type="string", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar el numero de la factura.")
      */
     private $numerofactura;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="montomonnac", type="decimal", nullable=false)
+     * @ORM\Column(name="montomonnac", type="numeric", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar lel monto de la moneda nacional.")
      */
     private $montomonnac;
 
@@ -201,27 +212,28 @@ class Relaciongasto
     }
 
     /**
-     * Set descripcion
+     * Set descripciongasto
      *
-     * @param string $descripcion
+     * @param \Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto
      * @return Relaciongastos
      */
-    public function setDescripcion($descripcion)
+    public function setDescripciongasto(\Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto = null)
     {
-        $this->descripcion = $descripcion;
+        $this->descripciongasto = $descripciongasto;
     
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get descripciongasto
      *
-     * @return string 
+     * @return \Frontend\CorresponsaliaBundle\Entity\Descripciongasto 
      */
-    public function getDescripcion()
+    public function getDescripciongasto()
     {
-        return $this->descripcion;
+        return $this->descripciongasto;
     }
+
 
     /**
      * Set nombrerazonsocial
