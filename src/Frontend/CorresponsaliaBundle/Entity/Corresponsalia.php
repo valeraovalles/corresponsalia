@@ -90,9 +90,9 @@ class Corresponsalia
      * @param integer $paisId
      * @return Corresponsalia
      */
-    public function setPaisId($paisId)
+    public function setPais($pais)
     {
-        $this->paisId = $paisId;
+        $this->pais = $pais;
     
         return $this;
     }
@@ -102,9 +102,9 @@ class Corresponsalia
      *
      * @return integer 
      */
-    public function getPaisId()
+    public function getPais()
     {
-        return $this->paisId;
+        return $this->pais;
     }
 
     /**
@@ -128,5 +128,10 @@ class Corresponsalia
     public function getTipocorresponsalia()
     {
         return $this->tipocorresponsalia;
+    }
+    
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }

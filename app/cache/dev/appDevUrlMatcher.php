@@ -214,6 +214,118 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
             not_tipocorresponsalia_delete:
 
+            if (0 === strpos($pathinfo, '/corresponsalia/moneda')) {
+                // moneda
+                if ($pathinfo === '/corresponsalia/moneda') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::indexAction',  '_route' => 'moneda',);
+                }
+
+                // moneda_show
+                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::showAction',));
+                }
+
+                // moneda_new
+                if ($pathinfo === '/corresponsalia/moneda/new') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::newAction',  '_route' => 'moneda_new',);
+                }
+
+                // moneda_create
+                if ($pathinfo === '/corresponsalia/moneda/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_moneda_create;
+                    }
+
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::createAction',  '_route' => 'moneda_create',);
+                }
+                not_moneda_create:
+
+                // moneda_edit
+                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::editAction',));
+                }
+
+                // moneda_update
+                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_moneda_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::updateAction',));
+                }
+                not_moneda_update:
+
+                // moneda_delete
+                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_moneda_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::deleteAction',));
+                }
+                not_moneda_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/corresponsalia')) {
+                // corresponsalia
+                if ($pathinfo === '/corresponsalia/corresponsalia') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::indexAction',  '_route' => 'corresponsalia',);
+                }
+
+                // corresponsalia_show
+                if (preg_match('#^/corresponsalia/corresponsalia/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::showAction',));
+                }
+
+                // corresponsalia_new
+                if ($pathinfo === '/corresponsalia/corresponsalia/new') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::newAction',  '_route' => 'corresponsalia_new',);
+                }
+
+                // corresponsalia_create
+                if ($pathinfo === '/corresponsalia/corresponsalia/reate') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_corresponsalia_create;
+                    }
+
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::createAction',  '_route' => 'corresponsalia_create',);
+                }
+                not_corresponsalia_create:
+
+                // corresponsalia_edit
+                if (preg_match('#^/corresponsalia/corresponsalia/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::editAction',));
+                }
+
+                // corresponsalia_update
+                if (preg_match('#^/corresponsalia/corresponsalia/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_corresponsalia_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::updateAction',));
+                }
+                not_corresponsalia_update:
+
+                // corresponsalia_delete
+                if (preg_match('#^/corresponsalia/corresponsalia/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_corresponsalia_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::deleteAction',));
+                }
+                not_corresponsalia_delete:
+
+            }
+
         }
 
         // _welcome

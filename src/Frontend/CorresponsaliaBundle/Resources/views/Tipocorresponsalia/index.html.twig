@@ -1,9 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Tipocorresponsalia list</h1>
+    {{ parent() }}
+    <h1>TIPO CORRESPONSALÍA</h1>
 
-    <table class="records_list">
+    <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,11 +32,20 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('tipocorresponsalia_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <br><br>
+    <a href="{{ path('tipocorresponsalia_new') }}">
+        Create a new entry
+    </a>
+
+    
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+
+        
+    </script>
     {% endblock %}

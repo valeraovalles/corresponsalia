@@ -1,0 +1,30 @@
+moneda:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:index" }
+
+moneda_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:show" }
+
+moneda_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:new" }
+
+moneda_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:create" }
+    requirements: { _method: post }
+
+moneda_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:edit" }
+
+moneda_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:update" }
+    requirements: { _method: post|put }
+
+moneda_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:delete" }
+    requirements: { _method: post|delete }

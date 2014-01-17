@@ -48,3 +48,69 @@ tipocorresponsalia_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Tipocorresponsalia:delete" }
     requirements: { _method: post|delete }
+
+################################################################################
+
+moneda:
+    pattern:  /moneda
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:index" }
+
+moneda_show:
+    pattern:  /moneda/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:show" }
+
+moneda_new:
+    pattern:  /moneda/new
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:new" }
+
+moneda_create:
+    pattern:  /moneda/create
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:create" }
+    requirements: { _method: post }
+
+moneda_edit:
+    pattern:  /moneda/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:edit" }
+
+moneda_update:
+    pattern:  /moneda/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:update" }
+    requirements: { _method: post|put }
+
+moneda_delete:
+    pattern:  /moneda/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Moneda:delete" }
+    requirements: { _method: post|delete }
+
+################################################################################
+
+corresponsalia:
+    pattern:  /corresponsalia
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:index" }
+
+corresponsalia_show:
+    pattern:  /corresponsalia/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:show" }
+
+corresponsalia_new:
+    pattern:  /corresponsalia/new
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:new" }
+
+corresponsalia_create:
+    pattern:  /corresponsalia/reate
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:create" }
+    requirements: { _method: post }
+
+corresponsalia_edit:
+    pattern:  /corresponsalia/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:edit" }
+
+corresponsalia_update:
+    pattern:  /corresponsalia/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:update" }
+    requirements: { _method: post|put }
+
+corresponsalia_delete:
+    pattern:  /corresponsalia/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:delete" }
+    requirements: { _method: post|delete }
