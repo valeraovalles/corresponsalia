@@ -53,7 +53,6 @@ class Relaciongasto
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
      * })
-     * @Assert\NotBlank(message="Debe colocar la descripción del gasto.")
      */
     private $descripciongasto;
 
@@ -84,15 +83,15 @@ class Relaciongasto
     /**
      * @var float
      *
-     * @ORM\Column(name="montomonnac", type="numeric", nullable=false)
-     * @Assert\NotBlank(message="Debe colocar lel monto de la moneda nacional.")
+     * @ORM\Column(name="montomonnac", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="Debe colocar el monto de la moneda nacional.")
      */
     private $montomonnac;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="montodolar", type="decimal", nullable=false)
+     * @ORM\Column(name="montodolar",  type="decimal", precision=20, scale= 2, nullable=false)
      */
     private $montodolar;
 
@@ -115,7 +114,7 @@ class Relaciongasto
      *
      * @ORM\ManyToOne(targetEntity="Corresponsalia")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $corresponsalia;
@@ -125,7 +124,7 @@ class Relaciongasto
      *
      * @ORM\ManyToOne(targetEntity="Tipogasto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $tipogasto;

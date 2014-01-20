@@ -16,8 +16,10 @@ class MonedaType extends AbstractType
     {
         $builder
             ->add('monedanacional')
-            ->add('valormonedanacional')
-            ->add('montocambiodolar')
+            ->add('montocambiodolar', 'money', array(
+                'invalid_message' => 'EL campo monto debe ser sólo con números',
+                'currency'=>null
+                ))
             ->add('corresponsalia')
         ;
     }

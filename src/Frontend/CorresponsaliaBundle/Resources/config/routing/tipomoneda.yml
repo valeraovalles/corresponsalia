@@ -1,0 +1,30 @@
+tipomoneda:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:index" }
+
+tipomoneda_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:show" }
+
+tipomoneda_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:new" }
+
+tipomoneda_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:create" }
+    requirements: { _method: post }
+
+tipomoneda_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:edit" }
+
+tipomoneda_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:update" }
+    requirements: { _method: post|put }
+
+tipomoneda_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:delete" }
+    requirements: { _method: post|delete }

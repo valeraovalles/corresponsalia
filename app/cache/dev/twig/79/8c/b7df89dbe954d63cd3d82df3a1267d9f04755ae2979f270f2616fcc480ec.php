@@ -46,13 +46,20 @@ class __TwigTemplate_798cb7df89dbe954d63cd3d82df3a1267d9f04755ae2979f270f2616fcc
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "nombre"), "html", null, true);
         echo "</td>
             </tr>
+            <tr>
+                <th>Montocambiodolar</th>
+                <td>";
+        // line 18
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montocambiodolar"), "html", null, true);
+        echo "</td>
+            </tr>
         </tbody>
     </table>
 
         <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 21
+        // line 25
         echo $this->env->getExtension('routing')->getPath("corresponsalia");
         echo "\">
             Back to the list
@@ -60,14 +67,14 @@ class __TwigTemplate_798cb7df89dbe954d63cd3d82df3a1267d9f04755ae2979f270f2616fcc
     </li>
     <li>
         <a href=\"";
-        // line 26
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">
             Edit
         </a>
     </li>
     <li>";
-        // line 30
+        // line 34
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form');
         echo "</li>
 </ul>
@@ -86,6 +93,6 @@ class __TwigTemplate_798cb7df89dbe954d63cd3d82df3a1267d9f04755ae2979f270f2616fcc
 
     public function getDebugInfo()
     {
-        return array (  71 => 30,  64 => 26,  56 => 21,  46 => 14,  39 => 10,  31 => 4,  28 => 3,);
+        return array (  78 => 34,  71 => 30,  63 => 25,  53 => 18,  46 => 14,  39 => 10,  31 => 4,  28 => 3,);
     }
 }

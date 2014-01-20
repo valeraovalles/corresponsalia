@@ -50,6 +50,22 @@ class Corresponsalia
     private $tipocorresponsalia;
 
 
+    /**
+     * @var \Tipomoneda
+     *
+     * @ORM\ManyToOne(targetEntity="Tipomoneda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id")
+     * })
+     */
+    private $tipomoneda;
+
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="montocambiodolar", type="decimal", precision=20, scale= 3, nullable=false)
+     */
+    private $montocambiodolar;
 
     /**
      * Get id
@@ -128,6 +144,52 @@ class Corresponsalia
     public function getTipocorresponsalia()
     {
         return $this->tipocorresponsalia;
+    }
+    
+    /**
+     * Set tipomoneda
+     *
+     * @param integer $tipomoneda
+     * @return Relaciongastos
+     */
+    public function setTipomoneda(\Frontend\CorresponsaliaBundle\Entity\Tipomoneda $tipomoneda = null )
+    {
+        $this->tipomoneda = $tipomoneda;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipomoneda
+     *
+     * @return integer 
+     */
+    public function getTipomoneda()
+    {
+        return $this->tipomoneda;
+    }
+
+    /**
+     * Set montocambiodolar
+     *
+     * @param string $montocambiodolar
+     * @return Relaciongastos
+     */
+    public function setMontocambiodolar($montocambiodolar)
+    {
+        $this->montocambiodolar = $montocambiodolar;
+    
+        return $this;
+    }
+
+    /**
+     * Get montocambiodolar
+     *
+     * @return string 
+     */
+    public function getMontocambiodolar()
+    {
+        return $this->montocambiodolar;
     }
     
     public function __toString()

@@ -53,7 +53,7 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="saldofinal", type="decimal", nullable=false)
+     * @ORM\Column(name="saldofinal", type="decimal", nullable=true)
      */
     private $saldofinal;
 

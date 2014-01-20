@@ -24,7 +24,6 @@ class RelaciongastoType extends AbstractType
             ->add('identificacionfiscal')
             ->add('numerofactura')
             ->add('montomonnac', 'money', array(
-                'divisor' => 100,
                 'invalid_message' => 'EL campo monto debe ser sólo con números',
                 'currency'=>null
                 ))

@@ -1,0 +1,30 @@
+estadofondo:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:index" }
+
+estadofondo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:show" }
+
+estadofondo_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:new" }
+
+estadofondo_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:create" }
+    requirements: { _method: post }
+
+estadofondo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:edit" }
+
+estadofondo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:update" }
+    requirements: { _method: post|put }
+
+estadofondo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:delete" }
+    requirements: { _method: post|delete }

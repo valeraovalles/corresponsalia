@@ -47,16 +47,9 @@ class __TwigTemplate_cb040399bbbc98ef63990e5276e4295c8575a61c1ea3998a3d08b383dd7
         echo "</td>
             </tr>
             <tr>
-                <th>Valormonedanacional</th>
-                <td>";
-        // line 18
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "valormonedanacional"), "html", null, true);
-        echo "</td>
-            </tr>
-            <tr>
                 <th>Montocambiodolar</th>
                 <td>";
-        // line 22
+        // line 18
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montocambiodolar"), "html", null, true);
         echo "</td>
             </tr>
@@ -66,7 +59,7 @@ class __TwigTemplate_cb040399bbbc98ef63990e5276e4295c8575a61c1ea3998a3d08b383dd7
         <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 29
+        // line 25
         echo $this->env->getExtension('routing')->getPath("moneda");
         echo "\">
             Back to the list
@@ -74,14 +67,14 @@ class __TwigTemplate_cb040399bbbc98ef63990e5276e4295c8575a61c1ea3998a3d08b383dd7
     </li>
     <li>
         <a href=\"";
-        // line 34
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("moneda_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">
             Edit
         </a>
     </li>
     <li>";
-        // line 38
+        // line 34
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form');
         echo "</li>
 </ul>
@@ -100,6 +93,6 @@ class __TwigTemplate_cb040399bbbc98ef63990e5276e4295c8575a61c1ea3998a3d08b383dd7
 
     public function getDebugInfo()
     {
-        return array (  85 => 38,  78 => 34,  70 => 29,  60 => 22,  53 => 18,  46 => 14,  39 => 10,  31 => 4,  28 => 3,);
+        return array (  78 => 34,  71 => 30,  63 => 25,  53 => 18,  46 => 14,  39 => 10,  31 => 4,  28 => 3,);
     }
 }

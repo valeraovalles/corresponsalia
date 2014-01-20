@@ -35,38 +35,43 @@ class __TwigTemplate_7155aabdd275169182037c9ac7c340f305193cad6895e53fea1da93ade8
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>Montocambiodolar</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 15
+        // line 16
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 16
+            // line 17
             echo "            <tr>
                 <td><a href=\"";
-            // line 17
+            // line 18
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 18
+            // line 19
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "nombre"), "html", null, true);
+            echo "</td>
+                <td>";
+            // line 20
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montocambiodolar"), "html", null, true);
             echo "</td>
                 <td>
                 <ul>
                     <li>
                         <a href=\"";
-            // line 22
+            // line 24
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">show</a>
                     </li>
                     <li>
                         <a href=\"";
-            // line 25
+            // line 27
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">edit</a>
                     </li>
@@ -78,14 +83,14 @@ class __TwigTemplate_7155aabdd275169182037c9ac7c340f305193cad6895e53fea1da93ade8
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 31
+        // line 33
         echo "        </tbody>
     </table>
 
         <ul>
         <li>
             <a href=\"";
-        // line 36
+        // line 38
         echo $this->env->getExtension('routing')->getPath("corresponsalia_new");
         echo "\">
                 Create a new entry
@@ -107,6 +112,6 @@ class __TwigTemplate_7155aabdd275169182037c9ac7c340f305193cad6895e53fea1da93ade8
 
     public function getDebugInfo()
     {
-        return array (  89 => 36,  82 => 31,  70 => 25,  64 => 22,  57 => 18,  51 => 17,  48 => 16,  44 => 15,  31 => 4,  28 => 3,);
+        return array (  94 => 38,  87 => 33,  75 => 27,  69 => 24,  62 => 20,  58 => 19,  52 => 18,  49 => 17,  45 => 16,  31 => 4,  28 => 3,);
     }
 }

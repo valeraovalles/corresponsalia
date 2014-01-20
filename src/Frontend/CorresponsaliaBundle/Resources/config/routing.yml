@@ -51,36 +51,37 @@ tipocorresponsalia_delete:
 
 ################################################################################
 
-moneda:
-    pattern:  /moneda
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:index" }
+tipomoneda:
+    pattern:  /tipomoneda
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:index" }
 
-moneda_show:
-    pattern:  /moneda/{id}/show
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:show" }
+tipomoneda_show:
+    pattern:  /tipomoneda/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:show" }
 
-moneda_new:
-    pattern:  /moneda/new
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:new" }
+tipomoneda_new:
+    pattern:  /tipomoneda/new
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:new" }
 
-moneda_create:
-    pattern:  /moneda/create
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:create" }
+tipomoneda_create:
+    pattern:  /tipomoneda/create
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:create" }
     requirements: { _method: post }
 
-moneda_edit:
-    pattern:  /moneda/{id}/edit
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:edit" }
+tipomoneda_edit:
+    pattern:  /tipomoneda/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:edit" }
 
-moneda_update:
-    pattern:  /moneda/{id}/update
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:update" }
+tipomoneda_update:
+    pattern:  /tipomoneda/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:update" }
     requirements: { _method: post|put }
 
-moneda_delete:
-    pattern:  /moneda/{id}/delete
-    defaults: { _controller: "CorresponsaliaBundle:Moneda:delete" }
+tipomoneda_delete:
+    pattern:  /tipomoneda/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tipomoneda:delete" }
     requirements: { _method: post|delete }
+
 
 ################################################################################
 
@@ -113,4 +114,37 @@ corresponsalia_update:
 corresponsalia_delete:
     pattern:  /corresponsalia/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Corresponsalia:delete" }
+    requirements: { _method: post|delete }
+
+################################################################################
+
+estadofondo:
+    pattern:  /estadofondo
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:index" }
+
+estadofondo_show:
+    pattern:  /estadofondo/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:show" }
+
+estadofondo_new:
+    pattern:  /estadofondo/new
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:new" }
+
+estadofondo_create:
+    pattern:  /estadofondo/create
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:create" }
+    requirements: { _method: post }
+
+estadofondo_edit:
+    pattern:  /estadofondo/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:edit" }
+
+estadofondo_update:
+    pattern:  /estadofondo/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:update" }
+    requirements: { _method: post|put }
+
+estadofondo_delete:
+    pattern:  /estadofondo/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Estadofondo:delete" }
     requirements: { _method: post|delete }

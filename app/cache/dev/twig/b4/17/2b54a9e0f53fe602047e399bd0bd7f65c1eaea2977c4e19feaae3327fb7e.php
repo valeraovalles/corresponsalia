@@ -40,7 +40,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
         // line 20
-        echo $this->env->getExtension('routing')->getPath("moneda");
+        echo $this->env->getExtension('routing')->getPath("tipomoneda");
         echo "\">Moneda</a></li>
           <li><a href=\"";
         // line 21
@@ -50,6 +50,10 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         // line 22
         echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
         echo "\">Tipo Corresponsalía</a></li>
+          <li><a href=\"";
+        // line 23
+        echo $this->env->getExtension('routing')->getPath("estadofondo");
+        echo "\">Estado fondo</a></li>
           <li><a href=\"#\">Something else here</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"#\">Separated link</a></li>
@@ -86,6 +90,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,);
+        return array (  55 => 23,  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,);
     }
 }

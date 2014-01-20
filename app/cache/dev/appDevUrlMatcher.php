@@ -214,59 +214,59 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
             not_tipocorresponsalia_delete:
 
-            if (0 === strpos($pathinfo, '/corresponsalia/moneda')) {
-                // moneda
-                if ($pathinfo === '/corresponsalia/moneda') {
-                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::indexAction',  '_route' => 'moneda',);
+            if (0 === strpos($pathinfo, '/corresponsalia/tipomoneda')) {
+                // tipomoneda
+                if ($pathinfo === '/corresponsalia/tipomoneda') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::indexAction',  '_route' => 'tipomoneda',);
                 }
 
-                // moneda_show
-                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::showAction',));
+                // tipomoneda_show
+                if (preg_match('#^/corresponsalia/tipomoneda/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'tipomoneda_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::showAction',));
                 }
 
-                // moneda_new
-                if ($pathinfo === '/corresponsalia/moneda/new') {
-                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::newAction',  '_route' => 'moneda_new',);
+                // tipomoneda_new
+                if ($pathinfo === '/corresponsalia/tipomoneda/new') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::newAction',  '_route' => 'tipomoneda_new',);
                 }
 
-                // moneda_create
-                if ($pathinfo === '/corresponsalia/moneda/create') {
+                // tipomoneda_create
+                if ($pathinfo === '/corresponsalia/tipomoneda/create') {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
-                        goto not_moneda_create;
+                        goto not_tipomoneda_create;
                     }
 
-                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::createAction',  '_route' => 'moneda_create',);
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::createAction',  '_route' => 'tipomoneda_create',);
                 }
-                not_moneda_create:
+                not_tipomoneda_create:
 
-                // moneda_edit
-                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::editAction',));
+                // tipomoneda_edit
+                if (preg_match('#^/corresponsalia/tipomoneda/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'tipomoneda_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::editAction',));
                 }
 
-                // moneda_update
-                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                // tipomoneda_update
+                if (preg_match('#^/corresponsalia/tipomoneda/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
                     if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
                         $allow = array_merge($allow, array('POST', 'PUT'));
-                        goto not_moneda_update;
+                        goto not_tipomoneda_update;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::updateAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'tipomoneda_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::updateAction',));
                 }
-                not_moneda_update:
+                not_tipomoneda_update:
 
-                // moneda_delete
-                if (preg_match('#^/corresponsalia/moneda/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                // tipomoneda_delete
+                if (preg_match('#^/corresponsalia/tipomoneda/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
                     if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
                         $allow = array_merge($allow, array('POST', 'DELETE'));
-                        goto not_moneda_delete;
+                        goto not_tipomoneda_delete;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'moneda_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\MonedaController::deleteAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'tipomoneda_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\TipomonedaController::deleteAction',));
                 }
-                not_moneda_delete:
+                not_tipomoneda_delete:
 
             }
 
@@ -323,6 +323,62 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CorresponsaliaController::deleteAction',));
                 }
                 not_corresponsalia_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/estadofondo')) {
+                // estadofondo
+                if ($pathinfo === '/corresponsalia/estadofondo') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::indexAction',  '_route' => 'estadofondo',);
+                }
+
+                // estadofondo_show
+                if (preg_match('#^/corresponsalia/estadofondo/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::showAction',));
+                }
+
+                // estadofondo_new
+                if ($pathinfo === '/corresponsalia/estadofondo/new') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::newAction',  '_route' => 'estadofondo_new',);
+                }
+
+                // estadofondo_create
+                if ($pathinfo === '/corresponsalia/estadofondo/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_estadofondo_create;
+                    }
+
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::createAction',  '_route' => 'estadofondo_create',);
+                }
+                not_estadofondo_create:
+
+                // estadofondo_edit
+                if (preg_match('#^/corresponsalia/estadofondo/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::editAction',));
+                }
+
+                // estadofondo_update
+                if (preg_match('#^/corresponsalia/estadofondo/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_estadofondo_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::updateAction',));
+                }
+                not_estadofondo_update:
+
+                // estadofondo_delete
+                if (preg_match('#^/corresponsalia/estadofondo/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_estadofondo_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::deleteAction',));
+                }
+                not_estadofondo_delete:
 
             }
 
