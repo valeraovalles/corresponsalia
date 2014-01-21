@@ -59,42 +59,80 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
     
     ";
         // line 14
-        if ((((((($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerocomprobante"), 'errors') || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "fechafactura"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombrerazonsocial"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "identificacionfiscal"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerofactura"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montomonnac"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montodolar"), 'errors'))) {
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "notice"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
             // line 15
+            echo "        <div class=\"alert alert-success\">
+            ";
+            // line 16
+            echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
+            echo "
+        </div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 19
+        echo "
+    ";
+        // line 20
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "alert"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 21
+            echo "        <div class=\"alert alert-danger\">
+            ";
+            // line 22
+            echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
+            echo "
+        </div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 25
+        echo "    
+    ";
+        // line 26
+        if ((((((($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerocomprobante"), 'errors') || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "fechafactura"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombrerazonsocial"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "identificacionfiscal"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerofactura"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montomonnac"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montodolar"), 'errors'))) {
+            // line 27
             echo "    <div class=\"alert alert-danger errores\">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>";
-            // line 17
+            // line 29
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerocomprobante"), 'errors');
             echo "</div>
         <div>";
-            // line 18
+            // line 30
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "fechafactura"), 'errors');
             echo "</div>
         <div>";
-            // line 19
+            // line 31
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombrerazonsocial"), 'errors');
             echo "</div>
         <div>";
-            // line 20
+            // line 32
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "identificacionfiscal"), 'errors');
             echo "</div>
         <div>";
-            // line 21
+            // line 33
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "numerofactura"), 'errors');
             echo "</div>
         <div>";
-            // line 22
+            // line 34
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montomonnac"), 'errors');
             echo "</div>
         <div>";
-            // line 23
+            // line 35
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "montodolar"), 'errors');
             echo "</div>
     </div>
     ";
         }
-        // line 26
+        // line 38
         echo "
     <div class=\"table-responsive\">
     <table border=\"1\" class=\"estatusfondo table table-striped\">
@@ -110,52 +148,61 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
         <tr>
             <td>Saldo inicial</td>
             <td>";
-        // line 40
+        // line 52
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldoinicial"), "html", null, true);
         echo "</td>
             <td>";
-        // line 41
+        // line 53
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldoinicial_mn"), "html", null, true);
         echo "</td>
             <td>";
-        // line 42
+        // line 54
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldoinicial_bs"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <td>Recursos recibidos</td>
             <td>";
-        // line 46
+        // line 58
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "recursorecibido"), "html", null, true);
         echo "</td>
             <td>";
-        // line 47
+        // line 59
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "recursorecibido_mn"), "html", null, true);
         echo "</td>
             <td>";
-        // line 48
+        // line 60
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "recursorecibido_bs"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <td>Pagos efectuados</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>";
+        // line 64
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "pagos"), "html", null, true);
+        echo "</td>
+            <td>";
+        // line 65
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "pagos_mn"), "html", null, true);
+        echo "</td>
+            <td>";
+        // line 66
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "pagos_bs"), "html", null, true);
+        echo "</td>
         </tr>
         <tr>
             <td>Saldo final</td>
             <td>";
-        // line 58
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "total"), "html", null, true);
+        // line 70
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldofinal"), "html", null, true);
         echo "</td>
             <td>";
-        // line 59
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "total_mn"), "html", null, true);
+        // line 71
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldofinal_mn"), "html", null, true);
         echo "</td>
             <td>";
-        // line 60
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "total_bs"), "html", null, true);
+        // line 72
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "saldofinal_bs"), "html", null, true);
         echo "</td>
             
         </tr>
@@ -166,46 +213,55 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
     
         
     <form novalidate method=\"post\" action=\"";
-        // line 69
+        // line 81
         echo $this->env->getExtension('routing')->getPath("corresponsalia_guardatemprendicion");
         echo "\">  
         ";
-        // line 70
+        // line 82
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "_token"), 'widget');
         echo "
         <table class=\"table\" style=\"width: 900px;\">
             <tr>
 
                 <th>";
-        // line 74
+        // line 86
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 1), 'widget');
-        echo "&nbsp;&nbsp;Gastos de funcionamiento</th>
+        echo "&nbsp;&nbsp;Gastos de funcionamiento&nbsp;<a style=\"cursor:pointer;\" data-toggle=\"modal\" data-target=\"#gasfun\">(";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "numerotipogasto"), 1), "num"), "html", null, true);
+        echo ")</a></th>
                 <th>";
-        // line 75
+        // line 87
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 2), 'widget');
-        echo "&nbsp;Cobertura programada</th>
+        echo "&nbsp;Cobertura programada&nbsp;<a style=\"cursor:pointer;\" data-toggle=\"modal\" data-target=\"#cobpro\">(";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "numerotipogasto"), 2), "num"), "html", null, true);
+        echo ")</a></th>
                 <th>";
-        // line 76
+        // line 88
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 3), 'widget');
-        echo "&nbsp;Honorarios profesionales</th>
+        echo "&nbsp;Honorarios profesionales&nbsp;<a style=\"cursor:pointer;\" data-toggle=\"modal\" data-target=\"#honpro\">(";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "numerotipogasto"), 3), "num"), "html", null, true);
+        echo ")</a></th>
             </tr>
         </table>
 
 
         ";
-        // line 81
+        // line 93
         $this->env->loadTemplate("CorresponsaliaBundle:Default:tablarendicion.html.twig")->display($context);
-        // line 82
+        // line 94
         echo "
 
         <br><input id=\"agregar\" type=\"submit\" value=\"Agregar\" class=\"btn btn-primary\"><br><br>
         <input type=\"hidden\" value=\"";
-        // line 85
+        // line 97
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "montocambiodolar"), "html", null, true);
         echo "\" id=\"montocambiodolar\">
     </form>
     
-    
+        ";
+        // line 100
+        $this->env->loadTemplate("CorresponsaliaBundle:Default:listadorendicion.html.twig")->display($context);
+        echo "  
     
     <script type=\"text/javascript\">
 
@@ -238,12 +294,12 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
         function ajaxdescripciongasto(valor){
                 var dato = valor;
                 var ruta = \"";
-        // line 120
+        // line 132
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_ajax_formdescripciongasto", array("idtipo" => "variable1", "data" => "variable2")), "html", null, true);
         echo "\";
                 ruta = ruta.replace(\"variable1\", dato);
                 ruta = ruta.replace(\"variable2\", ";
-        // line 122
+        // line 134
         echo twig_escape_filter($this->env, $this->getContext($context, "dataselect"), "html", null, true);
         echo ");
                 \$('#descripciongasto').load(ruta);            
@@ -275,6 +331,6 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
 
     public function getDebugInfo()
     {
-        return array (  247 => 122,  242 => 120,  204 => 85,  199 => 82,  197 => 81,  189 => 76,  185 => 75,  181 => 74,  174 => 70,  170 => 69,  158 => 60,  154 => 59,  150 => 58,  137 => 48,  133 => 47,  129 => 46,  122 => 42,  118 => 41,  114 => 40,  98 => 26,  92 => 23,  88 => 22,  84 => 21,  80 => 20,  76 => 19,  72 => 18,  68 => 17,  64 => 15,  62 => 14,  53 => 12,  46 => 9,  43 => 8,  37 => 5,  32 => 4,  29 => 3,);
+        return array (  303 => 134,  298 => 132,  263 => 100,  257 => 97,  252 => 94,  250 => 93,  240 => 88,  234 => 87,  228 => 86,  221 => 82,  217 => 81,  205 => 72,  201 => 71,  197 => 70,  190 => 66,  186 => 65,  182 => 64,  175 => 60,  171 => 59,  167 => 58,  160 => 54,  156 => 53,  152 => 52,  136 => 38,  130 => 35,  126 => 34,  122 => 33,  118 => 32,  114 => 31,  110 => 30,  106 => 29,  102 => 27,  100 => 26,  97 => 25,  88 => 22,  85 => 21,  81 => 20,  78 => 19,  69 => 16,  66 => 15,  62 => 14,  53 => 12,  46 => 9,  43 => 8,  37 => 5,  32 => 4,  29 => 3,);
     }
 }

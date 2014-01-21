@@ -30,7 +30,7 @@ class AjaxController extends Controller
             ->add('descripciongasto', 'choice', array(
                 'choices'   => $arraydescripciongasto,
                 'empty_value' => "Seleccione",
-                'data'=>$data
+                'data'=>$data,
         ))->getForm();
         
         return $this->render('CorresponsaliaBundle:Ajax:formdescripciongasto.html.twig',array('form'=>$form->createView()));

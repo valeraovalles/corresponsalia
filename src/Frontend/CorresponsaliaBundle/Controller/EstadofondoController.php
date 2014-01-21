@@ -41,6 +41,8 @@ class EstadofondoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $entity->setSaldofinal($entity->getSaldoinicial()+$entity->getRecursorecibido());
             $em->persist($entity);
             $em->flush();
 

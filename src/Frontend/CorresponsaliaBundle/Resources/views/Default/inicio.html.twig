@@ -11,6 +11,18 @@
     <h2>RENDICIÓN DE GASTOS MES DE ENERO</h2>
     <h4>CORRESPONSALIA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais|upper }} | CAMBIO: {{ corresponsalia.montocambiodolar }}</h4><BR>
     
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    
     {% if form_errors(form.numerocomprobante)  or form_errors(form.fechafactura) or form_errors(form.nombrerazonsocial) or form_errors(form.identificacionfiscal) or form_errors(form.numerofactura) or form_errors(form.montomonnac) or form_errors(form.montodolar)%}
     <div class="alert alert-danger errores">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
@@ -49,15 +61,15 @@
         </tr>
         <tr>
             <td>Pagos efectuados</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ estadofondo.pagos }}</td>
+            <td>{{ estadofondo.pagos_mn }}</td>
+            <td>{{ estadofondo.pagos_bs }}</td>
         </tr>
         <tr>
             <td>Saldo final</td>
-            <td>{{ estadofondo.total }}</td>
-            <td>{{ estadofondo.total_mn }}</td>
-            <td>{{ estadofondo.total_bs }}</td>
+            <td>{{ estadofondo.saldofinal }}</td>
+            <td>{{ estadofondo.saldofinal_mn }}</td>
+            <td>{{ estadofondo.saldofinal_bs }}</td>
             
         </tr>
     </table>
@@ -71,9 +83,9 @@
         <table class="table" style="width: 900px;">
             <tr>
 
-                <th>{{ form_widget(form.tipogasto.1) }}&nbsp;&nbsp;Gastos de funcionamiento</th>
-                <th>{{ form_widget(form.tipogasto.2) }}&nbsp;Cobertura programada</th>
-                <th>{{ form_widget(form.tipogasto.3) }}&nbsp;Honorarios profesionales</th>
+                <th>{{ form_widget(form.tipogasto.1) }}&nbsp;&nbsp;Gastos de funcionamiento&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#gasfun">({{ numerotipogasto.1.num }})</a></th>
+                <th>{{ form_widget(form.tipogasto.2) }}&nbsp;Cobertura programada&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#cobpro">({{ numerotipogasto.2.num }})</a></th>
+                <th>{{ form_widget(form.tipogasto.3) }}&nbsp;Honorarios profesionales&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#honpro">({{ numerotipogasto.3.num }})</a></th>
             </tr>
         </table>
 
@@ -85,7 +97,7 @@
         <input type="hidden" value="{{ corresponsalia.montocambiodolar }}" id="montocambiodolar">
     </form>
     
-    
+        {% include 'CorresponsaliaBundle:Default:listadorendicion.html.twig' %}  
     
     <script type="text/javascript">
 

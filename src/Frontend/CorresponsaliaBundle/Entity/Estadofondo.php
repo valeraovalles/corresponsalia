@@ -25,14 +25,14 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="saldoinicial", type="decimal", nullable=false)
+     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=false)
      */
     private $saldoinicial;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="recursorecibido", type="decimal", nullable=false)
+     * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 2, nullable=false)
      */
     private $recursorecibido;
 
@@ -53,10 +53,17 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="saldofinal", type="decimal", nullable=true)
+     * @ORM\Column(name="saldofinal", type="decimal", precision=20, scale= 2, nullable=true)
      */
     private $saldofinal;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="pagos", type="decimal", precision=20, scale= 2, nullable=true)
+     */
+    private $pagos=0;    
+    
     /**
      * @var \Corresponsalia
      *
@@ -194,6 +201,28 @@ class Estadofondo
         return $this->saldofinal;
     }
 
+      /**
+     * Set pagos
+     *
+     * @param float $pagos
+     * @return Estadofondo
+     */
+    public function setPagos($pagos)
+    {
+        $this->pagos = $pagos;
+    
+        return $this;
+    }
+
+    /**
+     * Get pagos
+     *
+     * @return float 
+     */
+    public function getPagos()
+    {
+        return $this->pagos;
+    }
     /**
      * Set corresponsalia
      *

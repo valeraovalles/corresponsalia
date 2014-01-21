@@ -87,6 +87,30 @@ class Corresponsalia extends \Frontend\CorresponsaliaBundle\Entity\Corresponsali
         return parent::getTipocorresponsalia();
     }
 
+    public function setTipomoneda(\Frontend\CorresponsaliaBundle\Entity\Tipomoneda $tipomoneda = NULL)
+    {
+        $this->__load();
+        return parent::setTipomoneda($tipomoneda);
+    }
+
+    public function getTipomoneda()
+    {
+        $this->__load();
+        return parent::getTipomoneda();
+    }
+
+    public function setMontocambiodolar($montocambiodolar)
+    {
+        $this->__load();
+        return parent::setMontocambiodolar($montocambiodolar);
+    }
+
+    public function getMontocambiodolar()
+    {
+        $this->__load();
+        return parent::getMontocambiodolar();
+    }
+
     public function __toString()
     {
         $this->__load();
@@ -96,7 +120,7 @@ class Corresponsalia extends \Frontend\CorresponsaliaBundle\Entity\Corresponsali
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'nombre', 'pais', 'tipocorresponsalia');
+        return array('__isInitialized__', 'id', 'nombre', 'montocambiodolar', 'pais', 'tipocorresponsalia', 'tipomoneda');
     }
 
     public function __clone()

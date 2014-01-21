@@ -26,8 +26,9 @@ class Relaciongasto
     /**
      * @var integer
      *
-     * @ORM\Column(name="numerocomprobante", type="integer", nullable=false)
-     * * @Assert\NotBlank(message="Debe escribir el número de comprobante.")
+     * @ORM\Column(name="numerocomprobante", type="decimal", nullable=false).
+     * @Assert\NotBlank(message="Debe escribir el número de comprobante.").
+     * @Assert\Type(type="digit", message="El numero conprobante no puede contener letras.").
      */
     private $numerocomprobante;
 
@@ -36,6 +37,7 @@ class Relaciongasto
      *
      * @ORM\Column(name="fechafactura", type="date", nullable=false)
      * @Assert\NotBlank(message="Debe colocar la fecha de la factura.")
+     * @Assert\Date()
      */
     private $fechafactura;
 

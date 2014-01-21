@@ -17,10 +17,11 @@ class EstadofondoType extends AbstractType
         $builder
             ->add('saldoinicial')
             ->add('recursorecibido')
-            ->add('anio')
-            ->add('mes')
-            ->add('saldofinal')
+            ->add('anio','text')
+            ->add('mes','text')
+            //->add('saldofinal')
             ->add('corresponsalia')
+            //->add('pagos')
         ;
     }
     
