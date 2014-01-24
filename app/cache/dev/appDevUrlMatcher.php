@@ -134,6 +134,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/corresponsalia')) {
+            // corresponsalia_principal
+            if ($pathinfo === '/corresponsalia/principal') {
+                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::principalAction',  '_route' => 'corresponsalia_principal',);
+            }
+
             // corresponsalia_inicio
             if ($pathinfo === '/corresponsalia/inicio') {
                 return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::inicioAction',  '_route' => 'corresponsalia_inicio',);
@@ -327,6 +332,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             if (0 === strpos($pathinfo, '/corresponsalia/estadofondo')) {
+                // estadofondo_aniomes
+                if ($pathinfo === '/corresponsalia/estadofondo/aniomes') {
+                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::estadofondoaniomesAction',  '_route' => 'estadofondo_aniomes',);
+                }
+
                 // estadofondo
                 if ($pathinfo === '/corresponsalia/estadofondo') {
                     return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::indexAction',  '_route' => 'estadofondo',);
@@ -379,6 +389,65 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::deleteAction',));
                 }
                 not_estadofondo_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/cambio')) {
+                // cambio
+                if (preg_match('#^/corresponsalia/cambio/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::indexAction',));
+                }
+
+                // cambio_show
+                if (preg_match('#^/corresponsalia/cambio/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::showAction',));
+                }
+
+                // cambio_new
+                if (0 === strpos($pathinfo, '/corresponsalia/cambio/new') && preg_match('#^/corresponsalia/cambio/new/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_new')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::newAction',));
+                }
+
+                // cambio_create
+                if (0 === strpos($pathinfo, '/corresponsalia/cambio/create') && preg_match('#^/corresponsalia/cambio/create/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_cambio_create;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_create')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::createAction',));
+                }
+                not_cambio_create:
+
+            }
+
+            // cambio_edit
+            if (preg_match('#^/corresponsalia/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::editAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/cambio')) {
+                // cambio_update
+                if (preg_match('#^/corresponsalia/cambio/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_cambio_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::updateAction',));
+                }
+                not_cambio_update:
+
+                // cambio_delete
+                if (preg_match('#^/corresponsalia/cambio/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_cambio_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::deleteAction',));
+                }
+                not_cambio_delete:
 
             }
 

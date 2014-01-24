@@ -16,7 +16,7 @@ class __TwigTemplate_78a1508fd2295072a6d45a1f5c24008f5fec4f88cf0cb4b070f30a71d95
             'titulobanner' => array($this, 'block_titulobanner'),
             'menu' => array($this, 'block_menu'),
             'body' => array($this, 'block_body'),
-            'mensaje' => array($this, 'block_mensaje'),
+            'titulomodulo' => array($this, 'block_titulomodulo'),
         );
     }
 
@@ -64,7 +64,7 @@ class __TwigTemplate_78a1508fd2295072a6d45a1f5c24008f5fec4f88cf0cb4b070f30a71d95
                     ";
         // line 31
         $this->displayBlock('body', $context, $blocks);
-        // line 38
+        // line 48
         echo "                    <br>
                 </div>
                 <footer>
@@ -151,23 +151,57 @@ class __TwigTemplate_78a1508fd2295072a6d45a1f5c24008f5fec4f88cf0cb4b070f30a71d95
     public function block_body($context, array $blocks = array())
     {
         // line 32
-        echo "
-                        ";
+        echo "                            ";
+        $this->env->loadTemplate("CorresponsaliaBundle:Includes:menu.html.twig")->display($context);
         // line 33
-        $this->displayBlock('mensaje', $context, $blocks);
-        // line 36
+        echo "                    
+                            ";
+        // line 34
+        $this->displayBlock('titulomodulo', $context, $blocks);
+        // line 35
+        echo "                            ";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "notice"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 36
+            echo "                                <div class=\"alert alert-success\">
+                                    ";
+            // line 37
+            echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
+            echo "
+                                </div>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 40
+        echo "
+                            ";
+        // line 41
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "alert"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 42
+            echo "                                <div class=\"alert alert-danger\">
+                                    ";
+            // line 43
+            echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
+            echo "
+                                </div>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 46
         echo "
                     ";
     }
 
-    // line 33
-    public function block_mensaje($context, array $blocks = array())
+    // line 34
+    public function block_titulomodulo($context, array $blocks = array())
     {
-        // line 34
-        echo "                            ";
-        $this->env->loadTemplate("CorresponsaliaBundle:Includes:menu.html.twig")->display($context);
-        // line 35
-        echo "                        ";
     }
 
     public function getTemplateName()
@@ -182,6 +216,6 @@ class __TwigTemplate_78a1508fd2295072a6d45a1f5c24008f5fec4f88cf0cb4b070f30a71d95
 
     public function getDebugInfo()
     {
-        return array (  167 => 34,  164 => 33,  159 => 36,  157 => 33,  151 => 31,  146 => 29,  140 => 28,  134 => 20,  130 => 19,  126 => 18,  116 => 15,  113 => 14,  106 => 10,  102 => 9,  93 => 7,  90 => 6,  66 => 31,  61 => 29,  57 => 28,  44 => 14,  41 => 13,  39 => 6,  35 => 5,  31 => 4,  26 => 1,  247 => 122,  242 => 120,  204 => 85,  199 => 82,  197 => 81,  189 => 76,  185 => 75,  181 => 74,  174 => 70,  170 => 35,  158 => 60,  154 => 32,  150 => 58,  137 => 48,  133 => 47,  129 => 46,  122 => 17,  118 => 41,  114 => 40,  98 => 8,  92 => 23,  88 => 22,  84 => 5,  80 => 20,  76 => 19,  72 => 18,  68 => 38,  64 => 15,  62 => 14,  53 => 27,  46 => 22,  43 => 8,  37 => 5,  32 => 4,  29 => 3,);
+        return array (  203 => 34,  198 => 46,  189 => 43,  186 => 42,  182 => 41,  179 => 40,  170 => 37,  167 => 36,  162 => 35,  157 => 33,  154 => 32,  151 => 31,  146 => 29,  140 => 28,  134 => 20,  122 => 17,  116 => 15,  113 => 14,  106 => 10,  102 => 9,  98 => 8,  93 => 7,  84 => 5,  68 => 48,  66 => 31,  61 => 29,  57 => 28,  53 => 27,  46 => 22,  41 => 13,  35 => 5,  31 => 4,  26 => 1,  160 => 34,  153 => 60,  149 => 59,  145 => 58,  141 => 57,  135 => 54,  130 => 19,  126 => 18,  118 => 46,  111 => 42,  104 => 38,  97 => 34,  90 => 6,  83 => 26,  76 => 22,  69 => 18,  65 => 17,  62 => 16,  56 => 13,  52 => 12,  48 => 11,  44 => 14,  42 => 8,  39 => 6,  37 => 6,  32 => 4,  29 => 3,);
     }
 }

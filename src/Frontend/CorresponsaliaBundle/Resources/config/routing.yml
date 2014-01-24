@@ -1,3 +1,15 @@
+
+    
+corresponsalia_principal:
+    pattern:  /principal
+    defaults: { _controller: CorresponsaliaBundle:Default:principal }
+    
+    
+    
+    
+    
+    
+    
 corresponsalia_inicio:
     pattern:  /inicio
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
@@ -118,6 +130,10 @@ corresponsalia_delete:
 
 ################################################################################
 
+estadofondo_aniomes:
+    pattern:  /estadofondo/aniomes
+    defaults: { _controller: CorresponsaliaBundle:Estadofondo:estadofondoaniomes }
+    
 estadofondo:
     pattern:  /estadofondo
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:index" }
@@ -147,4 +163,37 @@ estadofondo_update:
 estadofondo_delete:
     pattern:  /estadofondo/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:delete" }
+    requirements: { _method: post|delete }
+
+################################################################################
+
+cambio:
+    pattern:  /cambio/{idcor}
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:index" }
+
+cambio_show:
+    pattern:  /cambio/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:show" }
+
+cambio_new:
+    pattern:  /cambio/new/{idcor}
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:new" }
+
+cambio_create:
+    pattern:  /cambio/create/{idcor}
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:create" }
+    requirements: { _method: post }
+
+cambio_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:edit" }
+
+cambio_update:
+    pattern:  /cambio/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:update" }
+    requirements: { _method: post|put }
+
+cambio_delete:
+    pattern:  /cambio/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:delete" }
     requirements: { _method: post|delete }

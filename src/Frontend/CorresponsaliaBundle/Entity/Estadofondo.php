@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Estadofondo
@@ -25,7 +26,7 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=false)
+     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=true)
      */
     private $saldoinicial;
 
@@ -33,27 +34,22 @@ class Estadofondo
      * @var float
      *
      * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
      */
     private $recursorecibido;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anio", type="integer", nullable=false)
+     * @ORM\Column(name="fechaasignacion", type="date", nullable=false)
      */
-    private $anio;
+    private $fechaasignacion;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="mes", type="integer", nullable=false)
-     */
-    private $mes;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="saldofinal", type="decimal", precision=20, scale= 2, nullable=true)
+     * @ORM\Column(name="saldofinal", type="decimal", precision=20, length=200, scale= 2, nullable=true)
      */
     private $saldofinal;
 
@@ -74,8 +70,47 @@ class Estadofondo
      */
     private $corresponsalia;
 
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Tipogasto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id", nullable=false)
+     * })
+     * @Assert\NotBlank(message="Debe seleccionar una tipo de gasto.").
+     */
+    private $tipogasto;
 
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="observacion", type="string", nullable=true)
+     */
+    private $observacion;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio", type="integer", nullable=false)
+     */
+    private $anio;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes", type="integer", nullable=false)
+     */
+    private $mes;
+    
+    /**
+     * @var \Perfil
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="responsable_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $responsable;
     /**
      * Get id
      *
@@ -133,50 +168,29 @@ class Estadofondo
     }
 
     /**
-     * Set anio
+     * Set fechaasignacion
      *
-     * @param integer $anio
+     * @param integer $fechaasignacion
      * @return Estadofondo
      */
-    public function setAnio($anio)
+    public function setFechaasignacion($fechaasignacion)
     {
-        $this->anio = $anio;
+        $this->fechaasignacion = $fechaasignacion;
     
         return $this;
     }
 
     /**
-     * Get anio
+     * Get fechaasignacion
      *
      * @return integer 
      */
-    public function getAnio()
+    public function getFechaasignacion()
     {
-        return $this->anio;
+        return $this->fechaasignacion;
     }
 
-    /**
-     * Set mes
-     *
-     * @param integer $mes
-     * @return Estadofondo
-     */
-    public function setMes($mes)
-    {
-        $this->mes = $mes;
-    
-        return $this;
-    }
-
-    /**
-     * Get mes
-     *
-     * @return integer 
-     */
-    public function getMes()
-    {
-        return $this->mes;
-    }
+ 
 
     /**
      * Set saldofinal
@@ -245,4 +259,119 @@ class Estadofondo
     {
         return $this->corresponsalia;
     }
+    /**
+     * Set tipogasto
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto
+     * @return Relaciongastos
+     */
+    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = null)
+    {
+        $this->tipogasto = $tipogasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipogasto
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tipogasto 
+     */
+    public function getTipogasto()
+    {
+        return $this->tipogasto;
+    }
+
+      /**
+     * Set observacion
+     *
+     * @param float $observacion
+     * @return Estadofondo
+     */
+    public function setObservacion($observacion)
+    {
+        $this->observacion = $observacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get observacion
+     *
+     * @return float 
+     */
+    public function getObservacion()
+    {
+        return $this->observacion;
+    }
+    
+  /**
+     * Set anio
+     *
+     * @param integer $anio
+     * @return Estadofondo
+     */
+    public function setAnio($anio)
+    {
+        $this->anio = $anio;
+    
+        return $this;
+    }
+
+    /**
+     * Get anio
+     *
+     * @return integer 
+     */
+    public function getAnio()
+    {
+        return $this->anio;
+    }
+
+    /**
+     * Set mes
+     *
+     * @param integer $mes
+     * @return Estadofondo
+     */
+    public function setMes($mes)
+    {
+        $this->mes = $mes;
+    
+        return $this;
+    }
+
+    /**
+     * Get mes
+     *
+     * @return integer 
+     */
+    public function getMes()
+    {
+        return $this->mes;
+    }
+
+         /**
+     * Set responsable
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
+     * @return Operador
+     */
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Administracion\UsuarioBundle\Entity\Perfil 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+    
 }

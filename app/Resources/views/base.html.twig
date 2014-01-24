@@ -29,10 +29,20 @@
                 <div class="menu">{% block menu %}{% endblock %}</div>
                 <div id="contenedor">
                     {% block body %}
-
-                        {% block mensaje %}
                             {% include 'CorresponsaliaBundle:Includes:menu.html.twig' %}
-                        {% endblock %}
+                    
+                            {% block titulomodulo %}{% endblock %}
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+
+                            {% for flashMessage in app.session.flashbag.get('alert') %}
+                                <div class="alert alert-danger">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
 
                     {% endblock %}
                     <br>

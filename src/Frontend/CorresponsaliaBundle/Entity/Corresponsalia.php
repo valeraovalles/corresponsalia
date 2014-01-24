@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Corresponsalia
@@ -26,6 +27,7 @@ class Corresponsalia
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", nullable=false)
+     * @Assert\NotBlank(message="El campo nombre no puede estar en blanco.").
      */
     private $nombre;
 
@@ -36,6 +38,7 @@ class Corresponsalia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pais_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una país.").
      */
     private $pais;
 
@@ -46,6 +49,7 @@ class Corresponsalia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipocorresponsalia_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de corresponsalía").
      */
     private $tipocorresponsalia;
 
@@ -57,15 +61,10 @@ class Corresponsalia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda").
      */
     private $tipomoneda;
 
-     /**
-     * @var integer
-     *
-     * @ORM\Column(name="montocambiodolar", type="decimal", precision=20, scale= 3, nullable=false)
-     */
-    private $montocambiodolar;
 
     /**
      * Get id
@@ -169,28 +168,6 @@ class Corresponsalia
         return $this->tipomoneda;
     }
 
-    /**
-     * Set montocambiodolar
-     *
-     * @param string $montocambiodolar
-     * @return Relaciongastos
-     */
-    public function setMontocambiodolar($montocambiodolar)
-    {
-        $this->montocambiodolar = $montocambiodolar;
-    
-        return $this;
-    }
-
-    /**
-     * Get montocambiodolar
-     *
-     * @return string 
-     */
-    public function getMontocambiodolar()
-    {
-        return $this->montocambiodolar;
-    }
     
     public function __toString()
     {

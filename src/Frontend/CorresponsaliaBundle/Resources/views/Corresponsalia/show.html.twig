@@ -1,36 +1,46 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Corresponsalia</h1>
+    {{ parent() }}
+    <h1>CORRESPONSALÍA</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ entity.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Montocambiodolar</th>
-                <td>{{ entity.montocambiodolar }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('corresponsalia') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('corresponsalia_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    
+    <div class="formShow" style="width:70%;">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">País:</div>
+            <div class="widgetform">{{ entity.pais|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo:</div>
+            <div class="widgetform">{{ entity.tipocorresponsalia|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo moneda:</div>
+            <div class="widgetform">{{ entity.tipomoneda|capitalize }}</div>
+        </div>
+    </div>
+    
+        <a class="btn btn-default" href="{{ path('corresponsalia') }}">IR AL LISTADO</a> | 
+        <a class="btn btn-default" href="{{ path('corresponsalia_edit',{'id':entity.id}) }}">IR A EDITAR</a>
+        <br><br>
+        {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+            {{ form_errors(delete_form) }}
+            {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+        {{ form_end(delete_form) }}
+
 {% endblock %}

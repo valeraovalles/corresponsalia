@@ -8,7 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="{{ path('corresponsalia_inicio') }}">Inicio</a>
+    <a class="navbar-brand" href="{{ path('corresponsalia_principal') }}">Inicio</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,24 @@
           <li><a href="{{ path('tipomoneda') }}">Moneda</a></li>
           <li><a href="{{ path('corresponsalia') }}">Corresponsalia</a></li>
           <li><a href="{{ path('tipocorresponsalia') }}">Tipo Corresponsalía</a></li>
-          <li><a href="{{ path('estadofondo') }}">Estado fondo</a></li>
+          <li><a href="{{ path('estadofondo') }}">Listado de fondos</a></li>
+          <li><a href="{{ path('estadofondo_aniomes') }}">Asignar fondo</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+          <li class="divider"></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CORRESPONSALÍA <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ path('tipomoneda') }}">Tasa de cambio</a></li>
+          <li class="divider"></li>
+          <li><a href="{{ path('corresponsalia') }}">Rendir Gasto Funcionamiento</a></li>
+          <li><a href="{{ path('tipocorresponsalia') }}">Rendir Cobertura Programada</a></li>
+          <li><a href="{{ path('estadofondo') }}">Rendir Honorarios Profesionales</a></li>
           <li><a href="#">Something else here</a></li>
           <li class="divider"></li>
           <li><a href="#">Separated link</a></li>

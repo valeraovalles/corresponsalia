@@ -170,8 +170,8 @@ class CorresponsaliaController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('corresponsalia_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('alert', 'Actualizado con éxito.');
+            return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));
         }
 
         return $this->render('CorresponsaliaBundle:Corresponsalia:edit.html.twig', array(
@@ -185,12 +185,28 @@ class CorresponsaliaController extends Controller
      *
      */
     public function deleteAction(Request $request, $id)
-    {
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $estadofondo = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findBy(array('corresponsalia'=>$id));
+        if(!empty($estadofondo)){
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar ya que tiene un fondo asociado.');
+             return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));            
+        }
+        $cambio = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('corresponsalia'=>$id));
+        if(!empty($cambio)){
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar ya que tiene una tasa de cambio asociada.');
+             return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));            
+        }      
+        $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->findBy(array('corresponsalia'=>$id));
+        if(!empty($rendicion)){
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar ya que tiene una relacion de gasto asociada.');
+             return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));            
+        }  
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($id);
 
             if (!$entity) {
@@ -216,7 +232,7 @@ class CorresponsaliaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('corresponsalia_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()
         ;
     }

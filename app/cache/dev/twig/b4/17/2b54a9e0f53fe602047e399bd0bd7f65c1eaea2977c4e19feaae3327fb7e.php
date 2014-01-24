@@ -28,7 +28,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
     </button>
     <a class=\"navbar-brand\" href=\"";
         // line 11
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_inicio");
+        echo $this->env->getExtension('routing')->getPath("corresponsalia_principal");
         echo "\">Inicio</a>
   </div>
 
@@ -53,7 +53,39 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
           <li><a href=\"";
         // line 23
         echo $this->env->getExtension('routing')->getPath("estadofondo");
-        echo "\">Estado fondo</a></li>
+        echo "\">Listado de fondos</a></li>
+          <li><a href=\"";
+        // line 24
+        echo $this->env->getExtension('routing')->getPath("estadofondo_aniomes");
+        echo "\">Asignar fondo</a></li>
+          <li><a href=\"#\">Something else here</a></li>
+          <li class=\"divider\"></li>
+          <li><a href=\"#\">Separated link</a></li>
+          <li class=\"divider\"></li>
+          <li><a href=\"#\">One more separated link</a></li>
+        </ul>
+      </li>
+      
+      <li class=\"dropdown\">
+        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">CORRESPONSALÍA <b class=\"caret\"></b></a>
+        <ul class=\"dropdown-menu\">
+          <li><a href=\"";
+        // line 36
+        echo $this->env->getExtension('routing')->getPath("tipomoneda");
+        echo "\">Tasa de cambio</a></li>
+          <li class=\"divider\"></li>
+          <li><a href=\"";
+        // line 38
+        echo $this->env->getExtension('routing')->getPath("corresponsalia");
+        echo "\">Rendir Gasto Funcionamiento</a></li>
+          <li><a href=\"";
+        // line 39
+        echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
+        echo "\">Rendir Cobertura Programada</a></li>
+          <li><a href=\"";
+        // line 40
+        echo $this->env->getExtension('routing')->getPath("estadofondo");
+        echo "\">Rendir Honorarios Profesionales</a></li>
           <li><a href=\"#\">Something else here</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"#\">Separated link</a></li>
@@ -90,6 +122,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  55 => 23,  51 => 22,  47 => 21,  19 => 1,  167 => 34,  164 => 33,  159 => 36,  157 => 33,  151 => 31,  146 => 29,  140 => 28,  134 => 20,  130 => 19,  126 => 18,  116 => 15,  113 => 14,  106 => 10,  102 => 9,  93 => 7,  90 => 6,  66 => 31,  61 => 29,  57 => 28,  44 => 14,  41 => 13,  39 => 6,  35 => 5,  31 => 11,  26 => 1,  247 => 122,  242 => 120,  204 => 85,  199 => 82,  197 => 81,  189 => 76,  185 => 75,  181 => 74,  174 => 70,  170 => 35,  158 => 60,  154 => 32,  150 => 58,  137 => 48,  133 => 47,  129 => 46,  122 => 17,  118 => 41,  114 => 40,  98 => 8,  92 => 23,  88 => 22,  84 => 5,  80 => 20,  76 => 19,  72 => 18,  68 => 38,  64 => 15,  62 => 14,  53 => 27,  46 => 22,  43 => 20,  37 => 5,  32 => 4,  29 => 3,);
+        return array (  87 => 40,  83 => 39,  79 => 38,  74 => 36,  59 => 24,  55 => 23,  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,);
     }
 }

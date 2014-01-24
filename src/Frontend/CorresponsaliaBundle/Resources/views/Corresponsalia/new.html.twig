@@ -1,15 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Corresponsalia creation</h1>
+    {{ parent() }}
+    <h1>NUEVA CORRESPONSALÍA</h1>
 
-    {{ form(form) }}
+    {% if form_errors(form.nombre)  or form_errors(form.pais) or form_errors(form.tipocorresponsalia) or form_errors(form.tipomoneda)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>
+        <div>{{ form_errors(form.pais) }}</div>
+        <div>{{ form_errors(form.tipocorresponsalia) }}</div>
+        <div>{{ form_errors(form.tipomoneda) }}</div>
+    </div>
+    {% endif %}
+    
+    <form novalidate method="post" action="{{ path('corresponsalia_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">País:</div>
+                <div class="widgetform">{{ form_widget(form.pais) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(form.tipocorresponsalia) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo moneda:</div>
+                <div class="widgetform">{{ form_widget(form.tipomoneda) }}</div>
+            </div>
+        </div>
+    
+        <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('corresponsalia') }}">IR AL LISTADO</a>
+        
+    </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('corresponsalia') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
 {% endblock %}

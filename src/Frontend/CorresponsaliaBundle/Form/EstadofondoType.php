@@ -16,11 +16,17 @@ class EstadofondoType extends AbstractType
     {
         $builder
             ->add('saldoinicial')
-            ->add('recursorecibido')
+            ->add('responsable')
             ->add('anio','text')
             ->add('mes','text')
+            ->add('recursorecibido')
+            ->add('observacion','textarea')
+            ->add('fechaasignacion', 'date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd'))
             //->add('saldofinal')
-            ->add('corresponsalia')
+            ->add('corresponsalia',null,array('empty_value'=>'Seleccione...'))
+            ->add('tipogasto',null,array('empty_value'=>'Seleccione...'))
             //->add('pagos')
         ;
     }

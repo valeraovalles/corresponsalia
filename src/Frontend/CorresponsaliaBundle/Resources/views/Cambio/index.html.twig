@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <h1>LISTADO HISTÓRICO DE TASAS DE CAMBIO</h1>
+    <h4>{{ corresponsalia.nombre|upper }}</h4><br>
+
+    
+    <div class="alert alert-info">
+        <b>Nota:</b> Para conversiones del sistema sólo se tomará en cuenta la última Tasa de Cambio creada.
+        
+    </div>
+    <table class="table table-striped" style="width: 700px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Monto</th>
+                <th>Fecha registro</th>
+                <th>Responsable</th>
+                {#<th>Actions</th>#}
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.montocambiodolar }}</td>
+                <td>{{ entity.fechahoraregistro|date('d-m-Y G:i:s') }}</td>
+                <td>{{ entity.responsable.primerNombre|title }} {{ entity.responsable.primerApellido|title }}</td>
+                {#<td>
+                <ul>
+                    <li>
+                        <a href="{{ path('cambio_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cambio_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+
+            <a class="btn btn-primary" href="{{ path('cambio_new',{'idcor':idcor}) }}">
+                CREAR NUEVA TASA DE CAMBIO
+            </a> |             
+            <a class="btn btn-default" href="{{ path('corresponsalia_principal') }}">
+                VOLVER AL INICIO
+            </a><br>
+
+    {% endblock %}

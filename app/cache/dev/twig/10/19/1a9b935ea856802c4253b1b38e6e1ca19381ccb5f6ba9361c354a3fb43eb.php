@@ -28,23 +28,108 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "<h1>Estadofondo creation</h1>
-
-    ";
-        // line 6
-        echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "form"), 'form');
+        $this->displayParentBlock("body", $context, $blocks);
         echo "
 
-        <ul class=\"record_actions\">
-    <li>
-        <a href=\"";
+    <h1>ASIGNACIÓN DE FONDOS</h1>
+    <h4>CORRESPONSALÍA: ";
+        // line 7
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
+        echo " | PAÍS: ";
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "corresponsalia"), "pais"), "pais")), "html", null, true);
+        echo " | AÑO: ";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "anio"), "html", null, true);
+        echo " | MES: ";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "mes"), "html", null, true);
+        echo " </h4><br>
+
+
+    ";
         // line 10
-        echo $this->env->getExtension('routing')->getPath("estadofondo");
+        if ((($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'errors') || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "corresponsalia"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'errors'))) {
+            // line 11
+            echo "    <div class=\"alert alert-danger errores\" style=\"width:70%;\">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>";
+            // line 13
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'errors');
+            echo "</div>
+        <div>";
+            // line 14
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "corresponsalia"), 'errors');
+            echo "</div>
+        <div>";
+            // line 15
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'errors');
+            echo "</div>
+    </div>
+    ";
+        }
+        // line 18
+        echo "    
+    <form novalidate method=\"post\" action=\"";
+        // line 19
+        echo $this->env->getExtension('routing')->getPath("estadofondo_create");
         echo "\">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        ";
+        // line 20
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "_token"), 'widget');
+        echo "
+        <div class=\"formShow\" style=\"width:70%;\">
+            <div class=\"contenedorform\">
+                <div class=\"labelform\">Saldo inicial:</div>
+                <div class=\"widgetform\">";
+        // line 24
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "saldoinicial"), 'widget');
+        echo "</div>
+            </div>
+            <div class=\"contenedorform\">
+                <div class=\"labelform\">Recurso recibido:</div>
+                <div class=\"widgetform\">";
+        // line 28
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'widget');
+        echo "</div>
+            </div>
+            <div class=\"contenedorform\">
+                <div class=\"labelform\">Tipo gasto:</div>
+                <div class=\"widgetform\">";
+        // line 32
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'widget');
+        echo "</div>
+            </div>
+            <div class=\"contenedorform\">
+                <div class=\"labelform\">Observación:</div>
+                <div class=\"widgetform\">";
+        // line 36
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "observacion"), 'widget');
+        echo "</div>
+            </div>
+        </div>
+    
+        <input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\"> | 
+        <a class=\"btn btn-default\" href=\"";
+        // line 41
+        echo $this->env->getExtension('routing')->getPath("estadofondo_aniomes");
+        echo "\">SELECCIONAR OTROS PARÁMETROS</a> | 
+        <a class=\"btn btn-default\" href=\"";
+        // line 42
+        echo $this->env->getExtension('routing')->getPath("estadofondo");
+        echo "\">IR AL LISTADO DE FONDOS</a>
+        
+        <input type=\"hidden\" value=\"";
+        // line 44
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "anio"), "html", null, true);
+        echo "\" name=\"form[anio]\">
+        <input type=\"hidden\" value=\"";
+        // line 45
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "mes"), "html", null, true);
+        echo "\" name=\"form[mes]\">
+        <input type=\"hidden\" value=\"";
+        // line 46
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "corresponsalia"), "html", null, true);
+        echo "\" name=\"form[corresponsalia]\">
+    </form>
+
 ";
     }
 
@@ -60,6 +145,6 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
 
     public function getDebugInfo()
     {
-        return array (  42 => 10,  35 => 6,  31 => 4,  28 => 3,);
+        return array (  129 => 46,  125 => 45,  121 => 44,  116 => 42,  112 => 41,  104 => 36,  97 => 32,  90 => 28,  83 => 24,  76 => 20,  72 => 19,  69 => 18,  63 => 15,  59 => 14,  55 => 13,  51 => 11,  49 => 10,  37 => 7,  31 => 4,  28 => 3,);
     }
 }

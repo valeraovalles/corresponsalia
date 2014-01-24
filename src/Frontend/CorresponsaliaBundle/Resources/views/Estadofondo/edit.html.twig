@@ -1,16 +1,63 @@
 {% extends '::base.html.twig' %}
 
+{% block titulomodulo %}<h1>EDITAR ESTADO FONDO</h1>{% endblock %}
+    
 {% block body -%}
-    <h1>Estadofondo edit</h1>
+    {{ parent() }}
 
-    {{ form(edit_form) }}
+    {% if form_errors(edit_form.recursorecibido) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.tipogasto)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.recursorecibido) }}</div>
+        <div>{{ form_errors(edit_form.corresponsalia) }}</div>
+        <div>{{ form_errors(edit_form.tipogasto) }}</div>
+    </div>
+    {% endif %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('estadofondo') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <form novalidate method="post" action="{{ path('estadofondo_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Corresponsalía:</div>
+                <div class="widgetform">{{ form_widget(edit_form.corresponsalia) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Saldo inicial:</div>
+                <div class="widgetform">{{ form_widget(edit_form.saldoinicial) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Recurso recibido:</div>
+                <div class="widgetform">{{ form_widget(edit_form.recursorecibido) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo gasto:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tipogasto) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Año:</div>
+                <div class="widgetform">{{ form_widget(edit_form.anio) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Mes:</div>
+                <div class="widgetform">{{ form_widget(edit_form.mes) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Observación:</div>
+                <div class="widgetform">{{ form_widget(edit_form.observacion) }}</div>
+            </div>
+        </div>
+         
+        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('estadofondo') }}">IR AL LISTADO DE FONDOS</a>
+
+        {{ form_widget(edit_form.fechaasignacion,{'attr':{'style':'display:none'}}) }}
+    </form>
+    
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+
 {% endblock %}

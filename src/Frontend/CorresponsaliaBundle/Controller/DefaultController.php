@@ -3,12 +3,45 @@
 namespace Frontend\CorresponsaliaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Frontend\CorresponsaliaBundle\Entity\Cambio;
 use Frontend\CorresponsaliaBundle\Entity\Relaciongasto;
 use Frontend\CorresponsaliaBundle\Form\RelaciongastoType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    
+    public function cambio($idcor)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT c FROM CorresponsaliaBundle:Cambio c where c.corresponsalia= :idcorresponsalia order by c.id DESC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idcorresponsalia', $idcor);
+        $cambio = $query->getResult(); 
+        if(isset($cambio[0])) $cambio=$cambio[0];
+        else $cambio=null;
+        return $cambio;
+    }
+    
+    public function principalAction()
+    {   $idcor=4;
+        $cambio=  $this->cambio($idcor);
+        if($cambio==null){
+             $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
+             return $this->redirect($this->generateUrl('cambio_new',array('idcor'=>$idcor)));
+        }
+        
+        
+        $em = $this->getDoctrine()->getManager();
+        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find(4);
+        
+        return $this->render('CorresponsaliaBundle:Default:principal.html.twig',
+                array(
+                    "cambio"=>$cambio,
+                    "corresponsalia"=>$corresponsalia,
+                ));
+    }
     
     public function Estadofondo($cor,$anio,$mes)
     {

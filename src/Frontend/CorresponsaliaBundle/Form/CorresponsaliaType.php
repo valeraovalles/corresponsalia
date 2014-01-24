@@ -16,10 +16,9 @@ class CorresponsaliaType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('montocambiodolar')
-            ->add('pais')
-            ->add('tipocorresponsalia')
-            ->add('tipomoneda')
+            ->add('pais',null,array('empty_value' => 'Seleccione...'))
+            ->add('tipocorresponsalia',null,array('empty_value' => 'Seleccione...'))
+            ->add('tipomoneda',null,array('empty_value' => 'Seleccione...'))
         ;
     }
     

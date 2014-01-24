@@ -65,7 +65,8 @@
 	width: 50%;
 	float: right;
 	text-align: right;
-	padding-right: 10px;
+	padding-right: 15px;
+        margin-bottom: 10px;
 }
 
 .dataTables_info {
@@ -75,6 +76,7 @@
 	padding-left: 15px;
 	font-weight: bold;
 	padding-bottom: 5px;
+        margin-top: 15px;
 }
 
 .dataTables_paginate {
@@ -124,6 +126,7 @@ table.display {
 	width: 100%;
         color:#084B8A;
         font-size: 12px;
+        font-family: Verdana;
 	
 	/* Note Firefox 3.5 and before have a bug with border-collapse
 	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
@@ -300,9 +303,10 @@ td.details {
 }
 
 .paging_full_numbers {
-	width: 400px;
+	width:46%;
 	height: 22px;
 	line-height: 22px;
+        margin-top: 15px;
 }
 
 .paging_full_numbers span.paginate_button,

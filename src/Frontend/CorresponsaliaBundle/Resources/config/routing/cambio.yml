@@ -1,0 +1,30 @@
+cambio:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:index" }
+
+cambio_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:show" }
+
+cambio_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:new" }
+
+cambio_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:create" }
+    requirements: { _method: post }
+
+cambio_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:edit" }
+
+cambio_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:update" }
+    requirements: { _method: post|put }
+
+cambio_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cambio:delete" }
+    requirements: { _method: post|delete }

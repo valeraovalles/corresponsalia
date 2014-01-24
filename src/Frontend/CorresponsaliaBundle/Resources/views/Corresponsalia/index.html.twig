@@ -1,14 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Corresponsalia list</h1>
+    {{ parent() }}
+<h1>LISTA DE CORRESPONSALÍAS</h1><br>
 
-    <table class="records_list">
+    <table id="tablalista" style="width:97%">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Montocambiodolar</th>
+                <th>País</th>
+                <th>Tipo</th>
+                <th>Moneda</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,28 +19,34 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('corresponsalia_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nombre }}</td>
-                <td>{{ entity.montocambiodolar }}</td>
+                <td>{{ entity.nombre|title }}</td>
+                <td>{{ entity.pais.pais|title }}</td>
+                <td>{{ entity.tipocorresponsalia|title }}</td>
+                <td>{{ entity.tipomoneda.tipomoneda|title }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('corresponsalia_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('corresponsalia_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+       
+                    <a href="{{ path('corresponsalia_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+
+                    <a href="{{ path('corresponsalia_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+   
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('corresponsalia_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+
+    <br><br><br><a class="btn btn-primary" href="{{ path('corresponsalia_new') }}">
+        NUEVA CORRESPONSALÍA
+    </a><BR>
+
+
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
     {% endblock %}

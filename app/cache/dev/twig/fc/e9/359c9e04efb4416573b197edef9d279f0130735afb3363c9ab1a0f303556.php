@@ -10,6 +10,7 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
         $this->parent = $this->env->loadTemplate("::base.html.twig");
 
         $this->blocks = array(
+            'titulomodulo' => array($this, 'block_titulomodulo'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -25,12 +26,19 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
     }
 
     // line 3
+    public function block_titulomodulo($context, array $blocks = array())
+    {
+        echo "<h1>LISTADO DE FONDOS</h1>";
+    }
+
+    // line 5
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "<h1>Estadofondo list</h1>
+        // line 6
+        $this->displayParentBlock("body", $context, $blocks);
+        echo "
 
-    <table class=\"records_list\">
+<table id=\"tablalista\" style=\"width: 97%\">
         <thead>
             <tr>
                 <th>Id</th>
@@ -44,53 +52,50 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
         </thead>
         <tbody>
         ";
-        // line 19
+        // line 21
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 20
+            // line 22
             echo "            <tr>
                 <td><a href=\"";
-            // line 21
+            // line 23
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 22
+            // line 24
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "saldoinicial"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 23
+            // line 25
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "recursorecibido"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 24
+            // line 26
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "anio"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 25
+            // line 27
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "mes"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 26
+            // line 28
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "saldofinal"), "html", null, true);
             echo "</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href=\"";
-            // line 30
+   
+                    <a href=\"";
+            // line 31
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">show</a>
-                    </li>
-                    <li>
-                        <a href=\"";
+            echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a>
+
+                    <a href=\"";
             // line 33
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">edit</a>
-                    </li>
-                </ul>
+            echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a>
+
                 </td>
             </tr>
         ";
@@ -98,20 +103,25 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
+        // line 38
         echo "        </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href=\"";
-        // line 44
+
+    <br><br><a class=\"btn btn-primary\" href=\"";
+        // line 42
         echo $this->env->getExtension('routing')->getPath("estadofondo_new");
-        echo "\">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+        echo "\">ASIGNAR NUEVO FONDO</a><BR><BR>
+
+
+    <script>
+        \$(document).ready(function(){
+            \$('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 \"sPaginationType\": \"full_numbers\", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 \"aaSorting\": [[0,'desc']],
+             } );
+         })
+    </script>
     ";
     }
 
@@ -127,6 +137,6 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
 
     public function getDebugInfo()
     {
-        return array (  109 => 44,  102 => 39,  90 => 33,  84 => 30,  77 => 26,  73 => 25,  69 => 24,  65 => 23,  61 => 22,  55 => 21,  52 => 20,  48 => 19,  31 => 4,  28 => 3,);
+        return array (  113 => 42,  107 => 38,  96 => 33,  91 => 31,  85 => 28,  81 => 27,  77 => 26,  73 => 25,  69 => 24,  63 => 23,  60 => 22,  56 => 21,  38 => 6,  35 => 5,  29 => 3,);
     }
 }
