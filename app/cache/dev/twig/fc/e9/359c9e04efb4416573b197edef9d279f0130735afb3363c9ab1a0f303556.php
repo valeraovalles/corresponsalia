@@ -42,8 +42,8 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Saldoinicial</th>
-                <th>Recursorecibido</th>
+                <th>Corresponsalia</th>
+                <th>Tipo gasto</th>
                 <th>Anio</th>
                 <th>Mes</th>
                 <th>Saldofinal</th>
@@ -66,11 +66,11 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
             echo "</a></td>
                 <td>";
             // line 24
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "saldoinicial"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "corresponsalia"), "nombre"), "html", null, true);
             echo "</td>
                 <td>";
             // line 25
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "recursorecibido"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
             echo "</td>
                 <td>";
             // line 26

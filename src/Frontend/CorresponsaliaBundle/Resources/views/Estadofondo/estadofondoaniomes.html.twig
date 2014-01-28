@@ -14,7 +14,7 @@
             <h4 class="modal-title" id="myModalLabel">!Alerta¡</h4>
           </div>
           <div class="modal-body">
-            Debe seleccionar un año, un mes y una corresponsalía.
+            No debe dejar ningun campo en blanco.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -27,7 +27,8 @@
         <div style="width: 30%">
             <br><div>{{ form_widget(form.anio,{'attr':{'class':'form-control'}}) }}</div><br>
             <div>{{ form_widget(form.mes,{'attr':{'class':'form-control'}}) }}</div><br>
-            <div>{{ form_widget(form.corresponsalia,{'attr':{'class':'form-control'}}) }}</div>
+            <div>{{ form_widget(form.corresponsalia,{'attr':{'class':'form-control'}}) }}</div><br>
+            <div>{{ form_widget(form.tipogasto,{'attr':{'class':'form-control'}}) }}</div><br>
         </div>
     </form>
     
@@ -39,7 +40,7 @@
         $(document).ready(function () {
             
             $('#siguiente').click(function(){
-                if($('#form_anio').val()=='' || $('#form_mes').val()=='' || $('#form_corresponsalia').val()=='')
+                if($('#form_anio').val()=='' || $('#form_mes').val()=='' || $('#form_corresponsalia').val()=='' || $('#form_tipogasto').val()=='')
                    $('#myModal').modal("show")
                 else
                    $("#form").submit();

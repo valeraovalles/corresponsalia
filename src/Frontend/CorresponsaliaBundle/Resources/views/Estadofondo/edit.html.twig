@@ -1,6 +1,9 @@
 {% extends '::base.html.twig' %}
 
-{% block titulomodulo %}<h1>EDITAR ESTADO FONDO</h1>{% endblock %}
+{% block titulomodulo %}
+    <h1>EDITAR ESTADO FONDO</h1>
+    <h4>CORRESPONSALÍA: {{ entity.corresponsalia.nombre|upper }} | PAÍS: {{ entity.corresponsalia.pais.pais|upper }} | AÑO: {{ entity.anio }} | MES: {{ entity.mes}} </h4><br>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
@@ -16,8 +19,8 @@
 
     <form novalidate method="post" action="{{ path('estadofondo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
-        <div class="formShow" style="width:70%;">
-            <div class="contenedorform">
+         <div class="formShow" style="width:70%;">
+            <div class="contenedorform" style="display: none;">
                 <div class="labelform">Corresponsalía:</div>
                 <div class="widgetform">{{ form_widget(edit_form.corresponsalia) }}</div>
             </div>
@@ -29,15 +32,15 @@
                 <div class="labelform">Recurso recibido:</div>
                 <div class="widgetform">{{ form_widget(edit_form.recursorecibido) }}</div>
             </div>
-            <div class="contenedorform">
+            <div class="contenedorform" style="display: none;">
                 <div class="labelform">Tipo gasto:</div>
                 <div class="widgetform">{{ form_widget(edit_form.tipogasto) }}</div>
             </div>
-            <div class="contenedorform">
+            <div class="contenedorform" style="display: none;">
                 <div class="labelform">Año:</div>
                 <div class="widgetform">{{ form_widget(edit_form.anio) }}</div>
             </div>
-            <div class="contenedorform">
+            <div class="contenedorform" style="display: none;">
                 <div class="labelform">Mes:</div>
                 <div class="widgetform">{{ form_widget(edit_form.mes) }}</div>
             </div>

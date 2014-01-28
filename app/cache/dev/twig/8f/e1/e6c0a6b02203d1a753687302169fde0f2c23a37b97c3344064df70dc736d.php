@@ -103,7 +103,7 @@ class __TwigTemplate_8fe1e6c0a6b02203d1a753687302169fde0f2c23a37b97c3344064df70d
         <a class=\"btn btn-default\" href=\"";
         // line 40
         echo $this->env->getExtension('routing')->getPath("corresponsalia");
-        echo "\">VER HISTÓRICO</a>
+        echo "\">IR AL LISTADO</a>
     </form>
     <br>
     ";

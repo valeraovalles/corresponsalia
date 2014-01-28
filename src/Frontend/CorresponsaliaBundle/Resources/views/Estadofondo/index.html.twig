@@ -9,8 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Saldoinicial</th>
-                <th>Recursorecibido</th>
+                <th>Corresponsalia</th>
+                <th>Tipo gasto</th>
                 <th>Anio</th>
                 <th>Mes</th>
                 <th>Saldofinal</th>
@@ -21,8 +21,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('estadofondo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.saldoinicial }}</td>
-                <td>{{ entity.recursorecibido }}</td>
+                <td>{{ entity.corresponsalia.nombre }}</td>
+                <td>{{ entity.tipogasto.descripcion }}</td>
                 <td>{{ entity.anio }}</td>
                 <td>{{ entity.mes }}</td>
                 <td>{{ entity.saldofinal }}</td>

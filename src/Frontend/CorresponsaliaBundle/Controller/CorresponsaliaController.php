@@ -170,7 +170,7 @@ class CorresponsaliaController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            $this->get('session')->getFlashBag()->add('alert', 'Actualizado con éxito.');
+            $this->get('session')->getFlashBag()->add('alert', 'La corresponsalía se ha actualizado con éxito.');
             return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));
         }
 
@@ -217,6 +217,7 @@ class CorresponsaliaController extends Controller
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado la corresponsalía '.strtoupper($entity->getNombre()).' exitosamente.');
         return $this->redirect($this->generateUrl('corresponsalia'));
     }
 

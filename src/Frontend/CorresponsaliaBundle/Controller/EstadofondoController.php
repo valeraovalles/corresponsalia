@@ -37,6 +37,11 @@ class EstadofondoController extends Controller
                 'property' => 'nombre',
                 'empty_value'=>'Seleccione una corresponsalía...'
         ))
+        ->add('tipogasto', 'entity', array(
+                'class' => 'CorresponsaliaBundle:Tipogasto',
+                'property' => 'descripcion',
+                'empty_value'=>'Seleccione un tipo de gasto...'
+        ))
         ->getForm();
 
         return $this->render('CorresponsaliaBundle:Estadofondo:estadofondoaniomes.html.twig', array(
@@ -67,23 +72,25 @@ class EstadofondoController extends Controller
     {
         $datos=$request->request->all();
         $datos=$datos['form'];
+
+        $em = $this->getDoctrine()->getManager();
+        //consulto datos de corresponsalia
+        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
+        $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($datos['tipogasto']);
         
         $entity = new Estadofondo();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find(1);
             
             $entity->setSaldofinal($entity->getSaldoinicial()+$entity->getRecursorecibido());
             $entity->setFechaasignacion(new \DateTime("now"));
             $entity->setAnio($datos['anio']);
             $entity->setMes($datos['mes']);
-            
-            //consulto datos de corresponsalia
-            $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
             $entity->setCorresponsalia($corresponsalia);
+            $entity->setTipogasto($tipogasto);
             
             $entity->setResponsable($usuario);
             $em->persist($entity);
@@ -95,7 +102,8 @@ class EstadofondoController extends Controller
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'datos'=>$datos
+            'datos'=>$datos,
+            'corresponsalia'=>$corresponsalia
         ));
     }
 
@@ -132,14 +140,15 @@ class EstadofondoController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         //valido si la corresponsalia tiene ya un fondo asignado
-        $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.corresponsalia= :idcorresponsalia and ef.anio= :anio and ef.mes= :mes";
+        $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.corresponsalia= :idcorresponsalia and ef.anio= :anio and ef.mes= :mes and ef.tipogasto= :tipogasto";
         $query = $em->createQuery($dql);
         $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
         $query->setParameter('anio', $datos['anio']);
         $query->setParameter('mes', $datos['mes']);
+        $query->setParameter('tipogasto', $datos['tipogasto']);
         $ef = $query->getResult(); 
         if(!empty($ef)){
-            $this->get('session')->getFlashBag()->add('alert', 'Esta corresponsalía ya tiene un fondo asignado para el año y mes seleccionado.');
+            $this->get('session')->getFlashBag()->add('alert', 'Esta corresponsalía ya tiene un fondo asignado para el año, mes, corresponsalía y tipo de gasto seleccionado.');
             return $this->redirect($this->generateUrl('estadofondo_show',array('id'=>$ef[0]->getId())));
         }
         
@@ -245,7 +254,7 @@ class EstadofondoController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Registro actualizado exitosamente');
-            return $this->redirect($this->generateUrl('estadofondo_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $id)));
         }
 
         return $this->render('CorresponsaliaBundle:Estadofondo:edit.html.twig', array(

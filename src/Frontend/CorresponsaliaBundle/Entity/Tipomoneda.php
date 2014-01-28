@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relaciongasto
@@ -26,6 +27,7 @@ class Tipomoneda
      * @var integer
      *
      * @ORM\Column(name="tipomoneda", type="string", nullable=false)
+     * @Assert\NotBlank(message="El campo tipo moneda no debe estar vacío.").
      */
     private $tipomoneda;
 

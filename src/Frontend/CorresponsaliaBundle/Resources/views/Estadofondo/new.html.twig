@@ -1,11 +1,12 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    {{ parent() }}
-
+{% block titulomodulo %}  
     <h1>ASIGNACIÓN DE FONDOS</h1>
     <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ datos.anio }} | MES: {{ datos.mes}} </h4><br>
+{% endblock %}
 
+{% block body -%}
+    {{ parent() }}
 
     {% if form_errors(form.recursorecibido) or form_errors(form.corresponsalia) or form_errors(form.tipogasto)%}
     <div class="alert alert-danger errores" style="width:70%;">
@@ -28,10 +29,6 @@
                 <div class="widgetform">{{ form_widget(form.recursorecibido) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Tipo gasto:</div>
-                <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
-            </div>
-            <div class="contenedorform">
                 <div class="labelform">Observación:</div>
                 <div class="widgetform">{{ form_widget(form.observacion) }}</div>
             </div>
@@ -44,6 +41,7 @@
         <input type="hidden" value="{{ datos.anio}}" name="form[anio]">
         <input type="hidden" value="{{ datos.mes}}" name="form[mes]">
         <input type="hidden" value="{{ datos.corresponsalia}}" name="form[corresponsalia]">
+        <input type="hidden" value="{{ datos.tipogasto}}" name="form[tipogasto]">
     </form>
 
 {% endblock %}

@@ -42,7 +42,7 @@ class __TwigTemplate_a025e3d5c1f50cb8f9789cb32b33662210fffaf6b446803a3864f40604a
             <h4 class=\"modal-title\" id=\"myModalLabel\">!Alerta¡</h4>
           </div>
           <div class=\"modal-body\">
-            Debe seleccionar un año, un mes y una corresponsalía.
+            No debe dejar ningun campo en blanco.
           </div>
           <div class=\"modal-footer\">
             <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
@@ -67,7 +67,11 @@ class __TwigTemplate_a025e3d5c1f50cb8f9789cb32b33662210fffaf6b446803a3864f40604a
             <div>";
         // line 30
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "corresponsalia"), 'widget', array("attr" => array("class" => "form-control")));
-        echo "</div>
+        echo "</div><br>
+            <div>";
+        // line 31
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'widget', array("attr" => array("class" => "form-control")));
+        echo "</div><br>
         </div>
     </form>
     
@@ -79,7 +83,7 @@ class __TwigTemplate_a025e3d5c1f50cb8f9789cb32b33662210fffaf6b446803a3864f40604a
         \$(document).ready(function () {
             
             \$('#siguiente').click(function(){
-                if(\$('#form_anio').val()=='' || \$('#form_mes').val()=='' || \$('#form_corresponsalia').val()=='')
+                if(\$('#form_anio').val()=='' || \$('#form_mes').val()=='' || \$('#form_corresponsalia').val()=='' || \$('#form_tipogasto').val()=='')
                    \$('#myModal').modal(\"show\")
                 else
                    \$(\"#form\").submit();
@@ -103,6 +107,6 @@ class __TwigTemplate_a025e3d5c1f50cb8f9789cb32b33662210fffaf6b446803a3864f40604a
 
     public function getDebugInfo()
     {
-        return array (  69 => 30,  65 => 29,  61 => 28,  56 => 26,  31 => 4,  28 => 3,);
+        return array (  73 => 31,  69 => 30,  65 => 29,  61 => 28,  56 => 26,  31 => 4,  28 => 3,);
     }
 }

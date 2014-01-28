@@ -1,9 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block titulomodulo %}<h1>TIPO CORRESPONSALÍA</h1>{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-    <h1>TIPO CORRESPONSALÍA</h1>
-
+    
     <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
@@ -18,26 +19,21 @@
                 <td><a href="{{ path('tipocorresponsalia_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('tipocorresponsalia_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('tipocorresponsalia_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <a href="{{ path('tipocorresponsalia_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+
+                    <a href="{{ path('tipocorresponsalia_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <br><br>
-    <a href="{{ path('tipocorresponsalia_new') }}">
-        Create a new entry
-    </a>
+    <BR><BR><a class="btn btn-primary" href="{{ path('tipocorresponsalia_new') }}">
+          NUEVO TIPO DE CORRESPONSALÍA
+    </a><br><br>
 
-    
+   
     <script>
         $(document).ready(function(){
             $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA

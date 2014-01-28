@@ -171,6 +171,7 @@ class TipocorresponsaliaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Se ha editado el tipo de corresponsalía exitosamente.');
             return $this->redirect($this->generateUrl('tipocorresponsalia_edit', array('id' => $id)));
         }
 
@@ -200,7 +201,7 @@ class TipocorresponsaliaController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el tipo de corresponsalía '.strtoupper($entity->getDescripcion()).' exitosamente.');
         return $this->redirect($this->generateUrl('tipocorresponsalia'));
     }
 
@@ -216,7 +217,7 @@ class TipocorresponsaliaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tipocorresponsalia_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()
         ;
     }

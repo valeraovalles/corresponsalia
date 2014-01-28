@@ -27,7 +27,7 @@ class Tipocorresponsalia
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", nullable=false)
-     * @Assert\NotBlank(message="Debe escribir la descripción.")
+     * @Assert\NotBlank(message="El tipo de corresponsalía no debe estar en blanco.")
      */
     private $descripcion;
 

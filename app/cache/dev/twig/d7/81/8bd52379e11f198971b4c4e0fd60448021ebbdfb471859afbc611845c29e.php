@@ -10,6 +10,7 @@ class __TwigTemplate_d7818bd52379e11f198971b4c4e0fd60448021ebbdfb471859afbc61184
         $this->parent = $this->env->loadTemplate("::base.html.twig");
 
         $this->blocks = array(
+            'titulomodulo' => array($this, 'block_titulomodulo'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -25,13 +26,18 @@ class __TwigTemplate_d7818bd52379e11f198971b4c4e0fd60448021ebbdfb471859afbc61184
     }
 
     // line 3
+    public function block_titulomodulo($context, array $blocks = array())
+    {
+        echo "<h1>LISTADO DE TIPOS DE MONEDA</h1>";
+    }
+
+    // line 5
     public function block_body($context, array $blocks = array())
     {
-        // line 4
+        // line 6
         $this->displayParentBlock("body", $context, $blocks);
         echo "
-    <h1>LISTADO DE TIPOS DE MONEDA</h1>
-
+    
     <table id=\"tablalista\" style=\"width: 97%;\">
         <thead>
             <tr>
@@ -42,33 +48,32 @@ class __TwigTemplate_d7818bd52379e11f198971b4c4e0fd60448021ebbdfb471859afbc61184
         </thead>
         <tbody>
         ";
-        // line 16
+        // line 17
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 17
+            // line 18
             echo "            <tr>
                 <td><a href=\"";
-            // line 18
+            // line 19
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tipomoneda_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 19
+            // line 20
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "tipomoneda"), "html", null, true);
             echo "</td>
                 <td>
-
-                        <a href=\"";
+                    <a href=\"";
             // line 22
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tipomoneda_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">show</a>
+            echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a>
 
-                        <a href=\"";
+                    <a href=\"";
             // line 24
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tipomoneda_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">edit</a>
+            echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a>
 
                 </td>
             </tr>
@@ -112,6 +117,6 @@ class __TwigTemplate_d7818bd52379e11f198971b4c4e0fd60448021ebbdfb471859afbc61184
 
     public function getDebugInfo()
     {
-        return array (  87 => 33,  81 => 29,  70 => 24,  65 => 22,  59 => 19,  53 => 18,  50 => 17,  46 => 16,  31 => 4,  28 => 3,);
+        return array (  92 => 33,  86 => 29,  75 => 24,  70 => 22,  65 => 20,  59 => 19,  56 => 18,  52 => 17,  38 => 6,  35 => 5,  29 => 3,);
     }
 }

@@ -1,9 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block titulomodulo %}<h1>Estado Fondo</h1>{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-    <h1>Estado Fondo</h1>
-
+       
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
             <div class="labelform">Id:</div>
@@ -19,7 +20,7 @@
         </div>
         <div class="contenedorform">
             <div class="labelform">Saldo inicial:</div>
-            <div class="widgetform">{{ entity.saldoinicial }}</div>
+            <div class="widgetform">{% if entity.saldoinicial %}{{ entity.saldoinicial }}{% else %}No asignado{% endif %}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Recurso recibido:</div>
@@ -38,13 +39,15 @@
             <div class="widgetform">{{ entity.fechaasignacion|date('d-m-Y') }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">Observación:</div>
-            <div class="widgetform">{{ entity.observacion|capitalize }}</div>
-        </div>
-        <div class="contenedorform">
             <div class="labelform">Responsale:</div>
             <div class="widgetform">{{ entity.responsable.primerNombre|title }} {{ entity.responsable.primerApellido|title }}</div>
         </div>
+        {% if entity.observacion %}
+        <div class="contenedorform">
+            <div class="labelform">Observación:</div>
+            <div class="widgetform">{{ entity.observacion|capitalize }}</div>
+        </div>
+        {% endif %}
     </div>
     
     <a class="btn btn-default" href="{{ path('estadofondo_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 

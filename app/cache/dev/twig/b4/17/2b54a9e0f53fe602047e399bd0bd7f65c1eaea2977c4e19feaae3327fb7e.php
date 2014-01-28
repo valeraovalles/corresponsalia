@@ -41,15 +41,15 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
           <li><a href=\"";
         // line 20
         echo $this->env->getExtension('routing')->getPath("tipomoneda");
-        echo "\">Moneda</a></li>
+        echo "\">Tipo de Moneda</a></li>
           <li><a href=\"";
         // line 21
-        echo $this->env->getExtension('routing')->getPath("corresponsalia");
-        echo "\">Corresponsalia</a></li>
+        echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
+        echo "\">Tipo de Corresponsalía</a></li>
           <li><a href=\"";
         // line 22
-        echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
-        echo "\">Tipo Corresponsalía</a></li>
+        echo $this->env->getExtension('routing')->getPath("corresponsalia");
+        echo "\">Corresponsalia</a></li>
           <li><a href=\"";
         // line 23
         echo $this->env->getExtension('routing')->getPath("estadofondo");
@@ -122,6 +122,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  87 => 40,  83 => 39,  79 => 38,  74 => 36,  59 => 24,  55 => 23,  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,);
+        return array (  87 => 40,  83 => 39,  79 => 38,  74 => 36,  55 => 23,  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,  91 => 32,  86 => 29,  75 => 24,  70 => 22,  65 => 20,  59 => 24,  56 => 18,  52 => 17,  38 => 6,  35 => 5,  29 => 3,);
     }
 }

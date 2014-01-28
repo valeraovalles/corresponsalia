@@ -91,15 +91,16 @@ class __TwigTemplate_1c9d9390ea1d19654385430106a31aa0ad08cc42b312a3e9a039170b7e6
         echo "        </tbody>
     </table>
 
+    
 
             <a class=\"btn btn-primary\" href=\"";
-        // line 47
+        // line 48
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio_new", array("idcor" => $this->getContext($context, "idcor"))), "html", null, true);
         echo "\">
                 CREAR NUEVA TASA DE CAMBIO
             </a> |             
             <a class=\"btn btn-default\" href=\"";
-        // line 50
+        // line 51
         echo $this->env->getExtension('routing')->getPath("corresponsalia_principal");
         echo "\">
                 VOLVER AL INICIO
@@ -120,6 +121,6 @@ class __TwigTemplate_1c9d9390ea1d19654385430106a31aa0ad08cc42b312a3e9a039170b7e6
 
     public function getDebugInfo()
     {
-        return array (  103 => 50,  97 => 47,  91 => 43,  84 => 41,  78 => 30,  74 => 29,  70 => 28,  66 => 27,  63 => 26,  59 => 25,  54 => 22,  37 => 7,  31 => 4,  28 => 3,);
+        return array (  104 => 51,  98 => 48,  91 => 43,  84 => 41,  78 => 30,  74 => 29,  70 => 28,  66 => 27,  63 => 26,  59 => 25,  54 => 22,  37 => 7,  31 => 4,  28 => 3,);
     }
 }

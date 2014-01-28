@@ -171,7 +171,8 @@ class TipomonedaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tipomoneda_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('notice', 'Se ha editado el tipo de moneda exitosamente.');
+            return $this->redirect($this->generateUrl('tipomoneda_show', array('id' => $id)));
         }
 
         return $this->render('CorresponsaliaBundle:Tipomoneda:edit.html.twig', array(
@@ -200,7 +201,7 @@ class TipomonedaController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el tipo de moneda '.strtoupper($entity->getTipomoneda()).' exitosamente.');
         return $this->redirect($this->generateUrl('tipomoneda'));
     }
 
@@ -216,7 +217,7 @@ class TipomonedaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tipomoneda_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()
         ;
     }

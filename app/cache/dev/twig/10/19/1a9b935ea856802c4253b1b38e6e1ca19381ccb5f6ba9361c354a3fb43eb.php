@@ -91,16 +91,9 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
         echo "</div>
             </div>
             <div class=\"contenedorform\">
-                <div class=\"labelform\">Tipo gasto:</div>
-                <div class=\"widgetform\">";
-        // line 32
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'widget');
-        echo "</div>
-            </div>
-            <div class=\"contenedorform\">
                 <div class=\"labelform\">Observación:</div>
                 <div class=\"widgetform\">";
-        // line 36
+        // line 32
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "observacion"), 'widget');
         echo "</div>
             </div>
@@ -108,26 +101,30 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
     
         <input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\"> | 
         <a class=\"btn btn-default\" href=\"";
-        // line 41
+        // line 37
         echo $this->env->getExtension('routing')->getPath("estadofondo_aniomes");
         echo "\">SELECCIONAR OTROS PARÁMETROS</a> | 
         <a class=\"btn btn-default\" href=\"";
-        // line 42
+        // line 38
         echo $this->env->getExtension('routing')->getPath("estadofondo");
         echo "\">IR AL LISTADO DE FONDOS</a>
         
         <input type=\"hidden\" value=\"";
-        // line 44
+        // line 40
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "anio"), "html", null, true);
         echo "\" name=\"form[anio]\">
         <input type=\"hidden\" value=\"";
-        // line 45
+        // line 41
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "mes"), "html", null, true);
         echo "\" name=\"form[mes]\">
         <input type=\"hidden\" value=\"";
-        // line 46
+        // line 42
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "corresponsalia"), "html", null, true);
         echo "\" name=\"form[corresponsalia]\">
+        <input type=\"hidden\" value=\"";
+        // line 43
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "tipogasto"), "html", null, true);
+        echo "\" name=\"form[tipogasto]\">
     </form>
 
 ";
@@ -145,6 +142,6 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
 
     public function getDebugInfo()
     {
-        return array (  129 => 46,  125 => 45,  121 => 44,  116 => 42,  112 => 41,  104 => 36,  97 => 32,  90 => 28,  83 => 24,  76 => 20,  72 => 19,  69 => 18,  63 => 15,  59 => 14,  55 => 13,  51 => 11,  49 => 10,  37 => 7,  31 => 4,  28 => 3,);
+        return array (  126 => 43,  122 => 42,  118 => 41,  114 => 40,  109 => 38,  105 => 37,  97 => 32,  90 => 28,  83 => 24,  76 => 20,  72 => 19,  69 => 18,  63 => 15,  59 => 14,  55 => 13,  51 => 11,  49 => 10,  37 => 7,  31 => 4,  28 => 3,);
     }
 }

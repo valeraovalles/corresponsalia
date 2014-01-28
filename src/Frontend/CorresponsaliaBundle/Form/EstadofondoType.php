@@ -19,7 +19,10 @@ class EstadofondoType extends AbstractType
             ->add('responsable')
             ->add('anio','text')
             ->add('mes','text')
-            ->add('recursorecibido')
+            ->add('recursorecibido', 'money', array(
+                'invalid_message' => 'El monto debe ser numérico',
+                'currency'=>null
+                ))
             ->add('observacion','textarea')
             ->add('fechaasignacion', 'date',array(
                     'widget' => 'single_text',

@@ -77,7 +77,6 @@ class Estadofondo
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id", nullable=false)
      * })
-     * @Assert\NotBlank(message="Debe seleccionar una tipo de gasto.").
      */
     private $tipogasto;
 
