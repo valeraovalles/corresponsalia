@@ -128,3 +128,35 @@ perfil_delete:
     pattern:  /perfil/{id}/delete
     defaults: { _controller: "UsuarioBundle:Perfil:delete" }
     requirements: { _method: post }
+
+################################################################################
+usercorresponsalia:
+    pattern:  /usercorresponsalia
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:index" }
+
+usercorresponsalia_show:
+    pattern:  /usercorresponsalia/{id}/show
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:show" }
+
+usercorresponsalia_new:
+    pattern:  /usercorresponsalia/new
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:new" }
+
+usercorresponsalia_create:
+    pattern:  /usercorresponsalia/create
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:create" }
+    requirements: { _method: post }
+
+usercorresponsalia_edit:
+    pattern:  /usercorresponsalia/{id}/edit
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:edit" }
+
+usercorresponsalia_update:
+    pattern:  /usercorresponsalia/{id}/update
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:update" }
+    requirements: { _method: post|put }
+
+usercorresponsalia_delete:
+    pattern:  /usercorresponsalia/{id}/delete
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:delete" }
+    requirements: { _method: post|delete }

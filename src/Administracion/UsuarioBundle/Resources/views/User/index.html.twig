@@ -1,28 +1,27 @@
-{% extends '::administracion.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}CORRESPONSALÍA - LISTADO USUARIOS{% endblock %}
 
 {% block titulobanner %}
     ADMINISTRACIÓN DE USUARIOS
 {% endblock %}
 
+{% block titulomodulo %}
+    <h1>LISTA DE USUARIOS</h1>
+{% endblock %}
+    
 {% block body %}
-
     {{ parent() }}
 
-    <div class="titulo">LISTA DE USUARIOS</div>
-
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tablalista" style="width: 97%">
         <thead>
             <tr>
-                <th style="width:100px;">Id</th>
+                <th>Id</th>
                 <th>Username</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
-                <th>Cedula</th>
                 <th>Estatus</th>
-                <th>Id</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +31,6 @@
                 <td><a href="{{ path('user_show', { 'id': entity.user.id }) }}">{{ entity.user.username }}</a></td>
                 <td>{{ entity.primernombre }} {{ entity.segundonombre }}</td>
                 <td>{{ entity.primerapellido }} {{ entity.segundoapellido }}</td>
-                <td>{{ entity.cedula }}</td>
                 <td>
                     {% if entity.user.isActive == 1 %}
                         Activo
@@ -41,8 +39,9 @@
                     {% endif %}
                 </td>
                 <td>
-                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="icon-search"></a>
-                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="icon-edit"></a>
+                    <a href="{{ path('user_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+
+                    <a href="{{ path('user_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
            
                 </td>
             </tr>
@@ -52,13 +51,13 @@
 
     <br><br>
 
-    <a class="btn btn-primary" href="{{ path('user_new') }}">Nuevo</a>
+    <a class="btn btn-primary" href="{{ path('user_new') }}">NUEVO USUARIO</a>
 
     <br><br>
 
     <script>
     $(document).ready(function(){
-       $('#tabla_lista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+       $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
             "sPaginationType": "full_numbers" //DAMOS FORMATO A LA PAGINACION(NUMEROS)
         } );
     })

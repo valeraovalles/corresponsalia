@@ -81,7 +81,7 @@ class __TwigTemplate_602bbd1eda96892da970284e42263c50db8edf8e47580bbaf5c21498bf8
         // line 21
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "_token"), 'widget');
         echo "
-        <div class=\"formShow\" style=\"width:70%;\">
+         <div class=\"formShow\" style=\"width:70%;\">
             <div class=\"contenedorform\" style=\"display: none;\">
                 <div class=\"labelform\">Corresponsalía:</div>
                 <div class=\"widgetform\">";

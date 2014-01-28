@@ -35,34 +35,54 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
     <ul class=\"nav navbar-nav\">
+        
+      <li class=\"dropdown\">
+        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">USUARIOS<b class=\"caret\"></b></a>
+        <ul class=\"dropdown-menu\">
+          <li><a href=\"";
+        // line 21
+        echo $this->env->getExtension('routing')->getPath("user");
+        echo "\">Listado de usuarios</a></li>
+          <li><a href=\"";
+        // line 22
+        echo $this->env->getExtension('routing')->getPath("user_new");
+        echo "\">Nuevo usuario</a></li>
+          <li class=\"divider\"></li>
+          <li><a href=\"";
+        // line 24
+        echo $this->env->getExtension('routing')->getPath("rol");
+        echo "\">Listado de roles</a></li>
+          <li><a href=\"";
+        // line 25
+        echo $this->env->getExtension('routing')->getPath("rol_new");
+        echo "\">Nuevo rol</a></li>
+        </ul>
+      </li>
+      
       <li class=\"dropdown\">
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">ADMINISTRAR <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 20
+        // line 32
         echo $this->env->getExtension('routing')->getPath("tipomoneda");
         echo "\">Tipo de Moneda</a></li>
           <li><a href=\"";
-        // line 21
+        // line 33
         echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
         echo "\">Tipo de Corresponsalía</a></li>
           <li><a href=\"";
-        // line 22
+        // line 34
         echo $this->env->getExtension('routing')->getPath("corresponsalia");
         echo "\">Corresponsalia</a></li>
+          <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 23
+        // line 36
         echo $this->env->getExtension('routing')->getPath("estadofondo");
         echo "\">Listado de fondos</a></li>
           <li><a href=\"";
-        // line 24
+        // line 37
         echo $this->env->getExtension('routing')->getPath("estadofondo_aniomes");
         echo "\">Asignar fondo</a></li>
-          <li><a href=\"#\">Something else here</a></li>
-          <li class=\"divider\"></li>
-          <li><a href=\"#\">Separated link</a></li>
-          <li class=\"divider\"></li>
-          <li><a href=\"#\">One more separated link</a></li>
         </ul>
       </li>
       
@@ -70,27 +90,24 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">CORRESPONSALÍA <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 36
+        // line 44
         echo $this->env->getExtension('routing')->getPath("tipomoneda");
         echo "\">Tasa de cambio</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 38
+        // line 46
         echo $this->env->getExtension('routing')->getPath("corresponsalia");
         echo "\">Rendir Gasto Funcionamiento</a></li>
+          <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 39
+        // line 48
         echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
         echo "\">Rendir Cobertura Programada</a></li>
           <li><a href=\"";
-        // line 40
+        // line 49
         echo $this->env->getExtension('routing')->getPath("estadofondo");
         echo "\">Rendir Honorarios Profesionales</a></li>
           <li><a href=\"#\">Something else here</a></li>
-          <li class=\"divider\"></li>
-          <li><a href=\"#\">Separated link</a></li>
-          <li class=\"divider\"></li>
-          <li><a href=\"#\">One more separated link</a></li>
         </ul>
       </li>
       <li><a href=\"#\">ADMINISTRAR</a></li>
@@ -102,7 +119,10 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
       <button type=\"submit\" class=\"btn btn-default\">Submit</button>
     </form>
     <ul class=\"nav navbar-nav navbar-right\">
-      <li><a href=\"#\">SALIR</a></li>
+      <li><a href=\"";
+        // line 62
+        echo $this->env->getExtension('routing')->getPath("usuario_logout");
+        echo "\">SALIR</a></li>
       
     </ul>
   </div><!-- /.navbar-collapse -->
@@ -122,6 +142,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  87 => 40,  83 => 39,  79 => 38,  74 => 36,  55 => 23,  51 => 22,  47 => 21,  43 => 20,  31 => 11,  19 => 1,  91 => 32,  86 => 29,  75 => 24,  70 => 22,  65 => 20,  59 => 24,  56 => 18,  52 => 17,  38 => 6,  35 => 5,  29 => 3,);
+        return array (  124 => 62,  108 => 49,  104 => 48,  99 => 46,  94 => 44,  84 => 37,  80 => 36,  75 => 34,  71 => 33,  67 => 32,  57 => 25,  53 => 24,  48 => 22,  44 => 21,  31 => 11,  19 => 1,);
     }
 }

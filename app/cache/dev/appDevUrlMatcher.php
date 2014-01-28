@@ -453,77 +453,286 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // _welcome
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', '_welcome');
+        if (0 === strpos($pathinfo, '/usuario')) {
+            // usuario_homepage
+            if ($pathinfo === '/usuario/inicio') {
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\DefaultController::indexAction',  '_route' => 'usuario_homepage',);
             }
 
-            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\WelcomeController::indexAction',  '_route' => '_welcome',);
+            if (0 === strpos($pathinfo, '/usuario/log')) {
+                if (0 === strpos($pathinfo, '/usuario/login')) {
+                    // usuario_login
+                    if ($pathinfo === '/usuario/login') {
+                        return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\DefaultController::loginAction',  '_route' => 'usuario_login',);
+                    }
+
+                    // usuario_login_check
+                    if ($pathinfo === '/usuario/login_check') {
+                        return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\DefaultController::loginCheckAction',  '_route' => 'usuario_login_check',);
+                    }
+
+                }
+
+                // usuario_logout
+                if ($pathinfo === '/usuario/logout') {
+                    return array('_route' => 'usuario_logout');
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/usuario/c')) {
+                // contacto
+                if ($pathinfo === '/usuario/contacto') {
+                    return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController::templateAction',  'template' => 'UsuarioBundle:Default:contacto.html.twig',  '_route' => 'contacto',);
+                }
+
+                // cambioclave
+                if ($pathinfo === '/usuario/cambioclave') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::cambioclaveAction',  '_route' => 'cambioclave',);
+                }
+
+            }
+
+            // actualizacambioclave
+            if ($pathinfo === '/usuario/actualizacambioclave') {
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::actualizacambioclaveAction',  '_route' => 'actualizacambioclave',);
+            }
+
+            // notificar
+            if ($pathinfo === '/usuario/notificar') {
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::notificarAction',  '_route' => 'notificar',);
+            }
+
+            // user
+            if ($pathinfo === '/usuario/lista') {
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::indexAction',  '_route' => 'user',);
+            }
+
+            // user_show
+            if (preg_match('#^/usuario/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_show')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::showAction',));
+            }
+
+            // user_new
+            if ($pathinfo === '/usuario/new') {
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::newAction',  '_route' => 'user_new',);
+            }
+
+            // user_create
+            if ($pathinfo === '/usuario/create') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_user_create;
+                }
+
+                return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::createAction',  '_route' => 'user_create',);
+            }
+            not_user_create:
+
+            // user_edit
+            if (preg_match('#^/usuario/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_edit')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::editAction',));
+            }
+
+            // user_update
+            if (preg_match('#^/usuario/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_user_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_update')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::updateAction',));
+            }
+            not_user_update:
+
+            // user_delete
+            if (preg_match('#^/usuario/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_user_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_delete')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UserController::deleteAction',));
+            }
+            not_user_delete:
+
+            if (0 === strpos($pathinfo, '/usuario/rol')) {
+                // rol
+                if ($pathinfo === '/usuario/rol/lista') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::indexAction',  '_route' => 'rol',);
+                }
+
+                // rol_show
+                if (preg_match('#^/usuario/rol/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'rol_show')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::showAction',));
+                }
+
+                // rol_new
+                if ($pathinfo === '/usuario/rol/new') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::newAction',  '_route' => 'rol_new',);
+                }
+
+                // rol_create
+                if ($pathinfo === '/usuario/rol/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_rol_create;
+                    }
+
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::createAction',  '_route' => 'rol_create',);
+                }
+                not_rol_create:
+
+                // rol_edit
+                if (preg_match('#^/usuario/rol/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'rol_edit')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::editAction',));
+                }
+
+                // rol_update
+                if (preg_match('#^/usuario/rol/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_rol_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'rol_update')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::updateAction',));
+                }
+                not_rol_update:
+
+                // rol_delete
+                if (preg_match('#^/usuario/rol/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_rol_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'rol_delete')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\RolController::deleteAction',));
+                }
+                not_rol_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/usuario/perfil')) {
+                // perfil
+                if ($pathinfo === '/usuario/perfil/perfil/lista') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::indexAction',  '_route' => 'perfil',);
+                }
+
+                // perfil_show
+                if (preg_match('#^/usuario/perfil/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'perfil_show')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::showAction',));
+                }
+
+                // perfil_new
+                if ($pathinfo === '/usuario/perfil/new') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::newAction',  '_route' => 'perfil_new',);
+                }
+
+                // perfil_create
+                if ($pathinfo === '/usuario/perfil/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_perfil_create;
+                    }
+
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::createAction',  '_route' => 'perfil_create',);
+                }
+                not_perfil_create:
+
+                // perfil_edit
+                if (preg_match('#^/usuario/perfil/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'perfil_edit')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::editAction',));
+                }
+
+                // perfil_update
+                if (preg_match('#^/usuario/perfil/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_perfil_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'perfil_update')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::updateAction',));
+                }
+                not_perfil_update:
+
+                // perfil_delete
+                if (preg_match('#^/usuario/perfil/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_perfil_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'perfil_delete')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\PerfilController::deleteAction',));
+                }
+                not_perfil_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/usuario/usercorresponsalia')) {
+                // usercorresponsalia
+                if ($pathinfo === '/usuario/usercorresponsalia') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::indexAction',  '_route' => 'usercorresponsalia',);
+                }
+
+                // usercorresponsalia_show
+                if (preg_match('#^/usuario/usercorresponsalia/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'usercorresponsalia_show')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::showAction',));
+                }
+
+                // usercorresponsalia_new
+                if ($pathinfo === '/usuario/usercorresponsalia/new') {
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::newAction',  '_route' => 'usercorresponsalia_new',);
+                }
+
+                // usercorresponsalia_create
+                if ($pathinfo === '/usuario/usercorresponsalia/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_usercorresponsalia_create;
+                    }
+
+                    return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::createAction',  '_route' => 'usercorresponsalia_create',);
+                }
+                not_usercorresponsalia_create:
+
+                // usercorresponsalia_edit
+                if (preg_match('#^/usuario/usercorresponsalia/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'usercorresponsalia_edit')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::editAction',));
+                }
+
+                // usercorresponsalia_update
+                if (preg_match('#^/usuario/usercorresponsalia/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_usercorresponsalia_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'usercorresponsalia_update')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::updateAction',));
+                }
+                not_usercorresponsalia_update:
+
+                // usercorresponsalia_delete
+                if (preg_match('#^/usuario/usercorresponsalia/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_usercorresponsalia_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'usercorresponsalia_delete')), array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\UsercorresponsaliaController::deleteAction',));
+                }
+                not_usercorresponsalia_delete:
+
+            }
+
         }
 
-        if (0 === strpos($pathinfo, '/demo')) {
-            if (0 === strpos($pathinfo, '/demo/secured')) {
-                if (0 === strpos($pathinfo, '/demo/secured/log')) {
-                    if (0 === strpos($pathinfo, '/demo/secured/login')) {
-                        // _demo_login
-                        if ($pathinfo === '/demo/secured/login') {
-                            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::loginAction',  '_route' => '_demo_login',);
-                        }
-
-                        // _security_check
-                        if ($pathinfo === '/demo/secured/login_check') {
-                            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::securityCheckAction',  '_route' => '_security_check',);
-                        }
-
-                    }
-
-                    // _demo_logout
-                    if ($pathinfo === '/demo/secured/logout') {
-                        return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::logoutAction',  '_route' => '_demo_logout',);
-                    }
-
-                }
-
-                if (0 === strpos($pathinfo, '/demo/secured/hello')) {
-                    // acme_demo_secured_hello
-                    if ($pathinfo === '/demo/secured/hello') {
-                        return array (  'name' => 'World',  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloAction',  '_route' => 'acme_demo_secured_hello',);
-                    }
-
-                    // _demo_secured_hello
-                    if (preg_match('#^/demo/secured/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_secured_hello')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloAction',));
-                    }
-
-                    // _demo_secured_hello_admin
-                    if (0 === strpos($pathinfo, '/demo/secured/hello/admin') && preg_match('#^/demo/secured/hello/admin/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_secured_hello_admin')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloadminAction',));
-                    }
-
-                }
-
+        // login
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'login');
             }
 
-            // _demo
-            if (rtrim($pathinfo, '/') === '/demo') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', '_demo');
-                }
-
-                return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::indexAction',  '_route' => '_demo',);
-            }
-
-            // _demo_hello
-            if (0 === strpos($pathinfo, '/demo/hello') && preg_match('#^/demo/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_hello')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::helloAction',));
-            }
-
-            // _demo_contact
-            if ($pathinfo === '/demo/contact') {
-                return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::contactAction',  '_route' => '_demo_contact',);
-            }
-
+            return array (  '_controller' => 'Administracion\\UsuarioBundle\\Controller\\DefaultController::indexAction',  '_route' => 'login',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

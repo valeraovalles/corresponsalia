@@ -344,7 +344,7 @@ class UserController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el usuario "'.strtoupper($entity->getUsername()).'" exitosamente.');
         return $this->redirect($this->generateUrl('user'));
     }
 

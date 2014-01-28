@@ -8,12 +8,11 @@
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(form.recursorecibido) or form_errors(form.corresponsalia) or form_errors(form.tipogasto)%}
+    {% if form_errors(form.recursorecibido) or form_errors(form.saldoinicial)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.recursorecibido) }}</div>
-        <div>{{ form_errors(form.corresponsalia) }}</div>
-        <div>{{ form_errors(form.tipogasto) }}</div>
+        <div>{{ form_errors(form.saldoinicial) }}</div>
     </div>
     {% endif %}
     

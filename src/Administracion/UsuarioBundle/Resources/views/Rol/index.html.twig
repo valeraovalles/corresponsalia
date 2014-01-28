@@ -1,17 +1,20 @@
-{% extends '::administracion.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}CORRESPONSALÍA - LISTADO ROLES{% endblock %}
 
 {% block titulobanner %}
-    ADMINISTRACIÓN DE ROLES
+    LISTA DE ROLES
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTA DE ROLES</h1>
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
 
-    <div class="titulo">LISTA DE ROLES</div>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tablalista" style="width: 97%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,11 +26,11 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('rol_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.rol }}</td>
+                <td style="width: 70%">{{ entity.rol }}</td>
                 <td>
+                    <a href="{{ path('rol_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
 
-                    <a href="{{ path('rol_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
-                    <a href="{{ path('rol_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
+                    <a href="{{ path('rol_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
             
                 </td>
             </tr>
@@ -37,8 +40,14 @@
 
     <br><br>
 
-    <a class="btn btn-primary" href="{{ path('rol_new') }}">Nuevo</a>
+    <a class="btn btn-primary" href="{{ path('rol_new') }}">NUEVO ROL</a>
 
     <br><br>
-
+    <script>
+    $(document).ready(function(){
+       $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers" //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+        } );
+    })
+    </script>
 {% endblock %}

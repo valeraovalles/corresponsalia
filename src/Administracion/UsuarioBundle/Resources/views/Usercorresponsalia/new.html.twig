@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - NUEVO USUARIO-CORRESPONSALÍA{% endblock %}
+
+{% block titulobanner %}
+    NUEVO USUARIO-CORRESPONSALÍA
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>NUEVO USUARIO-CORRESPONSALÍA</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    
+    {% if form_errors(form.usuario) or form_errors(form.corresponsalia) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.usuario) }}</div>
+        <div>{{ form_errors(form.corresponsalia) }}</div>
+    </div>
+    {% endif %}  
+    
+    <form novalidate action="{{ path('usercorresponsalia_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Usuario:</div>
+                <div class="widgetform">{{ form_widget(form.usuario) }}</div>
+            </div> 
+            <div class="contenedorform">
+                <div class="labelform">Corresponsalía:</div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
+            </div>  
+        </div>
+        
+        <button class="btn btn-primary" type="submit">CREAR</button> | 
+        <a class="btn btn-default"  href="{{ path('usercorresponsalia') }}">IR AL LISTADO</a>
+    </form>
+    
+    
+{% endblock %}

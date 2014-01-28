@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="usuarios.user")
  * @ORM\Entity(repositoryClass="Administracion\UsuarioBundle\Entity\UserRepository")
- * @UniqueEntity("username")
+ * @UniqueEntity(fields={"username"},message="El nombre de usuario ya se está utilizando.")
  */
 class User implements UserInterface, AdvancedUserInterface
 {
@@ -31,7 +31,7 @@ class User implements UserInterface, AdvancedUserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=25, nullable=false, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="El nombre de usuario no debe estar en blanco."))
      */
     private $username;
 
@@ -46,6 +46,7 @@ class User implements UserInterface, AdvancedUserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=40, nullable=true)
+     * @Assert\NotBlank(message="La clave no debe estar en blanco."))
      */
     private $password;
 
@@ -56,7 +57,6 @@ class User implements UserInterface, AdvancedUserInterface
      */
     private $isActive;
 
-     
      /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -69,6 +69,7 @@ class User implements UserInterface, AdvancedUserInterface
      *     @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
      *   }
      * )
+     * @Assert\Count(min="1",minMessage="Debe seleccionar al menos 1 rol.")
      */
     private $rol;
 

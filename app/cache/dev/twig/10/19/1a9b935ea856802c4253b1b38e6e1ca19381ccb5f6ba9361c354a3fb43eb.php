@@ -10,6 +10,7 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
         $this->parent = $this->env->loadTemplate("::base.html.twig");
 
         $this->blocks = array(
+            'titulomodulo' => array($this, 'block_titulomodulo'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -25,15 +26,12 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
     }
 
     // line 3
-    public function block_body($context, array $blocks = array())
+    public function block_titulomodulo($context, array $blocks = array())
     {
-        // line 4
-        $this->displayParentBlock("body", $context, $blocks);
-        echo "
-
+        echo "  
     <h1>ASIGNACIÓN DE FONDOS</h1>
     <h4>CORRESPONSALÍA: ";
-        // line 7
+        // line 5
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
         echo " | PAÍS: ";
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "corresponsalia"), "pais"), "pais")), "html", null, true);
@@ -42,25 +40,29 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
         echo " | MES: ";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "datos"), "mes"), "html", null, true);
         echo " </h4><br>
+";
+    }
 
+    // line 8
+    public function block_body($context, array $blocks = array())
+    {
+        // line 9
+        $this->displayParentBlock("body", $context, $blocks);
+        echo "
 
     ";
-        // line 10
-        if ((($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'errors') || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "corresponsalia"), 'errors')) || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'errors'))) {
-            // line 11
+        // line 11
+        if (($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'errors') || $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "saldoinicial"), 'errors'))) {
+            // line 12
             echo "    <div class=\"alert alert-danger errores\" style=\"width:70%;\">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>";
-            // line 13
+            // line 14
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'errors');
             echo "</div>
         <div>";
-            // line 14
-            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "corresponsalia"), 'errors');
-            echo "</div>
-        <div>";
             // line 15
-            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'errors');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "saldoinicial"), 'errors');
             echo "</div>
     </div>
     ";
@@ -142,6 +144,6 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
 
     public function getDebugInfo()
     {
-        return array (  126 => 43,  122 => 42,  118 => 41,  114 => 40,  109 => 38,  105 => 37,  97 => 32,  90 => 28,  83 => 24,  76 => 20,  72 => 19,  69 => 18,  63 => 15,  59 => 14,  55 => 13,  51 => 11,  49 => 10,  37 => 7,  31 => 4,  28 => 3,);
+        return array (  128 => 43,  124 => 42,  120 => 41,  116 => 40,  111 => 38,  107 => 37,  99 => 32,  92 => 28,  85 => 24,  78 => 20,  74 => 19,  71 => 18,  65 => 15,  61 => 14,  57 => 12,  55 => 11,  50 => 9,  47 => 8,  35 => 5,  29 => 3,);
     }
 }

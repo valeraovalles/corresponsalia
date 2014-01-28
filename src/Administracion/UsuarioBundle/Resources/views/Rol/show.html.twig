@@ -1,9 +1,17 @@
-{% extends '::administracion.html.twig' %}
-{% block title %}Inicio - Telesur{% endblock %}
+{% extends '::base.html.twig' %}
 
+{% block title %}CORRESPONSALÍA - CONSULTAR ROL{% endblock %}
+
+{% block titulobanner %}
+    CONSULTAR ROL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CONSULTAR ROL</h1>
+{% endblock %}
+    
 {% block body %}
 {{ parent() }}
-<div class="titulo">ROL</div>
 
     {% if app.session.started %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -33,18 +41,17 @@
 <br>
 
         <a class="btn btn-default" href="{{ path('rol') }}">
-            Ir a la lista
+            IR AL LISTADO
         </a> |
 
         <a class="btn btn-default" href="{{ path('rol_edit', { 'id': entity.id }) }}">
-            Ir a editar
+            IR A EDITAR
         </a> 
         <br><br>
         <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
             {{ form_widget(delete_form) }}
-            <button  class="btn btn-danger" type="submit">Borrar</button>
+            <button  class="btn btn-danger" type="submit">BORRAR</button>
         </form>
-        </td>
 
 {% endblock %}
 

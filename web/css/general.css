@@ -6,6 +6,10 @@ Description            :
 Purpose of the stylesheet follows.
 */
 
+*{
+    font-family: Georgia;
+}
+
 body{
 background-color       :#efefef;
 margin-top             :0;
@@ -194,7 +198,9 @@ font-weight            :bold;
 		width                  :40%;
 		text-align             :right;
 		font-weight            :bold;
+                padding: 4px;
 		padding-right: 10px;
+                
 
 	}
 
@@ -202,6 +208,7 @@ font-weight            :bold;
 		text-align: left;
 		overflow: auto;
 		text-align: justify;
+                padding: 4px;
 
 	}
 
@@ -209,42 +216,6 @@ font-weight            :bold;
 
 li{
 list-style             :none;
-}
-
-.cienpx{
-width                  :100px;
-}
-
-.dospx{
-width                  :200px
-}
-
-.trespx{
-width                  :300px
-}
-
-.cuatropx{
-width                  :400px
-}
-
-.cincopx{
-width                  :500px
-}
-
-.seispx{
-width                  :600px
-}
-
-.sietepx{
-width                  :700px
-}
-
-.ochopx{
-width                  :800px
-}
-
-.nuevepx{
-width                  :900px
 }
 
 img{
@@ -313,39 +284,6 @@ cursor                 :pointer;
 
 }
 
-.records_list{
-width                  :800px;
-font-size              :12px;
-}
-
-.records_list th{
-text-align             :left;
-background-color       :#0fa1e0; 
-}
-
-.records_list td{
-text-align             :left;
-border                 :1px solid #0fa1e0;
-}
-
-.Redflash-notice{
-color                  :red;
-background-color       :#fffbeb;
-margin-bottom          :5px;
-}
-
-.Greenflash-notice{
-color                  :green;
-background-color       :#fffbeb;
-margin-bottom          :5px;
-}
-
-.help-inline{
-color                  :red;
-margin-bottom          :5px;
-
-}
-
 #administracion_usuariobundle_usertype_rol label{
 	font-size: 12px;
 }
@@ -367,3 +305,4 @@ margin-bottom          :5px;
     text-align: left;
     width: 800px;
 }
+

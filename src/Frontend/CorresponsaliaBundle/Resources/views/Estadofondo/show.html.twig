@@ -7,10 +7,6 @@
        
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
-            <div class="labelform">Id:</div>
-            <div class="widgetform">{{ entity.id }}</div>
-        </div>
-        <div class="contenedorform">
             <div class="labelform">Corresponsalia:</div>
             <div class="widgetform">{{ entity.corresponsalia.nombre|upper }}</div>
         </div>
@@ -19,20 +15,28 @@
             <div class="widgetform">{{ entity.tipogasto.descripcion|upper }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">Saldo inicial:</div>
-            <div class="widgetform">{% if entity.saldoinicial %}{{ entity.saldoinicial }}{% else %}No asignado{% endif %}</div>
-        </div>
-        <div class="contenedorform">
-            <div class="labelform">Recurso recibido:</div>
-            <div class="widgetform">{{ entity.recursorecibido }}</div>
-        </div>
-        <div class="contenedorform">
             <div class="labelform">Año:</div>
             <div class="widgetform">{{ entity.anio }}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Mes:</div>
             <div class="widgetform">{{ entity.mes }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Saldo inicial:</div>
+            <div class="widgetform"><span class="label label-info">{% if entity.saldoinicial %}{{ entity.saldoinicial }}{% else %}No asignado{% endif %}</span></div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Recurso recibido:</div>
+            <div class="widgetform"><span class="label label-info">{{ entity.recursorecibido }}</span></div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Pagos:</div>
+            <div class="widgetform"><span class="label label-danger">{{ entity.pagos }}</span></div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Saldo final:</div>
+            <div class="widgetform"><span class="label label-warning">{{ entity.saldofinal }}</span></div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Fecha de registro:</div>

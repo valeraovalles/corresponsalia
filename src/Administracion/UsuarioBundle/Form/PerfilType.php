@@ -15,8 +15,6 @@ class PerfilType extends AbstractType
             ->add('segundoNombre')
             ->add('primerApellido')
             ->add('segundoApellido')
-            ->add('cedula')
-            ->add('extension','integer')
             #->add('user')
         ;
     }

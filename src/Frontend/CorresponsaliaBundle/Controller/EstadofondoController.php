@@ -269,12 +269,19 @@ class EstadofondoController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        //validar que no tenga pagos al borrar
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
+        if($entity->getPagos()!=0){
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el fondo de la corresponsalía "'.ucfirst($entity->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getTipogasto()->getDescripcion()).'" porque tiene pagos asociados.');
+             return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $id)));            
+        }
+        
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Estadofondo entity.');
@@ -283,7 +290,7 @@ class EstadofondoController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el fondo de la corresponsalía "'.ucfirst($entity->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getTipogasto()->getDescripcion()).'" exitosamente.');
         return $this->redirect($this->generateUrl('estadofondo'));
     }
 

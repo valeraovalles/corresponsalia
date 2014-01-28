@@ -1,16 +1,25 @@
-{% extends '::administracion.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}CORRESPONSALÍA - NUEVO ROL{% endblock %}
 
 {% block titulobanner %}
-    ADMINISTRACIÓN DE ROLES
+    NUEVO ROL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>NUEVO ROL</h1>
 {% endblock %}
 
 {% block body %}
 	{{ parent() }}
 
-	<div class="titulo">CREAR ROL</div>
-
+{% if form_errors(form.rol) %}
+<div class="alert alert-danger errores" style="width:70%;">
+    <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+    <div>{{ form_errors(form.rol) }}</div>
+</div>
+{% endif %}
+    
 	<form novalidate action="{{ path('rol_create') }}" method="post" {{ form_enctype(form) }}>
 
 		{{ form_widget(form._token) }}
@@ -18,15 +27,14 @@
 
      <div class="formShow">
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(form.rol) }}</div>
             <div class="labelform">Rol:</div>
             <div class="widgetform">{{ form_widget(form.rol) }}</div>
         </div>
      </div>
      <br>
 
-	        <button class="btn btn-primary" type="submit">Crear</button>
-	    	<a class="btn btn-default"  href="{{ path('rol') }}">Ir a la lista</a>
+	        <button class="btn btn-primary" type="submit">CREAR</button>
+	    	<a class="btn btn-default"  href="{{ path('rol') }}">IR AL LISTADO</a>
 	</form>
 
 {% endblock %}

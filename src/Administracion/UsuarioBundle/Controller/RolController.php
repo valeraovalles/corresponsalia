@@ -174,7 +174,7 @@ class RolController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el rol "'.strtoupper($entity->getRol()).'" exitosamente.');
         return $this->redirect($this->generateUrl('rol'));
     }
 

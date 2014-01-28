@@ -1,0 +1,30 @@
+usercorresponsalia:
+    pattern:  /
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:index" }
+
+usercorresponsalia_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:show" }
+
+usercorresponsalia_new:
+    pattern:  /new
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:new" }
+
+usercorresponsalia_create:
+    pattern:  /create
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:create" }
+    requirements: { _method: post }
+
+usercorresponsalia_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:edit" }
+
+usercorresponsalia_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:update" }
+    requirements: { _method: post|put }
+
+usercorresponsalia_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "UsuarioBundle:Usercorresponsalia:delete" }
+    requirements: { _method: post|delete }

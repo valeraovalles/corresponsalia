@@ -13,7 +13,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>User account is disabled.</source>
-                <target>El usuario se encuentra desactivado, contacte con la extensión 264.</target>
+                <target>El usuario se encuentra desactivado.</target>
             </trans-unit>           
         </body>
     </file>

@@ -29,7 +29,7 @@ class Rol
      * @var string
      *
      * @ORM\Column(name="rol", type="string", length=255, nullable=false, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="El campo rol no debe estar en blanco.")
      */
     private $rol;
 

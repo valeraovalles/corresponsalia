@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONSULTAR USUARIO-CORRESPONSALÍA{% endblock %}
+
+{% block titulobanner %}
+    CONSULTAR USUARIO-CORRESPONSALÍA
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CONSULTAR USUARIO-CORRESPONSALÍA</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Id:</div>
+            <div class="widgetform">{{ entity.id }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Usuario:</div>
+            <div class="widgetform">{{ entity.usuario.primerNombre }} {{ entity.usuario.primerApellido }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Corresponsalía:</div>
+            <div class="widgetform">{{ entity.corresponsalia.nombre }}</div>
+        </div>
+    </div>
+    <a class="btn btn-default" href="{{ path('usercorresponsalia_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('usercorresponsalia') }}">IR AL LISTADO</a>
+  
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+
+
+{% endblock %}

@@ -15,12 +15,14 @@ class EstadofondoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('saldoinicial')
+            ->add('saldoinicial', 'money', array(
+                'invalid_message' => 'El monto del saldo inicial debe ser numérico',
+                'currency'=>null))
             ->add('responsable')
             ->add('anio','text')
             ->add('mes','text')
             ->add('recursorecibido', 'money', array(
-                'invalid_message' => 'El monto debe ser numérico',
+                'invalid_message' => 'El monto del recurso enviado debe ser numérico',
                 'currency'=>null
                 ))
             ->add('observacion','textarea')

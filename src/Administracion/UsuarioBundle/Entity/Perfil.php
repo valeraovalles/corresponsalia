@@ -27,7 +27,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="primer_nombre", type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="El primer nombre no debe estar en blanco.")
      */
     private $primerNombre;
 
@@ -42,7 +42,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="primer_apellido", type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="El primer apellido no debe estar en blanco.")
      */
     private $primerApellido;
 
@@ -52,31 +52,6 @@ class Perfil
      * @ORM\Column(name="segundo_apellido", type="string", length=255, nullable=true)
      */
     private $segundoApellido;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cedula", type="string", length=20, nullable=false)
-     * @Assert\NotBlank()
-     */
-    private $cedula;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fechanacimiento", type="date", length=20, nullable=true)
-     */
-    private $fechanacimiento;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="extension", type="integer", nullable=true)
-     * @Assert\Type(type="integer", message="La extensión debe ser un número.")
-     * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
-     */
-    private $extension=null;
 
     /**
      * @var \"user"
@@ -190,75 +165,6 @@ class Perfil
     public function getSegundoApellido()
     {
         return $this->segundoApellido;
-    }
-
-    /**
-     * Get cedula
-     *
-     * @return string 
-     */
-    public function getFechanacimiento()
-    {
-        return $this->fechanacimiento;
-    }
-
-  /**
-     * Set fechanacimiento
-     *
-     * @param string $fechanacimiento
-     * @return Fechanacimiento
-     */
-    public function setFechanacimiento($fechanacimiento)
-    {
-        $this->fechanacimiento = $fechanacimiento;
-    
-        return $this;
-    }
-
-    /**
-     * Set cedula
-     *
-     * @param string $cedula
-     * @return Perfil
-     */
-    public function setCedula($cedula)
-    {
-        $this->cedula = $cedula;
-    
-        return $this;
-    }
-
-    /**
-     * Get cedula
-     *
-     * @return string 
-     */
-    public function getCedula()
-    {
-        return $this->cedula;
-    }
-
-    /**
-     * Set extension
-     *
-     * @param string $extension
-     * @return Perfil
-     */
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-    
-        return $this;
-    }
-    
-    /**
-     * Get extension
-     *
-     * @return string 
-     */
-    public function getExtension()
-    {
-        return $this->extension;
     }
 
 

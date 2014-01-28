@@ -27,6 +27,8 @@ class Estadofondo
      * @var float
      *
      * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=true)
+     * @Assert\NotBlank(message="El saldo inicial no puede estar en blanco.").
+     * 
      */
     private $saldoinicial;
 
