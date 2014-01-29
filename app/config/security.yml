@@ -6,7 +6,7 @@ security:
             form_login:
                 login_path: /usuario/login
                 check_path: /usuario/login_check
-                default_target_path: /corresponsalia/principal
+                default_target_path: /corresponsalia/inicio
                 always_use_default_target_path: true
             logout:
                 path: usuario_logout

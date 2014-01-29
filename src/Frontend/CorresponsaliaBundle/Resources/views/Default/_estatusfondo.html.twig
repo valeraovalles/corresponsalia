@@ -1,0 +1,36 @@
+    <table border="1" class="estatusfondo table table-striped">
+        <tr>
+            <th colspan="4">ESTATUS DEL FONDO RECIBIDO PARA {{tipogasto.descripcion|upper}}</th>
+        </tr>
+        <tr>
+            <th>Descripción</th>
+            <th>USD $</th>
+            <th>Moneda nacional</th>
+            <th>Bs.</th>
+        </tr>
+        <tr>
+            <td>Saldo inicial</td>
+            <td>{{ estadofondo.saldoinicial }}</td>
+            <td>{{ estadofondo.saldoinicial_mn }}</td>
+            <td>{{ estadofondo.saldoinicial_bs }}</td>
+        </tr>
+        <tr>
+            <td>Recursos recibidos</td>
+            <td>{{ estadofondo.recursorecibido }}</td>
+            <td>{{ estadofondo.recursorecibido_mn }}</td>
+            <td>{{ estadofondo.recursorecibido_bs }}</td>
+        </tr>
+        <tr>
+            <td>Pagos efectuados</td>
+            <td>{{ estadofondo.pagos }}</td>
+            <td>{{ estadofondo.pagos_mn }}</td>
+            <td>{{ estadofondo.pagos_bs }}</td>
+        </tr>
+        <tr>
+            <td>Saldo final</td>
+            <td>{{ estadofondo.saldofinal }}</td>
+            <td>{{ estadofondo.saldofinal_mn }}</td>
+            <td>{{ estadofondo.saldofinal_bs }}</td>
+            
+        </tr>
+    </table>

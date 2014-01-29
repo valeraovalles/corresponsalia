@@ -32,7 +32,7 @@ class __TwigTemplate_a6b3dc98892787897841bc602b973252fb813615fab9c779b88a8c93c4e
         echo "
 
     <h1>TASA DE CAMBIO</h1>
-    <h4>";
+    <h4>CORRESPONSALÍA: ";
         // line 7
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
         echo "</h4><br>

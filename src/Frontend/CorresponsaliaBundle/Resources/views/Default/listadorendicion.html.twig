@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="gasfun" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{ tipogasto.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 1500px;">
     <div class="modal-content" style="width: 1500px;">
       <div class="modal-header">
@@ -24,7 +24,6 @@
                     </thead>
                     <tbody>
                     {% for entity in rendicionlista %}
-                        {% if entity.tipogasto.id == 1 %}
                             <tr>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
@@ -36,12 +35,11 @@
                                 <td>{{ entity.montomonnac }}</td>
                                 <td><b class="glyphicon glyphicon-remove"></b></td>
                             </tr>
-                         {% endif %}
                     {% endfor %}
 
                     </tbody>
                 </table>    
-                <br><br><br><br><div><b>Total Monto Dólares: {{ numerotipogasto.1.total }}</b><br><b>Total Monto Moneda Nacional: {{ numerotipogasto.1.total*corresponsalia.montocambiodolar }}</b></div>
+                <br><br><br><br><div><b>Total Monto Dólares: {{ montototalgasto.dolar }}</b><br><b>Total Monto Moneda Nacional: {{ montototalgasto.mn }}</b></div>
                 <script>    
                   $(document).ready(function(){
                      $('#tablalista1').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
@@ -61,141 +59,3 @@
 
 
 
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="cobpro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 1500px;">
-    <div class="modal-content" style="width: 1500px;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">COBERTURA PROGRAMADA</h4>
-      </div>
-      <div class="modal-body">
-          
-            <table id="tablalista2" style="width: 1400px;">
-                    <thead>
-                        <tr>
-                            <th>Nro</th>
-                            <th>F. Factura</th>
-                            <th>Imputación</th>
-                            <th>Descripcion</th>
-                            <th>Nombre/Razón</th>
-                            <th>I. Fiscal</th>
-                            <th>Dólares.</th>
-                            <th>Monto MN.</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in rendicionlista %}
-                        {% if entity.tipogasto.id == 2 %}
-                            <tr>
-                                <td>{{ entity.numerocomprobante }}</td>
-                                <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                                <td>{{ entity.imputacionpresupuestaria }}</td>
-                                <td>{{ entity.descripciongasto.descripcion }}</td>
-                                <td>{{ entity.identificacionfiscal }}</td>
-                                <td>{{ entity.numerofactura }}</td>
-                                <td>{{ entity.montodolar }}</td>
-                                <td>{{ entity.montomonnac }}</td>
-                                <td><b class="glyphicon glyphicon-remove"></b></td>
-                            </tr>
-                         {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>    
-                <br><br><br><br><div><b>Total Monto Dólares: {{ numerotipogasto.2.total }}</b><br><b>Total Monto Moneda Nacional: {{ numerotipogasto.2.total*corresponsalia.montocambiodolar }}</b></div>
-                <script>    
-                  $(document).ready(function(){
-                     $('#tablalista2').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-                          "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                          "aaSorting": [[0,'desc']],
-                      } );
-                  })
-               </script>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="honpro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 1500px;">
-    <div class="modal-content" style="width: 1500px;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">HONORARIOS PROFESIONALES</h4>
-      </div>
-      <div class="modal-body">
-          
-            <table id="tablalista3" style="width: 1400px;">
-                    <thead>
-                        <tr>
-                            <th>Nro</th>
-                            <th>F. Factura</th>
-                            <th>Imputación</th>
-                            <th>Descripcion</th>
-                            <th>Nombre/Razón</th>
-                            <th>I. Fiscal</th>
-                            <th>Dólares.</th>
-                            <th>Monto MN.</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in rendicionlista %}
-                        {% if entity.tipogasto.id == 3 %}
-                            <tr>
-                                <td>{{ entity.numerocomprobante }}</td>
-                                <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                                <td>{{ entity.imputacionpresupuestaria }}</td>
-                                <td>{{ entity.descripciongasto.descripcion }}</td>
-                                <td>{{ entity.identificacionfiscal }}</td>
-                                <td>{{ entity.numerofactura }}</td>
-                                <td>{{ entity.montodolar }}</td>
-                                <td>{{ entity.montomonnac }}</td>
-                                <td><b class="glyphicon glyphicon-remove"></b></td>
-                            </tr>
-                         {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>       
-                <br><br><br><br><div><b>Total Monto Dólares: {{ numerotipogasto.3.total }}</b><br><b>Total Monto Moneda Nacional: {{ numerotipogasto.3.total*corresponsalia.montocambiodolar }}</b></div>
-                <script>    
-                  $(document).ready(function(){
-                     $('#tablalista3').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-                          "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                          "aaSorting": [[0,'desc']],
-                      } );
-                  })
-               </script>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->

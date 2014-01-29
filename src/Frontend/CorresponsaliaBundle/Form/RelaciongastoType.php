@@ -5,15 +5,25 @@ namespace Frontend\CorresponsaliaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class RelaciongastoType extends AbstractType
 {
+    
+    public function __construct($idgasto)
+    {
+        $this->idgasto = $idgasto;
+
+    }
+
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $idgasto = $this->idgasto;
+        
         $builder
             ->add('numerocomprobante','text')
             ->add('fechafactura', 'date',array(
@@ -27,10 +37,23 @@ class RelaciongastoType extends AbstractType
                 'invalid_message' => 'EL campo monto debe ser sólo con números',
                 'currency'=>null
                 ))
-            ->add('montodolar')
+            ->add('montodolar', 'money', array(
+                'invalid_message' => 'EL campo dólares debe ser sólo con números',
+                'currency'=>null
+                ))
             ->add('anio')
             ->add('mes')
-            ->add('descripciongasto')
+            ->add('descripciongasto', 'entity', array(
+                    'class' => 'CorresponsaliaBundle:Descripciongasto',
+                    'property' => 'descripcion',
+                    'multiple' => false,
+                    'empty_value'=>'Seleccione...',
+                    'query_builder' => function(EntityRepository $er) use ($idgasto) {
+                    return $er->createQueryBuilder('t')
+                    ->where('t.tipogasto = :id')
+                    ->setParameter('id', $idgasto)
+                ;},
+                ))
             ->add('tipogasto',null, array(
                 'multiple' => false,
                 'expanded' => true,

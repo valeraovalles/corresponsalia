@@ -2226,7 +2226,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>52e8248ea4d14</argument>
+            <argument>52e9405270247</argument>
           </service>
         </argument>
       </argument>
@@ -2400,7 +2400,7 @@
                 </argument>
                 <argument type="collection">
                   <argument key="login_path">/usuario/login</argument>
-                  <argument key="default_target_path">/corresponsalia/principal</argument>
+                  <argument key="default_target_path">/corresponsalia/inicio</argument>
                   <argument key="always_use_default_target_path">true</argument>
                   <argument key="target_path_parameter">_target_path</argument>
                   <argument key="use_referer">false</argument>
@@ -2445,7 +2445,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>52e8248ea4d14</argument>
+            <argument>52e9405270247</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>

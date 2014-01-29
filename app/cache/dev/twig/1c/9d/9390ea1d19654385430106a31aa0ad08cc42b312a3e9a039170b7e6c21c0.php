@@ -101,7 +101,7 @@ class __TwigTemplate_1c9d9390ea1d19654385430106a31aa0ad08cc42b312a3e9a039170b7e6
             </a> |             
             <a class=\"btn btn-default\" href=\"";
         // line 51
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_principal");
+        echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
         echo "\">
                 VOLVER AL INICIO
             </a><br>

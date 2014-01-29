@@ -55,6 +55,7 @@ class Relaciongasto
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una descripción de gasto.")
      */
     private $descripciongasto;
 

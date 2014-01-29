@@ -79,7 +79,7 @@ class __TwigTemplate_6a0042c7e1dd7d6589fdeed58262a21b29d485f609e7edd70d10d3a281a
         echo "</span></div>
         </div>
         <div class=\"contenedorform\">
-            <div class=\"labelform\">Recurso recibido:</div>
+            <div class=\"labelform\">Recurso enviado:</div>
             <div class=\"widgetform\"><span class=\"label label-info\">";
         // line 31
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "recursorecibido"), "html", null, true);

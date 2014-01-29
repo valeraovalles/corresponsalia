@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{ asset('bundles/corresponsalia/css/formrendicion.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+          
+{% block titulomodulo %}  
+    <h2>{{ tipogasto.descripcion|upper }}</h2>
+    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ anio }} | MES: {{ mes }}</h4><br>
+{% endblock %}
+    
+{% block body %}
+    {{ parent()}}
+    
+    {% if form_errors(form.descripciongasto) or form_errors(form.numerocomprobante)  or form_errors(form.fechafactura) or form_errors(form.nombrerazonsocial) or form_errors(form.identificacionfiscal) or form_errors(form.numerofactura) or form_errors(form.montomonnac) or form_errors(form.montodolar)%}
+    <div class="alert alert-danger errores">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.descripciongasto) }}</div>
+        <div>{{ form_errors(form.numerocomprobante) }}</div>
+        <div>{{ form_errors(form.fechafactura) }}</div>
+        <div>{{ form_errors(form.nombrerazonsocial) }}</div>
+        <div>{{ form_errors(form.identificacionfiscal) }}</div>
+        <div>{{ form_errors(form.numerofactura) }}</div>
+        <div>{{ form_errors(form.montomonnac) }}</div>
+        <div>{{ form_errors(form.montodolar) }}</div>
+    </div>
+    {% endif %}
+
+    {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
+    
+    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion') }}">  
+        {{ form_widget(form._token) }}
+        {% include 'CorresponsaliaBundle:Default:tablarendicion.html.twig' %}
+        <br><br><input type="submit" value="GUARDAR" class="btn btn-primary">
+        <button class="btn btn-info" data-toggle="modal" data-target="#{{tipogasto.id}}">VER LISTADO DE RENDICION</button>
+        <input type="hidden" value="{{ tipogasto.id }}" name="rendicion_relaciongasto[tipogasto]">
+        <input type="hidden" value="{{ corresponsalia.id }}" name="rendicion_relaciongasto[corresponsalia]">
+        <input type="hidden" value="{{ anio }}" name="rendicion_relaciongasto[anio]">
+        <input type="hidden" value="{{ mes }}" name="rendicion_relaciongasto[mes]">
+    </form>
+        <input type="hidden" value="{{ cambio.montocambiodolar }}" id="cambio">
+    
+        {% include 'CorresponsaliaBundle:Default:listadorendicion.html.twig' %}  
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#rendicion_relaciongasto_montomonnac').blur(function(){
+                montocambiomn()
+            });
+            function montocambiomn(){
+                    var montomonnac=$('#rendicion_relaciongasto_montomonnac').val();
+                    var cambio=$('#cambio').val();
+                    var montofinal=montomonnac/cambio;
+                    montofinal = montofinal.toFixed(2);
+                    $('#rendicion_relaciongasto_montodolar').val(montofinal);
+            }
+         });
+    </script>
+    
+{% endblock %}

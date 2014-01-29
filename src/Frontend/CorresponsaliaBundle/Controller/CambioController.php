@@ -47,8 +47,8 @@ class CambioController extends Controller
         $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
 
         if ($form->isValid()) {
-            //$idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find(1);
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
             $em = $this->getDoctrine()->getManager();
             $entity->setCorresponsalia($corresponsalia);

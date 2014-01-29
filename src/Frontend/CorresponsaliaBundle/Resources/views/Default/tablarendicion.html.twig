@@ -2,8 +2,7 @@
 <table class="relaciongasto" border="1">
         <tr>
             <th>Descripción</th>
-
-            <td id="descripciongasto">Seleccione un tipo de gasto &nbsp;<b class="glyphicon glyphicon-arrow-up"></b></td>
+            <td>{{ form_widget(form.descripciongasto) }}</td>
             <th>Nro. Comprobante</th>
             <td>{{ form_widget(form.numerocomprobante) }}</td>
             <th>Fecha Factura</th>
@@ -20,10 +19,9 @@
         <tr>
             <th>Nro. factura</th>
             <td>{{ form_widget(form.numerofactura) }}</td>
-            <th>Dólares</th>
-            <td>{{ form_widget(form.montodolar) }}</td>
             <th>Monto MN.</th>
             <td>{{ form_widget(form.montomonnac) }}</td>
-
+            <th>Dólares</th>
+            <td>{{ form_widget(form.montodolar) }}</td>
         </tr>
     </table>

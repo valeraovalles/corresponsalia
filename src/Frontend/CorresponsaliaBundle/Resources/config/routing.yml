@@ -1,23 +1,23 @@
-
-    
-corresponsalia_principal:
-    pattern:  /principal
-    defaults: { _controller: CorresponsaliaBundle:Default:principal }
-    
-    
-    
-    
-    
-    
+corresponsalia_tasacambio:
+    pattern:  /tasacambio
+    defaults: { _controller: CorresponsaliaBundle:Default:tasacambio }
     
 corresponsalia_inicio:
     pattern:  /inicio
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
 
+corresponsalia_rendirgasto:
+    pattern:  /rendirgasto/{idcor}
+    defaults: { _controller: CorresponsaliaBundle:Default:rendirgasto }
 
-corresponsalia_guardatemprendicion:
-    pattern:  /guardatemprendicion/
-    defaults: { _controller: CorresponsaliaBundle:Default:guardatemprendicion }
+corresponsalia_rendirgastofunhon:
+    pattern:  /rendirgastofun/{idcor}
+    defaults: { _controller: CorresponsaliaBundle:Default:rendirgastofunhon }
+    
+    
+corresponsalia_guardarendicion:
+    pattern:  /guardarendicion/
+    defaults: { _controller: CorresponsaliaBundle:Default:guardarendicion }
 
 
 corresponsalia_ajax_gasfun:

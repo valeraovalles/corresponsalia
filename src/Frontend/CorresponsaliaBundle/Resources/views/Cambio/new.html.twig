@@ -4,7 +4,7 @@
     {{ parent() }}
 
     <h1>TASA DE CAMBIO</h1>
-    <h4>{{ corresponsalia.nombre|upper }}</h4><br>
+    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }}</h4><br>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">

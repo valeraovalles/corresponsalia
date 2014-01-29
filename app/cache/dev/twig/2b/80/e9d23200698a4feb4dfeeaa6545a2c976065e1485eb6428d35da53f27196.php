@@ -28,7 +28,7 @@ class __TwigTemplate_2b80e9d23200698a4feb4dfeeaa6545a2c976065e1485eb6428d35da53f
     // line 3
     public function block_titulomodulo($context, array $blocks = array())
     {
-        echo "<h1>TIPOS DE MONEDA</h1>";
+        echo "<h1>TIPO DE MONEDA</h1>";
     }
 
     // line 5

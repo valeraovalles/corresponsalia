@@ -83,7 +83,8 @@ class EstadofondoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find(1);
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
             $entity->setSaldofinal($entity->getSaldoinicial()+$entity->getRecursorecibido());
             $entity->setFechaasignacion(new \DateTime("now"));

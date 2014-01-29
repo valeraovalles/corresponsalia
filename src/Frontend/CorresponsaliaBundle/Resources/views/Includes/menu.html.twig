@@ -8,7 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="{{ path('corresponsalia_principal') }}">Inicio</a>
+    <a class="navbar-brand" href="{{ path('corresponsalia_tasacambio') }}">Inicio</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,6 +23,9 @@
           <li class="divider"></li>
           <li><a href="{{ path('rol') }}">Listado de roles</a></li>
           <li><a href="{{ path('rol_new') }}">Nuevo rol</a></li>
+          <li class="divider"></li>
+          <li><a href="{{ path('usercorresponsalia') }}">Listado Usuario-Corresponsalía</a></li>
+          <li><a href="{{ path('usercorresponsalia_new') }}">Nueva relación usuario-Corresponsalía</a></li>
         </ul>
       </li>
       
@@ -41,23 +44,19 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">CORRESPONSALÍA <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="{{ path('tipomoneda') }}">Tasa de cambio</a></li>
+          <li><a href="{{ path('corresponsalia_tasacambio') }}">Tasa de cambio</a></li>
           <li class="divider"></li>
-          <li><a href="{{ path('corresponsalia') }}">Rendir Gasto Funcionamiento</a></li>
-          <li class="divider"></li>
-          <li><a href="{{ path('tipocorresponsalia') }}">Rendir Cobertura Programada</a></li>
-          <li><a href="{{ path('estadofondo') }}">Rendir Honorarios Profesionales</a></li>
-          <li><a href="#">Something else here</a></li>
+          <li><a href="{{ path('corresponsalia_inicio') }}">Rendir gastos</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ path('corresponsalia_tasacambio') }}">Rendicion</a></li>
         </ul>
       </li>
       <li><a href="#">ADMINISTRAR</a></li>
     </ul>
-    <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
       

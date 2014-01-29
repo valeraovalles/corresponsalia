@@ -4,146 +4,55 @@
     {{parent()}}
     <link href="{{ asset('bundles/corresponsalia/css/formrendicion.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
-            
+          
+{% block titulomodulo %}  
+    <h2>SELECCIONE LOS PARÁMETROS PARA LA RENDICIÓN</h2>
+    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }}</h4><br>
+{% endblock %}
+    
 {% block body %}
     {{ parent()}}
    
-    <h2>RENDICIÓN DE GASTOS MES DE ENERO</h2>
-    <h4>CORRESPONSALIA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais|upper }} | CAMBIO: {{ corresponsalia.montocambiodolar }}</h4><BR>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">!Alerta¡</h4>
+          </div>
+          <div class="modal-body">
+            No debe dejar ningun campo en blanco.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+    <form id="form" method="post" action="{{ path('corresponsalia_rendirgasto',{'idcor':corresponsalia.id}) }}">
+        <div style="width: 30%">
+            <br><div>{{ form_widget(form.anio,{'attr':{'class':'form-control'}}) }}</div><br>
+            <div>{{ form_widget(form.mes,{'attr':{'class':'form-control'}}) }}</div><br>
+            <div>{{ form_widget(form.tipogasto,{'attr':{'class':'form-control'}}) }}</div><br>
         </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-    
-    {% if form_errors(form.numerocomprobante)  or form_errors(form.fechafactura) or form_errors(form.nombrerazonsocial) or form_errors(form.identificacionfiscal) or form_errors(form.numerofactura) or form_errors(form.montomonnac) or form_errors(form.montodolar)%}
-    <div class="alert alert-danger errores">
-        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(form.numerocomprobante) }}</div>
-        <div>{{ form_errors(form.fechafactura) }}</div>
-        <div>{{ form_errors(form.nombrerazonsocial) }}</div>
-        <div>{{ form_errors(form.identificacionfiscal) }}</div>
-        <div>{{ form_errors(form.numerofactura) }}</div>
-        <div>{{ form_errors(form.montomonnac) }}</div>
-        <div>{{ form_errors(form.montodolar) }}</div>
-    </div>
-    {% endif %}
-
-    <div class="table-responsive">
-    <table border="1" class="estatusfondo table table-striped">
-        <tr>
-            <th colspan="4">ESTATUS DEL FONDO ENVIADO</th>
-        </tr>
-        <tr>
-            <th>Descripción</th>
-            <th>USD $</th>
-            <th>Moneda nacional</th>
-            <th>Bs.</th>
-        </tr>
-        <tr>
-            <td>Saldo inicial</td>
-            <td>{{ estadofondo.saldoinicial }}</td>
-            <td>{{ estadofondo.saldoinicial_mn }}</td>
-            <td>{{ estadofondo.saldoinicial_bs }}</td>
-        </tr>
-        <tr>
-            <td>Recursos recibidos</td>
-            <td>{{ estadofondo.recursorecibido }}</td>
-            <td>{{ estadofondo.recursorecibido_mn }}</td>
-            <td>{{ estadofondo.recursorecibido_bs }}</td>
-        </tr>
-        <tr>
-            <td>Pagos efectuados</td>
-            <td>{{ estadofondo.pagos }}</td>
-            <td>{{ estadofondo.pagos_mn }}</td>
-            <td>{{ estadofondo.pagos_bs }}</td>
-        </tr>
-        <tr>
-            <td>Saldo final</td>
-            <td>{{ estadofondo.saldofinal }}</td>
-            <td>{{ estadofondo.saldofinal_mn }}</td>
-            <td>{{ estadofondo.saldofinal_bs }}</td>
-            
-        </tr>
-    </table>
-    
-    </div>  
-    
-    
-        
-    <form novalidate method="post" action="{{ path('corresponsalia_guardatemprendicion') }}">  
-        {{ form_widget(form._token) }}
-        <table class="table" style="width: 900px;">
-            <tr>
-
-                <th>{{ form_widget(form.tipogasto.1) }}&nbsp;&nbsp;Gastos de funcionamiento&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#gasfun">({{ numerotipogasto.1.num }})</a></th>
-                <th>{{ form_widget(form.tipogasto.2) }}&nbsp;Cobertura programada&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#cobpro">({{ numerotipogasto.2.num }})</a></th>
-                <th>{{ form_widget(form.tipogasto.3) }}&nbsp;Honorarios profesionales&nbsp;<a style="cursor:pointer;" data-toggle="modal" data-target="#honpro">({{ numerotipogasto.3.num }})</a></th>
-            </tr>
-        </table>
-
-
-        {% include 'CorresponsaliaBundle:Default:tablarendicion.html.twig' %}
-
-
-        <br><input id="agregar" type="submit" value="Agregar" class="btn btn-primary"><br><br>
-        <input type="hidden" value="{{ corresponsalia.montocambiodolar }}" id="montocambiodolar">
     </form>
     
-        {% include 'CorresponsaliaBundle:Default:listadorendicion.html.twig' %}  
+    <br><a id="siguiente" class="btn btn-primary btn-lg">SIGUIENTE</a><br>
     
-    <script type="text/javascript">
-
+    <script>
+        
+        
         $(document).ready(function () {
-            $('#rendicion_relaciongasto_tipogasto_1').click(function(){
-                ajaxdescripciongasto(1)
-            });
             
-            $('#rendicion_relaciongasto_tipogasto_2').click(function(){
-                ajaxdescripciongasto(2)
-            });
-            
-
-            $('#rendicion_relaciongasto_tipogasto_3').click(function(){
-                ajaxdescripciongasto(3)
-            }); 
-            
-            $('#rendicion_relaciongasto_montodolar').blur(function(){
-                montocambiomn()
+            $('#siguiente').click(function(){
+                if($('#form_anio').val()=='' || $('#form_mes').val()=='' || $('#form_tipogasto').val()=='')
+                   $('#myModal').modal("show")
+                else
+                   $("#form").submit();
             });
         });
-        
-        if($('#rendicion_relaciongasto_tipogasto_1').is(':checked')==true)
-            ajaxdescripciongasto(1)
-        else if($('#rendicion_relaciongasto_tipogasto_2').is(':checked')==true)
-            ajaxdescripciongasto(2)
-        else if($('#rendicion_relaciongasto_tipogasto_3').is(':checked')==true)
-            ajaxdescripciongasto(3)
-        
-        function ajaxdescripciongasto(valor){
-                var dato = valor;
-                var ruta = "{{ path('corresponsalia_ajax_formdescripciongasto', {'idtipo': 'variable1','data': 'variable2'}) }}";
-                ruta = ruta.replace("variable1", dato);
-                ruta = ruta.replace("variable2", {{ dataselect }});
-                $('#descripciongasto').load(ruta);            
-        }
-        
-        function montocambiomn(){
-                var montodolar=$('#rendicion_relaciongasto_montodolar').val();
-                var montocambiodolar=$('#montocambiodolar').val();
-                var montofinal=montodolar*montocambiodolar;
-                montofinal = montofinal.toFixed(2);
-                $('#rendicion_relaciongasto_montomonnac').val(montofinal);
-                
-        }
-        
     </script>
     
 {% endblock %}

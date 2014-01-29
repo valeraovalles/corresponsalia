@@ -37,7 +37,7 @@ class __TwigTemplate_134f7c52533d8e7b0c6cc488eeabc8db0a7ec94a4b90e7ea9e2f6edac1b
     public function block_titulobanner($context, array $blocks = array())
     {
         // line 6
-        echo "    NUEVO DE ROL
+        echo "    NUEVO ROL
 ";
     }
 

@@ -134,9 +134,9 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/corresponsalia')) {
-            // corresponsalia_principal
-            if ($pathinfo === '/corresponsalia/principal') {
-                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::principalAction',  '_route' => 'corresponsalia_principal',);
+            // corresponsalia_tasacambio
+            if ($pathinfo === '/corresponsalia/tasacambio') {
+                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::tasacambioAction',  '_route' => 'corresponsalia_tasacambio',);
             }
 
             // corresponsalia_inicio
@@ -144,13 +144,26 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::inicioAction',  '_route' => 'corresponsalia_inicio',);
             }
 
-            // corresponsalia_guardatemprendicion
-            if (rtrim($pathinfo, '/') === '/corresponsalia/guardatemprendicion') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'corresponsalia_guardatemprendicion');
+            if (0 === strpos($pathinfo, '/corresponsalia/rendirgasto')) {
+                // corresponsalia_rendirgasto
+                if (preg_match('#^/corresponsalia/rendirgasto/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgasto')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastoAction',));
                 }
 
-                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardatemprendicionAction',  '_route' => 'corresponsalia_guardatemprendicion',);
+                // corresponsalia_rendirgastofunhon
+                if (0 === strpos($pathinfo, '/corresponsalia/rendirgastofun') && preg_match('#^/corresponsalia/rendirgastofun/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgastofunhon')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastofunhonAction',));
+                }
+
+            }
+
+            // corresponsalia_guardarendicion
+            if (rtrim($pathinfo, '/') === '/corresponsalia/guardarendicion') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'corresponsalia_guardarendicion');
+                }
+
+                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardarendicionAction',  '_route' => 'corresponsalia_guardarendicion',);
             }
 
             if (0 === strpos($pathinfo, '/corresponsalia/ajax')) {

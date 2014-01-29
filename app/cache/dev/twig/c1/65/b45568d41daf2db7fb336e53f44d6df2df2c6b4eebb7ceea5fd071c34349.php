@@ -10,6 +10,7 @@ class __TwigTemplate_c165b45568d41daf2db7fb336e53f44d6df2df2c6b4eebb7ceea5fd071c
         $this->parent = $this->env->loadTemplate("::base.html.twig");
 
         $this->blocks = array(
+            'titulomodulo' => array($this, 'block_titulomodulo'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -25,34 +26,40 @@ class __TwigTemplate_c165b45568d41daf2db7fb336e53f44d6df2df2c6b4eebb7ceea5fd071c
     }
 
     // line 3
+    public function block_titulomodulo($context, array $blocks = array())
+    {
+        echo "<h1>TASA DE CAMBIO</h1>";
+    }
+
+    // line 5
     public function block_body($context, array $blocks = array())
     {
-        // line 4
+        // line 6
         echo " ";
         $this->displayParentBlock("body", $context, $blocks);
         echo "
     
-<h1>BIENVENIDOS</h1>
+
 <div class=\"table-responsive\" style=\"width:800px;\">
 <table class=\"table\" border=\"1\">
     <tr>
         <th>Corresponsalía: </th>
         <td>";
-        // line 11
+        // line 13
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
         echo "</td>
     </tr>
     <tr>
         <th>País: </th>
         <td>";
-        // line 15
+        // line 17
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "corresponsalia"), "pais"), "pais")), "html", null, true);
         echo "</td>
     </tr>
     <tr>
         <th>Tasa de cambio: </th>
         <td>";
-        // line 19
+        // line 21
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
         echo " &nbsp;&nbsp;&nbsp;<a  class=\"label label-info\" href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio_new", array("idcor" => $this->getAttribute($this->getContext($context, "corresponsalia"), "id"))), "html", null, true);
@@ -77,6 +84,6 @@ class __TwigTemplate_c165b45568d41daf2db7fb336e53f44d6df2df2c6b4eebb7ceea5fd071c
 
     public function getDebugInfo()
     {
-        return array (  56 => 19,  49 => 15,  42 => 11,  31 => 4,  28 => 3,);
+        return array (  63 => 21,  56 => 17,  49 => 13,  38 => 6,  35 => 5,  29 => 3,);
     }
 }
