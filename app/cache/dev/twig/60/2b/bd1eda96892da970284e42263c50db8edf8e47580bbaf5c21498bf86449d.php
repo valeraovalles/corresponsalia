@@ -97,7 +97,7 @@ class __TwigTemplate_602bbd1eda96892da970284e42263c50db8edf8e47580bbaf5c21498bf8
         echo "</div>
             </div>
             <div class=\"contenedorform\">
-                <div class=\"labelform\">Recurso recibido:</div>
+                <div class=\"labelform\">Recurso enviado:</div>
                 <div class=\"widgetform\">";
         // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "recursorecibido"), 'widget');

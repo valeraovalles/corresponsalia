@@ -7,19 +7,33 @@ corresponsalia_inicio:
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
 
 corresponsalia_rendirgasto:
-    pattern:  /rendirgasto/{idcor}
+    pattern:  /rendirgasto/{idtipogasto}/{anio}/{mes}
     defaults: { _controller: CorresponsaliaBundle:Default:rendirgasto }
 
 corresponsalia_rendirgastofunhon:
-    pattern:  /rendirgastofun/{idcor}
+    pattern:  /rendirgastofunhon/{idtipogasto}/{anio}/{mes}
     defaults: { _controller: CorresponsaliaBundle:Default:rendirgastofunhon }
     
     
 corresponsalia_guardarendicion:
-    pattern:  /guardarendicion/
+    pattern:  /guardarendicion/{idtipogasto}/{anio}/{mes}
     defaults: { _controller: CorresponsaliaBundle:Default:guardarendicion }
 
 
+corresponsalia_editarendicion:
+    pattern:  /editarendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    defaults: { _controller: CorresponsaliaBundle:Default:editarendicion }
+    
+tipocorresponsalia_actualizarendicion:
+    pattern:  /actualizarendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    defaults: { _controller: "CorresponsaliaBundle:Default:actualizarendicion" }
+    requirements: { _method: post|put }
+    
+corresponsalia_borrarrendicion:
+    pattern:  /borrarrendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    defaults: { _controller: "CorresponsaliaBundle:Default:borrarrendicion" }
+    requirements: { _method: post|delete }
+    
 corresponsalia_ajax_gasfun:
     pattern:  /ajax/gasfun/{datos}
     defaults: { _controller: CorresponsaliaBundle:Ajax:gasfun }

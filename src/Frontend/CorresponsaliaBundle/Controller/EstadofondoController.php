@@ -250,7 +250,8 @@ class EstadofondoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $usuario=$em->getRepository('UsuarioBundle:Perfil')->find(1);
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario=$em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
             $em->flush();
 

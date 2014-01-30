@@ -4,13 +4,14 @@
     <div class="modal-content" style="width: 1500px;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">GASTOS DE FUNCIONAMIENTO</h4>
+        <h4 class="modal-title" id="myModalLabel">{{ tipogasto.descripcion|upper }}</h4>
       </div>
       <div class="modal-body">
           
             <table id="tablalista1" style="width: 1400px;">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nro</th>
                             <th>F. Factura</th>
                             <th>Imputación</th>
@@ -19,12 +20,13 @@
                             <th>I. Fiscal</th>
                             <th>Dólares.</th>
                             <th>Monto MN.</th>
-                            <th>Eliminar</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for entity in rendicionlista %}
                             <tr>
+                                <td>{{ entity.id }}</td>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
                                 <td>{{ entity.imputacionpresupuestaria }}</td>
@@ -33,13 +35,12 @@
                                 <td>{{ entity.numerofactura }}</td>
                                 <td>{{ entity.montodolar }}</td>
                                 <td>{{ entity.montomonnac }}</td>
-                                <td><b class="glyphicon glyphicon-remove"></b></td>
+                                <td><a href="{{ path('corresponsalia_editarendicion',{'idrendicion':entity.id,'idtipogasto':tipogasto.id,'anio':anio,'mes':mes }) }}">Editar</a></td>
                             </tr>
                     {% endfor %}
 
                     </tbody>
                 </table>    
-                <br><br><br><br><div><b>Total Monto Dólares: {{ montototalgasto.dolar }}</b><br><b>Total Monto Moneda Nacional: {{ montototalgasto.mn }}</b></div>
                 <script>    
                   $(document).ready(function(){
                      $('#tablalista1').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
@@ -50,7 +51,7 @@
                </script>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

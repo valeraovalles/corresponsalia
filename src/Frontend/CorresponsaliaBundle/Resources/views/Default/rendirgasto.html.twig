@@ -7,7 +7,7 @@
           
 {% block titulomodulo %}  
     <h2>{{ tipogasto.descripcion|upper }}</h2>
-    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ anio }} | MES: {{ mes }}</h4><br>
+    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ anio }} | MES: {{ mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
 {% endblock %}
     
 {% block body %}
@@ -29,7 +29,7 @@
 
     {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
     
-    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion') }}">  
+    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion',{'idtipogasto':tipogasto.id,'anio':anio,'mes':mes}) }}">  
         {{ form_widget(form._token) }}
         {% include 'CorresponsaliaBundle:Default:tablarendicion.html.twig' %}
         <br><br><input type="submit" value="GUARDAR" class="btn btn-primary">
@@ -50,6 +50,7 @@
             });
             function montocambiomn(){
                     var montomonnac=$('#rendicion_relaciongasto_montomonnac').val();
+                    montomonnac = montomonnac.replace(",", ".");
                     var cambio=$('#cambio').val();
                     var montofinal=montomonnac/cambio;
                     montofinal = montofinal.toFixed(2);

@@ -13,6 +13,7 @@
 {% block body %}
     {{ parent()}}
    
+    
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -31,13 +32,11 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     
-    <form id="form" method="post" action="{{ path('corresponsalia_rendirgasto',{'idcor':corresponsalia.id}) }}">
-        <div style="width: 30%">
-            <br><div>{{ form_widget(form.anio,{'attr':{'class':'form-control'}}) }}</div><br>
-            <div>{{ form_widget(form.mes,{'attr':{'class':'form-control'}}) }}</div><br>
-            <div>{{ form_widget(form.tipogasto,{'attr':{'class':'form-control'}}) }}</div><br>
-        </div>
-    </form>
+    <div style="width: 30%">
+        <br><div>{{ form_widget(form.anio,{'attr':{'class':'form-control'}}) }}</div><br>
+        <div>{{ form_widget(form.mes,{'attr':{'class':'form-control'}}) }}</div><br>
+        <div>{{ form_widget(form.tipogasto,{'attr':{'class':'form-control'}}) }}</div><br>
+    </div>
     
     <br><a id="siguiente" class="btn btn-primary btn-lg">SIGUIENTE</a><br>
     
@@ -49,8 +48,18 @@
             $('#siguiente').click(function(){
                 if($('#form_anio').val()=='' || $('#form_mes').val()=='' || $('#form_tipogasto').val()=='')
                    $('#myModal').modal("show")
-                else
-                   $("#form").submit();
+                else{
+                    var a=$('#form_tipogasto').val();
+                    var b=$('#form_anio').val();
+                    var c=$('#form_mes').val();
+                    
+                    ruta = "{{ path('corresponsalia_rendirgasto',{'idtipogasto':'ax','anio':'bx','mes':'cx'}) }}"
+                    ruta = ruta.replace("ax", a);
+                    ruta = ruta.replace("bx", b);
+                    ruta = ruta.replace("cx", c);
+                    $(location).attr('href',ruta);
+                    //$("#form").submit();
+               }
             });
         });
     </script>

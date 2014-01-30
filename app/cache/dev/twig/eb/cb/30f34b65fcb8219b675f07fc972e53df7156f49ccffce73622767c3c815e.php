@@ -25,13 +25,17 @@ class __TwigTemplate_ebcb30f34b65fcb8219b675f07fc972e53df7156f49ccffce73622767c3
     <div class=\"modal-content\" style=\"width: 1500px;\">
       <div class=\"modal-header\">
         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
-        <h4 class=\"modal-title\" id=\"myModalLabel\">GASTOS DE FUNCIONAMIENTO</h4>
+        <h4 class=\"modal-title\" id=\"myModalLabel\">";
+        // line 7
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "tipogasto"), "descripcion")), "html", null, true);
+        echo "</h4>
       </div>
       <div class=\"modal-body\">
           
             <table id=\"tablalista1\" style=\"width: 1400px;\">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nro</th>
                             <th>F. Factura</th>
                             <th>Imputación</th>
@@ -40,66 +44,67 @@ class __TwigTemplate_ebcb30f34b65fcb8219b675f07fc972e53df7156f49ccffce73622767c3
                             <th>I. Fiscal</th>
                             <th>Dólares.</th>
                             <th>Monto MN.</th>
-                            <th>Eliminar</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                     ";
-        // line 26
+        // line 27
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "rendicionlista"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 27
+            // line 28
             echo "                            <tr>
                                 <td>";
-            // line 28
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "numerocomprobante"), "html", null, true);
-            echo "</td>
-                                <td>";
             // line 29
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "fechafactura"), "d-m-Y"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 30
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "imputacionpresupuestaria"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "numerocomprobante"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 31
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "descripciongasto"), "descripcion"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "fechafactura"), "d-m-Y"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 32
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "identificacionfiscal"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "imputacionpresupuestaria"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 33
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "numerofactura"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "descripciongasto"), "descripcion"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 34
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montodolar"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "identificacionfiscal"), "html", null, true);
             echo "</td>
                                 <td>";
             // line 35
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "numerofactura"), "html", null, true);
+            echo "</td>
+                                <td>";
+            // line 36
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montodolar"), "html", null, true);
+            echo "</td>
+                                <td>";
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "montomonnac"), "html", null, true);
             echo "</td>
-                                <td><b class=\"glyphicon glyphicon-remove\"></b></td>
+                                <td><a href=\"";
+            // line 38
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_editarendicion", array("idrendicion" => $this->getAttribute($this->getContext($context, "entity"), "id"), "idtipogasto" => $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "anio" => $this->getContext($context, "anio"), "mes" => $this->getContext($context, "mes"))), "html", null, true);
+            echo "\">Editar</a></td>
                             </tr>
                     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
+        // line 41
         echo "
                     </tbody>
                 </table>    
-                <br><br><br><br><div><b>Total Monto Dólares: ";
-        // line 42
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "montototalgasto"), "dolar"), "html", null, true);
-        echo "</b><br><b>Total Monto Moneda Nacional: ";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "montototalgasto"), "mn"), "html", null, true);
-        echo "</b></div>
                 <script>    
                   \$(document).ready(function(){
                      \$('#tablalista1').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
@@ -110,7 +115,7 @@ class __TwigTemplate_ebcb30f34b65fcb8219b675f07fc972e53df7156f49ccffce73622767c3
                </script>
       </div>
       <div class=\"modal-footer\">
-        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">CERRAR</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -134,6 +139,6 @@ class __TwigTemplate_ebcb30f34b65fcb8219b675f07fc972e53df7156f49ccffce73622767c3
 
     public function getDebugInfo()
     {
-        return array (  99 => 42,  94 => 39,  84 => 35,  80 => 34,  76 => 33,  72 => 32,  68 => 31,  64 => 30,  60 => 29,  56 => 28,  53 => 27,  49 => 26,  22 => 2,  19 => 1,);
+        return array (  105 => 41,  96 => 38,  92 => 37,  88 => 36,  84 => 35,  80 => 34,  76 => 33,  72 => 32,  68 => 31,  64 => 30,  60 => 29,  57 => 28,  53 => 27,  30 => 7,  22 => 2,  19 => 1,);
     }
 }

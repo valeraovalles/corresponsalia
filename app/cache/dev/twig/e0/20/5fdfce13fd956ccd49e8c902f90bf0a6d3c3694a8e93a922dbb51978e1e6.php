@@ -57,6 +57,8 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
         echo twig_escape_filter($this->env, $this->getContext($context, "anio"), "html", null, true);
         echo " | MES: ";
         echo twig_escape_filter($this->env, $this->getContext($context, "mes"), "html", null, true);
+        echo " | CAMBIO: ";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
         echo "</h4><br>
 ";
     }
@@ -119,7 +121,7 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
         echo "    
     <form novalidate method=\"post\" action=\"";
         // line 32
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_guardarendicion");
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_guardarendicion", array("idtipogasto" => $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "anio" => $this->getContext($context, "anio"), "mes" => $this->getContext($context, "mes"))), "html", null, true);
         echo "\">  
         ";
         // line 33
@@ -191,6 +193,6 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
 
     public function getDebugInfo()
     {
-        return array (  161 => 44,  156 => 42,  151 => 40,  147 => 39,  143 => 38,  139 => 37,  135 => 36,  132 => 35,  130 => 34,  126 => 33,  122 => 32,  119 => 31,  117 => 30,  114 => 29,  108 => 26,  104 => 25,  100 => 24,  96 => 23,  92 => 22,  88 => 21,  84 => 20,  80 => 19,  76 => 17,  74 => 16,  68 => 14,  65 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
+        return array (  163 => 44,  158 => 42,  153 => 40,  149 => 39,  145 => 38,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 14,  67 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
     }
 }

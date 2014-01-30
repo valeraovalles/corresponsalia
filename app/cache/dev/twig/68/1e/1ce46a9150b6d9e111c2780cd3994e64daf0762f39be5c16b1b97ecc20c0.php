@@ -62,6 +62,7 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
         $this->displayParentBlock("body", $context, $blocks);
         echo "
    
+    
     <!-- Modal -->
     <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
       <div class=\"modal-dialog\">
@@ -80,25 +81,20 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     
-    <form id=\"form\" method=\"post\" action=\"";
-        // line 34
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idcor" => $this->getAttribute($this->getContext($context, "corresponsalia"), "id"))), "html", null, true);
-        echo "\">
-        <div style=\"width: 30%\">
-            <br><div>";
+    <div style=\"width: 30%\">
+        <br><div>";
         // line 36
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "anio"), 'widget', array("attr" => array("class" => "form-control")));
         echo "</div><br>
-            <div>";
+        <div>";
         // line 37
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "mes"), 'widget', array("attr" => array("class" => "form-control")));
         echo "</div><br>
-            <div>";
+        <div>";
         // line 38
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "tipogasto"), 'widget', array("attr" => array("class" => "form-control")));
         echo "</div><br>
-        </div>
-    </form>
+    </div>
     
     <br><a id=\"siguiente\" class=\"btn btn-primary btn-lg\">SIGUIENTE</a><br>
     
@@ -110,8 +106,21 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
             \$('#siguiente').click(function(){
                 if(\$('#form_anio').val()=='' || \$('#form_mes').val()=='' || \$('#form_tipogasto').val()=='')
                    \$('#myModal').modal(\"show\")
-                else
-                   \$(\"#form\").submit();
+                else{
+                    var a=\$('#form_tipogasto').val();
+                    var b=\$('#form_anio').val();
+                    var c=\$('#form_mes').val();
+                    
+                    ruta = \"";
+        // line 56
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idtipogasto" => "ax", "anio" => "bx", "mes" => "cx")), "html", null, true);
+        echo "\"
+                    ruta = ruta.replace(\"ax\", a);
+                    ruta = ruta.replace(\"bx\", b);
+                    ruta = ruta.replace(\"cx\", c);
+                    \$(location).attr('href',ruta);
+                    //\$(\"#form\").submit();
+               }
             });
         });
     </script>
@@ -131,6 +140,6 @@ class __TwigTemplate_681e1ce46a9150b6d9e111c2780cd3994e64daf0762f39be5c16b1b97ec
 
     public function getDebugInfo()
     {
-        return array (  98 => 38,  94 => 37,  90 => 36,  85 => 34,  61 => 14,  58 => 13,  50 => 10,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
+        return array (  116 => 56,  95 => 38,  91 => 37,  87 => 36,  61 => 14,  58 => 13,  50 => 10,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
     }
 }

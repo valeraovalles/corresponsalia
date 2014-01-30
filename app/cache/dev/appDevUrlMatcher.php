@@ -146,25 +146,48 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             if (0 === strpos($pathinfo, '/corresponsalia/rendirgasto')) {
                 // corresponsalia_rendirgasto
-                if (preg_match('#^/corresponsalia/rendirgasto/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/corresponsalia/rendirgasto/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgasto')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastoAction',));
                 }
 
                 // corresponsalia_rendirgastofunhon
-                if (0 === strpos($pathinfo, '/corresponsalia/rendirgastofun') && preg_match('#^/corresponsalia/rendirgastofun/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/corresponsalia/rendirgastofunhon') && preg_match('#^/corresponsalia/rendirgastofunhon/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgastofunhon')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastofunhonAction',));
                 }
 
             }
 
             // corresponsalia_guardarendicion
-            if (rtrim($pathinfo, '/') === '/corresponsalia/guardarendicion') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'corresponsalia_guardarendicion');
+            if (0 === strpos($pathinfo, '/corresponsalia/guardarendicion') && preg_match('#^/corresponsalia/guardarendicion/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_guardarendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardarendicionAction',));
+            }
+
+            // corresponsalia_editarendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/editarendicion') && preg_match('#^/corresponsalia/editarendicion/(?P<idrendicion>[^/]++)/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_editarendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::editarendicionAction',));
+            }
+
+            // tipocorresponsalia_actualizarendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/actualizarendicion') && preg_match('#^/corresponsalia/actualizarendicion/(?P<idrendicion>[^/]++)/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                    $allow = array_merge($allow, array('POST', 'PUT'));
+                    goto not_tipocorresponsalia_actualizarendicion;
                 }
 
-                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardarendicionAction',  '_route' => 'corresponsalia_guardarendicion',);
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'tipocorresponsalia_actualizarendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::actualizarendicionAction',));
             }
+            not_tipocorresponsalia_actualizarendicion:
+
+            // corresponsalia_borrarrendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/borrarrendicion') && preg_match('#^/corresponsalia/borrarrendicion/(?P<idrendicion>[^/]++)/(?P<idtipogasto>[^/]++)/(?P<anio>[^/]++)/(?P<mes>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                    $allow = array_merge($allow, array('POST', 'DELETE'));
+                    goto not_corresponsalia_borrarrendicion;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_borrarrendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::borrarrendicionAction',));
+            }
+            not_corresponsalia_borrarrendicion:
 
             if (0 === strpos($pathinfo, '/corresponsalia/ajax')) {
                 // corresponsalia_ajax_gasfun
