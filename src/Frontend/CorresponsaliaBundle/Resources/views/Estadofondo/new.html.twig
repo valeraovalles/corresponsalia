@@ -2,7 +2,7 @@
 
 {% block titulomodulo %}  
     <h1>ASIGNACIÓN DE FONDOS</h1>
-    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ datos.anio }} | MES: {{ datos.mes}} </h4><br>
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes}} </h4><br>
 {% endblock %}
 
 {% block body -%}
@@ -16,7 +16,7 @@
     </div>
     {% endif %}
     
-    <form novalidate method="post" action="{{ path('estadofondo_create') }}">
+    <form novalidate method="post" action="{{ path('estadofondo_create',{'idperiodo':periodo.id}) }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
@@ -34,13 +34,8 @@
         </div>
     
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('estadofondo_aniomes') }}">SELECCIONAR OTROS PARÁMETROS</a> | 
-        <a class="btn btn-default" href="{{ path('estadofondo') }}">IR AL LISTADO DE FONDOS</a>
-        
-        <input type="hidden" value="{{ datos.anio}}" name="form[anio]">
-        <input type="hidden" value="{{ datos.mes}}" name="form[mes]">
-        <input type="hidden" value="{{ datos.corresponsalia}}" name="form[corresponsalia]">
-        <input type="hidden" value="{{ datos.tipogasto}}" name="form[tipogasto]">
+        <a class="btn btn-default" href="{{ path('estadofondo_aniomes') }}">SELECCIONAR OTROS PARÁMETROS</a> {#| 
+        <a class="btn btn-default" href="{{ path('estadofondo',{'idperiodo':periodo.id}) }}">IR AL LISTADO DE FONDOS</a>#}
     </form>
 
 {% endblock %}

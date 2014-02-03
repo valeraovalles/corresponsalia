@@ -1,0 +1,30 @@
+xx:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Pais:index" }
+
+xx_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Pais:show" }
+
+xx_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Pais:new" }
+
+xx_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Pais:create" }
+    requirements: { _method: post }
+
+xx_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Pais:edit" }
+
+xx_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Pais:update" }
+    requirements: { _method: post|put }
+
+xx_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Pais:delete" }
+    requirements: { _method: post|delete }

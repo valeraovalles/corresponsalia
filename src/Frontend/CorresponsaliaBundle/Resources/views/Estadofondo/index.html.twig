@@ -21,10 +21,10 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('estadofondo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.corresponsalia.nombre }}</td>
-                <td>{{ entity.tipogasto.descripcion }}</td>
-                <td>{{ entity.anio }}</td>
-                <td>{{ entity.mes }}</td>
+                <td>{{ entity.periodorendicion.corresponsalia.nombre }}</td>
+                <td>{{ entity.periodorendicion.tipogasto.descripcion }}</td>
+                <td>{{ entity.periodorendicion.anio }}</td>
+                <td>{{ entity.periodorendicion.mes }}</td>
                 <td>{{ entity.saldofinal }}</td>
                 <td>
    
@@ -39,7 +39,7 @@
     </table>
 
 
-    <br><br><a class="btn btn-primary" href="{{ path('estadofondo_new') }}">ASIGNAR NUEVO FONDO</a><BR><BR>
+    {#<br><br><a class="btn btn-primary" href="{{ path('estadofondo_new',{'idperiodo':idperiodo}) }}">ASIGNAR NUEVO FONDO</a><BR><BR>#}<br><br><br>
 
 
     <script>

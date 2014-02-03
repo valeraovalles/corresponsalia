@@ -46,17 +46,17 @@ class __TwigTemplate_9d32b03f175a6341bd0d927fa97cdceb7196ffdf99d3ba0ec7b59712301
         echo "  
     <h2>EDITAR ";
         // line 9
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "tipogasto"), "descripcion")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "descripcion")), "html", null, true);
         echo "</h2>
     <h4>CORRESPONSALÍA: ";
         // line 10
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "corresponsalia"), "nombre")), "html", null, true);
         echo " | PAÍS: ";
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "corresponsalia"), "pais"), "pais")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "corresponsalia"), "pais"), "pais")), "html", null, true);
         echo " | AÑO: ";
-        echo twig_escape_filter($this->env, $this->getContext($context, "anio"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "anio"), "html", null, true);
         echo " | MES: ";
-        echo twig_escape_filter($this->env, $this->getContext($context, "mes"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "mes"), "html", null, true);
         echo " | CAMBIO: ";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
         echo "</h4><br>
@@ -121,7 +121,7 @@ class __TwigTemplate_9d32b03f175a6341bd0d927fa97cdceb7196ffdf99d3ba0ec7b59712301
         echo "    
     <form novalidate method=\"post\" action=\"";
         // line 32
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tipocorresponsalia_actualizarendicion", array("idrendicion" => $this->getAttribute($this->getContext($context, "rendicion"), "id"), "idtipogasto" => $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "anio" => $this->getContext($context, "anio"), "mes" => $this->getContext($context, "mes"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tipocorresponsalia_actualizarendicion", array("idrendicion" => $this->getAttribute($this->getContext($context, "rendicion"), "id"), "idperiodo" => $this->getAttribute($this->getContext($context, "periodo"), "id"))), "html", null, true);
         echo "\">  
         <input type=\"hidden\" name=\"_method\" value=\"PUT\"> ";
         // line 33
@@ -129,63 +129,49 @@ class __TwigTemplate_9d32b03f175a6341bd0d927fa97cdceb7196ffdf99d3ba0ec7b59712301
         echo "
         ";
         // line 34
-        $this->env->loadTemplate("CorresponsaliaBundle:Default:tablarendicion.html.twig")->display($context);
+        $this->env->loadTemplate("CorresponsaliaBundle:Default:_tablarendicion.html.twig")->display($context);
         // line 35
         echo "        <br><br><input type=\"submit\" value=\"EDITAR\" class=\"btn btn-warning\">
         <button class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#";
         // line 36
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "id"), "html", null, true);
         echo "\">VER LISTADO DE RENDICION</button> 
         <a class=\"btn btn-default\" href=\"";
         // line 37
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idtipogasto" => $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "anio" => $this->getContext($context, "anio"), "mes" => $this->getContext($context, "mes"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "periodo"), "id"))), "html", null, true);
         echo "\">VOLVER</a>
   
         
-        
-        
         <input type=\"hidden\" value=\"";
-        // line 42
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "tipogasto"), "id"), "html", null, true);
-        echo "\" name=\"rendicion_relaciongasto[tipogasto]\">
-        <input type=\"hidden\" value=\"";
-        // line 43
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "id"), "html", null, true);
-        echo "\" name=\"rendicion_relaciongasto[corresponsalia]\">
-        <input type=\"hidden\" value=\"";
-        // line 44
-        echo twig_escape_filter($this->env, $this->getContext($context, "anio"), "html", null, true);
-        echo "\" name=\"rendicion_relaciongasto[anio]\">
-        <input type=\"hidden\" value=\"";
-        // line 45
-        echo twig_escape_filter($this->env, $this->getContext($context, "mes"), "html", null, true);
-        echo "\" name=\"rendicion_relaciongasto[mes]\">
+        // line 40
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "id"), "html", null, true);
+        echo "\" name=\"rendicion_relaciongasto[periodorendicion]\">
     </form>
         <input type=\"hidden\" value=\"";
-        // line 47
+        // line 42
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
         echo "\" id=\"cambio\">
     
         ";
-        // line 49
-        $this->env->loadTemplate("CorresponsaliaBundle:Default:listadorendicion.html.twig")->display($context);
+        // line 44
+        $this->env->loadTemplate("CorresponsaliaBundle:Default:_listadorendicion.html.twig")->display($context);
         echo "  
 
         <BR>
         ";
-        // line 52
+        // line 47
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_start', array("attr" => array("onsubmit" => "return confirm(\"¿Seguro que deseas eliminar?\")")));
         echo "
             ";
-        // line 53
+        // line 48
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'errors');
         echo "
             ";
-        // line 54
+        // line 49
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "delete_form"), "submit"), 'row', array("attr" => array("class" => "btn btn-danger")));
         echo "
         ";
-        // line 55
+        // line 50
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_end');
         echo "   
         
@@ -221,6 +207,6 @@ class __TwigTemplate_9d32b03f175a6341bd0d927fa97cdceb7196ffdf99d3ba0ec7b59712301
 
     public function getDebugInfo()
     {
-        return array (  189 => 55,  185 => 54,  181 => 53,  177 => 52,  171 => 49,  166 => 47,  161 => 45,  157 => 44,  153 => 43,  149 => 42,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 14,  67 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
+        return array (  175 => 50,  171 => 49,  167 => 48,  163 => 47,  157 => 44,  152 => 42,  147 => 40,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 14,  67 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
     }
 }

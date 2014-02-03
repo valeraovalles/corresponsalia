@@ -2,28 +2,22 @@
 
 {% block titulomodulo %}
     <h1>EDITAR ESTADO FONDO</h1>
-    <h4>CORRESPONSALÍA: {{ entity.corresponsalia.nombre|upper }} | PAÍS: {{ entity.corresponsalia.pais.pais|upper }} | AÑO: {{ entity.anio }} | MES: {{ entity.mes}} </h4><br>
+    <h4>CORRESPONSALÍA: {{ entity.periodorendicion.corresponsalia.nombre|upper }} | PAÍS: {{ entity.periodorendicion.corresponsalia.pais.pais|upper }} | AÑO: {{ entity.periodorendicion.anio }} | MES: {{ entity.periodorendicion.mes}} </h4><br>
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(edit_form.recursorecibido) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.tipogasto)%}
+    {% if form_errors(edit_form.recursorecibido) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.recursorecibido) }}</div>
-        <div>{{ form_errors(edit_form.corresponsalia) }}</div>
-        <div>{{ form_errors(edit_form.tipogasto) }}</div>
     </div>
     {% endif %}
 
     <form novalidate method="post" action="{{ path('estadofondo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
-            <div class="contenedorform" style="display: none;">
-                <div class="labelform">Corresponsalía:</div>
-                <div class="widgetform">{{ form_widget(edit_form.corresponsalia) }}</div>
-            </div>
             <div class="contenedorform">
                 <div class="labelform">Saldo inicial:</div>
                 <div class="widgetform">{{ form_widget(edit_form.saldoinicial) }}</div>
@@ -32,18 +26,6 @@
                 <div class="labelform">Recurso enviado:</div>
                 <div class="widgetform">{{ form_widget(edit_form.recursorecibido) }}</div>
             </div>
-            <div class="contenedorform" style="display: none;">
-                <div class="labelform">Tipo gasto:</div>
-                <div class="widgetform">{{ form_widget(edit_form.tipogasto) }}</div>
-            </div>
-            <div class="contenedorform" style="display: none;">
-                <div class="labelform">Año:</div>
-                <div class="widgetform">{{ form_widget(edit_form.anio) }}</div>
-            </div>
-            <div class="contenedorform" style="display: none;">
-                <div class="labelform">Mes:</div>
-                <div class="widgetform">{{ form_widget(edit_form.mes) }}</div>
-            </div>
             <div class="contenedorform">
                 <div class="labelform">Observación:</div>
                 <div class="widgetform">{{ form_widget(edit_form.observacion) }}</div>
@@ -51,8 +33,8 @@
         </div>
          
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
-        <a class="btn btn-default" href="{{ path('estadofondo') }}">IR AL LISTADO DE FONDOS</a>
+        <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> {#| 
+        <a class="btn btn-default" href="{{ path('estadofondo',{'idperiodo':entity.periodorendicion.id}) }}">IR AL LISTADO DE FONDOS</a>#}
 
         {{ form_widget(edit_form.fechaasignacion,{'attr':{'style':'display:none'}}) }}
     </form>

@@ -20,7 +20,7 @@ class __TwigTemplate_6c065a4103765712072942722f8eae88b2b1a6a129d834270872bcd8954
         <tr>
             <th colspan=\"4\">ESTATUS DEL FONDO RECIBIDO PARA ";
         // line 3
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "tipogasto"), "descripcion")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "descripcion")), "html", null, true);
         echo "</th>
         </tr>
         <tr>

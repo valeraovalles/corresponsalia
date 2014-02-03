@@ -43,7 +43,7 @@ class Estadofondo
     /**
      * @var integer
      *
-     * @ORM\Column(name="fechaasignacion", type="date", nullable=false)
+     * @ORM\Column(name="fechaasignacion", type="datetime", nullable=false)
      */
     private $fechaasignacion;
 
@@ -62,46 +62,12 @@ class Estadofondo
      */
     private $pagos=0;    
     
-    /**
-     * @var \Corresponsalia
-     *
-     * @ORM\ManyToOne(targetEntity="Corresponsalia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
-     * })
-     */
-    private $corresponsalia;
-
-    /**
-     * @var \Tipogasto
-     *
-     * @ORM\ManyToOne(targetEntity="Tipogasto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipogasto_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $tipogasto;
-
      /**
      * @var integer
      *
      * @ORM\Column(name="observacion", type="string", nullable=true)
      */
     private $observacion;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="anio", type="integer", nullable=false)
-     */
-    private $anio;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="mes", type="integer", nullable=false)
-     */
-    private $mes;
     
     /**
      * @var \Perfil
@@ -112,6 +78,17 @@ class Estadofondo
      * })
      */
     private $responsable;
+    
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Periodorendicion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="periodorendicion_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $periodorendicion;
+    
     /**
      * Get id
      *
@@ -238,52 +215,8 @@ class Estadofondo
     {
         return $this->pagos;
     }
-    /**
-     * Set corresponsalia
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia
-     * @return Estadofondo
-     */
-    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = null)
-    {
-        $this->corresponsalia = $corresponsalia;
     
-        return $this;
-    }
-
-    /**
-     * Get corresponsalia
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Corresponsalia 
-     */
-    public function getCorresponsalia()
-    {
-        return $this->corresponsalia;
-    }
-    /**
-     * Set tipogasto
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto
-     * @return Relaciongastos
-     */
-    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = null)
-    {
-        $this->tipogasto = $tipogasto;
-    
-        return $this;
-    }
-
-    /**
-     * Get tipogasto
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Tipogasto 
-     */
-    public function getTipogasto()
-    {
-        return $this->tipogasto;
-    }
-
-      /**
+   /**
      * Set observacion
      *
      * @param float $observacion
@@ -306,53 +239,7 @@ class Estadofondo
         return $this->observacion;
     }
     
-  /**
-     * Set anio
-     *
-     * @param integer $anio
-     * @return Estadofondo
-     */
-    public function setAnio($anio)
-    {
-        $this->anio = $anio;
-    
-        return $this;
-    }
-
     /**
-     * Get anio
-     *
-     * @return integer 
-     */
-    public function getAnio()
-    {
-        return $this->anio;
-    }
-
-    /**
-     * Set mes
-     *
-     * @param integer $mes
-     * @return Estadofondo
-     */
-    public function setMes($mes)
-    {
-        $this->mes = $mes;
-    
-        return $this;
-    }
-
-    /**
-     * Get mes
-     *
-     * @return integer 
-     */
-    public function getMes()
-    {
-        return $this->mes;
-    }
-
-         /**
      * Set responsable
      *
      * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
@@ -373,6 +260,29 @@ class Estadofondo
     public function getResponsable()
     {
         return $this->responsable;
+    }
+    
+    /**
+     * Set periodorendicion
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion
+     * @return Relaciongastos
+     */
+    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = null)
+    {
+        $this->periodorendicion = $periodorendicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get periodorendicion
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Periodorendicion 
+     */
+    public function getPeriodorendicion()
+    {
+        return $this->periodorendicion;
     }
     
 }

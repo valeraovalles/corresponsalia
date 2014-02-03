@@ -65,6 +65,15 @@ class Corresponsalia
      */
     private $tipomoneda;
 
+     /**
+     * @var \Perfil
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="responsable_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $responsable;
 
     /**
      * Get id
@@ -168,6 +177,52 @@ class Corresponsalia
         return $this->tipomoneda;
     }
 
+    
+    /**
+     * Set tipogasto
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto
+     * @return Relaciongastos
+     */
+    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = null)
+    {
+        $this->tipogasto = $tipogasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipogasto
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tipogasto 
+     */
+    public function getTipogasto()
+    {
+        return $this->tipogasto;
+    }
+    
+     /**
+     * Set responsable
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
+     * @return Operador
+     */
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Administracion\UsuarioBundle\Entity\Perfil 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
     
     public function __toString()
     {

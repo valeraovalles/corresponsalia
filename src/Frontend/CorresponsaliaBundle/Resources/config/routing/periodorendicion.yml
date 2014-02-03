@@ -1,0 +1,30 @@
+periodorendicion:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:index" }
+
+periodorendicion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:show" }
+
+periodorendicion_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:new" }
+
+periodorendicion_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:create" }
+    requirements: { _method: post }
+
+periodorendicion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:edit" }
+
+periodorendicion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:update" }
+    requirements: { _method: post|put }
+
+periodorendicion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:delete" }
+    requirements: { _method: post|delete }

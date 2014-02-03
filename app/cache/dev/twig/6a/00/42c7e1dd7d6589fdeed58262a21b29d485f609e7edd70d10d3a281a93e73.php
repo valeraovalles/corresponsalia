@@ -43,28 +43,28 @@ class __TwigTemplate_6a0042c7e1dd7d6589fdeed58262a21b29d485f609e7edd70d10d3a281a
             <div class=\"labelform\">Corresponsalia:</div>
             <div class=\"widgetform\">";
         // line 11
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "corresponsalia"), "nombre")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "corresponsalia"), "nombre")), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Tipo gasto:</div>
             <div class=\"widgetform\">";
         // line 15
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "tipogasto"), "descripcion")), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Año:</div>
             <div class=\"widgetform\">";
         // line 19
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "anio"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "anio"), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Mes:</div>
             <div class=\"widgetform\">";
         // line 23
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "mes"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "mes"), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
@@ -134,12 +134,9 @@ class __TwigTemplate_6a0042c7e1dd7d6589fdeed58262a21b29d485f609e7edd70d10d3a281a
     <a class=\"btn btn-default\" href=\"";
         // line 57
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-        echo "\">IR A EDITAR</a> | 
-    <a class=\"btn btn-default\" href=\"";
-        // line 58
-        echo $this->env->getExtension('routing')->getPath("estadofondo");
-        echo "\">IR AL LISTADO DE FONDOS</a>
-  
+        echo "\">IR A EDITAR</a> ";
+        // line 59
+        echo "  
     <BR><BR>
     ";
         // line 61
@@ -173,6 +170,6 @@ class __TwigTemplate_6a0042c7e1dd7d6589fdeed58262a21b29d485f609e7edd70d10d3a281a
 
     public function getDebugInfo()
     {
-        return array (  158 => 64,  154 => 63,  150 => 62,  146 => 61,  140 => 58,  136 => 57,  132 => 55,  126 => 52,  122 => 50,  120 => 49,  113 => 47,  106 => 43,  99 => 39,  92 => 35,  85 => 31,  74 => 27,  67 => 23,  60 => 19,  53 => 15,  46 => 11,  38 => 6,  35 => 5,  29 => 3,);
+        return array (  155 => 64,  151 => 63,  147 => 62,  143 => 61,  139 => 59,  136 => 57,  132 => 55,  126 => 52,  122 => 50,  120 => 49,  113 => 47,  106 => 43,  99 => 39,  92 => 35,  85 => 31,  74 => 27,  67 => 23,  60 => 19,  53 => 15,  46 => 11,  38 => 6,  35 => 5,  29 => 3,);
     }
 }

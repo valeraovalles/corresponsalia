@@ -7,30 +7,30 @@ corresponsalia_inicio:
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
 
 corresponsalia_rendirgasto:
-    pattern:  /rendirgasto/{idtipogasto}/{anio}/{mes}
+    pattern:  /rendirgasto/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:rendirgasto }
 
 corresponsalia_rendirgastofunhon:
-    pattern:  /rendirgastofunhon/{idtipogasto}/{anio}/{mes}
+    pattern:  /rendirgastofunhon/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:rendirgastofunhon }
     
     
 corresponsalia_guardarendicion:
-    pattern:  /guardarendicion/{idtipogasto}/{anio}/{mes}
+    pattern:  /guardarendicion/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:guardarendicion }
 
 
 corresponsalia_editarendicion:
-    pattern:  /editarendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    pattern:  /editarendicion/{idrendicion}/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:editarendicion }
     
 tipocorresponsalia_actualizarendicion:
-    pattern:  /actualizarendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    pattern:  /actualizarendicion/{idrendicion}/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:actualizarendicion" }
     requirements: { _method: post|put }
     
 corresponsalia_borrarrendicion:
-    pattern:  /borrarrendicion/{idrendicion}/{idtipogasto}/{anio}/{mes}
+    pattern:  /borrarrendicion/{idrendicion}/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:borrarrendicion" }
     requirements: { _method: post|delete }
     
@@ -149,7 +149,7 @@ estadofondo_aniomes:
     defaults: { _controller: CorresponsaliaBundle:Estadofondo:estadofondoaniomes }
     
 estadofondo:
-    pattern:  /estadofondo
+    pattern:  /estadofondo/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:index" }
 
 estadofondo_show:
@@ -157,11 +157,11 @@ estadofondo_show:
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:show" }
 
 estadofondo_new:
-    pattern:  /estadofondo/new
+    pattern:  /estadofondo/new/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:new" }
 
 estadofondo_create:
-    pattern:  /estadofondo/create
+    pattern:  /estadofondo/create/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:create" }
     requirements: { _method: post }
 
@@ -210,4 +210,36 @@ cambio_update:
 cambio_delete:
     pattern:  /cambio/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Cambio:delete" }
+    requirements: { _method: post|delete }
+
+################################################################################
+periodorendicion:
+    pattern:  /periodorendicion
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:index" }
+
+periodorendicion_show:
+    pattern:  /periodorendicion/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:show" }
+
+periodorendicion_new:
+    pattern:  /periodorendicion/new
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:new" }
+
+periodorendicion_create:
+    pattern:  /periodorendicion/create
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:create" }
+    requirements: { _method: post }
+
+periodorendicion_edit:
+    pattern:  /periodorendicion/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:edit" }
+
+periodorendicion_update:
+    pattern:  /periodorendicion/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:update" }
+    requirements: { _method: post|put }
+
+periodorendicion_delete:
+    pattern:  /periodorendicion/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:delete" }
     requirements: { _method: post|delete }

@@ -54,46 +54,43 @@ class EstadofondoController extends Controller
      * Lists all Estadofondo entities.
      *
      */
-    public function indexAction()
+    public function indexAction($idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findAll();
+        $entities = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
 
         return $this->render('CorresponsaliaBundle:Estadofondo:index.html.twig', array(
             'entities' => $entities,
+            'idperiodo'=>$idperiodo
         ));
     }
     /**
      * Creates a new Estadofondo entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request,$idperiodo)
     {
-        $datos=$request->request->all();
-        $datos=$datos['form'];
-
         $em = $this->getDoctrine()->getManager();
-        //consulto datos de corresponsalia
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
-        $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($datos['tipogasto']);
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
         
         $entity = new Estadofondo();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity,$idperiodo);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setResponsable($usuario);
             
             $entity->setSaldofinal($entity->getSaldoinicial()+$entity->getRecursorecibido());
             $entity->setFechaasignacion(new \DateTime("now"));
-            $entity->setAnio($datos['anio']);
-            $entity->setMes($datos['mes']);
-            $entity->setCorresponsalia($corresponsalia);
-            $entity->setTipogasto($tipogasto);
-            
-            $entity->setResponsable($usuario);
+            $entity->setPeriodorendicion($periodo);
+
             $em->persist($entity);
             $em->flush();
 
@@ -103,8 +100,7 @@ class EstadofondoController extends Controller
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'datos'=>$datos,
-            'corresponsalia'=>$corresponsalia
+            'periodo'=>$periodo,
         ));
     }
 
@@ -115,10 +111,10 @@ class EstadofondoController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Estadofondo $entity)
+    private function createCreateForm(Estadofondo $entity,$idperiodo)
     {
         $form = $this->createForm(new EstadofondoType(), $entity, array(
-            'action' => $this->generateUrl('estadofondo_create'),
+            'action' => $this->generateUrl('estadofondo_create',array('idperiodo'=>$idperiodo)),
             'method' => 'POST',
         ));
 
@@ -131,39 +127,33 @@ class EstadofondoController extends Controller
      * Displays a form to create a new Estadofondo entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$idperiodo)
     {
-        $datos=$request->request->all();
-        if(!isset($datos['form']))
-            return $this->redirect($this->generateUrl('estadofondo_aniomes'));
-        $datos=$datos['form'];
-        
         $em = $this->getDoctrine()->getManager();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
         
         //valido si la corresponsalia tiene ya un fondo asignado
-        $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.corresponsalia= :idcorresponsalia and ef.anio= :anio and ef.mes= :mes and ef.tipogasto= :tipogasto";
+        $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.periodorendicion= :idperiodo";
         $query = $em->createQuery($dql);
-        $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
-        $query->setParameter('anio', $datos['anio']);
-        $query->setParameter('mes', $datos['mes']);
-        $query->setParameter('tipogasto', $datos['tipogasto']);
+        $query->setParameter('idperiodo', $idperiodo);
         $ef = $query->getResult(); 
+        
         if(!empty($ef)){
-            $this->get('session')->getFlashBag()->add('alert', 'Esta corresponsalía ya tiene un fondo asignado para el año, mes, corresponsalía y tipo de gasto seleccionado.');
+            $this->get('session')->getFlashBag()->add('alert', 'Esta corresponsalía ya tiene un fondo asignado para el período seleccionado, puede editar el actual.');
             return $this->redirect($this->generateUrl('estadofondo_show',array('id'=>$ef[0]->getId())));
         }
         
-        //consulto datos de corresponsalia
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
-        
         $entity = new Estadofondo();
-        $form   = $this->createCreateForm($entity);
-
+        $form   = $this->createCreateForm($entity,$idperiodo);
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'datos'=>$datos,
-            'corresponsalia'=>$corresponsalia
+            'periodo'=>$periodo,
         ));
     }
 
@@ -250,9 +240,14 @@ class EstadofondoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            
+            $data = $editForm->getData();
+       
+            
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario=$em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
+            $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido())-$entity->getPagos());
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Registro actualizado exitosamente');
@@ -271,9 +266,11 @@ class EstadofondoController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+
         //validar que no tenga pagos al borrar
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
+        
         if($entity->getPagos()!=0){
              $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el fondo de la corresponsalía "'.ucfirst($entity->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getTipogasto()->getDescripcion()).'" porque tiene pagos asociados.');
              return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $id)));            
@@ -288,12 +285,13 @@ class EstadofondoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Estadofondo entity.');
             }
-
             $em->remove($entity);
             $em->flush();
+
         }
-        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el fondo de la corresponsalía "'.ucfirst($entity->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getTipogasto()->getDescripcion()).'" exitosamente.');
-        return $this->redirect($this->generateUrl('estadofondo'));
+
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el fondo de la corresponsalía "'.ucfirst($entity->getPeriodorendicion()->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getPeriodorendicion()->getTipogasto()->getDescripcion()).'" exitosamente.');
+        return $this->redirect($this->generateUrl('estadofondo',array('idperiodo'=>$entity->getPeriodorendicion()->getId())));
     }
 
     /**

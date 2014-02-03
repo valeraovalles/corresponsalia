@@ -12,32 +12,26 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function Listadorendicion($cor,$anio,$mes,$tipogasto){
+    public function Listadorendicion($idperiodo){
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT r FROM CorresponsaliaBundle:Relaciongasto r where r.corresponsalia= :idcorresponsalia and r.anio= :anio and r.mes= :mes and r.tipogasto= :tipogasto";
+        $dql   = "SELECT r FROM CorresponsaliaBundle:Relaciongasto r where r.periodorendicion= :idperiodo";
         $query = $em->createQuery($dql);
-        $query->setParameter('idcorresponsalia', $cor);
-        $query->setParameter('anio', $anio);
-        $query->setParameter('mes', $mes);
-        $query->setParameter('tipogasto', $tipogasto);
+        $query->setParameter('idperiodo', $idperiodo);
         $rendicion = $query->getResult(); 
         return $rendicion;
     }
 
-    public function Estadofondo($cor,$anio,$mes,$tipogasto)
+    public function Estadofondo($idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT e FROM CorresponsaliaBundle:Estadofondo e where e.corresponsalia= :idcorresponsalia and e.anio= :anio and e.mes= :mes and e.tipogasto= :tipogasto";
+        $dql   = "SELECT e FROM CorresponsaliaBundle:Estadofondo e where e.periodorendicion= :idperiodo";
         $query = $em->createQuery($dql);
-        $query->setParameter('idcorresponsalia', $cor);
-        $query->setParameter('anio', $anio);
-        $query->setParameter('mes', $mes);
-        $query->setParameter('tipogasto', $tipogasto);
+        $query->setParameter('idperiodo', $idperiodo);
         $estadofondo = $query->getResult(); 
         if(empty($estadofondo)) return null;
         $estadofondo=$estadofondo[0];
 
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('corresponsalia'=>$cor),array('id'=>'desc'));
+        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('corresponsalia'=>$estadofondo->getPeriodorendicion()->getCorresponsalia()->getId()),array('id'=>'desc'));
         $corresponsalia=$corresponsalia[0];
 
         $datos['saldoinicial']=$estadofondo->getSaldoinicial();
@@ -96,13 +90,16 @@ class DefaultController extends Controller
                 ));
     }
     
-    public function rendirgastofunhonAction($idtipogasto,$anio,$mes)
-    {
+    public function rendirgastofunhonAction($idperiodo)
+    {    
+
         $em = $this->getDoctrine()->getManager();
-        //id de corresponsalia
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
         
         //valido si ya fue asignada una tasa de cambio
         $cambio=  $this->cambio($idcor);
@@ -110,119 +107,92 @@ class DefaultController extends Controller
              $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
              return $this->redirect($this->generateUrl('cambio_new',array('idcor'=>$idcor)));
         }
+        //fin
         
         //consulto si tiene fondo asignado
-        $estadofondo=$this->Estadofondo($idcor,$anio,$mes,$idtipogasto);
+        $estadofondo=$this->Estadofondo($idperiodo);
         if($estadofondo==null){
-            $this->get('session')->getFlashBag()->add('alert', 'Aún no tiene asignado un fondo para los parámetros seleccionados.');
-            return $this->redirect($this->generateUrl('corresponsalia_inicio'));                
+            $this->get('session')->getFlashBag()->add('alert', 'Aún no tiene asignado un fondo para este período.');
+            return $this->redirect($this->generateUrl('periodorendicion'));                
         }
+        //fin
 
-        //consulto corresponsalía
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($idtipogasto);
-        
         //genero form de relacion gasto
         $entity = new Relaciongasto();
         $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);
+        //fin
        
-        
-        ##########
-        //verifico si hay rendicion para este mes
-        $rendicionlista=$this->Listadorendicion($idcor,$anio,$mes,$idtipogasto);
+        //verifico si hay rendicion para mostrar el listado con modal
+        $rendicionlista=$this->Listadorendicion($periodo);
+        //fin
 
         return $this->render('CorresponsaliaBundle:Default:rendirgasto.html.twig',
                 array(
                     "form" => $form->createView(),
-                    "corresponsalia"=>$corresponsalia,
                     "estadofondo"=>$estadofondo,
                     "rendicionlista"=>$rendicionlista,
-                    'tipogasto'=>$tipogasto,
-                    'anio'=>$anio,
-                    'mes'=>$mes,
+                    'periodo'=>$periodo,
                     "cambio"=>$cambio
                 ));
-        
     }
     
-    public function rendirgastoAction($idtipogasto,$anio,$mes)
+    public function rendirgastoAction($idperiodo)
     {
-        if($idtipogasto==1 or $idtipogasto==3){
+        $em = $this->getDoctrine()->getManager();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
+        if($periodo->getTipogasto()->getId()==1 or $periodo->getTipogasto()->getId()==3){
             return $this->forward('CorresponsaliaBundle:Default:rendirgastofunhon',array(
-                'idtipogasto'=>$idtipogasto,
-                'anio'=>$anio,
-                'mes'=>$mes,
+                'idperiodo'=>$idperiodo,
             ));
         }
     }
         public function inicioAction()
     {
-        //consulto el id corresponsalia
-        $em = $this->getDoctrine()->getManager();
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
-        $entities = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        
-        $meses= array(''=>'Seleccione un mes','01'=>'Enero','02'=>'Febrero','03'=>'Marzo','04'=>'Abril','05'=>'Mayo','06'=>'Junio','07'=>'Julio','08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-        $anios= array(''=>'Seleccione un año', date('Y') => date('Y'),date('Y')+1 => date('Y')+1);
-        
-        $form = $this->createFormBuilder()
-        ->add('mes', 'choice', array(
-            'choices'   => $meses,
-        ))
-        ->add('anio', 'choice', array(
-                'choices'   => $anios,
-        ))
-        ->add('tipogasto', 'entity', array(
-                'class' => 'CorresponsaliaBundle:Tipogasto',
-                'property' => 'descripcion',
-                'empty_value'=>'Seleccione un tipo de gasto...'
-        ))
-        ->getForm();
-
-        return $this->render('CorresponsaliaBundle:Default:inicio.html.twig', array(
-            'corresponsalia' => $entities,
-            'form'=>$form->createView()
-        ));               
+            
+       return $this->render('CorresponsaliaBundle:Default:inicio.html.twig');               
       
     }
     
-    public function guardarendicionAction(Request $request,$idtipogasto,$anio,$mes)
+    public function guardarendicionAction(Request $request,$idperiodo)
     {
-        //consulto el id corresponsalia
         $em = $this->getDoctrine()->getManager();
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
+        
+        //genero form de rendicion con su validacion
         $entity = new Relaciongasto();
         $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);
         $form->bind($request);
+        //fin
 
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($idtipogasto);
         
         //consulto el fondo asigando
-        $estadofondo=$this->Estadofondo($idcor,$anio,$mes,$tipogasto);
+        $estadofondo=$this->Estadofondo($idperiodo);
+        //
                 
         //verifico si hay rendicion para este mes
-        $rendicionlista=$this->Listadorendicion($idcor,$anio,$mes,$tipogasto);
+        $rendicionlista=$this->Listadorendicion($idperiodo);
+        //
         
         $cambio=  $this->cambio($idcor);
         
         if ($form->isValid()) {
             $descgas = $em->getRepository('CorresponsaliaBundle:Descripciongasto')->find($idtipogasto);
             $entity->setDescripciongasto($descgas);
-            $entity->setCorresponsalia($corresponsalia);
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setResponsable($usuario);
             $em->persist($entity);
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('notice', 'Registro guardado exitosamente. Puede veridficar el listado de la rendición.');
             return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array(
-                'idtipogasto'=>$idtipogasto,
-                'anio'=>$anio,
-                'mes'=>$mes
+                'idperiodo'=>$periodo->getId(),
             ))); 
             
             /*return $this->forward('CorresponsaliaBundle:Default:rendirgasto', array(
@@ -232,48 +202,44 @@ class DefaultController extends Controller
         return $this->render('CorresponsaliaBundle:Default:rendirgasto.html.twig',
                 array(
                     "form" => $form->createView(),
-                    "corresponsalia"=>$corresponsalia,
                     "estadofondo"=>$estadofondo,
                     "rendicionlista"=>$rendicionlista,
-                    'tipogasto'=>$tipogasto,
-                    'anio'=>$anio,
-                    'mes'=>$mes,
+                    'periodo'=>$periodo,
                     "cambio"=>$cambio
                 ));
     }
     
-    public function editarendicionAction($idrendicion,$idtipogasto,$anio,$mes)
+    public function editarendicionAction($idrendicion,$idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
+        
+        //genero formularios para editar y borrar
         $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->find($idrendicion);
         $form = $this->createEditForm($rendicion,$idtipogasto);
-        $deleteForm = $this->createDeleteForm($idrendicion,$idtipogasto,$anio,$mes);
+        $deleteForm = $this->createDeleteForm($idrendicion,$idperiodo);
+        //fin
         
-        
-        //id de corresponsalia
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
         
         //valido si ya fue asignada una tasa de cambio
         $cambio=  $this->cambio($idcor);
         
         //consulto si tiene fondo asignado
-        $estadofondo=$this->Estadofondo($idcor,$anio,$mes,$idtipogasto);
+        $estadofondo=$this->Estadofondo($idperiodo);
         
-        //consulto corresponsalía
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
+        //consulto tipo gasto
         $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($idtipogasto);
+        //fin
         
-        //genero form de relacion gasto
-        /*$entity = new Relaciongasto();
-        $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);*/
-       
-        
-        ##########
         //verifico si hay rendicion para este mes
-        $rendicionlista=$this->Listadorendicion($idcor,$anio,$mes,$idtipogasto);
+        $rendicionlista=$this->Listadorendicion($periodo);
+        //fin
 
         return $this->render('CorresponsaliaBundle:Default:editarendicion.html.twig',
                 array(
@@ -281,12 +247,9 @@ class DefaultController extends Controller
                     'delete_form' => $deleteForm->createView(),
                     'rendicion'=>$rendicion,
                     
-                    "corresponsalia"=>$corresponsalia,
                     "estadofondo"=>$estadofondo,
                     "rendicionlista"=>$rendicionlista,
-                    'tipogasto'=>$tipogasto,
-                    'anio'=>$anio,
-                    'mes'=>$mes,
+                    'periodo'=>$periodo,
                     "cambio"=>$cambio
                 ));
     }
@@ -302,14 +265,19 @@ class DefaultController extends Controller
         return $form;
     }
     
-    public function actualizarendicionAction(Request $request, $idrendicion,$idtipogasto,$anio,$mes)
+    public function actualizarendicionAction(Request $request, $idrendicion,$idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
+        $idtipogasto=$periodo->getTipogasto()->getId();
+        $anio=$periodo->getAnio();
+        $mes=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
+        
         $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->find($idrendicion);
 
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
         
         if (!$rendicion) {
             throw $this->createNotFoundException('Unable to find Relaciongasto entity.');
@@ -320,18 +288,19 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         
         //consulto corresponsalía
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        $tipogasto = $em->getRepository('CorresponsaliaBundle:Tipogasto')->find($idtipogasto);
-        $estadofondo=$this->Estadofondo($idcor,$anio,$mes,$idtipogasto);
-        $rendicionlista=$this->Listadorendicion($idcor,$anio,$mes,$idtipogasto);
+        $estadofondo=$this->Estadofondo($idperiodo);
+        $rendicionlista=$this->Listadorendicion($idperiodo);
         $cambio=  $this->cambio($idcor);
         
         
         if ($form->isValid()) {
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $rendicion->setResponsable($usuario);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Se ha editado la rendicion exitosamente.');
-            return $this->redirect($this->generateUrl('corresponsalia_editarendicion', array('idrendicion' => $idrendicion,'idtipogasto'=>$idtipogasto,'anio'=>$anio,'mes'=>$mes)));
+            return $this->redirect($this->generateUrl('corresponsalia_editarendicion', array('idrendicion' => $idrendicion,'idperiodo'=>$periodo->getId())));
         }
 
         return $this->render('CorresponsaliaBundle:Default:editarendicion.html.twig',
@@ -340,19 +309,16 @@ class DefaultController extends Controller
                     'delete_form' => $deleteForm->createView(),
                     'rendicion'=>$rendicion,
                     
-                    "corresponsalia"=>$corresponsalia,
                     "estadofondo"=>$estadofondo,
                     "rendicionlista"=>$rendicionlista,
-                    'tipogasto'=>$tipogasto,
-                    'anio'=>$anio,
-                    'mes'=>$mes,
+                    'periodo'=>$periodo,
                     "cambio"=>$cambio
                 ));
     }
     
-    public function borrarrendicionAction(Request $request, $idrendicion,$idtipogasto,$anio,$mes)
+    public function borrarrendicionAction(Request $request, $idrendicion,$idperiodo)
     {
-        $form = $this->createDeleteForm($idrendicion,$idtipogasto,$anio,$mes);
+        $form = $this->createDeleteForm($idrendicion,$idperiodo);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -368,21 +334,17 @@ class DefaultController extends Controller
         }
         $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado la rendicion exitosamente.');
         return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array(
-                'idtipogasto'=>$idtipogasto,
-                'anio'=>$anio,
-                'mes'=>$mes
+                'idperiodo'=>$idperiodo,
             ))); 
     }
     
-    
-    private function createDeleteForm($idrendicion,$idtipogasto,$anio,$mes)
+    private function createDeleteForm($idrendicion,$idperiodo)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('corresponsalia_borrarrendicion',array(
                 'idrendicion'=>$idrendicion,
-                'idtipogasto'=>$idtipogasto,
-                'anio'=>$anio,
-                'mes'=>$mes,)))
+                'idperiodo'=>$idperiodo,
+                )))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()

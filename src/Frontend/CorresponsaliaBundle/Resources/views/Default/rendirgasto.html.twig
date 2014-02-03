@@ -6,8 +6,8 @@
 {% endblock %}
           
 {% block titulomodulo %}  
-    <h2>{{ tipogasto.descripcion|upper }}</h2>
-    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }} | PAÍS: {{ corresponsalia.pais.pais|upper }} | AÑO: {{ anio }} | MES: {{ mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
+    <h2>{{ periodo.tipogasto.descripcion|upper }}</h2>
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
 {% endblock %}
     
 {% block body %}
@@ -29,19 +29,16 @@
 
     {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
     
-    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion',{'idtipogasto':tipogasto.id,'anio':anio,'mes':mes}) }}">  
+    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion',{'idperiodo':periodo.id}) }}">  
         {{ form_widget(form._token) }}
-        {% include 'CorresponsaliaBundle:Default:tablarendicion.html.twig' %}
+        {% include 'CorresponsaliaBundle:Default:_tablarendicion.html.twig' %}
         <br><br><input type="submit" value="GUARDAR" class="btn btn-primary">
-        <button class="btn btn-info" data-toggle="modal" data-target="#{{tipogasto.id}}">VER LISTADO DE RENDICION</button>
-        <input type="hidden" value="{{ tipogasto.id }}" name="rendicion_relaciongasto[tipogasto]">
-        <input type="hidden" value="{{ corresponsalia.id }}" name="rendicion_relaciongasto[corresponsalia]">
-        <input type="hidden" value="{{ anio }}" name="rendicion_relaciongasto[anio]">
-        <input type="hidden" value="{{ mes }}" name="rendicion_relaciongasto[mes]">
+        <button class="btn btn-info" data-toggle="modal" data-target="#{{periodo.tipogasto.id}}">VER LISTADO DE RENDICION</button>
+        <input type="hidden" value="{{ periodo.id }}" name="rendicion_relaciongasto[periodorendicion]">
     </form>
         <input type="hidden" value="{{ cambio.montocambiodolar }}" id="cambio">
     
-        {% include 'CorresponsaliaBundle:Default:listadorendicion.html.twig' %}  
+        {% include 'CorresponsaliaBundle:Default:_listadorendicion.html.twig' %}  
     
     <script type="text/javascript">
         $(document).ready(function () {
@@ -60,3 +57,9 @@
     </script>
     
 {% endblock %}
+
+
+    
+    
+    
+    

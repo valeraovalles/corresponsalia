@@ -41,6 +41,11 @@ class CorresponsaliaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setResponsable($usuario);
+            
             $em->persist($entity);
             $em->flush();
 
@@ -169,6 +174,10 @@ class CorresponsaliaController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setResponsable($usuario);
+            
             $em->flush();
             $this->get('session')->getFlashBag()->add('alert', 'La corresponsalía se ha actualizado con éxito.');
             return $this->redirect($this->generateUrl('corresponsalia_show', array('id' => $id)));

@@ -86,11 +86,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
           <li class=\"divider\"></li>
           <li><a href=\"";
         // line 39
-        echo $this->env->getExtension('routing')->getPath("estadofondo");
-        echo "\">Listado de fondos</a></li>
-          <li><a href=\"";
-        // line 40
-        echo $this->env->getExtension('routing')->getPath("estadofondo_aniomes");
+        echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">Asignar fondo</a></li>
         </ul>
       </li>
@@ -99,13 +95,13 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">CORRESPONSALÍA <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 47
+        // line 46
         echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
         echo "\">Tasa de cambio</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 49
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_inicio");
+        // line 48
+        echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">Rendir gastos</a></li>
         </ul>
       </li>
@@ -113,7 +109,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">REPORTES <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 55
+        // line 54
         echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
         echo "\">Rendicion</a></li>
         </ul>
@@ -122,7 +118,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
     </ul>
     <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 61
+        // line 60
         echo $this->env->getExtension('routing')->getPath("usuario_logout");
         echo "\">SALIR</a></li>
       
@@ -144,6 +140,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  126 => 61,  117 => 55,  108 => 49,  103 => 47,  93 => 40,  89 => 39,  84 => 37,  80 => 36,  76 => 35,  66 => 28,  62 => 27,  57 => 25,  53 => 24,  48 => 22,  44 => 21,  31 => 11,  19 => 1,);
+        return array (  122 => 60,  113 => 54,  104 => 48,  99 => 46,  89 => 39,  84 => 37,  80 => 36,  76 => 35,  66 => 28,  62 => 27,  57 => 25,  53 => 24,  48 => 22,  44 => 21,  31 => 11,  19 => 1,);
     }
 }

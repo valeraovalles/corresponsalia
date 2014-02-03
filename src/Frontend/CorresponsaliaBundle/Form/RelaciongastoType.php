@@ -15,13 +15,13 @@ class RelaciongastoType extends AbstractType
         $this->idgasto = $idgasto;
 
     }
-
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $idgasto = $this->idgasto;
         
         $builder
@@ -41,8 +41,6 @@ class RelaciongastoType extends AbstractType
                 'invalid_message' => 'EL campo dólares debe ser sólo con números',
                 'currency'=>null
                 ))
-            ->add('anio')
-            ->add('mes')
             ->add('descripciongasto', 'entity', array(
                     'class' => 'CorresponsaliaBundle:Descripciongasto',
                     'property' => 'descripcion',
@@ -54,11 +52,8 @@ class RelaciongastoType extends AbstractType
                     ->setParameter('id', $idgasto)
                 ;},
                 ))
-            ->add('tipogasto',null, array(
-                'multiple' => false,
-                'expanded' => true,
-                'empty_value'=>false))
-            ->add('corresponsalia')
+            ->add('periodorendicion')
+            ->add('responsable')
         ;
     }
     

@@ -19,8 +19,6 @@ class EstadofondoType extends AbstractType
                 'invalid_message' => 'El monto del saldo inicial debe ser numérico',
                 'currency'=>null))
             ->add('responsable')
-            ->add('anio','text')
-            ->add('mes','text')
             ->add('recursorecibido', 'money', array(
                 'invalid_message' => 'El monto del recurso enviado debe ser numérico',
                 'currency'=>null
@@ -30,8 +28,6 @@ class EstadofondoType extends AbstractType
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd'))
             //->add('saldofinal')
-            ->add('corresponsalia',null,array('empty_value'=>'Seleccione...'))
-            ->add('tipogasto',null,array('empty_value'=>'Seleccione...'))
             //->add('pagos')
         ;
     }

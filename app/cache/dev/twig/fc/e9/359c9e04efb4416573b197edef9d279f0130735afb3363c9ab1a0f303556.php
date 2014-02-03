@@ -66,19 +66,19 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
             echo "</a></td>
                 <td>";
             // line 24
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "corresponsalia"), "nombre"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "corresponsalia"), "nombre"), "html", null, true);
             echo "</td>
                 <td>";
             // line 25
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "tipogasto"), "descripcion"), "html", null, true);
             echo "</td>
                 <td>";
             // line 26
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "anio"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "anio"), "html", null, true);
             echo "</td>
                 <td>";
             // line 27
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "mes"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "periodorendicion"), "mes"), "html", null, true);
             echo "</td>
                 <td>";
             // line 28
@@ -108,10 +108,9 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
     </table>
 
 
-    <br><br><a class=\"btn btn-primary\" href=\"";
+    ";
         // line 42
-        echo $this->env->getExtension('routing')->getPath("estadofondo_new");
-        echo "\">ASIGNAR NUEVO FONDO</a><BR><BR>
+        echo "<br><br><br>
 
 
     <script>

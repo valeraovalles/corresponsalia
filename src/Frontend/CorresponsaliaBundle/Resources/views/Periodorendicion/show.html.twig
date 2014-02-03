@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONSULTAR PERÍODO{% endblock %}
+
+{% block titulobanner %}
+    CONSULTAR PERÍODO
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CONSULTAR PERÍODO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Corresponsalia:</div>
+            <div class="widgetform">{{ entity.corresponsalia.nombre }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo gasto:</div>
+            <div class="widgetform">{{ entity.tipogasto.descripcion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Año:</div>
+            <div class="widgetform">{{ entity.anio }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Mes:</div>
+            <div class="widgetform">{{ entity.mes }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Estatus:</div>
+            <div class="widgetform">{% if entity.estatus==true %}<span class="label label-info">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</div>
+        </div>
+        {% if entity.observacion  %}
+        <div class="contenedorform">
+            <div class="labelform">Observacion:</div>
+            <div class="widgetform">{{ entity.observacion }}</div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <a class="btn btn-default" href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
+  
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    
+    
+    
+{% endblock %}

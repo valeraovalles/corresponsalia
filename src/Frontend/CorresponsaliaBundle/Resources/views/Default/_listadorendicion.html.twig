@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div class="modal fade" id="{{ periodo.tipogasto.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 1500px;">
+    <div class="modal-content" style="width: 1500px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{{ periodo.tipogasto.descripcion|upper }}</h4>
+      </div>
+      <div class="modal-body">
+          
+            <table id="tablalista1" style="width: 1400px;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nro</th>
+                            <th>F. Factura</th>
+                            <th>Imputación</th>
+                            <th>Descripcion</th>
+                            <th>Nombre/Razón</th>
+                            <th>I. Fiscal</th>
+                            <th>Dólares.</th>
+                            <th>Monto MN.</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in rendicionlista %}
+                            <tr>
+                                <td>{{ entity.id }}</td>
+                                <td>{{ entity.numerocomprobante }}</td>
+                                <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
+                                <td>{{ entity.imputacionpresupuestaria }}</td>
+                                <td>{{ entity.descripciongasto.descripcion }}</td>
+                                <td>{{ entity.identificacionfiscal }}</td>
+                                <td>{{ entity.numerofactura }}</td>
+                                <td>{{ entity.montodolar }}</td>
+                                <td>{{ entity.montomonnac }}</td>
+                                <td><a href="{{ path('corresponsalia_editarendicion',{'idperiodo':periodo.id,'idrendicion':entity.id }) }}">Editar</a></td>
+                            </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>    
+                <script>    
+                  $(document).ready(function(){
+                     $('#tablalista1').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                          "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                          "aaSorting": [[0,'desc']],
+                      } );
+                  })
+               </script>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
