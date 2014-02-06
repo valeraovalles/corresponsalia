@@ -13,7 +13,7 @@
     
 {% block body -%}
     {{ parent() }}
-    <br><table id="tablalista" style="width: 97%;">
+    <br><table id="tablalista" style="width: 97%;" cellpadding="5px">
         <thead>
             <tr>
                 <th>Id</th>
@@ -33,14 +33,30 @@
                 <td>{{ entity.mes }}</td>
                 <td>{{ entity.corresponsalia.nombre }}</td>
                 <td>{{ entity.tipogasto.descripcion }}</td>
-                <td>{% if entity.estatus==true %}<b class="label label-success">Abierto</b>{% else %}<b class="label label-danger">Cerrado</b>{% endif %}</td>
                 <td>
-                    <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    {% if entity.estatus==1 %}
+                        <span class="label label-info">Abierto</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">Enviado para revisión</span>
+                    {% elseif entity.estatus==3 %}
+                        <span class="label label-danger">Devuelto para corrección</span>
+                    {% elseif entity.estatus==4 %}
+                        <span class="label label-success">Cerrado</span>
+                    {% endif %}
+                </td>
+                <td>
+                    | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
 
-                    <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> | 
                     
-                    <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
-                    <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">ASIGNAR FONDOS</b></a>
+                        {% if entity.tipogasto.id!=2 and entity.estatus!=2 %}
+                        <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
+                        {% elseif entity.tipogasto.id==2 %}
+                        <a href="{{ path('cobertura', {'idperiodo':entity.id}) }}"><b class="text-warning">COBERTURAS</b></a> | 
+                        {% endif %}
+                        <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">FONDOS</b></a>
+
+                    
                 </td>
             </tr>
         {% endfor %}

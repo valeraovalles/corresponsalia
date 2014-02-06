@@ -61,7 +61,7 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
         // line 15
         $this->displayParentBlock("body", $context, $blocks);
         echo "
-    <br><table id=\"tablalista\" style=\"width: 97%;\">
+    <br><table id=\"tablalista\" style=\"width: 97%;\" cellpadding=\"5px\">
         <thead>
             <tr>
                 <th>Id</th>
@@ -103,33 +103,60 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
             // line 35
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
             echo "</td>
-                <td>";
-            // line 36
-            if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == true)) {
-                echo "<b class=\"label label-success\">Abierto</b>";
-            } else {
-                echo "<b class=\"label label-danger\">Cerrado</b>";
-            }
-            echo "</td>
                 <td>
-                    <a href=\"";
-            // line 38
+                    ";
+            // line 37
+            if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 1)) {
+                // line 38
+                echo "                        <span class=\"label label-info\">Abierto</span>
+                    ";
+            } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 2)) {
+                // line 40
+                echo "                        <span class=\"label label-warning\">Enviado para revisión</span>
+                    ";
+            } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 3)) {
+                // line 42
+                echo "                        <span class=\"label label-danger\">Devuelto para corrección</span>
+                    ";
+            } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 4)) {
+                // line 44
+                echo "                        <span class=\"label label-success\">Cerrado</span>
+                    ";
+            }
+            // line 46
+            echo "                </td>
+                <td>
+                    | <a href=\"";
+            // line 48
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a>
+            echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a> | 
 
                     <a href=\"";
-            // line 40
+            // line 50
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a>
+            echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a> | 
                     
-                    <a href=\"";
-            // line 42
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"text-warning\">RENDIR</b></a> | 
-                    <a href=\"";
-            // line 43
+                        ";
+            // line 52
+            if ((($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") != 2) && ($this->getAttribute($this->getContext($context, "entity"), "estatus") != 2))) {
+                // line 53
+                echo "                        <a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"text-warning\">RENDIR</b></a> | 
+                        ";
+            } elseif (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
+                // line 55
+                echo "                        <a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cobertura", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"text-warning\">COBERTURAS</b></a> | 
+                        ";
+            }
+            // line 57
+            echo "                        <a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_new", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"text-warning\">ASIGNAR FONDOS</b></a>
+            echo "\"><b class=\"text-warning\">FONDOS</b></a>
+
+                    
                 </td>
             </tr>
         ";
@@ -137,14 +164,14 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 47
+        // line 63
         echo "        </tbody>
     </table>
 
     <br><br>
 
     <a class=\"btn btn-primary\" href=\"";
-        // line 52
+        // line 68
         echo $this->env->getExtension('routing')->getPath("periodorendicion_new");
         echo "\">NUEVO PERÍODO</a>
 
@@ -173,6 +200,6 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
 
     public function getDebugInfo()
     {
-        return array (  148 => 52,  141 => 47,  131 => 43,  127 => 42,  122 => 40,  117 => 38,  108 => 36,  104 => 35,  100 => 34,  96 => 33,  92 => 32,  86 => 31,  83 => 30,  79 => 29,  62 => 15,  59 => 14,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  175 => 68,  168 => 63,  155 => 57,  149 => 55,  143 => 53,  141 => 52,  136 => 50,  131 => 48,  127 => 46,  123 => 44,  119 => 42,  115 => 40,  111 => 38,  109 => 37,  104 => 35,  100 => 34,  96 => 33,  92 => 32,  86 => 31,  83 => 30,  79 => 29,  62 => 15,  59 => 14,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

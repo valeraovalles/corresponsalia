@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - REVISIÓN{% endblock %}
+
+{% block titulobanner %}
+    REVISIÓN
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>PERÍODOS PARA REVISIÓN</h1>
+{% endblock %}
+    
+    
+{% block body -%}
+    {{ parent() }}
+    <br><table id="tablalista" style="width: 97%;" cellpadding="5px">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th style="width: 5%">Anio</th>
+                <th style="width: 5%">Mes</th>
+                <th style="width: 30%">Corresponsalía</th>
+                <th>Tipo gasto</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.anio }}</td>
+                <td>{{ entity.mes }}</td>
+                <td>{{ entity.corresponsalia.nombre }}</td>
+                <td>{{ entity.tipogasto.descripcion }}</td>
+                <td>
+                    {% if entity.estatus==1 %}
+                        <span class="label label-info">Abierto</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">Enviado para revisión</span>
+                    {% elseif entity.estatus==3 %}
+                        <span class="label label-danger">Devuelto para corrección</span>
+                    {% elseif entity.estatus==4 %}
+                        <span class="label label-success">Cerrado</span>
+                    {% endif %}
+                </td>
+                <td>
+                    | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
+
+                    <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> | 
+                    
+                    <a href="{{ path('corresponsalia_revisionrendicion', {'idperiodo':entity.id}) }}"><b class="text-success">REVISAR RENDICIÓN</b></a> | 
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <a class="btn btn-primary" href="{{ path('periodorendicion_new') }}">NUEVO PERÍODO</a>
+
+    <br><br>
+
+    <script>
+    $(document).ready(function(){
+       $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[5,'asc'],[1,'asc'],[2,'asc']],
+        } );
+    })
+    </script>
+    {% endblock %}

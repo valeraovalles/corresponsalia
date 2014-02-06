@@ -121,7 +121,7 @@ class __TwigTemplate_a4fe95096b70189f813fc8c85af2fdbff1b01d13c9d2d58dabafbaf8870
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "mes"), 'widget');
         echo "</div>
             </div>
-            <div class=\"contenedorform\">
+            <div class=\"contenedorform\" style=\"display:none;\">
                 <div class=\"labelform\">Estatus:</div>
                 <div class=\"widgetform\">";
         // line 47

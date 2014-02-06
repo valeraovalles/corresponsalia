@@ -59,62 +59,18 @@ class __TwigTemplate_7de20e646448e8f5a3bebcb42582692e48056e53d240ac3f1a0e1377528
         $this->displayParentBlock("body", $context, $blocks);
         echo "
 
-    ";
-        // line 17
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "started")) {
-            // line 18
-            echo "        ";
-            $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "notice"), "method"));
-            foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-                // line 19
-                echo "            <div class=\"Greenflash-notice\">
-                ";
-                // line 20
-                echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
-                echo "
-            </div>
-        ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 23
-            echo "
-        ";
-            // line 24
-            $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "alert"), "method"));
-            foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-                // line 25
-                echo "            <div class=\"Redflash-notice\">
-                ";
-                // line 26
-                echo twig_escape_filter($this->env, $this->getContext($context, "flashMessage"), "html", null, true);
-                echo "
-            </div>
-        ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 29
-            echo "    ";
-        }
-        // line 30
-        echo "
     <div class=\"formShow\">
         <div class=\"contenedorform\">
             <div class=\"labelform\">Id:</div>
             <div class=\"widgetform\">";
-        // line 34
+        // line 20
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "id"), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Username:</div>
             <div class=\"widgetform\">";
-        // line 38
+        // line 24
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "username"), "html", null, true);
         echo "</div>
         </div>
@@ -122,23 +78,23 @@ class __TwigTemplate_7de20e646448e8f5a3bebcb42582692e48056e53d240ac3f1a0e1377528
             <div class=\"labelform\">Estatus:</div>
             <div class=\"widgetform\">
                 ";
-        // line 43
+        // line 29
         if (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "isActive") == 1)) {
-            // line 44
+            // line 30
             echo "                    Activo
                 ";
         } elseif (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "isActive") == null)) {
-            // line 46
+            // line 32
             echo "                    Inactivo
                 ";
         }
-        // line 48
+        // line 34
         echo "            </div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Nombres:</div>
             <div class=\"widgetform\">";
-        // line 52
+        // line 38
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "primerNombre"), "html", null, true);
         echo " ";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "segundoNombre"), "html", null, true);
@@ -147,7 +103,7 @@ class __TwigTemplate_7de20e646448e8f5a3bebcb42582692e48056e53d240ac3f1a0e1377528
         <div class=\"contenedorform\">
             <div class=\"labelform\">Apellidos:</div>
             <div class=\"widgetform\">";
-        // line 56
+        // line 42
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "primerApellido"), "html", null, true);
         echo " ";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "segundoApellido"), "html", null, true);
@@ -158,20 +114,20 @@ class __TwigTemplate_7de20e646448e8f5a3bebcb42582692e48056e53d240ac3f1a0e1377528
 <br>
 
 <form action=\"";
-        // line 62
+        // line 48
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("user_delete", array("id" => $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "id"))), "html", null, true);
         echo "\" method=\"post\" onsubmit=\"return confirm('Seguro que desea eliminar')\">
     <a class=\"btn btn-default\" href=\"";
-        // line 63
+        // line 49
         echo $this->env->getExtension('routing')->getPath("user");
         echo "\">IR AL LISTADO</a> | 
     <a class=\"btn btn-default\" href=\"";
-        // line 64
+        // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("user_edit", array("id" => $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "user"), "id"))), "html", null, true);
         echo "\">IR A EDITAR</a> | 
     <button class=\"btn btn-danger\" type=\"submit\">BORRAR</button>
     ";
-        // line 66
+        // line 52
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
 </form>
@@ -193,6 +149,6 @@ class __TwigTemplate_7de20e646448e8f5a3bebcb42582692e48056e53d240ac3f1a0e1377528
 
     public function getDebugInfo()
     {
-        return array (  175 => 66,  170 => 64,  166 => 63,  162 => 62,  151 => 56,  142 => 52,  136 => 48,  132 => 46,  128 => 44,  126 => 43,  118 => 38,  111 => 34,  105 => 30,  102 => 29,  93 => 26,  90 => 25,  86 => 24,  83 => 23,  74 => 20,  71 => 19,  66 => 18,  64 => 17,  59 => 15,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  131 => 52,  126 => 50,  122 => 49,  118 => 48,  107 => 42,  98 => 38,  92 => 34,  88 => 32,  84 => 30,  82 => 29,  74 => 24,  67 => 20,  59 => 15,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

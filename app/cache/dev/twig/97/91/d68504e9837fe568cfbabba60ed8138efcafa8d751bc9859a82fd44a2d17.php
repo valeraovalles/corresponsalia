@@ -95,12 +95,23 @@ class __TwigTemplate_9791d68504e9837fe568cfbabba60ed8138efcafa8d751bc9859a82fd44
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "rol"), 'widget');
         echo "</div>
         </div>
+        <div class=\"contenedorform\">
+            <div class=\"text-error\">";
+        // line 35
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "descripcion"), 'errors');
+        echo "</div>
+            <div class=\"labelform\">Descripcion:</div>
+            <div class=\"widgetform\">";
+        // line 37
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "descripcion"), 'widget');
+        echo "</div>
+        </div>
     </div>
 
     <button class=\"btn btn-primary\" type=\"submit\">EDITAR</button> | 
 
         <a class=\"btn btn-default\" href=\"";
-        // line 38
+        // line 43
         echo $this->env->getExtension('routing')->getPath("rol");
         echo "\">
             IR AL LISTADO
@@ -109,11 +120,11 @@ class __TwigTemplate_9791d68504e9837fe568cfbabba60ed8138efcafa8d751bc9859a82fd44
 
 
         <form action=\"";
-        // line 44
+        // line 49
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\" onsubmit=\"return confirm('Seguro que desea eliminar')\">
             ";
-        // line 45
+        // line 50
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
             <button class=\"btn btn-danger\" type=\"submit\">BORRAR</button>
@@ -135,6 +146,6 @@ class __TwigTemplate_9791d68504e9837fe568cfbabba60ed8138efcafa8d751bc9859a82fd44
 
     public function getDebugInfo()
     {
-        return array (  117 => 45,  113 => 44,  104 => 38,  95 => 32,  90 => 30,  83 => 26,  76 => 24,  73 => 23,  67 => 20,  63 => 18,  61 => 17,  56 => 15,  53 => 14,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  128 => 50,  124 => 49,  115 => 43,  106 => 37,  101 => 35,  95 => 32,  90 => 30,  83 => 26,  76 => 24,  73 => 23,  67 => 20,  63 => 18,  61 => 17,  56 => 15,  53 => 14,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

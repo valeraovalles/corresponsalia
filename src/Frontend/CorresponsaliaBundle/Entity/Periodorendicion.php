@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tipocorresponsalia
  *
- * @ORM\Table(name="periodorendicion")
+ * @ORM\Table(name="rendicion.periodorendicion")
  * @ORM\Entity
  */
 class Periodorendicion
@@ -19,7 +19,7 @@ class Periodorendicion
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="rendicion_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.rendicion_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -80,9 +80,10 @@ class Periodorendicion
     /**
      * @var integer
      *
-     * @ORM\Column(name="estatus", type="boolean", nullable=false)
+     * @ORM\Column(name="estatus", type="integer", nullable=false)
+     * 1 nueva, 2 enviada para revision, 3 devuelta para corrección, 4 cerrada
      */
-    private $estatus=true;
+    private $estatus;
     
     /**
      * Get id

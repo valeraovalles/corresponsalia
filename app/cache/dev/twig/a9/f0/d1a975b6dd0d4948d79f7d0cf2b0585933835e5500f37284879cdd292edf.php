@@ -121,16 +121,9 @@ class __TwigTemplate_a9f0d1a975b6dd0d4948d79f7d0cf2b0585933835e5500f37284879cdd2
         echo "</div>
             </div>
             <div class=\"contenedorform\">
-                <div class=\"labelform\">Período abierto:</div>
-                <div class=\"widgetform\">";
-        // line 47
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "estatus"), 'widget', array("attr" => array("checked" => "checked")));
-        echo "</div>
-            </div>
-            <div class=\"contenedorform\">
                 <div class=\"labelform\">Observación:</div>
                 <div class=\"widgetform\">";
-        // line 51
+        // line 47
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "observacion"), 'widget');
         echo "</div>
             </div>
@@ -138,7 +131,7 @@ class __TwigTemplate_a9f0d1a975b6dd0d4948d79f7d0cf2b0585933835e5500f37284879cdd2
     
         <input type=\"submit\" value=\"CREAR\" class=\"btn btn-primary\"> | 
         <a class=\"btn btn-default\" href=\"";
-        // line 56
+        // line 52
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">IR AL LISTADO</a>
     </form>
@@ -157,6 +150,6 @@ class __TwigTemplate_a9f0d1a975b6dd0d4948d79f7d0cf2b0585933835e5500f37284879cdd2
 
     public function getDebugInfo()
     {
-        return array (  142 => 56,  134 => 51,  127 => 47,  120 => 43,  113 => 39,  106 => 35,  99 => 31,  92 => 27,  88 => 26,  85 => 25,  79 => 22,  75 => 21,  71 => 20,  67 => 19,  63 => 17,  61 => 16,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  135 => 52,  127 => 47,  120 => 43,  113 => 39,  106 => 35,  99 => 31,  92 => 27,  88 => 26,  85 => 25,  79 => 22,  75 => 21,  71 => 20,  67 => 19,  63 => 17,  61 => 16,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

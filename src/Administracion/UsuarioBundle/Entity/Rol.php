@@ -34,6 +34,14 @@ class Rol
     private $rol;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="El campo descripción no debe estar en blanco.")
+     */
+    private $descripcion;
+    
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="rol")
@@ -79,6 +87,29 @@ class Rol
     public function getRol()
     {
         return $this->rol;
+    }
+    
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Descripcion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
     
 /**

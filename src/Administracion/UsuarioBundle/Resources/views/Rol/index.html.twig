@@ -19,6 +19,7 @@
             <tr>
                 <th>Id</th>
                 <th>Rol</th>
+                <th>Descripción</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,7 +27,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('rol_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td style="width: 70%">{{ entity.rol }}</td>
+                <td style="width: 35%">{{ entity.rol }}</td>
+                <td style="width: 45%">{{ entity.descripcion }}</td>
                 <td>
                     <a href="{{ path('rol_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
 

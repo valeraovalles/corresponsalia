@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - REVISIÓN RENDICIÓN{% endblock %}
+
+{% block titulobanner %}
+    REVISIÓN RENDICIÓN
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>REVISIÓN DE RENDICIÓN</h1><h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | AÑO: {{periodo.anio}} | MES: {{ periodo.mes }}</h4>
+{% endblock %}
+    
+{% block body %}
+    {{ parent()}}
+    
+    <br><div style="width: 99%;">{% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}</div>
+    
+    <form method="post" action="{{ path('corresponsalia_guardarevisionrendicion',{'idperiodo':periodo.id})}}">
+        <table id="tablalista1" style="width: 99%;">
+            <thead>
+                <tr>
+                    <th>Nro Comp.</th>
+                    <th>F. Factura</th>
+                    <th>Imputación</th>
+                    <th>Descripcion</th>
+                    <th>Nombre/Razón</th>
+                    <th>I. Fiscal</th>
+                    <th>Dólares.</th>
+                    <th>Monto MN.</th>
+                    <th>Acc.</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in rendicionlista %}
+                    <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
+                        <td>{{ entity.numerocomprobante }}</td>
+                        <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
+                        <td>{{ entity.imputacionpresupuestaria }}</td>
+                        <td>{{ entity.descripciongasto.descripcion }}</td>
+                        <td>{{ entity.identificacionfiscal }}</td>
+                        <td>{{ entity.numerofactura }}</td>
+                        <td>{{ entity.montodolar }}</td>
+                        <td>{{ entity.montomonnac }}</td>
+                        <td><input value="{{ entity.id }}" name="rendiciones[{{entity.id}}]" type="checkbox" {% if entity.aprobada==false %}checked="checked"{% endif %}></td>
+                    </tr>
+            {% endfor %}
+
+            </tbody>
+        </table> 
+        <br><br><br><br>
+        <input class="btn btn-primary" type="submit" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
+    </form>
+    
+    <div style="width: 420px;">
+        <div style="float: left;">
+            <form novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':3 }) }}" onsubmit="return confirm('¿Está seguro que desea devolver esta rendición para su corrección? Recuerde actualizar las rediciones que se deben corregir antes de devolver la rendición!!')">  
+               <input type="submit" value="DEVOLVER PARA CORRECIÓN" class="btn btn-danger">
+            </form> 
+        </div>
+
+        <div>
+            <form novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':4 }) }}" onsubmit="return confirm('¿Está seguro que desea cerrar esta rendición? Recuerde que no se podrá realizar ningun cambio y todos las rendiciones que no están aprobadas se aprobarán!!')">  
+               <input type="submit" value="CERRAR CRENDICIÓN" class="btn btn-success">
+            </form> 
+        </div>
+    </div>
+    
+    <br>
+    <script>    
+      $(document).ready(function(){
+         $('#tablalista1').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+              "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+              "aaSorting": [[0,'desc']],
+          } );
+      })
+   </script>
+{% endblock %}

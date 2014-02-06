@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - EDITAR PERÍODO{% endblock %}
+
+{% block titulobanner %}
+    EDITAR PERÍODO
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>EDITAR PERÍODO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    
+    {% if form_errors(edit_form.descripcion) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el edit_formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+    </div>
+    {% endif %}    
+    
+    <form novalidate method="post" action="{{ path('cobertura_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Dqescripcion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+        </div>
+         
+         <div style="display:none;">
+         {{ form_widget(edit_form.fechaproceso) }}
+         {{ form_widget(edit_form.responsable) }}
+         {{ form_widget(edit_form.periodorendicion) }}
+         </div>
+         
+         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('cobertura',{'idperiodo':entity.periodorendicion.id}) }}">IR AL LISTADO</a>
+
+    </form>
+    
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    
+    
+{% endblock %}

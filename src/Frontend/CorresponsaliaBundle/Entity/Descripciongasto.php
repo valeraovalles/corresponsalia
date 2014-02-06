@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Descripciongasto
  *
- * @ORM\Table(name="descripciongasto")
+ * @ORM\Table(name="rendicion.descripciongasto")
  * @ORM\Entity
  */
 class Descripciongasto
@@ -21,7 +21,7 @@ class Descripciongasto
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="descripciongasto_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.descripciongasto_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 

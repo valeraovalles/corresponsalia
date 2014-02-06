@@ -286,6 +286,7 @@ cursor                 :pointer;
 
 #administracion_usuariobundle_usertype_rol label{
 	font-size: 12px;
+        display: block;
 }
 
 

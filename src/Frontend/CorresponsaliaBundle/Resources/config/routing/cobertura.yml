@@ -1,0 +1,30 @@
+cobertura:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:index" }
+
+cobertura_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:show" }
+
+cobertura_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:new" }
+
+cobertura_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:create" }
+    requirements: { _method: post }
+
+cobertura_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:edit" }
+
+cobertura_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:update" }
+    requirements: { _method: post|put }
+
+cobertura_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:delete" }
+    requirements: { _method: post|delete }

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tipocorresponsalia
  *
- * @ORM\Table(name="cobertura")
+ * @ORM\Table(name="rendicion.cobertura")
  * @ORM\Entity
  */
 class Cobertura
@@ -19,7 +19,7 @@ class Cobertura
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="cobetura_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.cobetura_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -41,6 +41,23 @@ class Cobertura
      */
     private $responsable;
 
+        /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Periodorendicion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="periodorendicion_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $periodorendicion;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fechaproceso", type="datetime", nullable=false)
+     */
+    private $fechaproceso;
+    
     /**
      * Get id
      *
@@ -96,6 +113,52 @@ class Cobertura
     {
         return $this->responsable;
     }
+    
+   /**
+     * Set periodorendicion
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion
+     * @return Relaciongastos
+     */
+    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = null)
+    {
+        $this->periodorendicion = $periodorendicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get periodorendicion
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Periodorendicion 
+     */
+    public function getPeriodorendicion()
+    {
+        return $this->periodorendicion;
+    }
+    
+     /**
+     * Set fechaproceso
+     *
+     * @param integer $fechaproceso
+     * @return Estadofondo
+     */
+    public function setFechaproceso($fechaproceso)
+    {
+        $this->fechaproceso = $fechaproceso;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechaproceso
+     *
+     * @return integer 
+     */
+    public function getFechaproceso()
+    {
+        return $this->fechaproceso;
+    } 
     
     public function __toString()
     {

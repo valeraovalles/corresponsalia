@@ -155,6 +155,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgastofunhon')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastofunhonAction',));
                 }
 
+                // corresponsalia_rendirgastocob
+                if (0 === strpos($pathinfo, '/corresponsalia/rendirgastocob') && preg_match('#^/corresponsalia/rendirgastocob/(?P<idcobertura>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_rendirgastocob')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::rendirgastocobAction',));
+                }
+
             }
 
             // corresponsalia_guardarendicion
@@ -200,6 +205,21 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_ajax_formdescripciongasto')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\AjaxController::formdescripciongastoAction',));
                 }
 
+            }
+
+            // corresponsalia_estatusrendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/estatusrendicion') && preg_match('#^/corresponsalia/estatusrendicion/(?P<idperiodo>[^/]++)/(?P<estatus>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_estatusrendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::estatusrendicionAction',));
+            }
+
+            // corresponsalia_revisionrendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/revisionrendicion') && preg_match('#^/corresponsalia/revisionrendicion/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_revisionrendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::revisionrendicionAction',));
+            }
+
+            // corresponsalia_guardarevisionrendicion
+            if (0 === strpos($pathinfo, '/corresponsalia/guardarevisionrendicion') && preg_match('#^/corresponsalia/guardarevisionrendicion/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'corresponsalia_guardarevisionrendicion')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\DefaultController::guardarevisionrendicionAction',));
             }
 
             // tipocorresponsalia
@@ -487,6 +507,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
+            // revision_periodorendicion
+            if ($pathinfo === '/corresponsalia/revisionperiodorendicion') {
+                return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\PeriodorendicionController::revisionperiodorendicionAction',  '_route' => 'revision_periodorendicion',);
+            }
+
             if (0 === strpos($pathinfo, '/corresponsalia/periodorendicion')) {
                 // periodorendicion
                 if ($pathinfo === '/corresponsalia/periodorendicion') {
@@ -540,6 +565,62 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'periodorendicion_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\PeriodorendicionController::deleteAction',));
                 }
                 not_periodorendicion_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/corresponsalia/cobertura')) {
+                // cobertura
+                if (0 === strpos($pathinfo, '/corresponsalia/cobertura/lista') && preg_match('#^/corresponsalia/cobertura/lista/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::indexAction',));
+                }
+
+                // cobertura_show
+                if (preg_match('#^/corresponsalia/cobertura/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_show')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::showAction',));
+                }
+
+                // cobertura_new
+                if (0 === strpos($pathinfo, '/corresponsalia/cobertura/new') && preg_match('#^/corresponsalia/cobertura/new/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_new')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::newAction',));
+                }
+
+                // cobertura_create
+                if (0 === strpos($pathinfo, '/corresponsalia/cobertura/create') && preg_match('#^/corresponsalia/cobertura/create/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_cobertura_create;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_create')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::createAction',));
+                }
+                not_cobertura_create:
+
+                // cobertura_edit
+                if (preg_match('#^/corresponsalia/cobertura/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_edit')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::editAction',));
+                }
+
+                // cobertura_update
+                if (preg_match('#^/corresponsalia/cobertura/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_cobertura_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_update')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::updateAction',));
+                }
+                not_cobertura_update:
+
+                // cobertura_delete
+                if (preg_match('#^/corresponsalia/cobertura/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_cobertura_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cobertura_delete')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CoberturaController::deleteAction',));
+                }
+                not_cobertura_delete:
 
             }
 

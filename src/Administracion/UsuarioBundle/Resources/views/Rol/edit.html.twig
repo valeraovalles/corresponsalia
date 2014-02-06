@@ -31,6 +31,11 @@
             <div class="labelform">Rol:</div>
             <div class="widgetform">{{ form_widget(edit_form.rol) }}</div>
         </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.descripcion) }}</div>
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+        </div>
     </div>
 
     <button class="btn btn-primary" type="submit">EDITAR</button> | 

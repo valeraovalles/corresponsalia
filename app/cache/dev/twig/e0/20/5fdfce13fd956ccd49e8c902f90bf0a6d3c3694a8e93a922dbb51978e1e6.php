@@ -131,7 +131,7 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
         // line 34
         $this->env->loadTemplate("CorresponsaliaBundle:Default:_tablarendicion.html.twig")->display($context);
         // line 35
-        echo "        <br><br><input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\">
+        echo "        <br><br><input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\"> | 
         <button class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#";
         // line 36
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "id"), "html", null, true);
@@ -140,17 +140,31 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
         // line 37
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "id"), "html", null, true);
         echo "\" name=\"rendicion_relaciongasto[periodorendicion]\">
-    </form>
         <input type=\"hidden\" value=\"";
-        // line 39
+        // line 38
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
-        echo "\" id=\"cambio\">
+        echo "\" id=\"cambio\" name=\"rendicion_relaciongasto[cambio]\">
+    </form>
     
+        
         ";
-        // line 41
+        // line 42
         $this->env->loadTemplate("CorresponsaliaBundle:Default:_listadorendicion.html.twig")->display($context);
         echo "  
-    
+
+        
+        
+     <form novalidate method=\"post\" action=\"";
+        // line 46
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_estatusrendicion", array("idperiodo" => $this->getAttribute($this->getContext($context, "periodo"), "id"), "estatus" => 2)), "html", null, true);
+        echo "\" onsubmit=\"return confirm('¿Está seguro que desea cerrar esta rendición? Recuerde que una vez cerrada no podrá realizar modificaciones a menos que le sea devuelta para correcciones!!')\">  
+        <input type=\"submit\" value=\"CERRAR RENDICIÓN\" class=\"btn btn-danger\">
+     </form> 
+        
+        
+        
+        
+        
     <script type=\"text/javascript\">
         \$(document).ready(function () {
             \$('#rendicion_relaciongasto_montomonnac').blur(function(){
@@ -182,6 +196,6 @@ class __TwigTemplate_e0205fdfce13fd956ccd49e8c902f90bf0a6d3c3694a8e93a922dbb5197
 
     public function getDebugInfo()
     {
-        return array (  151 => 41,  146 => 39,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 14,  67 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
+        return array (  159 => 46,  152 => 42,  145 => 38,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 14,  67 => 13,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 3,);
     }
 }

@@ -63,35 +63,40 @@ class __TwigTemplate_39a47867f18a0c2d30f5b1a5b11d9fb6680ad58d32d19b5914d1e0daf0d
             <tr>
                 <th>Id</th>
                 <th>Rol</th>
+                <th>Descripción</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 26
+        // line 27
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 27
+            // line 28
             echo "            <tr>
                 <td><a href=\"";
-            // line 28
+            // line 29
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
-                <td style=\"width: 70%\">";
-            // line 29
+                <td style=\"width: 35%\">";
+            // line 30
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "rol"), "html", null, true);
+            echo "</td>
+                <td style=\"width: 45%\">";
+            // line 31
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "descripcion"), "html", null, true);
             echo "</td>
                 <td>
                     <a href=\"";
-            // line 31
+            // line 33
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a>
 
                     <a href=\"";
-            // line 33
+            // line 35
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a>
             
@@ -102,14 +107,14 @@ class __TwigTemplate_39a47867f18a0c2d30f5b1a5b11d9fb6680ad58d32d19b5914d1e0daf0d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 38
+        // line 40
         echo "        </tbody>
     </table>
 
     <br><br>
 
     <a class=\"btn btn-primary\" href=\"";
-        // line 43
+        // line 45
         echo $this->env->getExtension('routing')->getPath("rol_new");
         echo "\">NUEVO ROL</a>
 
@@ -136,6 +141,6 @@ class __TwigTemplate_39a47867f18a0c2d30f5b1a5b11d9fb6680ad58d32d19b5914d1e0daf0d
 
     public function getDebugInfo()
     {
-        return array (  113 => 43,  106 => 38,  95 => 33,  90 => 31,  85 => 29,  79 => 28,  76 => 27,  72 => 26,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  118 => 45,  111 => 40,  100 => 35,  95 => 33,  90 => 31,  86 => 30,  80 => 29,  77 => 28,  73 => 27,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

@@ -17,11 +17,11 @@ class EstadofondoType extends AbstractType
         $builder
             ->add('saldoinicial', 'money', array(
                 'invalid_message' => 'El monto del saldo inicial debe ser numérico',
-                'currency'=>null))
+                'currency'=>"USD"))
             ->add('responsable')
             ->add('recursorecibido', 'money', array(
                 'invalid_message' => 'El monto del recurso enviado debe ser numérico',
-                'currency'=>null
+                'currency'=>"USD"
                 ))
             ->add('observacion','textarea')
             ->add('fechaasignacion', 'date',array(

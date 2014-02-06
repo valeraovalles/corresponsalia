@@ -1,6 +1,6 @@
     <table border="1" class="estatusfondo table table-striped">
         <tr>
-            <th colspan="4">ESTATUS DEL FONDO RECIBIDO PARA {{periodo.tipogasto.descripcion|upper}}</th>
+            <th colspan="4" style="text-align: center;">ESTATUS DEL FONDO RECIBIDO PARA {{periodo.tipogasto.descripcion|upper}}</th>
         </tr>
         <tr>
             <th>Descripción</th>
@@ -26,7 +26,7 @@
             <td>{{ estadofondo.pagos_mn }}</td>
             <td>{{ estadofondo.pagos_bs }}</td>
         </tr>
-        <tr>
+        <tr style="font-weight: bold;">
             <td>Saldo final</td>
             <td>{{ estadofondo.saldofinal }}</td>
             <td>{{ estadofondo.saldofinal_mn }}</td>

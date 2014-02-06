@@ -12,7 +12,7 @@ class RolTextType extends AbstractType
     {
         $builder
             ->add('rol')
-            #->add('user')
+            ->add('descripcion','textarea')
         ;
     }
 

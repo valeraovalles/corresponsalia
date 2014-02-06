@@ -18,7 +18,7 @@ class __TwigTemplate_6c065a4103765712072942722f8eae88b2b1a6a129d834270872bcd8954
         // line 1
         echo "    <table border=\"1\" class=\"estatusfondo table table-striped\">
         <tr>
-            <th colspan=\"4\">ESTATUS DEL FONDO RECIBIDO PARA ";
+            <th colspan=\"4\" style=\"text-align: center;\">ESTATUS DEL FONDO RECIBIDO PARA ";
         // line 3
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "descripcion")), "html", null, true);
         echo "</th>
@@ -74,7 +74,7 @@ class __TwigTemplate_6c065a4103765712072942722f8eae88b2b1a6a129d834270872bcd8954
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "estadofondo"), "pagos_bs"), "html", null, true);
         echo "</td>
         </tr>
-        <tr>
+        <tr style=\"font-weight: bold;\">
             <td>Saldo final</td>
             <td>";
         // line 31

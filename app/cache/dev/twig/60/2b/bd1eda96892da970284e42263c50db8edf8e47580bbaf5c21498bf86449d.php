@@ -101,30 +101,34 @@ class __TwigTemplate_602bbd1eda96892da970284e42263c50db8edf8e47580bbaf5c21498bf8
         <a class=\"btn btn-default\" href=\"";
         // line 36
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-        echo "\">IR A CONSULTA</a> ";
-        // line 38
+        echo "\">IR A CONSULTA</a> | 
+        <a class=\"btn btn-default\" href=\"";
+        // line 37
+        echo $this->env->getExtension('routing')->getPath("periodorendicion");
+        echo "\">IR AL LISTADO DE PERÍODOS</a> ";
+        // line 39
         echo "
         ";
-        // line 39
+        // line 40
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "fechaasignacion"), 'widget', array("attr" => array("style" => "display:none")));
         echo "
     </form>
     
     <BR>
     ";
-        // line 43
+        // line 44
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_start', array("attr" => array("onsubmit" => "return confirm(\"¿Seguro que deseas eliminar?\")")));
         echo "
         ";
-        // line 44
+        // line 45
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'errors');
         echo "
         ";
-        // line 45
+        // line 46
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "delete_form"), "submit"), 'row', array("attr" => array("class" => "btn btn-danger")));
         echo "
     ";
-        // line 46
+        // line 47
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_end');
         echo "
 
@@ -143,6 +147,6 @@ class __TwigTemplate_602bbd1eda96892da970284e42263c50db8edf8e47580bbaf5c21498bf8
 
     public function getDebugInfo()
     {
-        return array (  128 => 46,  124 => 45,  120 => 44,  116 => 43,  109 => 39,  106 => 38,  103 => 36,  95 => 31,  88 => 27,  81 => 23,  74 => 19,  70 => 18,  67 => 17,  61 => 14,  57 => 12,  55 => 11,  50 => 9,  47 => 8,  35 => 5,  32 => 4,  29 => 3,);
+        return array (  132 => 47,  128 => 46,  124 => 45,  120 => 44,  113 => 40,  110 => 39,  107 => 37,  103 => 36,  95 => 31,  88 => 27,  81 => 23,  74 => 19,  70 => 18,  67 => 17,  61 => 14,  57 => 12,  55 => 11,  50 => 9,  47 => 8,  35 => 5,  32 => 4,  29 => 3,);
     }
 }

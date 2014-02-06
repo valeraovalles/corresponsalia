@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Relaciongasto
  *
- * @ORM\Table(name="relaciongasto")
+ * @ORM\Table(name="rendicion.relaciongasto")
  * @ORM\Entity
  */
 class Relaciongasto
@@ -19,7 +19,7 @@ class Relaciongasto
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="relaciongasto_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.relaciongasto_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -100,6 +100,13 @@ class Relaciongasto
     private $montodolar;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="cambio",  type="decimal", precision=20, scale= 3, nullable=true)
+     */
+    private $cambio;
+    
+    /**
      * @var \Tipogasto
      *
      * @ORM\ManyToOne(targetEntity="Periodorendicion")
@@ -119,6 +126,24 @@ class Relaciongasto
      */
     private $responsable;
 
+    
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Cobertura")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cobertura_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $cobertura;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aprobada", type="boolean", nullable=false)
+     */
+    private $aprobada=true;
+    
     /**
      * Get id
      *
@@ -337,6 +362,28 @@ class Relaciongasto
         return $this->montodolar;
     }
 
+        /**
+     * Set cambio
+     *
+     * @param float $cambio
+     * @return Relaciongastos
+     */
+    public function setCambio($cambio)
+    {
+        $this->cambio = $cambio;
+    
+        return $this;
+    }
+
+    /**
+     * Get cambio
+     *
+     * @return float 
+     */
+    public function getCambio()
+    {
+        return $this->cambio;
+    }
     /**
      * Set periodorendicion
      *
@@ -381,5 +428,51 @@ class Relaciongasto
     public function getResponsable()
     {
         return $this->responsable;
+    }
+    
+    /**
+     * Set cobertura
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Cobertura $cobertura
+     * @return Relaciongastos
+     */
+    public function setCobertura(\Frontend\CorresponsaliaBundle\Entity\Cobertura $cobertura = null)
+    {
+        $this->cobertura = $cobertura;
+    
+        return $this;
+    }
+
+    /**
+     * Get cobertura
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Cobertura 
+     */
+    public function getCobertura()
+    {
+        return $this->cobertura;
+    }
+    
+    /**
+     * Set aprobada
+     *
+     * @param integer $aprobada
+     * @return Relaciongastos
+     */
+    public function setAprobada($aprobada)
+    {
+        $this->aprobada = $aprobada;
+    
+        return $this;
+    }
+
+    /**
+     * Get aprobada
+     *
+     * @return integer 
+     */
+    public function getAprobada()
+    {
+        return $this->aprobada;
     }
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pais
  *
- * @ORM\Table(name="pais")
+ * @ORM\Table(name="rendicion.pais")
  * @ORM\Entity
  */
 class Pais
@@ -18,7 +18,7 @@ class Pais
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="pais_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.pais_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 

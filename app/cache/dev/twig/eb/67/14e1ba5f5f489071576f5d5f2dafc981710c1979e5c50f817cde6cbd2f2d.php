@@ -54,7 +54,11 @@ class __TwigTemplate_eb6714e1ba5f5f489071576f5d5f2dafc981710c1979e5c50f817cde6cb
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "rendicionlista"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
             // line 28
-            echo "                            <tr>
+            echo "                            <tr ";
+            if (($this->getAttribute($this->getContext($context, "entity"), "aprobada") == false)) {
+                echo " style=\"background-color: yellow;\"";
+            }
+            echo ">
                                 <td>";
             // line 29
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
@@ -115,7 +119,7 @@ class __TwigTemplate_eb6714e1ba5f5f489071576f5d5f2dafc981710c1979e5c50f817cde6cb
                </script>
       </div>
       <div class=\"modal-footer\">
-        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">CERRAR</button>
+        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">VOLVER</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -139,6 +143,6 @@ class __TwigTemplate_eb6714e1ba5f5f489071576f5d5f2dafc981710c1979e5c50f817cde6cb
 
     public function getDebugInfo()
     {
-        return array (  105 => 41,  96 => 38,  92 => 37,  88 => 36,  84 => 35,  80 => 34,  76 => 33,  72 => 32,  68 => 31,  64 => 30,  60 => 29,  57 => 28,  53 => 27,  30 => 7,  22 => 2,  19 => 1,);
+        return array (  109 => 41,  100 => 38,  96 => 37,  92 => 36,  88 => 35,  84 => 34,  80 => 33,  76 => 32,  72 => 31,  68 => 30,  64 => 29,  57 => 28,  53 => 27,  30 => 7,  22 => 2,  19 => 1,);
     }
 }

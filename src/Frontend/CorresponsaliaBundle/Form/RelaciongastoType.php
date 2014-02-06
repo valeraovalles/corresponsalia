@@ -54,6 +54,8 @@ class RelaciongastoType extends AbstractType
                 ))
             ->add('periodorendicion')
             ->add('responsable')
+            ->add('cobertura')
+            ->add('cambio')
         ;
     }
     

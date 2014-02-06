@@ -28,7 +28,7 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
     </button>
     <a class=\"navbar-brand\" href=\"";
         // line 11
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
+        echo $this->env->getExtension('routing')->getPath("corresponsalia_inicio");
         echo "\">Inicio</a>
   </div>
 
@@ -83,42 +83,61 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         // line 37
         echo $this->env->getExtension('routing')->getPath("corresponsalia");
         echo "\">Corresponsalia</a></li>
-          <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 39
+        // line 38
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">Asignar fondo</a></li>
+          <li><a href=\"";
+        // line 39
+        echo $this->env->getExtension('routing')->getPath("revision_periodorendicion");
+        echo "\">Revisión de rendiciones</a></li>
+          <li class=\"divider\"></li>
         </ul>
       </li>
       
+    
       <li class=\"dropdown\">
-        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">CORRESPONSALÍA <b class=\"caret\"></b></a>
+        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">RENDICIÓN <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 46
+        // line 48
         echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
         echo "\">Tasa de cambio</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 48
+        // line 50
+        echo $this->env->getExtension('routing')->getPath("periodorendicion");
+        echo "\">Rendir gastos</a></li>
+        </ul>
+      </li>
+      
+      <li class=\"dropdown\">
+        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">TECNOLOGÍA <b class=\"caret\"></b></a>
+        <ul class=\"dropdown-menu\">
+          <li><a href=\"";
+        // line 57
+        echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
+        echo "\">Tasa de cambio</a></li>
+          <li class=\"divider\"></li>
+          <li><a href=\"";
+        // line 59
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">Rendir gastos</a></li>
         </ul>
       </li>
       <li class=\"dropdown\">
-        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">REPORTES <b class=\"caret\"></b></a>
+        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">CONSULTORÍA <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 54
+        // line 65
         echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
         echo "\">Rendicion</a></li>
         </ul>
       </li>
-      <li><a href=\"#\">ADMINISTRAR</a></li>
     </ul>
     <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 60
+        // line 70
         echo $this->env->getExtension('routing')->getPath("usuario_logout");
         echo "\">SALIR</a></li>
       
@@ -140,6 +159,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  122 => 60,  113 => 54,  104 => 48,  99 => 46,  89 => 39,  84 => 37,  80 => 36,  76 => 35,  66 => 28,  62 => 27,  57 => 25,  53 => 24,  48 => 22,  44 => 21,  31 => 11,  19 => 1,);
+        return array (  141 => 70,  133 => 65,  124 => 59,  119 => 57,  109 => 50,  104 => 48,  92 => 39,  88 => 38,  84 => 37,  80 => 36,  76 => 35,  66 => 28,  62 => 27,  57 => 25,  53 => 24,  48 => 22,  44 => 21,  31 => 11,  19 => 1,);
     }
 }

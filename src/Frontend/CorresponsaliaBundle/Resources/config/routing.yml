@@ -14,11 +14,13 @@ corresponsalia_rendirgastofunhon:
     pattern:  /rendirgastofunhon/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:rendirgastofunhon }
     
+corresponsalia_rendirgastocob:
+    pattern:  /rendirgastocob/{idcobertura}
+    defaults: { _controller: CorresponsaliaBundle:Default:rendirgastocob }
     
 corresponsalia_guardarendicion:
     pattern:  /guardarendicion/{idperiodo}
     defaults: { _controller: CorresponsaliaBundle:Default:guardarendicion }
-
 
 corresponsalia_editarendicion:
     pattern:  /editarendicion/{idrendicion}/{idperiodo}
@@ -42,6 +44,18 @@ corresponsalia_ajax_formdescripciongasto:
     pattern:  /ajax/formdescripciongasto/{idtipo}/{data}
     defaults: { _controller: CorresponsaliaBundle:Ajax:formdescripciongasto }
 
+corresponsalia_estatusrendicion:
+    pattern:  /estatusrendicion/{idperiodo}/{estatus}
+    defaults: { _controller: CorresponsaliaBundle:Default:estatusrendicion }
+    
+corresponsalia_revisionrendicion:
+    pattern:  /revisionrendicion/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Default:revisionrendicion" }
+    
+   
+corresponsalia_guardarevisionrendicion:
+    pattern:  /guardarevisionrendicion/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Default:guardarevisionrendicion" }
 ################################################################################
 
 tipocorresponsalia:
@@ -213,6 +227,10 @@ cambio_delete:
     requirements: { _method: post|delete }
 
 ################################################################################
+revision_periodorendicion:
+    pattern:  /revisionperiodorendicion
+    defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:revisionperiodorendicion" }
+    
 periodorendicion:
     pattern:  /periodorendicion
     defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:index" }
@@ -242,4 +260,37 @@ periodorendicion_update:
 periodorendicion_delete:
     pattern:  /periodorendicion/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Periodorendicion:delete" }
+    requirements: { _method: post|delete }
+
+################################################################################
+
+cobertura:
+    pattern:  /cobertura/lista/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:index" }
+
+cobertura_show:
+    pattern:  /cobertura/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:show" }
+
+cobertura_new:
+    pattern:  /cobertura/new/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:new" }
+
+cobertura_create:
+    pattern:  /cobertura/create/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:create" }
+    requirements: { _method: post }
+
+cobertura_edit:
+    pattern:  /cobertura/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:edit" }
+
+cobertura_update:
+    pattern:  /cobertura/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:update" }
+    requirements: { _method: post|put }
+
+cobertura_delete:
+    pattern:  /cobertura/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cobertura:delete" }
     requirements: { _method: post|delete }

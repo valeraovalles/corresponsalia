@@ -29,7 +29,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables features
  */
-
+#tablalista{
+    font-size: 13px;
+}
 .dataTables_length {
 	width: 40%;
         height: 50px;

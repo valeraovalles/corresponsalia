@@ -87,55 +87,69 @@ class __TwigTemplate_4bac1b6c968be5a9ca782d4fb6a7c69d300bf89eb4851af177dd282ab2c
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Estatus:</div>
-            <div class=\"widgetform\">";
-        // line 35
-        if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == true)) {
-            echo "<span class=\"label label-info\">Abierto</span>";
-        } else {
-            echo "<span class=\"label label-danger\">Cerrado</span>";
+            <div class=\"widgetform\">
+                ";
+        // line 36
+        if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 1)) {
+            // line 37
+            echo "                    <span class=\"label label-info\">Abierto</span>
+                ";
+        } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 2)) {
+            // line 39
+            echo "                    <span class=\"label label-warning\">Enviado para revisión</span>
+                ";
+        } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 3)) {
+            // line 41
+            echo "                    <span class=\"label label-danger\">Devuelto para corrección</span>
+                ";
+        } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 4)) {
+            // line 43
+            echo "                    <span class=\"label label-success\">Cerrado</span>
+                ";
         }
-        echo "</div>
+        // line 45
+        echo "            </div>
         </div>
         ";
-        // line 37
+        // line 47
         if ($this->getAttribute($this->getContext($context, "entity"), "observacion")) {
-            // line 38
+            // line 48
             echo "        <div class=\"contenedorform\">
             <div class=\"labelform\">Observacion:</div>
             <div class=\"widgetform\">";
-            // line 40
+            // line 50
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "observacion"), "html", null, true);
             echo "</div>
         </div>
         ";
         }
-        // line 43
+        // line 53
         echo "    </div>
     
     <a class=\"btn btn-default\" href=\"";
-        // line 45
+        // line 55
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">IR A EDITAR</a> | 
     <a class=\"btn btn-default\" href=\"";
-        // line 46
+        // line 56
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">IR AL LISTADO</a>
   
     <BR><BR>
     ";
-        // line 49
+        // line 59
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_start', array("attr" => array("onsubmit" => "return confirm(\"¿Seguro que deseas eliminar?\")")));
         echo "
         ";
-        // line 50
+        // line 60
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'errors');
         echo "
         ";
-        // line 51
+        // line 61
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "delete_form"), "submit"), 'row', array("attr" => array("class" => "btn btn-danger")));
         echo "
     ";
-        // line 52
+        // line 62
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_end');
         echo "
     
@@ -156,6 +170,6 @@ class __TwigTemplate_4bac1b6c968be5a9ca782d4fb6a7c69d300bf89eb4851af177dd282ab2c
 
     public function getDebugInfo()
     {
-        return array (  139 => 52,  135 => 51,  131 => 50,  127 => 49,  121 => 46,  117 => 45,  113 => 43,  107 => 40,  103 => 38,  101 => 37,  92 => 35,  85 => 31,  78 => 27,  71 => 23,  64 => 19,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  153 => 62,  149 => 61,  145 => 60,  141 => 59,  135 => 56,  131 => 55,  127 => 53,  121 => 50,  117 => 48,  115 => 47,  111 => 45,  107 => 43,  103 => 41,  99 => 39,  95 => 37,  93 => 36,  85 => 31,  78 => 27,  71 => 23,  64 => 19,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

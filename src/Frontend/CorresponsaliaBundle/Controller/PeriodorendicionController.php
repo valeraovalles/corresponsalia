@@ -15,6 +15,18 @@ use Frontend\CorresponsaliaBundle\Form\PeriodorendicionType;
  */
 class PeriodorendicionController extends Controller
 {
+    
+    public function revisionperiodorendicionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findByEstatus(2);
+
+        return $this->render('CorresponsaliaBundle:Periodorendicion:revisionperiodorendicion.html.twig', array(
+            'entities' => $entities,
+            
+        ));
+    }
 
     /**
      * Lists all Periodorendicion entities.
@@ -68,6 +80,7 @@ class PeriodorendicionController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
+            $entity->setEstatus(1);
 
             
             $entity->setCorresponsalia($corresponsalia);
@@ -221,11 +234,18 @@ class PeriodorendicionController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($id);
+        
+        if(!empty($ef)){
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el período porque tiene fondos asociados.');
+             return $this->redirect($this->generateUrl('periodorendicion_show', array('id' => $id)));            
+        }
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($id);
 
             if (!$entity) {

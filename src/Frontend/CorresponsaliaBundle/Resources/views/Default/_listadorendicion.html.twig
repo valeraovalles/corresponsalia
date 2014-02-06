@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                     {% for entity in rendicionlista %}
-                            <tr>
+                            <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
                                 <td>{{ entity.id }}</td>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
@@ -51,7 +51,7 @@
                </script>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">VOLVER</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

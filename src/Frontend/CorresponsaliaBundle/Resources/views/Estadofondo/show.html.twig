@@ -54,7 +54,8 @@
         {% endif %}
     </div>
     
-    <a class="btn btn-default" href="{{ path('estadofondo_edit', { 'id': entity.id }) }}">IR A EDITAR</a> {#| 
+    <a class="btn btn-default" href="{{ path('estadofondo_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO DE PERÍODOS</a>{#| 
     <a class="btn btn-default" href="{{ path('estadofondo',{'idperiodo':entity.periodorendicion.id}) }}">IR AL LISTADO DE FONDOS</a>#}
   
     <BR><BR>

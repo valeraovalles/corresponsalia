@@ -270,9 +270,8 @@ class EstadofondoController extends Controller
         //validar que no tenga pagos al borrar
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
-        
         if($entity->getPagos()!=0){
-             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el fondo de la corresponsalía "'.ucfirst($entity->getCorresponsalia()->getNombre()).'" para "'.ucfirst($entity->getTipogasto()->getDescripcion()).'" porque tiene pagos asociados.');
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el fondo porque tiene pagos asociados.');
              return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $id)));            
         }
         

@@ -115,30 +115,37 @@ class __TwigTemplate_37fa091caaab470420f5831d3532fcf99107c1b5e35b9ee41f99a2f80f9
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "rol"), "html", null, true);
         echo "</div>
         </div>
+        <div class=\"contenedorform\">
+            <div class=\"labelform\">Descripcion:</div>
+            <div class=\"widgetform\">";
+        // line 41
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "descripcion"), "html", null, true);
+        echo "</div>
+        </div>
     </div>
 
 <br>
 
         <a class=\"btn btn-default\" href=\"";
-        // line 43
+        // line 47
         echo $this->env->getExtension('routing')->getPath("rol");
         echo "\">
             IR AL LISTADO
         </a> |
 
         <a class=\"btn btn-default\" href=\"";
-        // line 47
+        // line 51
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">
             IR A EDITAR
         </a> 
         <br><br>
         <form action=\"";
-        // line 51
+        // line 55
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("rol_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\" onsubmit=\"return confirm('Seguro que desea eliminar')\">
             ";
-        // line 52
+        // line 56
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
             <button  class=\"btn btn-danger\" type=\"submit\">BORRAR</button>
@@ -159,6 +166,6 @@ class __TwigTemplate_37fa091caaab470420f5831d3532fcf99107c1b5e35b9ee41f99a2f80f9
 
     public function getDebugInfo()
     {
-        return array (  142 => 52,  138 => 51,  131 => 47,  124 => 43,  115 => 37,  108 => 33,  102 => 29,  99 => 28,  90 => 25,  87 => 24,  83 => 23,  80 => 22,  71 => 19,  68 => 18,  63 => 17,  61 => 16,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  149 => 56,  145 => 55,  138 => 51,  131 => 47,  122 => 41,  115 => 37,  108 => 33,  102 => 29,  99 => 28,  90 => 25,  87 => 24,  83 => 23,  80 => 22,  71 => 19,  68 => 18,  63 => 17,  61 => 16,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{ asset('bundles/corresponsalia/css/formrendicion.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+          
+{% block titulomodulo %}  
+    <h2>{{ periodo.tipogasto.descripcion|upper }}</h2>
+    <h4>"{{ cobertura.descripcion|upper }}"</h4>
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
+{% endblock %}
+    
+{% block body %}
+    {{ parent()}}
+    
+    {% if form_errors(form.descripciongasto) or form_errors(form.numerocomprobante)  or form_errors(form.fechafactura) or form_errors(form.nombrerazonsocial) or form_errors(form.identificacionfiscal) or form_errors(form.numerofactura) or form_errors(form.montomonnac) or form_errors(form.montodolar)%}
+    <div class="alert alert-danger errores">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.descripciongasto) }}</div>
+        <div>{{ form_errors(form.numerocomprobante) }}</div>
+        <div>{{ form_errors(form.fechafactura) }}</div>
+        <div>{{ form_errors(form.nombrerazonsocial) }}</div>
+        <div>{{ form_errors(form.identificacionfiscal) }}</div>
+        <div>{{ form_errors(form.numerofactura) }}</div>
+        <div>{{ form_errors(form.montomonnac) }}</div>
+        <div>{{ form_errors(form.montodolar) }}</div>
+    </div>
+    {% endif %}
+
+    {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
+    
+    <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion',{'idperiodo':periodo.id}) }}">  
+        {{ form_widget(form._token) }}
+        {% include 'CorresponsaliaBundle:Default:_tablarendicion.html.twig' %}
+        <br><br><input type="submit" value="GUARDAR" class="btn btn-primary">
+        <button class="btn btn-info" data-toggle="modal" data-target="#{{periodo.tipogasto.id}}">VER LISTADO DE RENDICION</button>
+        <input type="hidden" value="{{ periodo.id }}" name="rendicion_relaciongasto[periodorendicion]">
+        <input type="hidden" value="{{ cobertura.id }}" name="rendicion_relaciongasto[cobertura]">
+        <input type="hidden" value="{{ cambio.montocambiodolar }}" id="cambio" name="rendicion_relaciongasto[cambio]">
+    </form>
+    
+        {% include 'CorresponsaliaBundle:Default:_listadorendicion.html.twig' %}  
+
+    
+     <form novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':2 }) }}" onsubmit="return confirm('¿Está seguro que desea cerrar esta rendición? Recuerde que una vez cerrada no podrá realizar modificaciones a menos que le sea devuelta para correcciones!!')">  
+        <input type="submit" value="CERRAR RENDICIÓN" class="btn btn-danger">
+     </form> 
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#rendicion_relaciongasto_montomonnac').blur(function(){
+                montocambiomn()
+            });
+            function montocambiomn(){
+                    var montomonnac=$('#rendicion_relaciongasto_montomonnac').val();
+                    montomonnac = montomonnac.replace(",", ".");
+                    var cambio=$('#cambio').val();
+                    var montofinal=montomonnac/cambio;
+                    montofinal = montofinal.toFixed(2);
+                    $('#rendicion_relaciongasto_montodolar').val(montofinal);
+            }
+         });
+    </script>
+    
+{% endblock %}
+
+
+    
+    
+    
+    

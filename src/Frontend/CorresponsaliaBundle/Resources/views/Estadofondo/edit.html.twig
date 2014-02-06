@@ -33,7 +33,8 @@
         </div>
          
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> {#| 
+        <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO DE PERÍODOS</a> {#| 
         <a class="btn btn-default" href="{{ path('estadofondo',{'idperiodo':entity.periodorendicion.id}) }}">IR AL LISTADO DE FONDOS</a>#}
 
         {{ form_widget(edit_form.fechaasignacion,{'attr':{'style':'display:none'}}) }}
