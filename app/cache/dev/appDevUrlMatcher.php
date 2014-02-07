@@ -388,11 +388,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             if (0 === strpos($pathinfo, '/corresponsalia/estadofondo')) {
-                // estadofondo_aniomes
-                if ($pathinfo === '/corresponsalia/estadofondo/aniomes') {
-                    return array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::estadofondoaniomesAction',  '_route' => 'estadofondo_aniomes',);
-                }
-
                 // estadofondo
                 if (preg_match('#^/corresponsalia/estadofondo/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'estadofondo')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\EstadofondoController::indexAction',));
@@ -450,7 +445,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             if (0 === strpos($pathinfo, '/corresponsalia/cambio')) {
                 // cambio
-                if (preg_match('#^/corresponsalia/cambio/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/corresponsalia/cambio/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::indexAction',));
                 }
 
@@ -460,12 +455,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
 
                 // cambio_new
-                if (0 === strpos($pathinfo, '/corresponsalia/cambio/new') && preg_match('#^/corresponsalia/cambio/new/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/corresponsalia/cambio/new') && preg_match('#^/corresponsalia/cambio/new/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'cambio_new')), array (  '_controller' => 'Frontend\\CorresponsaliaBundle\\Controller\\CambioController::newAction',));
                 }
 
                 // cambio_create
-                if (0 === strpos($pathinfo, '/corresponsalia/cambio/create') && preg_match('#^/corresponsalia/cambio/create/(?P<idcor>[^/]++)$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/corresponsalia/cambio/create') && preg_match('#^/corresponsalia/cambio/create/(?P<idperiodo>[^/]++)$#s', $pathinfo, $matches)) {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_cambio_create;

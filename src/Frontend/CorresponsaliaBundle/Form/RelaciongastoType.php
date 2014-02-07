@@ -39,7 +39,8 @@ class RelaciongastoType extends AbstractType
                 ))
             ->add('montodolar', 'money', array(
                 'invalid_message' => 'EL campo dólares debe ser sólo con números',
-                'currency'=>null
+                'currency'=>null,
+                'read_only'=>true
                 ))
             ->add('descripciongasto', 'entity', array(
                     'class' => 'CorresponsaliaBundle:Descripciongasto',

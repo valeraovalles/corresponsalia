@@ -13,20 +13,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function Listadorendicion($idperiodo){
+    public function Listadorendicion($periodo){
+
         $em = $this->getDoctrine()->getManager();
-        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
         if($periodo->getEstatus()!=3) // si el periodo esta abierto
         $dql   = "SELECT r FROM CorresponsaliaBundle:Relaciongasto r where r.periodorendicion= :idperiodo order by r.id DESC";
         
         else if($periodo->getEstatus()==3) // si fue devuelta para rendicion solo muestro lo seleccionado
         $dql   = "SELECT r FROM CorresponsaliaBundle:Relaciongasto r  where r.periodorendicion= :idperiodo and r.aprobada=false order by r.id DESC";
-        
-        
+
         $query = $em->createQuery($dql);
-        $query->setParameter('idperiodo', $idperiodo);
+        $query->setParameter('idperiodo', $periodo->getId());
         $rendicion = $query->getResult(); 
+        
         return $rendicion;
     }
 
@@ -65,12 +65,12 @@ class DefaultController extends Controller
         return $dato;
     }
     
-    public function cambio($idcor)
+    public function cambio($idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT c FROM CorresponsaliaBundle:Cambio c where c.corresponsalia= :idcorresponsalia order by c.id DESC";
+        $dql   = "SELECT c FROM CorresponsaliaBundle:Cambio c where c.periodorendicion= :idperiodo order by c.id DESC";
         $query = $em->createQuery($dql);
-        $query->setParameter('idcorresponsalia', $idcor);
+        $query->setParameter('idperiodo', $idperiodo);
         $cambio = $query->getResult(); 
         if(isset($cambio[0])) $cambio=$cambio[0];
         else $cambio=null;
@@ -99,10 +99,8 @@ class DefaultController extends Controller
                 ));
     }
   
-    
     public function revisionrendicionAction($idperiodo)
     {  
-        
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
@@ -180,13 +178,13 @@ class DefaultController extends Controller
         $idcor=$periodo->getCorresponsalia()->getId();
         
         //valido si ya fue asignada una tasa de cambio
-        $cambio=  $this->cambio($idcor);
+        $cambio=  $this->cambio($idperiodo);
         if($cambio==null){
              $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
-             return $this->redirect($this->generateUrl('cambio_new',array('idcor'=>$idcor)));
+             return $this->redirect($this->generateUrl('cambio_new',array('idperiodo'=>$idperiodo)));
         }
         //fin
-        
+
         //consulto si tiene fondo asignado
         $estadofondo=$this->Estadofondo($idperiodo);
         if($estadofondo==null){
@@ -194,16 +192,14 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('periodorendicion'));                
         }
         //fin
-
         //genero form de relacion gasto
         $entity = new Relaciongasto();
         $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);
         //fin
-       
+
         //verifico si hay rendicion para mostrar el listado con modal
         $rendicionlista=$this->Listadorendicion($periodo);
         //fin
-
         return $this->render('CorresponsaliaBundle:Default:rendirgasto.html.twig',
                 array(
                     "form" => $form->createView(),
@@ -274,14 +270,24 @@ class DefaultController extends Controller
         if($periodo->getTipogasto()->getId()==1 or $periodo->getTipogasto()->getId()==3){
             return $this->forward('CorresponsaliaBundle:Default:rendirgastofunhon',array(
                 'idperiodo'=>$idperiodo,
+                
             ));
         }
     }
-        public function inicioAction()
+    public function inicioAction()
     {
-            
-       return $this->render('CorresponsaliaBundle:Default:inicio.html.twig');               
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+                     
       
+        
+    	$em = $this->getDoctrine()->getManager();
+        $dql = "select distinct p.id, p.pais, p.latitud, p.longitud, o.nombre from CorresponsaliaBundle:Corresponsalia o join o.pais p";
+        $consulta = $em->createQuery($dql);
+        $paises = $consulta->getResult();
+
+        return $this->render('CorresponsaliaBundle:Default:inicio.html.twig',array('usuario'=>$usuario,'cor'=>$paises));  
     }
     
     public function guardarendicionAction(Request $request,$idperiodo)
@@ -310,7 +316,7 @@ class DefaultController extends Controller
         //
                 
         //verifico si hay rendicion para este mes
-        $rendicionlista=$this->Listadorendicion($idperiodo);
+        $rendicionlista=$this->Listadorendicion($periodo);
         //
         
         $cambio=  $this->cambio($idcor);
@@ -441,7 +447,7 @@ class DefaultController extends Controller
         
         //consulto corresponsalía
         $estadofondo=$this->Estadofondo($idperiodo);
-        $rendicionlista=$this->Listadorendicion($idperiodo);
+        $rendicionlista=$this->Listadorendicion($periodo);
         $cambio=  $this->cambio($idcor);
         
         

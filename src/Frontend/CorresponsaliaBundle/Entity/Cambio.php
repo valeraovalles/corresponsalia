@@ -23,16 +23,6 @@ class Cambio
      */
     private $id;
 
-        /**
-     * @var \Corresponsalia
-     *
-     * @ORM\ManyToOne(targetEntity="Corresponsalia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $corresponsalia;
-    
      /**
      * @var integer
      *
@@ -58,6 +48,16 @@ class Cambio
      * })
      */
     private $responsable;
+    
+    /**
+     * @var \Tipogasto
+     *
+     * @ORM\ManyToOne(targetEntity="Periodorendicion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="periodorendicion_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $periodorendicion;
     
     /**
      * Get id
@@ -91,29 +91,7 @@ class Cambio
     {
         return $this->montocambiodolar;
     }
-    
- /**
-     * Set corresponsalia
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia
-     * @return Relaciongastos
-     */
-    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = null)
-    {
-        $this->corresponsalia = $corresponsalia;
-    
-        return $this;
-    }
 
-    /**
-     * Get corresponsalia
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Corresponsalia 
-     */
-    public function getCorresponsalia()
-    {
-        return $this->corresponsalia;
-    }
     
     /**
      * Set fechahoraregistro
@@ -164,5 +142,28 @@ class Cambio
     public function __toString()
     {
         return $this->getMonto();
+    }
+    
+    /**
+     * Set periodorendicion
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion
+     * @return Relaciongastos
+     */
+    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = null)
+    {
+        $this->periodorendicion = $periodorendicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get periodorendicion
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Periodorendicion 
+     */
+    public function getPeriodorendicion()
+    {
+        return $this->periodorendicion;
     }
 }

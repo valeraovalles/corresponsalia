@@ -45,7 +45,7 @@ class Relaciongasto extends \Frontend\CorresponsaliaBundle\Entity\Relaciongasto 
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
-            return $this->_identifier["id"];
+            return (int) $this->_identifier["id"];
         }
         $this->__load();
         return parent::getId();
@@ -159,58 +159,70 @@ class Relaciongasto extends \Frontend\CorresponsaliaBundle\Entity\Relaciongasto 
         return parent::getMontodolar();
     }
 
-    public function setAnio($anio)
+    public function setCambio($cambio)
     {
         $this->__load();
-        return parent::setAnio($anio);
+        return parent::setCambio($cambio);
     }
 
-    public function getAnio()
+    public function getCambio()
     {
         $this->__load();
-        return parent::getAnio();
+        return parent::getCambio();
     }
 
-    public function setMes($mes)
+    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = NULL)
     {
         $this->__load();
-        return parent::setMes($mes);
+        return parent::setPeriodorendicion($periodorendicion);
     }
 
-    public function getMes()
+    public function getPeriodorendicion()
     {
         $this->__load();
-        return parent::getMes();
+        return parent::getPeriodorendicion();
     }
 
-    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = NULL)
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = NULL)
     {
         $this->__load();
-        return parent::setCorresponsalia($corresponsalia);
+        return parent::setResponsable($responsable);
     }
 
-    public function getCorresponsalia()
+    public function getResponsable()
     {
         $this->__load();
-        return parent::getCorresponsalia();
+        return parent::getResponsable();
     }
 
-    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = NULL)
+    public function setCobertura(\Frontend\CorresponsaliaBundle\Entity\Cobertura $cobertura = NULL)
     {
         $this->__load();
-        return parent::setTipogasto($tipogasto);
+        return parent::setCobertura($cobertura);
     }
 
-    public function getTipogasto()
+    public function getCobertura()
     {
         $this->__load();
-        return parent::getTipogasto();
+        return parent::getCobertura();
+    }
+
+    public function setAprobada($aprobada)
+    {
+        $this->__load();
+        return parent::setAprobada($aprobada);
+    }
+
+    public function getAprobada()
+    {
+        $this->__load();
+        return parent::getAprobada();
     }
 
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'numerocomprobante', 'fechafactura', 'imputacionpresupuestaria', 'nombrerazonsocial', 'identificacionfiscal', 'numerofactura', 'montomonnac', 'montodolar', 'anio', 'mes', 'descripciongasto', 'corresponsalia', 'tipogasto');
+        return array('__isInitialized__', 'id', 'numerocomprobante', 'fechafactura', 'imputacionpresupuestaria', 'nombrerazonsocial', 'identificacionfiscal', 'numerofactura', 'montomonnac', 'montodolar', 'cambio', 'aprobada', 'descripciongasto', 'periodorendicion', 'responsable', 'cobertura');
     }
 
     public function __clone()

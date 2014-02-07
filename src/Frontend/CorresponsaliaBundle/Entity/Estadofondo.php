@@ -66,6 +66,7 @@ class Estadofondo
      * @var integer
      *
      * @ORM\Column(name="observacion", type="string", nullable=true)
+     * @Assert\NotBlank(message="La obervación no puede estar en blanco.").
      */
     private $observacion;
     
@@ -89,6 +90,7 @@ class Estadofondo
      */
     private $periodorendicion;
     
+   
     /**
      * Get id
      *
@@ -284,5 +286,4 @@ class Estadofondo
     {
         return $this->periodorendicion;
     }
-    
 }

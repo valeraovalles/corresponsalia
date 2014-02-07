@@ -2,7 +2,6 @@
 
 {% block titulomodulo %}
     <h1>EDITAR ESTADO FONDO</h1>
-    <h4>CORRESPONSALÍA: {{ entity.periodorendicion.corresponsalia.nombre|upper }} | PAÍS: {{ entity.periodorendicion.corresponsalia.pais.pais|upper }} | AÑO: {{ entity.periodorendicion.anio }} | MES: {{ entity.periodorendicion.mes}} </h4><br>
 {% endblock %}
     
 {% block body -%}
@@ -19,6 +18,34 @@
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
             <div class="contenedorform">
+                <div class="labelform">Corresponsalia:</div>
+                <div class="widgetform">{{ entity.periodorendicion.corresponsalia.nombre|upper }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">País:</div>
+                <div class="widgetform">{{ entity.periodorendicion.corresponsalia.pais.pais|upper }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo gasto:</div>
+                <div class="widgetform">{{ entity.periodorendicion.tipogasto.descripcion|upper }}</div>
+            </div>
+
+            {% if entity.periodorendicion.tipogasto.id==2 %}
+            <div class="contenedorform">
+                <div class="labelform">Cobertura:</div>
+                <div class="widgetform">{{ entity.periodorendicion.cobertura|upper }}</div>
+            </div>
+            {% endif %}
+
+            <div class="contenedorform">
+                <div class="labelform">Año:</div>
+                <div class="widgetform">{{ entity.periodorendicion.anio }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Mes:</div>
+                <div class="widgetform">{{ entity.periodorendicion.mes }}</div>
+            </div>
+            <div class="contenedorform">
                 <div class="labelform">Saldo inicial:</div>
                 <div class="widgetform">{{ form_widget(edit_form.saldoinicial) }}</div>
             </div>
@@ -34,8 +61,7 @@
          
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('estadofondo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
-        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO DE PERÍODOS</a> {#| 
-        <a class="btn btn-default" href="{{ path('estadofondo',{'idperiodo':entity.periodorendicion.id}) }}">IR AL LISTADO DE FONDOS</a>#}
+        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO DE PERÍODOS</a> 
 
         {{ form_widget(edit_form.fechaasignacion,{'attr':{'style':'display:none'}}) }}
     </form>

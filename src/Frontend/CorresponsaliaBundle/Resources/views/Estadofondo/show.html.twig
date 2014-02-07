@@ -10,10 +10,22 @@
             <div class="labelform">Corresponsalia:</div>
             <div class="widgetform">{{ entity.periodorendicion.corresponsalia.nombre|upper }}</div>
         </div>
+            <div class="contenedorform">
+                <div class="labelform">País:</div>
+                <div class="widgetform">{{ entity.periodorendicion.corresponsalia.pais.pais|upper }}</div>
+            </div>
         <div class="contenedorform">
             <div class="labelform">Tipo gasto:</div>
             <div class="widgetform">{{ entity.periodorendicion.tipogasto.descripcion|upper }}</div>
         </div>
+        
+        {% if entity.periodorendicion.tipogasto.id==2 %}
+        <div class="contenedorform">
+            <div class="labelform">Cobertura:</div>
+            <div class="widgetform">{{ entity.periodorendicion.cobertura|upper }}</div>
+        </div>
+        {% endif %}
+        
         <div class="contenedorform">
             <div class="labelform">Año:</div>
             <div class="widgetform">{{ entity.periodorendicion.anio }}</div>

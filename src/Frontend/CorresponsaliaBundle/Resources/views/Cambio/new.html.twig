@@ -4,7 +4,7 @@
     {{ parent() }}
 
     <h1>TASA DE CAMBIO</h1>
-    <h4>CORRESPONSALÍA: {{ corresponsalia.nombre|upper }}</h4><br>
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4><br>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
@@ -25,7 +25,7 @@
     </div>
     {% endif %}
     
-    <form novalidate method="post" action="{{ path('cambio_create', {'idcor' : corresponsalia.id}) }}">
+    <form novalidate method="post" action="{{ path('cambio_create', {'idperiodo' : periodo.id}) }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:50%;">
             <div class="contenedorform">
@@ -35,7 +35,7 @@
         </div>
     
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('cambio',{'idcor':corresponsalia.id}) }}">VER HISTÓRICO</a>
+        <a class="btn btn-default" href="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
         
     </form>
 

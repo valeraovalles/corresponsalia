@@ -111,30 +111,6 @@ class Estadofondo extends \Frontend\CorresponsaliaBundle\Entity\Estadofondo impl
         return parent::getPagos();
     }
 
-    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = NULL)
-    {
-        $this->__load();
-        return parent::setCorresponsalia($corresponsalia);
-    }
-
-    public function getCorresponsalia()
-    {
-        $this->__load();
-        return parent::getCorresponsalia();
-    }
-
-    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = NULL)
-    {
-        $this->__load();
-        return parent::setTipogasto($tipogasto);
-    }
-
-    public function getTipogasto()
-    {
-        $this->__load();
-        return parent::getTipogasto();
-    }
-
     public function setObservacion($observacion)
     {
         $this->__load();
@@ -145,30 +121,6 @@ class Estadofondo extends \Frontend\CorresponsaliaBundle\Entity\Estadofondo impl
     {
         $this->__load();
         return parent::getObservacion();
-    }
-
-    public function setAnio($anio)
-    {
-        $this->__load();
-        return parent::setAnio($anio);
-    }
-
-    public function getAnio()
-    {
-        $this->__load();
-        return parent::getAnio();
-    }
-
-    public function setMes($mes)
-    {
-        $this->__load();
-        return parent::setMes($mes);
-    }
-
-    public function getMes()
-    {
-        $this->__load();
-        return parent::getMes();
     }
 
     public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = NULL)
@@ -183,10 +135,22 @@ class Estadofondo extends \Frontend\CorresponsaliaBundle\Entity\Estadofondo impl
         return parent::getResponsable();
     }
 
+    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = NULL)
+    {
+        $this->__load();
+        return parent::setPeriodorendicion($periodorendicion);
+    }
+
+    public function getPeriodorendicion()
+    {
+        $this->__load();
+        return parent::getPeriodorendicion();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'saldoinicial', 'recursorecibido', 'fechaasignacion', 'saldofinal', 'pagos', 'observacion', 'anio', 'mes', 'corresponsalia', 'tipogasto', 'responsable');
+        return array('__isInitialized__', 'id', 'saldoinicial', 'recursorecibido', 'fechaasignacion', 'saldofinal', 'pagos', 'observacion', 'responsable', 'periodorendicion');
     }
 
     public function __clone()

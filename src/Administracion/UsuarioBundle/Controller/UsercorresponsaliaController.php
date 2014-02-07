@@ -43,6 +43,7 @@ class UsercorresponsaliaController extends Controller
         if ($form->isValid()) {
             $datos=$request->request->all();
             $datos=$datos['administracion_usuariobundle_usercorresponsalia'];
+     
             //valido
             $em = $this->getDoctrine()->getManager();
             $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findBy(array('usuario'=>$datos['usuario'],'corresponsalia'=>$datos['corresponsalia']));
@@ -51,10 +52,8 @@ class UsercorresponsaliaController extends Controller
                 return $this->redirect($this->generateUrl('usercorresponsalia'));
             }
             
-                 
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('usercorresponsalia_show', array('id' => $entity->getId())));
         }
 

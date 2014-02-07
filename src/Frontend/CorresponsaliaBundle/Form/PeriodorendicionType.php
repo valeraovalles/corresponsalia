@@ -26,6 +26,7 @@ class PeriodorendicionType extends AbstractType
             ->add('corresponsalia',null,array('empty_value'=>'Seleccione una corresponsalía...'))
             ->add('tipogasto',null,array('empty_value'=>'Seleccione un tipo de gasto...'))
             ->add('responsable')
+            ->add('cobertura','textarea')
         ;
     }
     

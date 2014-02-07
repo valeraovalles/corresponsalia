@@ -34,7 +34,7 @@ class __TwigTemplate_a6b3dc98892787897841bc602b973252fb813615fab9c779b88a8c93c4e
     <h1>TASA DE CAMBIO</h1>
     <h4>CORRESPONSALÍA: ";
         // line 7
-        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "corresponsalia"), "nombre")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "corresponsalia"), "nombre")), "html", null, true);
         echo "</h4><br>
 
     ";
@@ -92,7 +92,7 @@ class __TwigTemplate_a6b3dc98892787897841bc602b973252fb813615fab9c779b88a8c93c4e
         echo "    
     <form novalidate method=\"post\" action=\"";
         // line 28
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio_create", array("idcor" => $this->getAttribute($this->getContext($context, "corresponsalia"), "id"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio_create", array("idperiodo" => $this->getAttribute($this->getContext($context, "periodo"), "id"))), "html", null, true);
         echo "\">
         ";
         // line 29
@@ -111,7 +111,7 @@ class __TwigTemplate_a6b3dc98892787897841bc602b973252fb813615fab9c779b88a8c93c4e
         <input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\"> | 
         <a class=\"btn btn-default\" href=\"";
         // line 38
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio", array("idcor" => $this->getAttribute($this->getContext($context, "corresponsalia"), "id"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cambio", array("idperiodo" => $this->getAttribute($this->getContext($context, "periodo"), "id"))), "html", null, true);
         echo "\">VER HISTÓRICO</a>
         
     </form>

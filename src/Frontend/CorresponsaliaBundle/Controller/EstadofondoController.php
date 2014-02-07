@@ -15,41 +15,6 @@ use Frontend\CorresponsaliaBundle\Form\EstadofondoType;
 class EstadofondoController extends Controller
 {
     
-    public function estadofondoaniomesAction()
-    {
-       
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findAll();
-        
-        $meses= array(''=>'Seleccione un mes','01'=>'Enero','02'=>'Febrero','03'=>'Marzo','04'=>'Abril','05'=>'Mayo','06'=>'Junio','07'=>'Julio','08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-        $anios=array(''=>'Seleccione un año', date('Y') => date('Y'),date('Y')+1 => date('Y')+1);
-        
-        $form = $this->createFormBuilder()
-        ->add('mes', 'choice', array(
-            'choices'   => $meses,
-        ))
-        ->add('anio', 'choice', array(
-                'choices'   => $anios,
-        ))
-        ->add('corresponsalia', 'entity', array(
-                'class' => 'CorresponsaliaBundle:Corresponsalia',
-                'property' => 'nombre',
-                'empty_value'=>'Seleccione una corresponsalía...'
-        ))
-        ->add('tipogasto', 'entity', array(
-                'class' => 'CorresponsaliaBundle:Tipogasto',
-                'property' => 'descripcion',
-                'empty_value'=>'Seleccione un tipo de gasto...'
-        ))
-        ->getForm();
-
-        return $this->render('CorresponsaliaBundle:Estadofondo:estadofondoaniomes.html.twig', array(
-            'entities' => $entities,
-            'form'=>$form->createView()
-        ));        
-    }
-
     /**
      * Lists all Estadofondo entities.
      *
@@ -77,6 +42,7 @@ class EstadofondoController extends Controller
         $anio=$periodo->getAnio();
         $mes=$periodo->getMes();
         $idcor=$periodo->getCorresponsalia()->getId();
+        
         
         $entity = new Estadofondo();
         $form = $this->createCreateForm($entity,$idperiodo);
@@ -137,17 +103,19 @@ class EstadofondoController extends Controller
         $mes=$periodo->getMes();
         $idcor=$periodo->getCorresponsalia()->getId();
         
+        
         //valido si la corresponsalia tiene ya un fondo asignado
-        $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.periodorendicion= :idperiodo";
-        $query = $em->createQuery($dql);
-        $query->setParameter('idperiodo', $idperiodo);
-        $ef = $query->getResult(); 
-        
-        if(!empty($ef)){
-            $this->get('session')->getFlashBag()->add('alert', 'Esta corresponsalía ya tiene un fondo asignado para el período seleccionado, puede editar el actual.');
-            return $this->redirect($this->generateUrl('estadofondo_show',array('id'=>$ef[0]->getId())));
-        }
-        
+            $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.periodorendicion= :idperiodo";
+            $query = $em->createQuery($dql); 
+            $query->setParameter('idperiodo', $idperiodo);
+            $ef = $query->getResult(); 
+            
+            if(!empty($ef)){
+                $this->get('session')->getFlashBag()->add('alert', 'Ya existe un fondo asignado para el período seleccionado, puede editar el actual.');
+                return $this->redirect($this->generateUrl('estadofondo_show',array('id'=>$ef[0]->getId())));
+            }
+        //fin
+
         $entity = new Estadofondo();
         $form   = $this->createCreateForm($entity,$idperiodo);
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(

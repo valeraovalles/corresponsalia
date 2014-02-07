@@ -7,12 +7,75 @@
     INICIO
 {% endblock %}
 
-    
 {% block titulomodulo %}  
-    <h2>BIENVENIDOS AL SISTEMA DE CORRESPONSALÍA</h2>
+    <h2>BIENVENIDO {{ usuario.primerNombre|upper }} {{ usuario.primerApellido|upper }}</h2>
 {% endblock %}
-    
+
+{% block javascripts %}
+	{{ parent() }}
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaX5WySgrnP70Br7a83wkzFJb7d6onGis&sensor=true&language=es">
+    </script>
+
+    <script type="text/javascript">
+      function initialize() {
+
+        var myLatlng = new google.maps.LatLng(19.311143,-3.515625);
+        var mapOptions = {
+          zoom: 2,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+
+                var mapOptions2 = {
+          zoom: 2,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        {% for corpa in cor %}
+            
+            {% set datos %}
+                <table>
+                    <tr>
+                        <th>Corresponsalía: </th>
+                        <td>{{corpa.nombre}}</td>
+                    </tr>
+                </table>
+            {% endset %}
+
+            var contentString{{loop.index}} = '{{datos|escape('js')}}';
+
+            var infowindow{{loop.index}} = new google.maps.InfoWindow({content: contentString{{loop.index}}});
+
+            var image = 'http://www.telesurtv.net/favicon.ico';
+
+            var marker{{loop.index}} = new google.maps.Marker({position: new google.maps.LatLng({{ corpa.latitud }}, {{corpa.longitud}}),title:"{{ corpa.pais }}", icon:image});
+
+            google.maps.event.addListener(marker{{loop.index}},'click', function() {infowindow{{loop.index}}.open(map,marker{{loop.index}});});
+            marker{{loop.index}}.setMap(map);
+
+            
+        {% endfor %}
+
+
+        }
+
+  </script>
+{% endblock %}
+  
 {% block body %}
     {{ parent()}}
-    
+    <br>
+    <div id="map_canvas" style="width:1000px; height:500px"></div>
+
+    <script>
+      $(document).ready(function() {
+        initialize()
+      });
+    </script>
+
+    <br><br>
 {% endblock %}

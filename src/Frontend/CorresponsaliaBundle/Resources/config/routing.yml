@@ -158,10 +158,7 @@ corresponsalia_delete:
 
 ################################################################################
 
-estadofondo_aniomes:
-    pattern:  /estadofondo/aniomes
-    defaults: { _controller: CorresponsaliaBundle:Estadofondo:estadofondoaniomes }
-    
+   
 estadofondo:
     pattern:  /estadofondo/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Estadofondo:index" }
@@ -196,7 +193,7 @@ estadofondo_delete:
 ################################################################################
 
 cambio:
-    pattern:  /cambio/{idcor}
+    pattern:  /cambio/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Cambio:index" }
 
 cambio_show:
@@ -204,11 +201,11 @@ cambio_show:
     defaults: { _controller: "CorresponsaliaBundle:Cambio:show" }
 
 cambio_new:
-    pattern:  /cambio/new/{idcor}
+    pattern:  /cambio/new/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Cambio:new" }
 
 cambio_create:
-    pattern:  /cambio/create/{idcor}
+    pattern:  /cambio/create/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Cambio:create" }
     requirements: { _method: post }
 

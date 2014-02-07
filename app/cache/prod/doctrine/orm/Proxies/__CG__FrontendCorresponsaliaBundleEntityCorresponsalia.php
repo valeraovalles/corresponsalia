@@ -99,6 +99,30 @@ class Corresponsalia extends \Frontend\CorresponsaliaBundle\Entity\Corresponsali
         return parent::getTipomoneda();
     }
 
+    public function setTipogasto(\Frontend\CorresponsaliaBundle\Entity\Tipogasto $tipogasto = NULL)
+    {
+        $this->__load();
+        return parent::setTipogasto($tipogasto);
+    }
+
+    public function getTipogasto()
+    {
+        $this->__load();
+        return parent::getTipogasto();
+    }
+
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = NULL)
+    {
+        $this->__load();
+        return parent::setResponsable($responsable);
+    }
+
+    public function getResponsable()
+    {
+        $this->__load();
+        return parent::getResponsable();
+    }
+
     public function __toString()
     {
         $this->__load();
@@ -108,7 +132,7 @@ class Corresponsalia extends \Frontend\CorresponsaliaBundle\Entity\Corresponsali
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'nombre', 'pais', 'tipocorresponsalia', 'tipomoneda');
+        return array('__isInitialized__', 'id', 'nombre', 'pais', 'tipocorresponsalia', 'tipomoneda', 'responsable');
     }
 
     public function __clone()

@@ -19,7 +19,7 @@ class CambioType extends AbstractType
                 'invalid_message' => 'El monto debe ser numérico',
                 'currency'=>'USD'
                 ))
-            ->add('corresponsalia')
+            ->add('periodorendicion')
         ;
     }
     

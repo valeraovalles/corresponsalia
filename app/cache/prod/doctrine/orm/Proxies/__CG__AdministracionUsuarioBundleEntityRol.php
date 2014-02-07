@@ -63,6 +63,18 @@ class Rol extends \Administracion\UsuarioBundle\Entity\Rol implements \Doctrine\
         return parent::getRol();
     }
 
+    public function setDescripcion($descripcion)
+    {
+        $this->__load();
+        return parent::setDescripcion($descripcion);
+    }
+
+    public function getDescripcion()
+    {
+        $this->__load();
+        return parent::getDescripcion();
+    }
+
     public function addUser(\Administracion\UsuarioBundle\Entity\User $user)
     {
         $this->__load();
@@ -90,7 +102,7 @@ class Rol extends \Administracion\UsuarioBundle\Entity\Rol implements \Doctrine\
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'rol', 'user');
+        return array('__isInitialized__', 'id', 'rol', 'descripcion', 'user');
     }
 
     public function __clone()

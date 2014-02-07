@@ -46,6 +46,7 @@ class Periodorendicion
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id", nullable=false)
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una Corresponsalía.")
      */
     private $corresponsalia;
 
@@ -84,6 +85,13 @@ class Periodorendicion
      * 1 nueva, 2 enviada para revision, 3 devuelta para corrección, 4 cerrada
      */
     private $estatus;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cobertura", type="string", nullable=true)
+     */
+    private $cobertura;
     
     /**
      * Get id
@@ -235,7 +243,7 @@ class Periodorendicion
     
     public function __toString()
     {
-        return $this->getCorresponsalia()->getNombre();
+        return "sass";
     }
     /**
      * Set estatus
@@ -260,4 +268,26 @@ class Periodorendicion
         return $this->estatus;
     }
     
+    /**
+     * Set cobertura
+     *
+     * @param integer $cobertura
+     * @return Relaciongastos
+     */
+    public function setCobertura($cobertura)
+    {
+        $this->cobertura = $cobertura;
+    
+        return $this;
     }
+
+    /**
+     * Get cobertura
+     *
+     * @return integer 
+     */
+    public function getCobertura()
+    {
+        return $this->cobertura;
+    }
+}

@@ -7,7 +7,12 @@
 {% endblock %}
 
 {% block titulomodulo %}
-    <h1> PERÍODO DE RENCIDIÓN Y ASIGNACIÓN DE FONDOS</h1><h2>{% if entities[0] is defined %} {{entities[0].corresponsalia.nombre|upper}} {% endif %}</h2>
+    
+    {% if is_granted('ROLE_RENDICION_CORRESPONSALIA') %}
+        <h1> PERÍODO DE RENDICIÓN</h1><h2>{% if entities[0] is defined %} {{entities[0].corresponsalia.nombre|upper}} {% endif %}</h2>
+    {% elseif is_granted('ROLE_RENDICION_ADMIN') %}
+        <h1> PERÍODO DE ASIGNACIÓN DE FONDOS</h1>
+    {% endif %}
 {% endblock %}
     
     
@@ -21,6 +26,7 @@
                 <th style="width: 5%">Mes</th>
                 <th style="width: 30%">Corresponsalía</th>
                 <th>Tipo gasto</th>
+                <th>Cobertura</th>
                 <th>Estatus</th>
                 <th>Actions</th>
             </tr>
@@ -33,6 +39,7 @@
                 <td>{{ entity.mes }}</td>
                 <td>{{ entity.corresponsalia.nombre }}</td>
                 <td>{{ entity.tipogasto.descripcion }}</td>
+                <td>{% if entity.tipogasto.id==2 %}{{ entity.cobertura|capitalize }}{% else %}N/A{% endif %}</td>
                 <td>
                     {% if entity.estatus==1 %}
                         <span class="label label-info">Abierto</span>
@@ -45,16 +52,23 @@
                     {% endif %}
                 </td>
                 <td>
-                    | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
-
-                    <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> | 
                     
-                        {% if entity.tipogasto.id!=2 and entity.estatus!=2 %}
-                        <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
-                        {% elseif entity.tipogasto.id==2 %}
-                        <a href="{{ path('cobertura', {'idperiodo':entity.id}) }}"><b class="text-warning">COBERTURAS</b></a> | 
+                    
+                        {% if is_granted('ROLE_RENDICION_CORRESPONSALIA') %}
+                    
+                            {% if entity.tipogasto.id!=2 and entity.estatus!=2 %}
+                                | <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
+                            {% elseif entity.tipogasto.id==2 %}
+                                | <a href="{{ path('cobertura', {'idperiodo':entity.id}) }}"><b class="text-warning">COBERTURAS</b></a> |
+                            {% endif %}
+                                
                         {% endif %}
-                        <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">FONDOS</b></a>
+                        
+                        {% if is_granted('ROLE_RENDICION_ADMIN') %}
+                            | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
+                            <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |  
+                            <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">FONDOS</b></a>
+                        {% endif %}
 
                     
                 </td>

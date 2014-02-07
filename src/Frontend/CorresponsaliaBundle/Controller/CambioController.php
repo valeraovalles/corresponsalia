@@ -20,50 +20,50 @@ class CambioController extends Controller
      * Lists all Cambio entities.
      *
      */
-    public function indexAction($idcor)
+    public function indexAction($idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('corresponsalia'=>$idcor),array('id'=>'desc'));
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
+        $entities = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('periodorendicion'=>$idperiodo),array('id'=>'desc'));
+        $periodo = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idperiodo);
 
         return $this->render('CorresponsaliaBundle:Cambio:index.html.twig', array(
             'entities' => $entities,
             'idcor'=>$idcor,
-            "corresponsalia"=>$corresponsalia
+            "periodo"=>$periodo
         ));
     }
     /**
      * Creates a new Cambio entity.
      *
      */
-    public function createAction(Request $request,$idcor)
+    public function createAction(Request $request,$idperiodo)
     {
         $entity = new Cambio();
-        $form = $this->createCreateForm($entity,$idcor);
+        $form = $this->createCreateForm($entity,$idperiodo);
         $form->handleRequest($request);
      
         $em = $this->getDoctrine()->getManager();
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
 
         if ($form->isValid()) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
             $em = $this->getDoctrine()->getManager();
-            $entity->setCorresponsalia($corresponsalia);
+            $entity->setPeriodorendicion($periodo);
             $entity->setFechahoraregistro(new \DateTime("now"));
             $entity->setResponsable($usuario);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cambio', array('idcor' => $idcor)));
+            return $this->redirect($this->generateUrl('cambio', array('idperiodo' => $idperiodo)));
         }
 
         return $this->render('CorresponsaliaBundle:Cambio:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            "corresponsalia"=>$corresponsalia
+            "periodo"=>$periodo
         ));
     }
 
@@ -74,10 +74,10 @@ class CambioController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Cambio $entity, $idcor)
+    private function createCreateForm(Cambio $entity, $idperiodo)
     {
         $form = $this->createForm(new CambioType(), $entity, array(
-            'action' => $this->generateUrl('cambio_create',array("idcor"=>$idcor)),
+            'action' => $this->generateUrl('cambio_create',array("idperiodo"=>$idperiodo)),
             'method' => 'POST',
         ));
 
@@ -90,17 +90,17 @@ class CambioController extends Controller
      * Displays a form to create a new Cambio entity.
      *
      */
-    public function newAction($idcor)
+    public function newAction($idperiodo)
     {
-        $entity = new Cambio();
-        $form   = $this->createCreateForm($entity,$idcor);
-        
         $em = $this->getDoctrine()->getManager();
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
+        $entity = new Cambio();
+        $form   = $this->createCreateForm($entity,$idperiodo);
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        
         return $this->render('CorresponsaliaBundle:Cambio:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            "corresponsalia"=>$corresponsalia
+            'periodo'=>$periodo
         ));
         
     }

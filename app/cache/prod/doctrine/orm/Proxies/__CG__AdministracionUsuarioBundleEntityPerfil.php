@@ -99,42 +99,6 @@ class Perfil extends \Administracion\UsuarioBundle\Entity\Perfil implements \Doc
         return parent::getSegundoApellido();
     }
 
-    public function getFechanacimiento()
-    {
-        $this->__load();
-        return parent::getFechanacimiento();
-    }
-
-    public function setFechanacimiento($fechanacimiento)
-    {
-        $this->__load();
-        return parent::setFechanacimiento($fechanacimiento);
-    }
-
-    public function setCedula($cedula)
-    {
-        $this->__load();
-        return parent::setCedula($cedula);
-    }
-
-    public function getCedula()
-    {
-        $this->__load();
-        return parent::getCedula();
-    }
-
-    public function setExtension($extension)
-    {
-        $this->__load();
-        return parent::setExtension($extension);
-    }
-
-    public function getExtension()
-    {
-        $this->__load();
-        return parent::getExtension();
-    }
-
     public function setUser(\Administracion\UsuarioBundle\Entity\User $user = NULL)
     {
         $this->__load();
@@ -156,7 +120,7 @@ class Perfil extends \Administracion\UsuarioBundle\Entity\Perfil implements \Doc
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'cedula', 'fechanacimiento', 'extension', 'user');
+        return array('__isInitialized__', 'id', 'primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'user');
     }
 
     public function __clone()

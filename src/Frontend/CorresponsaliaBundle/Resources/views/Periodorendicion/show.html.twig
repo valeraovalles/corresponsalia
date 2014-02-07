@@ -22,6 +22,12 @@
             <div class="labelform">Tipo gasto:</div>
             <div class="widgetform">{{ entity.tipogasto.descripcion }}</div>
         </div>
+        {% if entity.tipogasto.id==2 %}
+        <div class="contenedorform">
+            <div class="labelform">Cobertura:</div>
+            <div class="widgetform">{{ entity.cobertura|capitalize }}</div>
+        </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Año:</div>
             <div class="widgetform">{{ entity.anio }}</div>

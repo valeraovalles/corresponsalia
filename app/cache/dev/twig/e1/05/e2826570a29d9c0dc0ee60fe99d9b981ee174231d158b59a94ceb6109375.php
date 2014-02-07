@@ -45,20 +45,30 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
     public function block_titulomodulo($context, array $blocks = array())
     {
         // line 10
-        echo "    <h1> PERÍODO DE RENCIDIÓN Y ASIGNACIÓN DE FONDOS</h1><h2>";
-        if ($this->getAttribute($this->getContext($context, "entities", true), 0, array(), "array", true, true)) {
-            echo " ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entities"), 0, array(), "array"), "corresponsalia"), "nombre")), "html", null, true);
-            echo " ";
+        echo "    
+    ";
+        // line 11
+        if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_CORRESPONSALIA")) {
+            // line 12
+            echo "        <h1> PERÍODO DE RENDICIÓN</h1><h2>";
+            if ($this->getAttribute($this->getContext($context, "entities", true), 0, array(), "array", true, true)) {
+                echo " ";
+                echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entities"), 0, array(), "array"), "corresponsalia"), "nombre")), "html", null, true);
+                echo " ";
+            }
+            echo "</h2>
+    ";
+        } elseif ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_ADMIN")) {
+            // line 14
+            echo "        <h1> PERÍODO DE ASIGNACIÓN DE FONDOS</h1>
+    ";
         }
-        echo "</h2>
-";
     }
 
-    // line 14
+    // line 19
     public function block_body($context, array $blocks = array())
     {
-        // line 15
+        // line 20
         $this->displayParentBlock("body", $context, $blocks);
         echo "
     <br><table id=\"tablalista\" style=\"width: 97%;\" cellpadding=\"5px\">
@@ -69,93 +79,119 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
                 <th style=\"width: 5%\">Mes</th>
                 <th style=\"width: 30%\">Corresponsalía</th>
                 <th>Tipo gasto</th>
+                <th>Cobertura</th>
                 <th>Estatus</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 29
+        // line 35
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 30
+            // line 36
             echo "            <tr>
                 <td><a href=\"";
-            // line 31
+            // line 37
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 32
+            // line 38
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "anio"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 33
+            // line 39
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "mes"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 34
+            // line 40
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "corresponsalia"), "nombre"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 35
+            // line 41
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
+            echo "</td>
+                <td>";
+            // line 42
+            if (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
+                echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "cobertura")), "html", null, true);
+            } else {
+                echo "N/A";
+            }
             echo "</td>
                 <td>
                     ";
-            // line 37
+            // line 44
             if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 1)) {
-                // line 38
+                // line 45
                 echo "                        <span class=\"label label-info\">Abierto</span>
                     ";
             } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 2)) {
-                // line 40
+                // line 47
                 echo "                        <span class=\"label label-warning\">Enviado para revisión</span>
                     ";
             } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 3)) {
-                // line 42
+                // line 49
                 echo "                        <span class=\"label label-danger\">Devuelto para corrección</span>
                     ";
             } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 4)) {
-                // line 44
+                // line 51
                 echo "                        <span class=\"label label-success\">Cerrado</span>
                     ";
             }
-            // line 46
+            // line 53
             echo "                </td>
                 <td>
-                    | <a href=\"";
-            // line 48
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a> | 
-
-                    <a href=\"";
-            // line 50
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a> | 
+                    
                     
                         ";
-            // line 52
-            if ((($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") != 2) && ($this->getAttribute($this->getContext($context, "entity"), "estatus") != 2))) {
-                // line 53
-                echo "                        <a href=\"";
-                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-                echo "\"><b class=\"text-warning\">RENDIR</b></a> | 
-                        ";
-            } elseif (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
-                // line 55
-                echo "                        <a href=\"";
-                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cobertura", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-                echo "\"><b class=\"text-warning\">COBERTURAS</b></a> | 
+            // line 57
+            if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_CORRESPONSALIA")) {
+                // line 58
+                echo "                    
+                            ";
+                // line 59
+                if ((($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") != 2) && ($this->getAttribute($this->getContext($context, "entity"), "estatus") != 2))) {
+                    // line 60
+                    echo "                                | <a href=\"";
+                    echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                    echo "\"><b class=\"text-warning\">RENDIR</b></a> | 
+                            ";
+                } elseif (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
+                    // line 62
+                    echo "                                | <a href=\"";
+                    echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cobertura", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                    echo "\"><b class=\"text-warning\">COBERTURAS</b></a> |
+                            ";
+                }
+                // line 64
+                echo "                                
                         ";
             }
-            // line 57
-            echo "                        <a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_new", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\"><b class=\"text-warning\">FONDOS</b></a>
-
+            // line 66
+            echo "                        
+                        ";
+            // line 67
+            if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_ADMIN")) {
+                // line 68
+                echo "                            | <a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a> | 
+                            <a href=\"";
+                // line 69
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a> |  
+                            <a href=\"";
+                // line 70
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_new", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"text-warning\">FONDOS</b></a>
+                        ";
+            }
+            // line 72
+            echo "
                     
                 </td>
             </tr>
@@ -164,14 +200,14 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 63
+        // line 77
         echo "        </tbody>
     </table>
 
     <br><br>
 
     <a class=\"btn btn-primary\" href=\"";
-        // line 68
+        // line 82
         echo $this->env->getExtension('routing')->getPath("periodorendicion_new");
         echo "\">NUEVO PERÍODO</a>
 
@@ -200,6 +236,6 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
 
     public function getDebugInfo()
     {
-        return array (  175 => 68,  168 => 63,  155 => 57,  149 => 55,  143 => 53,  141 => 52,  136 => 50,  131 => 48,  127 => 46,  123 => 44,  119 => 42,  115 => 40,  111 => 38,  109 => 37,  104 => 35,  100 => 34,  96 => 33,  92 => 32,  86 => 31,  83 => 30,  79 => 29,  62 => 15,  59 => 14,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  211 => 82,  204 => 77,  194 => 72,  189 => 70,  185 => 69,  180 => 68,  178 => 67,  175 => 66,  171 => 64,  165 => 62,  159 => 60,  157 => 59,  154 => 58,  152 => 57,  146 => 53,  142 => 51,  138 => 49,  134 => 47,  130 => 45,  128 => 44,  119 => 42,  115 => 41,  111 => 40,  107 => 39,  103 => 38,  97 => 37,  94 => 36,  90 => 35,  72 => 20,  69 => 19,  63 => 14,  53 => 12,  51 => 11,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

@@ -13,13 +13,15 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(form.anio) or form_errors(form.mes) or form_errors(form.corresponsalia) or form_errors(form.tipogasto)%}
+    {% if form_errors(form.anio) or form_errors(form.mes) or form_errors(form.corresponsalia) or form_errors(form.tipogasto) or error %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.corresponsalia) }}</div>
         <div>{{ form_errors(form.tipogasto) }}</div>
+        <div>{{ form_errors(form.cobertura) }}</div>
         <div>{{ form_errors(form.anio) }}</div>
         <div>{{ form_errors(form.mes) }}</div>
+        {% for e in error %}<div><ul><li>{{ e }}</li></ul></div>{% endfor %}
     </div>
     {% endif %}
     
@@ -33,6 +35,10 @@
             <div class="contenedorform">
                 <div class="labelform">Tipo gasto:</div>
                 <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
+            </div>
+            <div class="contenedorform" style="display: none;" id="cobertura">
+                <div class="labelform">Cobertura:</div>
+                <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Anio:</div>
@@ -51,4 +57,18 @@
         <input type="submit" value="CREAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
     </form>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#frontend_corresponsaliabundle_periodorendicion_tipogasto').change(function(){
+                if($("#frontend_corresponsaliabundle_periodorendicion_tipogasto").val()==2)
+                    $("#cobertura").show()
+                else
+                    $("#cobertura").hide()
+            });
+            
+            if($("#frontend_corresponsaliabundle_periodorendicion_tipogasto").val()==2)
+                    $("#cobertura").show()
+        });
+     </script>
 {% endblock %}

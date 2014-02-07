@@ -19,7 +19,7 @@
                 <th>Id</th>
                 <th>Descripcion</th>
                 <th>Fechaproceso</th>
-                <th>Actions</th>
+                <th style="width: 20%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +29,15 @@
                 <td>{{ entity.descripcion }}</td>
                 <td>{% if entity.fechaproceso %}{{ entity.fechaproceso|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('cobertura_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('cobertura_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> | 
-                    <a href="{{ path('corresponsalia_rendirgastocob', {'idcobertura':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
+                    {% if is_granted('ROLE_RENDICION_ADMIN') %}
+                        <a href="{{ path('cobertura_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                        <a href="{{ path('cobertura_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> | 
+                        <a href="{{ path('estadofondo_new', {'idperiodo':entity.periodorendicion.id,'idcobertura':entity.id}) }}"><b class="text-warning">FONDOS</b></a> | 
+                    {% endif %}
+                    
+                    {% if is_granted('ROLE_RENDICION_CORRESPONSALIA') %}
+                        <a href="{{ path('corresponsalia_rendirgastocob', {'idcobertura':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
@@ -40,7 +46,8 @@
 
         <br><br>
 
-    <a class="btn btn-primary" href="{{ path('cobertura_new',{'idperiodo':idperiodo}) }}">NUEVA COBERTURA</a>
+    <a class="btn btn-primary" href="{{ path('cobertura_new',{'idperiodo':idperiodo}) }}">NUEVA COBERTURA</a> | 
+    <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO DE PERÍODOS</a>
 
     <br><br>
 

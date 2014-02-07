@@ -38,10 +38,20 @@ class PeriodorendicionController extends Controller
         //consulto id de corresponsalia
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
-        //fin
-
-        $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findByCorresponsalia($idcor);
+        
+        if(isset($usercorresponsalia[0]) and $this->get('security.context')->isGranted('ROLE_RENDICION_CORRESPONSALIA')){
+            $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
+            $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findByCorresponsalia($idcor);
+        }
+        
+        else if(!isset($usercorresponsalia[0]) and $this->get('security.context')->isGranted('ROLE_RENDICION_ADMIN')){
+            $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findAll();
+        }
+        
+        else{
+             $this->get('session')->getFlashBag()->add('alert', 'No tiene los permisos necesario para asignar fondos.');
+             return $this->redirect($this->generateUrl('corresponsalia_inicio'));
+        }
 
         return $this->render('CorresponsaliaBundle:Periodorendicion:index.html.twig', array(
             'entities' => $entities,
@@ -54,35 +64,44 @@ class PeriodorendicionController extends Controller
      */
     public function createAction(Request $request)
     {
-        //validar que no cree un mismo periodo
-        $datos=$request->request->all();
-        $datos=$datos['frontend_corresponsaliabundle_periodorendicion'];     
-
+        $error=null;
+        
         $em = $this->getDoctrine()->getManager();
-        //consulto id de corresponsalia
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        //fin
-            
-        $periodorendicion= $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findBy(array('corresponsalia'=>$corresponsalia,'tipogasto'=>$datos['tipogasto'],'anio'=>$datos['anio'],'mes'=>$datos['mes']));
-        if(!empty($periodorendicion)){
-             $this->get('session')->getFlashBag()->add('alert', 'Ya existe un periodo con los mismos parámetros.');
-             return $this->redirect($this->generateUrl('periodorendicion_show',array('id'=>$periodorendicion[0]->getId())));
-        }
         
         $entity = new Periodorendicion();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        
+        $data=$form->getData();
+        
+        if($data->getTipogasto()->getId()==2 and $data->getCobertura()==null){
+            $error[0]="La cobertura no debe estar en blanco";
+        }
 
-        if ($form->isValid()) {
+        if ($form->isValid() and $error==null) {
+            
+            //validar que no cree un mismo periodo
+            $datos=$request->request->all();
+            $datos=$datos['frontend_corresponsaliabundle_periodorendicion'];              
+            
+            if($data->getTipogasto()->getId()==2)
+                $where=array('corresponsalia'=>$data->getCorresponsalia()->getId(),'tipogasto'=>$data->getTipogasto()->getId(),'anio'=>$data->getAnio(),'mes'=>$data->getMes(),'cobertura'=>$data->getCobertura());
+            else
+                $where=array('corresponsalia'=>$data->getCorresponsalia()->getId(),'tipogasto'=>$data->getTipogasto()->getId(),'anio'=>$data->getAnio(),'mes'=>$data->getMes());
+            
+            $periodorendicion= $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findBy($where);
+            if(!empty($periodorendicion)){
+                $this->get('session')->getFlashBag()->add('alert', 'Ya existe un periodo con los mismos parámetros.');
+                return $this->redirect($this->generateUrl('periodorendicion_show',array('id'=>$periodorendicion[0]->getId())));
+            }           
+            
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
+            
             $entity->setEstatus(1);
 
-            
+            $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
             $entity->setCorresponsalia($corresponsalia);
             
             $em->persist($entity);
@@ -94,6 +113,7 @@ class PeriodorendicionController extends Controller
         return $this->render('CorresponsaliaBundle:Periodorendicion:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error' => $error
         ));
     }
 
@@ -122,12 +142,15 @@ class PeriodorendicionController extends Controller
      */
     public function newAction()
     {
+        $error=null;
+        
         $entity = new Periodorendicion();
         $form   = $this->createCreateForm($entity);
 
         return $this->render('CorresponsaliaBundle:Periodorendicion:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error' => null
         ));
     }
 
@@ -158,10 +181,18 @@ class PeriodorendicionController extends Controller
      */
     public function editAction($id)
     {
+        $error=null;
         $em = $this->getDoctrine()->getManager();
 
+        $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($id);
+        
+        if(!empty($ef)){
+            $this->get('session')->getFlashBag()->add('alert', 'No se puede editar el período porque ya tiene un fondo asignado para los parámetros seleccionados.');
+            return $this->redirect($this->generateUrl('periodorendicion_show', array('id' => $id)));
+        }
+        
         $entity = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Periodorendicion entity.');
         }
@@ -173,6 +204,7 @@ class PeriodorendicionController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'error'=>$error
         ));
     }
 
@@ -200,6 +232,8 @@ class PeriodorendicionController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        $error=null;
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($id);
@@ -212,7 +246,12 @@ class PeriodorendicionController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        $data=$editForm->getData();
+        if($data->getTipogasto()->getId()==2 and $data->getCobertura()==null){
+            $error[0]="La cobertura no debe estar en blanco";
+        }
+        
+        if ($editForm->isValid() and $error==null) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
@@ -226,6 +265,7 @@ class PeriodorendicionController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'error'=>$error
         ));
     }
     /**
@@ -238,7 +278,7 @@ class PeriodorendicionController extends Controller
         $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($id);
         
         if(!empty($ef)){
-             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el período porque tiene fondos asociados.');
+             $this->get('session')->getFlashBag()->add('alert', 'No se puede borrar el período porque tiene un fondo asignado.');
              return $this->redirect($this->generateUrl('periodorendicion_show', array('id' => $id)));            
         }
         
