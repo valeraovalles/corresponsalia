@@ -107,10 +107,13 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
         echo "        </tbody>
     </table>
 
-
+    <br><br><br><a class=\"btn btn-default\" href=\"";
+        // line 41
+        echo $this->env->getExtension('routing')->getPath("periodorendicion");
+        echo "\">IR AL LISTADO DE PERÍODOS</a>
     ";
         // line 42
-        echo "<br><br><br>
+        echo "<br>
 
 
     <script>
@@ -136,6 +139,6 @@ class __TwigTemplate_fce9359c9e04efb4416573b197edef9d279f0130735afb3363c9ab1a0f3
 
     public function getDebugInfo()
     {
-        return array (  113 => 42,  107 => 38,  96 => 33,  91 => 31,  85 => 28,  81 => 27,  77 => 26,  73 => 25,  69 => 24,  63 => 23,  60 => 22,  56 => 21,  38 => 6,  35 => 5,  29 => 3,);
+        return array (  116 => 42,  112 => 41,  107 => 38,  96 => 33,  91 => 31,  85 => 28,  81 => 27,  77 => 26,  73 => 25,  69 => 24,  63 => 23,  60 => 22,  56 => 21,  38 => 6,  35 => 5,  29 => 3,);
     }
 }

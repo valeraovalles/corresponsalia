@@ -1,10 +1,21 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}CORRESPONSALÍA - TASA DE CAMBIO{% endblock %}
+
+{% block titulobanner %}
+    TASA DE CAMBIO
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTADO HISTÓRICO DE TASAS DE CAMBIO</h1>
+    <h4>CORRESPONSALIA: {{ periodo.corresponsalia.nombre|upper }}</h4>
+    <h4>AÑO: {{ periodo.anio}} | MES: {{ periodo.mes}}</h4><br>
+{% endblock %}
+    
 {% block body -%}
     {{ parent() }}
 
-    <h1>LISTADO HISTÓRICO DE TASAS DE CAMBIO</h1>
-    <h4>{{ corresponsalia.nombre|upper }}</h4><br>
+
 
     
     <div class="alert alert-info">
@@ -45,11 +56,11 @@
 
     
 
-            <a class="btn btn-primary" href="{{ path('cambio_new',{'idcor':idcor}) }}">
+            <a class="btn btn-primary" href="{{ path('cambio_new',{'idperiodo':periodo.id}) }}">
                 CREAR NUEVA TASA DE CAMBIO
             </a> |             
-            <a class="btn btn-default" href="{{ path('corresponsalia_tasacambio') }}">
-                VOLVER AL INICIO
+            <a class="btn btn-default" href="{{ path('corresponsalia_rendirgasto', {'idperiodo':periodo.id}) }}">
+                VOLVER A LA RENDICIÓN
             </a><br>
 
     {% endblock %}

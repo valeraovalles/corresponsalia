@@ -29,7 +29,6 @@ class RelaciongastoType extends AbstractType
             ->add('fechafactura', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd'))
-            ->add('imputacionpresupuestaria')
             ->add('nombrerazonsocial')
             ->add('identificacionfiscal')
             ->add('numerofactura')
@@ -55,7 +54,6 @@ class RelaciongastoType extends AbstractType
                 ))
             ->add('periodorendicion')
             ->add('responsable')
-            ->add('cobertura')
             ->add('cambio')
         ;
     }

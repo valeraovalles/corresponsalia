@@ -153,10 +153,22 @@ class Periodorendicion extends \Frontend\CorresponsaliaBundle\Entity\Periodorend
         return parent::getCobertura();
     }
 
+    public function setFechaproceso($fechaproceso)
+    {
+        $this->__load();
+        return parent::setFechaproceso($fechaproceso);
+    }
+
+    public function getFechaproceso()
+    {
+        $this->__load();
+        return parent::getFechaproceso();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'anio', 'mes', 'observacion', 'estatus', 'cobertura', 'corresponsalia', 'tipogasto', 'responsable');
+        return array('__isInitialized__', 'id', 'anio', 'mes', 'observacion', 'estatus', 'cobertura', 'fechaproceso', 'corresponsalia', 'tipogasto', 'responsable');
     }
 
     public function __clone()

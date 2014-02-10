@@ -104,6 +104,8 @@ class PeriodorendicionController extends Controller
             $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($datos['corresponsalia']);
             $entity->setCorresponsalia($corresponsalia);
             
+            $entity->setFechaproceso(new \DateTime("now"));
+            
             $em->persist($entity);
             $em->flush();
 
@@ -255,6 +257,7 @@ class PeriodorendicionController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
+            $entity->setFechaproceso(new \DateTime("now"));
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Se ha actualizado el período exitosamente.');

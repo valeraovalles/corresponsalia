@@ -9,8 +9,8 @@
             <td>{{ form_widget(form.fechafactura) }}</td>
         </tr>
         <tr>
-            <th>Imputación</th>
-            <td>{{ form_widget(form.imputacionpresupuestaria) }}</td>
+            <th>Cambio</th>
+            <td><input type="text" value="{{ cambio.montocambiodolar }}" id="cambio" name="rendicion_relaciongasto[cambio]"></td>
             <th>Nombre/Razón</th>
             <td>{{ form_widget(form.nombrerazonsocial) }}</td>
             <th>Identif. fiscal</th>

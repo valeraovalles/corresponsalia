@@ -41,12 +41,7 @@ class Relaciongasto
      */
     private $fechafactura;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="imputacionpresupuestaria", type="string", nullable=false)
-     */
-    private $imputacionpresupuestaria;
+
 
     /**
      * @var \Descripciongasto
@@ -126,17 +121,6 @@ class Relaciongasto
      */
     private $responsable;
 
-    
-    /**
-     * @var \Tipogasto
-     *
-     * @ORM\ManyToOne(targetEntity="Cobertura")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cobertura_id", referencedColumnName="id", nullable=true)
-     * })
-     */
-    private $cobertura;
-    
     /**
      * @var string
      *
@@ -198,29 +182,6 @@ class Relaciongasto
     public function getFechafactura()
     {
         return $this->fechafactura;
-    }
-
-    /**
-     * Set imputacionpresupuestaria
-     *
-     * @param string $imputacionpresupuestaria
-     * @return Relaciongastos
-     */
-    public function setImputacionpresupuestaria($imputacionpresupuestaria)
-    {
-        $this->imputacionpresupuestaria = $imputacionpresupuestaria;
-    
-        return $this;
-    }
-
-    /**
-     * Get imputacionpresupuestaria
-     *
-     * @return string 
-     */
-    public function getImputacionpresupuestaria()
-    {
-        return $this->imputacionpresupuestaria;
     }
 
     /**
@@ -428,29 +389,6 @@ class Relaciongasto
     public function getResponsable()
     {
         return $this->responsable;
-    }
-    
-    /**
-     * Set cobertura
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Cobertura $cobertura
-     * @return Relaciongastos
-     */
-    public function setCobertura(\Frontend\CorresponsaliaBundle\Entity\Cobertura $cobertura = null)
-    {
-        $this->cobertura = $cobertura;
-    
-        return $this;
-    }
-
-    /**
-     * Get cobertura
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Cobertura 
-     */
-    public function getCobertura()
-    {
-        return $this->cobertura;
     }
     
     /**

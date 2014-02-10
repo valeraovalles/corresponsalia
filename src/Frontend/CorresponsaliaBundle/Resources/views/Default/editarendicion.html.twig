@@ -7,8 +7,9 @@
           
 {% block titulomodulo %}  
     <h2>EDITAR {{ periodo.tipogasto.descripcion|upper }}</h2>
-    {% if periodo.tipogasto.id==2 %}<h4>"{{ rendicion.cobertura.descripcion|upper }}"</h4>{% endif %}
-    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
+    {% if periodo.cobertura!='' %}<h4>COBERTURA: '{{ periodo.cobertura|upper }}'</h4>{% endif %}
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4>
+    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
 {% endblock %}
     
 {% block body %}
@@ -36,18 +37,12 @@
         <br><br><input type="submit" value="EDITAR" class="btn btn-warning">
         <button class="btn btn-info" data-toggle="modal" data-target="#{{periodo.tipogasto.id}}">VER LISTADO DE RENDICION</button> 
         
-        {% if periodo.tipogasto.id!=2 %}
         <a class="btn btn-default" href="{{ path('corresponsalia_rendirgasto',{'idperiodo':periodo.id}) }}">VOLVER</a>
-        {% else %}
-        <a class="btn btn-default" href="{{ path('corresponsalia_rendirgastocob',{'idcobertura':rendicion.cobertura.id}) }}">VOLVER</a>
-        {% endif %}
   
         
         <input type="hidden" value="{{ periodo.id }}" name="rendicion_relaciongasto[periodorendicion]">
+        <input type="hidden" value="{{ cambio.montocambiodolar }}" id="cambio" name="rendicion_relaciongasto[cambio]">
         
-        {% if periodo.tipogasto.id==2 %}
-        <input type="hidden" value="{{ rendicion.cobertura.id }}" name="rendicion_relaciongasto[cobertura]">
-        {% endif %}
     </form>
         <input type="hidden" value="{{ cambio.montocambiodolar }}" id="cambio">
     

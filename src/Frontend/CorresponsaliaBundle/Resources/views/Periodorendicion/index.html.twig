@@ -56,11 +56,7 @@
                     
                         {% if is_granted('ROLE_RENDICION_CORRESPONSALIA') %}
                     
-                            {% if entity.tipogasto.id!=2 and entity.estatus!=2 %}
-                                | <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a> | 
-                            {% elseif entity.tipogasto.id==2 %}
-                                | <a href="{{ path('cobertura', {'idperiodo':entity.id}) }}"><b class="text-warning">COBERTURAS</b></a> |
-                            {% endif %}
+                            <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
                                 
                         {% endif %}
                         

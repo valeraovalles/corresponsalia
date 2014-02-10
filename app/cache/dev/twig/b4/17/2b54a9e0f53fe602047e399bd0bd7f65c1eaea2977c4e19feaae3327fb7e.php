@@ -112,40 +112,31 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
             // line 51
-            echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
-            echo "\">Tasa de cambio</a></li>
-          <li class=\"divider\"></li>
-          <li><a href=\"";
-            // line 53
             echo $this->env->getExtension('routing')->getPath("periodorendicion");
             echo "\">Rendir gastos</a></li>
         </ul>
       </li>
       ";
         }
-        // line 57
+        // line 55
         echo "      
       <li class=\"dropdown\">
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">REPORTES <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
-          <li><a href=\"";
-        // line 61
-        echo $this->env->getExtension('routing')->getPath("corresponsalia_tasacambio");
-        echo "\">Tasa de cambio</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 63
+        // line 60
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">Rendir gastos</a></li>
         </ul>
       </li>
       
       ";
-        // line 83
+        // line 80
         echo "    </ul>
     <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 85
+        // line 82
         echo $this->env->getExtension('routing')->getPath("usuario_logout");
         echo "\">SALIR</a></li>
       
@@ -167,6 +158,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  138 => 63,  133 => 61,  127 => 57,  120 => 53,  110 => 48,  105 => 46,  89 => 39,  85 => 38,  81 => 37,  76 => 34,  74 => 33,  67 => 29,  63 => 28,  58 => 26,  54 => 25,  49 => 23,  45 => 22,  19 => 1,  203 => 34,  198 => 46,  189 => 43,  179 => 40,  170 => 37,  167 => 36,  162 => 35,  160 => 34,  157 => 33,  154 => 32,  151 => 31,  146 => 29,  140 => 28,  134 => 20,  130 => 19,  126 => 18,  116 => 15,  113 => 14,  106 => 10,  102 => 9,  98 => 8,  93 => 40,  84 => 5,  61 => 29,  57 => 28,  44 => 14,  41 => 13,  39 => 6,  31 => 11,  26 => 1,  194 => 82,  190 => 81,  186 => 42,  182 => 41,  178 => 77,  175 => 75,  172 => 74,  166 => 72,  164 => 71,  159 => 69,  155 => 67,  149 => 85,  145 => 83,  143 => 61,  136 => 59,  129 => 55,  122 => 17,  115 => 51,  108 => 47,  97 => 41,  90 => 6,  83 => 31,  78 => 28,  72 => 25,  68 => 48,  66 => 31,  60 => 19,  53 => 27,  46 => 22,  38 => 6,  35 => 5,  29 => 3,);
+        return array (  140 => 82,  136 => 80,  129 => 60,  122 => 55,  115 => 51,  110 => 48,  108 => 47,  105 => 46,  97 => 41,  93 => 40,  89 => 39,  85 => 38,  81 => 37,  76 => 34,  74 => 33,  67 => 29,  63 => 28,  58 => 26,  54 => 25,  49 => 23,  45 => 22,  31 => 11,  19 => 1,);
     }
 }

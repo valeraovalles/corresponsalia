@@ -94,6 +94,13 @@ class Periodorendicion
     private $cobertura;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="fechaperoceso", type="datetime", nullable=false)
+     */
+    private $fechaproceso;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -289,5 +296,28 @@ class Periodorendicion
     public function getCobertura()
     {
         return $this->cobertura;
+    }
+    
+    /**
+     * Set fechaproceso
+     *
+     * @param integer $fechaproceso
+     * @return Relaciongastos
+     */
+    public function setFechaproceso($fechaproceso)
+    {
+        $this->fechaproceso = $fechaproceso;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechaproceso
+     *
+     * @return integer 
+     */
+    public function getFechaproceso()
+    {
+        return $this->fechaproceso;
     }
 }

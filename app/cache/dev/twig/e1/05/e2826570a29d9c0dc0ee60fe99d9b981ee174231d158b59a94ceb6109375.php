@@ -152,45 +152,33 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
             if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_CORRESPONSALIA")) {
                 // line 58
                 echo "                    
-                            ";
+                            <a href=\"";
                 // line 59
-                if ((($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") != 2) && ($this->getAttribute($this->getContext($context, "entity"), "estatus") != 2))) {
-                    // line 60
-                    echo "                                | <a href=\"";
-                    echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-                    echo "\"><b class=\"text-warning\">RENDIR</b></a> | 
-                            ";
-                } elseif (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
-                    // line 62
-                    echo "                                | <a href=\"";
-                    echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cobertura", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-                    echo "\"><b class=\"text-warning\">COBERTURAS</b></a> |
-                            ";
-                }
-                // line 64
-                echo "                                
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("corresponsalia_rendirgasto", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
+                echo "\"><b class=\"text-warning\">RENDIR</b></a>
+                                
                         ";
             }
-            // line 66
+            // line 62
             echo "                        
                         ";
-            // line 67
+            // line 63
             if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_ADMIN")) {
-                // line 68
+                // line 64
                 echo "                            | <a href=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
                 echo "\"><b class=\"glyphicon glyphicon-eye-open\"></b></a> | 
                             <a href=\"";
-                // line 69
+                // line 65
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
                 echo "\"><b class=\"glyphicon glyphicon-edit\"></b></a> |  
                             <a href=\"";
-                // line 70
+                // line 66
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("estadofondo_new", array("idperiodo" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
                 echo "\"><b class=\"text-warning\">FONDOS</b></a>
                         ";
             }
-            // line 72
+            // line 68
             echo "
                     
                 </td>
@@ -200,14 +188,14 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 77
+        // line 73
         echo "        </tbody>
     </table>
 
     <br><br>
 
     <a class=\"btn btn-primary\" href=\"";
-        // line 82
+        // line 78
         echo $this->env->getExtension('routing')->getPath("periodorendicion_new");
         echo "\">NUEVO PERÍODO</a>
 
@@ -236,6 +224,6 @@ class __TwigTemplate_e105e2826570a29d9c0dc0ee60fe99d9b981ee174231d158b59a94ceb61
 
     public function getDebugInfo()
     {
-        return array (  211 => 82,  204 => 77,  194 => 72,  189 => 70,  185 => 69,  180 => 68,  178 => 67,  175 => 66,  171 => 64,  165 => 62,  159 => 60,  157 => 59,  154 => 58,  152 => 57,  146 => 53,  142 => 51,  138 => 49,  134 => 47,  130 => 45,  128 => 44,  119 => 42,  115 => 41,  111 => 40,  107 => 39,  103 => 38,  97 => 37,  94 => 36,  90 => 35,  72 => 20,  69 => 19,  63 => 14,  53 => 12,  51 => 11,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  199 => 78,  192 => 73,  182 => 68,  177 => 66,  173 => 65,  168 => 64,  166 => 63,  163 => 62,  157 => 59,  154 => 58,  152 => 57,  146 => 53,  142 => 51,  138 => 49,  134 => 47,  130 => 45,  128 => 44,  119 => 42,  115 => 41,  111 => 40,  107 => 39,  103 => 38,  97 => 37,  94 => 36,  90 => 35,  72 => 20,  69 => 19,  63 => 14,  53 => 12,  51 => 11,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

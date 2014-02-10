@@ -1,22 +1,19 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}CORRESPONSALÍA - NUEVA TASA DE CAMBIO{% endblock %}
+
+{% block titulobanner %}
+    NUEVA TASA DE CAMBIO
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>NUEVA TASA DE CAMBIO</h1>
+{% endblock %}
+    
 {% block body -%}
     {{ parent() }}
 
-    <h1>TASA DE CAMBIO</h1>
-    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4><br>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+    
     
     {% if form_errors(form.montocambiodolar) %}
     <div class="alert alert-danger errores" style="width:50%;">
@@ -28,6 +25,28 @@
     <form novalidate method="post" action="{{ path('cambio_create', {'idperiodo' : periodo.id}) }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:50%;">
+            
+            <div class="alert alert-info">Debe colocar el equivalente de su moneda nacional al dólar</div>
+            <div class="contenedorform">
+                <div class="labelform">Corresponsalía:</div>
+                <div class="widgetform">{{ periodo.corresponsalia.nombre|upper }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo gasto:</div>
+                <div class="widgetform">{{ periodo.tipogasto.descripcion|upper }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Moneda:</div>
+                <div class="widgetform">{{ periodo.corresponsalia.tipomoneda.tipomoneda|upper }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Año:</div>
+                <div class="widgetform">{{ periodo.anio }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Mes:</div>
+                <div class="widgetform">{{ periodo.mes }}</div>
+            </div>
             <div class="contenedorform">
                 <div class="labelform">Monto Cambio:</div>
                 <div class="widgetform">{{ form_widget(form.montocambiodolar) }}</div>

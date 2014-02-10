@@ -97,65 +97,72 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
         echo "</div>
             </div>
             <div class=\"contenedorform\">
-                <div class=\"labelform\">Tipo gasto:</div>
+                <div class=\"labelform\">País:</div>
                 <div class=\"widgetform\">";
         // line 34
+        echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "corresponsalia"), "pais"), "pais")), "html", null, true);
+        echo "</div>
+            </div>
+            <div class=\"contenedorform\">
+                <div class=\"labelform\">Tipo gasto:</div>
+                <div class=\"widgetform\">";
+        // line 38
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "descripcion")), "html", null, true);
         echo "</div>
             </div>
             ";
-        // line 36
+        // line 40
         if (($this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "tipogasto"), "id") == 2)) {
-            // line 37
+            // line 41
             echo "            <div class=\"contenedorform\">
                 <div class=\"labelform\">Cobertura:</div>
                 <div class=\"widgetform\">";
-            // line 39
+            // line 43
             echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "cobertura")), "html", null, true);
             echo "</div>
             </div>
             ";
         }
-        // line 42
+        // line 46
         echo "            <div class=\"contenedorform\">
                 <div class=\"labelform\">País:</div>
                 <div class=\"widgetform\">";
-        // line 44
+        // line 48
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "periodo"), "corresponsalia"), "pais"), "pais")), "html", null, true);
         echo "</div>
             </div>
             <div class=\"contenedorform\">
                 <div class=\"labelform\">Año:</div>
                 <div class=\"widgetform\">";
-        // line 48
+        // line 52
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "anio")), "html", null, true);
         echo "</div>
             </div>
             <div class=\"contenedorform\">
                 <div class=\"labelform\">Mes:</div>
                 <div class=\"widgetform\">";
-        // line 52
+        // line 56
         echo twig_escape_filter($this->env, twig_upper_filter($this->env, $this->getAttribute($this->getContext($context, "periodo"), "mes")), "html", null, true);
         echo "</div>
             </div>
             <div class=\"contenedorform\">
                 <div class=\"labelform\">Saldo inicial:</div>
                 <div class=\"widgetform\">";
-        // line 56
+        // line 60
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "saldoinicial"), 'widget');
         echo "</div>
             </div>
             <div class=\"contenedorform\">
                 <div class=\"labelform\">Recurso enviado:</div>
                 <div class=\"widgetform\">";
-        // line 60
+        // line 64
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "recursorecibido"), 'widget');
         echo "</div>
             </div>
             <div class=\"contenedorform\">
                 <div class=\"labelform\">Observación:</div>
                 <div class=\"widgetform\">";
-        // line 64
+        // line 68
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "observacion"), 'widget');
         echo "</div>
             </div>
@@ -163,10 +170,10 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
     
         <input type=\"submit\" value=\"GUARDAR\" class=\"btn btn-primary\"> | 
         <a class=\"btn btn-default\" href=\"";
-        // line 69
+        // line 73
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">IR AL LISTADO DE PERÍODOS</a> ";
-        // line 71
+        // line 75
         echo "    </form>
 
 ";
@@ -184,6 +191,6 @@ class __TwigTemplate_10191a9b935ea856802c4253b1b38e6e1ca19381ccb5f6ba9361c354a3f
 
     public function getDebugInfo()
     {
-        return array (  170 => 71,  167 => 69,  159 => 64,  152 => 60,  145 => 56,  138 => 52,  131 => 48,  124 => 44,  120 => 42,  114 => 39,  110 => 37,  108 => 36,  103 => 34,  96 => 30,  89 => 26,  85 => 25,  82 => 24,  79 => 23,  76 => 22,  73 => 21,  70 => 20,  68 => 19,  65 => 18,  59 => 15,  55 => 14,  51 => 13,  47 => 11,  45 => 10,  40 => 8,  37 => 7,  29 => 3,);
+        return array (  177 => 75,  174 => 73,  166 => 68,  159 => 64,  152 => 60,  145 => 56,  138 => 52,  131 => 48,  127 => 46,  121 => 43,  117 => 41,  115 => 40,  110 => 38,  103 => 34,  96 => 30,  89 => 26,  85 => 25,  82 => 24,  79 => 23,  76 => 22,  73 => 21,  70 => 20,  68 => 19,  65 => 18,  59 => 15,  55 => 14,  51 => 13,  47 => 11,  45 => 10,  40 => 8,  37 => 7,  29 => 3,);
     }
 }

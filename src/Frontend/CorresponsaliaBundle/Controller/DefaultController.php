@@ -40,7 +40,7 @@ class DefaultController extends Controller
         if(empty($estadofondo)) return null;
         $estadofondo=$estadofondo[0];
 
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('corresponsalia'=>$estadofondo->getPeriodorendicion()->getCorresponsalia()->getId()),array('id'=>'desc'));
+        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('periodorendicion'=>$estadofondo->getPeriodorendicion()->getId()),array('id'=>'desc'));
         $corresponsalia=$corresponsalia[0];
 
         $datos['saldoinicial']=$estadofondo->getSaldoinicial();
@@ -76,29 +76,7 @@ class DefaultController extends Controller
         else $cambio=null;
         return $cambio;
     }
-    
-    public function tasacambioAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
-        $idcor=$usercorresponsalia[0]->getCorresponsalia()->getId();
-
-        $cambio=  $this->cambio($idcor);
-        if($cambio==null){
-             $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
-             return $this->redirect($this->generateUrl('cambio_new',array('idcor'=>$idcor)));
-        }
-        
-        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idcor);
-        
-        return $this->render('CorresponsaliaBundle:Default:tasacambio.html.twig',
-                array(
-                    "cambio"=>$cambio,
-                    "corresponsalia"=>$corresponsalia,
-                ));
-    }
-  
+ 
     public function revisionrendicionAction($idperiodo)
     {  
         $em = $this->getDoctrine()->getManager();
@@ -166,7 +144,7 @@ class DefaultController extends Controller
         $this->get('session')->getFlashBag()->add('notice', 'El periodo se ha cambiado su estatus.');
         return $this->redirect($this->generateUrl('periodorendicion_show',array('id'=>$idperiodo)));
     }
-    public function rendirgastofunhonAction($idperiodo)
+    public function rendirgastoAction($idperiodo)
     {    
 
         $em = $this->getDoctrine()->getManager();
@@ -180,7 +158,7 @@ class DefaultController extends Controller
         //valido si ya fue asignada una tasa de cambio
         $cambio=  $this->cambio($idperiodo);
         if($cambio==null){
-             $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
+             $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO QUE UTILIZARÁ PARA ESTA RENDICIÓN ANTES DE CONTINUAR.');
              return $this->redirect($this->generateUrl('cambio_new',array('idperiodo'=>$idperiodo)));
         }
         //fin
@@ -192,6 +170,8 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('periodorendicion'));                
         }
         //fin
+        //
+
         //genero form de relacion gasto
         $entity = new Relaciongasto();
         $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);
@@ -210,70 +190,7 @@ class DefaultController extends Controller
                 ));
     }
     
-   public function rendirgastocobAction($idcobertura)
-    {    
-
-        $em = $this->getDoctrine()->getManager();
-        $cobertura = $em->getRepository('CorresponsaliaBundle:Cobertura')->find($idcobertura);
-        
-        $idperiodo=$cobertura->getPeriodorendicion()->getId();
-        
-        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
-        
-        $idtipogasto=$periodo->getTipogasto()->getId();
-        $anio=$periodo->getAnio();
-        $mes=$periodo->getMes();
-        $idcor=$periodo->getCorresponsalia()->getId();
-        
-        //valido si ya fue asignada una tasa de cambio
-        $cambio=  $this->cambio($idcor);
-        if($cambio==null){
-             $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO DE SU MONEDA AL DÓLAR ANTES DE CONTINUAR.');
-             return $this->redirect($this->generateUrl('cambio_new',array('idcor'=>$idcor)));
-        }
-        //fin
-        
-        //consulto si tiene fondo asignado
-        $estadofondo=$this->Estadofondo($idperiodo);
-        if($estadofondo==null){
-            $this->get('session')->getFlashBag()->add('alert', 'Aún no tiene asignado un fondo para este período.');
-            return $this->redirect($this->generateUrl('periodorendicion'));                
-        }
-        //fin
-
-        //genero form de relacion gasto
-        $entity = new Relaciongasto();
-        $form   = $this->createForm(new RelaciongastoType($idtipogasto), $entity);
-        //fin
-       
-        //verifico si hay rendicion para mostrar el listado con modal
-        $rendicionlista=$this->Listadorendicion($periodo);
-        //fin
-
-        return $this->render('CorresponsaliaBundle:Default:rendirgastocob.html.twig',
-                array(
-                    "form" => $form->createView(),
-                    "estadofondo"=>$estadofondo,
-                    "rendicionlista"=>$rendicionlista,
-                    'periodo'=>$periodo,
-                    "cambio"=>$cambio,
-                    'cobertura'=>$cobertura
-                ));
-    }
-    
   
-    public function rendirgastoAction($idperiodo)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
-        
-        if($periodo->getTipogasto()->getId()==1 or $periodo->getTipogasto()->getId()==3){
-            return $this->forward('CorresponsaliaBundle:Default:rendirgastofunhon',array(
-                'idperiodo'=>$idperiodo,
-                
-            ));
-        }
-    }
     public function inicioAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -310,7 +227,6 @@ class DefaultController extends Controller
         $form->bind($request);
         //fin
 
-        
         //consulto el fondo asigando
         $estadofondo=$this->Estadofondo($idperiodo);
         //
@@ -319,11 +235,9 @@ class DefaultController extends Controller
         $rendicionlista=$this->Listadorendicion($periodo);
         //
         
-        $cambio=  $this->cambio($idcor);
+        $cambio=  $this->cambio($idperiodo);
         
         if ($form->isValid()) {
-            $descgas = $em->getRepository('CorresponsaliaBundle:Descripciongasto')->find($idtipogasto);
-            $entity->setDescripciongasto($descgas);
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
@@ -331,18 +245,9 @@ class DefaultController extends Controller
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('notice', 'Registro guardado exitosamente. Puede veridficar el listado de la rendición.');
-            
-            if($idtipogasto!=2)
             return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$periodo->getId()))); 
-            else
-            return $this->redirect($this->generateUrl('corresponsalia_rendirgastocob',array('idcobertura'=>$datos['cobertura']))); 
-            
-            /*return $this->forward('CorresponsaliaBundle:Default:rendirgasto', array(
-                    'idcor'  => $idcor,
-            ));*/
         }
         
-        if($idtipogasto==1 or $idtipogasto==3)
             return $this->render('CorresponsaliaBundle:Default:rendirgasto.html.twig',
                 array(
                     "form" => $form->createView(),
@@ -351,21 +256,6 @@ class DefaultController extends Controller
                     'periodo'=>$periodo,
                     "cambio"=>$cambio
             ));
-        else if($idtipogasto==2){
-            $cobertura = $em->getRepository('CorresponsaliaBundle:Cobertura')->find($datos['cobertura']);
-            
-            return $this->render('CorresponsaliaBundle:Default:rendirgastocob.html.twig',
-                array(
-                    "form" => $form->createView(),
-                    "estadofondo"=>$estadofondo,
-                    "rendicionlista"=>$rendicionlista,
-                    'periodo'=>$periodo,
-                    "cambio"=>$cambio,
-                    "cobertura"=>$cobertura
-            ));
-            
-        }
-        
     }    
     public function editarendicionAction($idrendicion,$idperiodo)
     {
@@ -386,7 +276,7 @@ class DefaultController extends Controller
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         
         //valido si ya fue asignada una tasa de cambio
-        $cambio=  $this->cambio($idcor);
+        $cambio=  $this->cambio($idperiodo);
         
         //consulto si tiene fondo asignado
         $estadofondo=$this->Estadofondo($idperiodo);
@@ -434,8 +324,6 @@ class DefaultController extends Controller
         $idcor=$periodo->getCorresponsalia()->getId();
         
         $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->find($idrendicion);
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         
         if (!$rendicion) {
             throw $this->createNotFoundException('Unable to find Relaciongasto entity.');
@@ -448,7 +336,7 @@ class DefaultController extends Controller
         //consulto corresponsalía
         $estadofondo=$this->Estadofondo($idperiodo);
         $rendicionlista=$this->Listadorendicion($periodo);
-        $cambio=  $this->cambio($idcor);
+        $cambio=  $this->cambio($periodo);
         
         
         if ($form->isValid()) {

@@ -44,6 +44,13 @@ class Descripciongasto
     private $tipogasto;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="partida", type="string", nullable=true)
+     */
+    private $partida;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -101,5 +108,28 @@ class Descripciongasto
     
     public function __toString(){
         return $this->getDescripcion().' '.$this->getTipogasto()->getId();
+    }
+    
+    /**
+     * Set partida
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Partida $partida
+     * @return Relaciongastos
+     */
+    public function setPartida(\Frontend\CorresponsaliaBundle\Entity\Partida $partida = null)
+    {
+        $this->partida = $partida;
+    
+        return $this;
+    }
+
+    /**
+     * Get partida
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Partida 
+     */
+    public function getPartida()
+    {
+        return $this->partida;
     }
 }

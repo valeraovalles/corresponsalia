@@ -25,11 +25,10 @@ class CambioController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CorresponsaliaBundle:Cambio')->findBy(array('periodorendicion'=>$idperiodo),array('id'=>'desc'));
-        $periodo = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($idperiodo);
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
 
         return $this->render('CorresponsaliaBundle:Cambio:index.html.twig', array(
             'entities' => $entities,
-            'idcor'=>$idcor,
             "periodo"=>$periodo
         ));
     }
@@ -57,6 +56,7 @@ class CambioController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Se ha creado la nueva tasa de cambio exitosamente.');
             return $this->redirect($this->generateUrl('cambio', array('idperiodo' => $idperiodo)));
         }
 

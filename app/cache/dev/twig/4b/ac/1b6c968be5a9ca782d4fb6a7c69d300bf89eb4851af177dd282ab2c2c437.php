@@ -65,23 +65,44 @@ class __TwigTemplate_4bac1b6c968be5a9ca782d4fb6a7c69d300bf89eb4851af177dd282ab2c
         echo "</div>
         </div>
         <div class=\"contenedorform\">
-            <div class=\"labelform\">Tipo gasto:</div>
+            <div class=\"labelform\">País:</div>
             <div class=\"widgetform\">";
         // line 23
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "corresponsalia"), "pais"), "pais"), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
-            <div class=\"labelform\">Año:</div>
+            <div class=\"labelform\">Tipo gasto:</div>
             <div class=\"widgetform\">";
         // line 27
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "descripcion"), "html", null, true);
+        echo "</div>
+        </div>
+        ";
+        // line 29
+        if (($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "tipogasto"), "id") == 2)) {
+            // line 30
+            echo "        <div class=\"contenedorform\">
+            <div class=\"labelform\">Cobertura:</div>
+            <div class=\"widgetform\">";
+            // line 32
+            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "cobertura")), "html", null, true);
+            echo "</div>
+        </div>
+        ";
+        }
+        // line 35
+        echo "        <div class=\"contenedorform\">
+            <div class=\"labelform\">Año:</div>
+            <div class=\"widgetform\">";
+        // line 37
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "anio"), "html", null, true);
         echo "</div>
         </div>
         <div class=\"contenedorform\">
             <div class=\"labelform\">Mes:</div>
             <div class=\"widgetform\">";
-        // line 31
+        // line 41
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "mes"), "html", null, true);
         echo "</div>
         </div>
@@ -89,67 +110,67 @@ class __TwigTemplate_4bac1b6c968be5a9ca782d4fb6a7c69d300bf89eb4851af177dd282ab2c
             <div class=\"labelform\">Estatus:</div>
             <div class=\"widgetform\">
                 ";
-        // line 36
+        // line 46
         if (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 1)) {
-            // line 37
+            // line 47
             echo "                    <span class=\"label label-info\">Abierto</span>
                 ";
         } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 2)) {
-            // line 39
+            // line 49
             echo "                    <span class=\"label label-warning\">Enviado para revisión</span>
                 ";
         } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 3)) {
-            // line 41
+            // line 51
             echo "                    <span class=\"label label-danger\">Devuelto para corrección</span>
                 ";
         } elseif (($this->getAttribute($this->getContext($context, "entity"), "estatus") == 4)) {
-            // line 43
+            // line 53
             echo "                    <span class=\"label label-success\">Cerrado</span>
                 ";
         }
-        // line 45
+        // line 55
         echo "            </div>
         </div>
         ";
-        // line 47
+        // line 57
         if ($this->getAttribute($this->getContext($context, "entity"), "observacion")) {
-            // line 48
+            // line 58
             echo "        <div class=\"contenedorform\">
             <div class=\"labelform\">Observacion:</div>
             <div class=\"widgetform\">";
-            // line 50
+            // line 60
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "observacion"), "html", null, true);
             echo "</div>
         </div>
         ";
         }
-        // line 53
+        // line 63
         echo "    </div>
     
     <a class=\"btn btn-default\" href=\"";
-        // line 55
+        // line 65
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("periodorendicion_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">IR A EDITAR</a> | 
     <a class=\"btn btn-default\" href=\"";
-        // line 56
+        // line 66
         echo $this->env->getExtension('routing')->getPath("periodorendicion");
         echo "\">IR AL LISTADO</a>
   
     <BR><BR>
     ";
-        // line 59
+        // line 69
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_start', array("attr" => array("onsubmit" => "return confirm(\"¿Seguro que deseas eliminar?\")")));
         echo "
         ";
-        // line 60
+        // line 70
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'errors');
         echo "
         ";
-        // line 61
+        // line 71
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "delete_form"), "submit"), 'row', array("attr" => array("class" => "btn btn-danger")));
         echo "
     ";
-        // line 62
+        // line 72
         echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "delete_form"), 'form_end');
         echo "
     
@@ -170,6 +191,6 @@ class __TwigTemplate_4bac1b6c968be5a9ca782d4fb6a7c69d300bf89eb4851af177dd282ab2c
 
     public function getDebugInfo()
     {
-        return array (  153 => 62,  149 => 61,  145 => 60,  141 => 59,  135 => 56,  131 => 55,  127 => 53,  121 => 50,  117 => 48,  115 => 47,  111 => 45,  107 => 43,  103 => 41,  99 => 39,  95 => 37,  93 => 36,  85 => 31,  78 => 27,  71 => 23,  64 => 19,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  174 => 72,  170 => 71,  166 => 70,  162 => 69,  156 => 66,  152 => 65,  148 => 63,  142 => 60,  138 => 58,  136 => 57,  132 => 55,  128 => 53,  124 => 51,  120 => 49,  116 => 47,  114 => 46,  106 => 41,  99 => 37,  95 => 35,  89 => 32,  85 => 30,  83 => 29,  78 => 27,  71 => 23,  64 => 19,  56 => 14,  53 => 13,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  31 => 3,);
     }
 }

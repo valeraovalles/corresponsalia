@@ -36,11 +36,11 @@ class __TwigTemplate_16f80e381c0383a894a8adc9c23d48a850370578807420fe1a2c29a4bd3
         echo "</td>
         </tr>
         <tr>
-            <th>Imputación</th>
-            <td>";
+            <th>Cambio</th>
+            <td><input type=\"text\" value=\"";
         // line 13
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "imputacionpresupuestaria"), 'widget');
-        echo "</td>
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "cambio"), "montocambiodolar"), "html", null, true);
+        echo "\" id=\"cambio\" name=\"rendicion_relaciongasto[cambio]\"></td>
             <th>Nombre/Razón</th>
             <td>";
         // line 15
@@ -85,6 +85,6 @@ class __TwigTemplate_16f80e381c0383a894a8adc9c23d48a850370578807420fe1a2c29a4bd3
 
     public function getDebugInfo()
     {
-        return array (  69 => 25,  64 => 23,  52 => 17,  47 => 15,  42 => 13,  35 => 9,  25 => 5,  89 => 33,  85 => 32,  81 => 31,  74 => 27,  66 => 25,  59 => 21,  55 => 20,  51 => 19,  40 => 14,  36 => 13,  23 => 3,  19 => 1,  159 => 46,  152 => 42,  145 => 38,  141 => 37,  137 => 36,  134 => 35,  132 => 34,  128 => 33,  124 => 32,  121 => 31,  119 => 30,  116 => 29,  110 => 26,  106 => 25,  102 => 24,  98 => 23,  94 => 22,  90 => 21,  86 => 20,  82 => 19,  78 => 17,  76 => 16,  70 => 26,  67 => 13,  53 => 10,  49 => 9,  44 => 15,  38 => 5,  33 => 4,  30 => 7,);
+        return array (  69 => 25,  52 => 17,  47 => 15,  42 => 13,  35 => 9,  25 => 5,  19 => 1,  167 => 48,  160 => 44,  152 => 39,  148 => 38,  145 => 37,  143 => 36,  139 => 35,  135 => 34,  132 => 33,  130 => 32,  127 => 31,  121 => 28,  117 => 27,  113 => 26,  109 => 25,  105 => 24,  101 => 23,  97 => 22,  93 => 21,  89 => 19,  87 => 18,  81 => 16,  78 => 15,  64 => 23,  59 => 21,  53 => 10,  49 => 9,  44 => 8,  38 => 5,  33 => 4,  30 => 7,);
     }
 }
