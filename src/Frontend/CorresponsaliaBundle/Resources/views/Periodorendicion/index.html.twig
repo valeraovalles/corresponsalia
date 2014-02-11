@@ -56,14 +56,22 @@
                     
                         {% if is_granted('ROLE_RENDICION_CORRESPONSALIA') %}
                     
+                            {% if entity.estatus==1 or entity.estatus==3 %}
                             <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
+                            {% else %}
+                            <b>BLOQUEADO</b>
+                            {% endif %}
                                 
                         {% endif %}
                         
                         {% if is_granted('ROLE_RENDICION_ADMIN') %}
-                            | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
-                            <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |  
-                            <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">FONDOS</b></a>
+                            {% if entity.estatus!=4 %}
+                                | <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a> | 
+                                <a href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |  
+                                <a href="{{ path('estadofondo_new', {'idperiodo':entity.id}) }}"><b class="text-warning">FONDOS</b></a>
+                                {% else %}
+                                <b>CULMINADO</b>
+                            {% endif %}
                         {% endif %}
 
                     

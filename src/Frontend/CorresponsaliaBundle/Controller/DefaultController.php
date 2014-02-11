@@ -197,8 +197,6 @@ class DefaultController extends Controller
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
                      
-      
-        
     	$em = $this->getDoctrine()->getManager();
         $dql = "select distinct p.id, p.pais, p.latitud, p.longitud, o.nombre from CorresponsaliaBundle:Corresponsalia o join o.pais p";
         $consulta = $em->createQuery($dql);
@@ -381,11 +379,7 @@ class DefaultController extends Controller
         
 
         $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado la rendicion exitosamente.');
-        
-            if($entity->getPeriodorendicion()->getTipogasto()->getId()!=2)
-                return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$idperiodo))); 
-            else
-                return $this->redirect($this->generateUrl('corresponsalia_rendirgastocob',array('idcobertura'=>$entity->getCobertura()->getId()))); 
+        return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$idperiodo))); 
             
     }
     

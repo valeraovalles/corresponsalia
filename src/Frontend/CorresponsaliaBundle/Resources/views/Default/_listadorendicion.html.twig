@@ -14,12 +14,12 @@
                             <th>Id</th>
                             <th>Nro</th>
                             <th>F. Factura</th>
-                            <th>Imputación</th>
                             <th>Descripcion</th>
                             <th>Nombre/Razón</th>
                             <th>I. Fiscal</th>
-                            <th>Dólares.</th>
+                            <th>Tasa</th>
                             <th>Monto MN.</th>
+                            <th>Dólares.</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -29,12 +29,13 @@
                                 <td>{{ entity.id }}</td>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                                <td>{{ entity.imputacionpresupuestaria }}</td>
+                                
                                 <td>{{ entity.descripciongasto.descripcion }}</td>
                                 <td>{{ entity.identificacionfiscal }}</td>
                                 <td>{{ entity.numerofactura }}</td>
-                                <td>{{ entity.montodolar }}</td>
+                                <td>{{ entity.cambio }}</td>
                                 <td>{{ entity.montomonnac }}</td>
+                                <td>{{ entity.montodolar }}</td>
                                 <td><a href="{{ path('corresponsalia_editarendicion',{'idperiodo':periodo.id,'idrendicion':entity.id }) }}">Editar</a></td>
                             </tr>
                     {% endfor %}
@@ -51,7 +52,9 @@
                </script>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">VOLVER</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">VOLVER</button>&nbsp;&nbsp;
+          <a href="{{ path('reporte_excelrendicion',{'idperiodo':periodo.id}) }}"><img width="50px;" src="{{ asset('images/excel.png') }}"></a>
+        
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

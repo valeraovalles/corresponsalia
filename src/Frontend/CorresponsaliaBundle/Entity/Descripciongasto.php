@@ -116,7 +116,7 @@ class Descripciongasto
      * @param \Frontend\CorresponsaliaBundle\Entity\Partida $partida
      * @return Relaciongastos
      */
-    public function setPartida(\Frontend\CorresponsaliaBundle\Entity\Partida $partida = null)
+    public function setPartida($partida)
     {
         $this->partida = $partida;
     

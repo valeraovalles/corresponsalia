@@ -82,7 +82,7 @@ class Relaciongasto
     /**
      * @var float
      *
-     * @ORM\Column(name="montomonnac", type="decimal", precision=20, scale= 2, nullable=false)
+     * @ORM\Column(name="montomonnac", type="decimal", precision=20, scale= 3, nullable=false)
      * @Assert\NotBlank(message="Debe colocar el monto de la moneda nacional.")
      */
     private $montomonnac;
@@ -90,7 +90,7 @@ class Relaciongasto
     /**
      * @var float
      *
-     * @ORM\Column(name="montodolar",  type="decimal", precision=20, scale= 2, nullable=false)
+     * @ORM\Column(name="montodolar",  type="decimal", precision=20, scale= 3, nullable=false)
      */
     private $montodolar;
 

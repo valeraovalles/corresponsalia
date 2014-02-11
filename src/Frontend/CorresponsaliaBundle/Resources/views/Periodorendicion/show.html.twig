@@ -66,10 +66,12 @@
     <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
   
     <BR><BR>
-    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
-        {{ form_errors(delete_form) }}
-        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
-    {{ form_end(delete_form) }}
+    {% if entity.estatus!=4 %}
+        {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+            {{ form_errors(delete_form) }}
+            {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+        {{ form_end(delete_form) }}
+    {% endif %}
     
     
     
