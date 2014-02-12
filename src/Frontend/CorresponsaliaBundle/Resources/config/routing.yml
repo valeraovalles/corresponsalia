@@ -50,6 +50,10 @@ corresponsalia_guardarevisionrendicion:
 reporte_excelrendicion:
     pattern:  /excelrendicion/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Reporte:excelrendicion" }    
+    
+reporte_auditoriaestadofondo:
+    pattern:  /auditoriaestadofondo
+    defaults: { _controller: "CorresponsaliaBundle:Reporte:auditoriaestadofondo" }    
 
 ################################################################################
 

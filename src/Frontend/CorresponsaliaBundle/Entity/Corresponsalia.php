@@ -226,6 +226,6 @@ class Corresponsalia
     
     public function __toString()
     {
-        return $this->getNombre();
+        return $this->getNombre().' | '.$this->getPais()->getPais();
     }
 }

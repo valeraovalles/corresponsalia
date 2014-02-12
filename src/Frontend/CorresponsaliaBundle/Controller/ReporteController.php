@@ -10,6 +10,9 @@ use Doctrine\ORM\EntityRepository;
 use Frontend\CorresponsaliaBundle\Resources\Misclases\htmlreporte;
 use Frontend\CorresponsaliaBundle\Resources\Misclases\funciones;
 
+use Frontend\CorresponsaliaBundle\Entity\Reportes\AuditoriaEstadofondo;
+use Frontend\CorresponsaliaBundle\Form\Reportes\AuditoriaEstadofondoType;
+
 
 /**
  * Reporte controller.
@@ -44,7 +47,31 @@ class ReporteController extends Controller
         //damos salida a la tabla
         echo $info;
         die;
-    }  
+    } 
+    
+    public function auditoriaestadofondoAction()
+    {    
+        $entity = new AuditoriaEstadofondo();
+        $form   = $this->createForm(new AuditoriaEstadofondoType(), $entity);
+        return $this->render('CorresponsaliaBundle:Reporte:auditoriaestadofondo.html.twig', array(
+            'form'=>$form->createView(),
+        ));
+        
+        die;
+                    //GENERO EL PDF
+                include("libs/MPDF/mpdf.php");
+                $mpdf=new \mPDF();
+                //izq - der - arr - aba
+                $mpdf->AddPage('L','','','','',10,10,0,0);
+                //$mpdf->AddPage('L','','','','',25,25,55,45,18,12);
+                $stylesheet = file_get_contents('bundles/distribucion/css/reporteinformativo.css');
+                $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
+         
+                $mpdf->WriteHTML($html);
+                $mpdf->Output("reporte".".pdf","D");
+                exit;
+    }
+                
     public function reporteinfoAction(Request $request)
     {
 

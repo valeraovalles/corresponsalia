@@ -62,15 +62,17 @@
         {% endif %}
     </div>
     
-    <a class="btn btn-default" href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    {% if is_granted('ROLE_RENDICION_ADMIN') %}<a class="btn btn-default" href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | {% endif %}
     <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
   
     <BR><BR>
-    {% if entity.estatus!=4 %}
-        {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
-            {{ form_errors(delete_form) }}
-            {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
-        {{ form_end(delete_form) }}
+    {% if is_granted('ROLE_RENDICION_ADMIN') %}
+        {% if entity.estatus!=4 %}
+            {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+                {{ form_errors(delete_form) }}
+                {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+            {{ form_end(delete_form) }}
+        {% endif %}
     {% endif %}
     
     
