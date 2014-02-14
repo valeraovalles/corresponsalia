@@ -36,64 +36,70 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
   <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
     <ul class=\"nav navbar-nav\">
         
-        
+      ";
+        // line 18
+        if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_ADMIN")) {
+            echo "  
       <li class=\"dropdown\">
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">USUARIOS<b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-        // line 22
-        echo $this->env->getExtension('routing')->getPath("user");
-        echo "\">Listado de usuarios</a></li>
+            // line 22
+            echo $this->env->getExtension('routing')->getPath("user");
+            echo "\">Listado de usuarios</a></li>
           <li><a href=\"";
-        // line 23
-        echo $this->env->getExtension('routing')->getPath("user_new");
-        echo "\">Nuevo usuario</a></li>
+            // line 23
+            echo $this->env->getExtension('routing')->getPath("user_new");
+            echo "\">Nuevo usuario</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 25
-        echo $this->env->getExtension('routing')->getPath("rol");
-        echo "\">Listado de roles</a></li>
+            // line 25
+            echo $this->env->getExtension('routing')->getPath("rol");
+            echo "\">Listado de roles</a></li>
           <li><a href=\"";
-        // line 26
-        echo $this->env->getExtension('routing')->getPath("rol_new");
-        echo "\">Nuevo rol</a></li>
+            // line 26
+            echo $this->env->getExtension('routing')->getPath("rol_new");
+            echo "\">Nuevo rol</a></li>
           <li class=\"divider\"></li>
           <li><a href=\"";
-        // line 28
-        echo $this->env->getExtension('routing')->getPath("usercorresponsalia");
-        echo "\">Listado Usuario-Corresponsalía</a></li>
+            // line 28
+            echo $this->env->getExtension('routing')->getPath("usercorresponsalia");
+            echo "\">Listado Usuario-Corresponsalía</a></li>
           <li><a href=\"";
-        // line 29
-        echo $this->env->getExtension('routing')->getPath("usercorresponsalia_new");
-        echo "\">Nueva relación usuario-Corresponsalía</a></li>
+            // line 29
+            echo $this->env->getExtension('routing')->getPath("usercorresponsalia_new");
+            echo "\">Nueva relación usuario-Corresponsalía</a></li>
         </ul>
       </li>
-      
       ";
+        }
         // line 33
+        echo "      
+      ";
+        // line 34
         if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_ADMIN")) {
-            // line 34
+            // line 35
             echo "      <li class=\"dropdown\">
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">ADMINISTRAR <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-            // line 37
+            // line 38
             echo $this->env->getExtension('routing')->getPath("tipomoneda");
             echo "\">Tipo de Moneda</a></li>
           <li><a href=\"";
-            // line 38
+            // line 39
             echo $this->env->getExtension('routing')->getPath("tipocorresponsalia");
             echo "\">Tipo de Corresponsalía</a></li>
           <li><a href=\"";
-            // line 39
+            // line 40
             echo $this->env->getExtension('routing')->getPath("corresponsalia");
             echo "\">Corresponsalia</a></li>
           <li><a href=\"";
-            // line 40
+            // line 41
             echo $this->env->getExtension('routing')->getPath("periodorendicion");
             echo "\">Asignar fondo</a></li>
           <li><a href=\"";
-            // line 41
+            // line 42
             echo $this->env->getExtension('routing')->getPath("revision_periodorendicion");
             echo "\">Revisión de rendiciones</a></li>
           <li class=\"divider\"></li>
@@ -101,42 +107,34 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
       </li>
       ";
         }
-        // line 46
+        // line 47
         echo "      
       ";
-        // line 47
+        // line 48
         if ($this->env->getExtension('security')->isGranted("ROLE_RENDICION_CORRESPONSALIA")) {
-            // line 48
+            // line 49
             echo "      <li class=\"dropdown\">
         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">RENDICIÓN <b class=\"caret\"></b></a>
         <ul class=\"dropdown-menu\">
           <li><a href=\"";
-            // line 51
+            // line 52
             echo $this->env->getExtension('routing')->getPath("periodorendicion");
             echo "\">Rendir gastos</a></li>
         </ul>
       </li>
       ";
         }
-        // line 55
+        // line 56
         echo "      
-      <li class=\"dropdown\">
-        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">REPORTES <b class=\"caret\"></b></a>
-        <ul class=\"dropdown-menu\">
-          <li><a href=\"";
-        // line 59
-        echo $this->env->getExtension('routing')->getPath("reporte_auditoriaestadofondo");
-        echo "\">Auditoria Estado Fondo</a></li>
-          <li><a href=\"#\">Auditoria Rendición</a></li>
-        </ul>
-      </li>
-      
       ";
-        // line 80
+        // line 64
+        echo "      
+      ";
+        // line 81
         echo "    </ul>
     <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 82
+        // line 83
         echo $this->env->getExtension('routing')->getPath("usuario_logout");
         echo "\">SALIR</a></li>
       
@@ -158,6 +156,6 @@ class __TwigTemplate_b4172b54a9e0f53fe602047e399bd0bd7f65c1eaea2977c4e19feaae332
 
     public function getDebugInfo()
     {
-        return array (  140 => 82,  136 => 80,  128 => 59,  122 => 55,  115 => 51,  110 => 48,  108 => 47,  105 => 46,  97 => 41,  93 => 40,  89 => 39,  85 => 38,  81 => 37,  76 => 34,  74 => 33,  67 => 29,  63 => 28,  58 => 26,  54 => 25,  49 => 23,  45 => 22,  31 => 11,  19 => 1,);
+        return array (  138 => 83,  134 => 81,  131 => 64,  128 => 56,  121 => 52,  116 => 49,  114 => 48,  111 => 47,  103 => 42,  99 => 41,  95 => 40,  91 => 39,  87 => 38,  82 => 35,  80 => 34,  77 => 33,  70 => 29,  66 => 28,  61 => 26,  57 => 25,  52 => 23,  48 => 22,  41 => 18,  31 => 11,  19 => 1,);
     }
 }
