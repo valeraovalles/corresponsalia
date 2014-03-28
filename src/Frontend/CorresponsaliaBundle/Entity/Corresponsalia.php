@@ -76,6 +76,30 @@ class Corresponsalia
     private $responsable;
 
     /**
+     * @var \Representante
+     *
+     * @ORM\ManyToOne(targetEntity="Representante")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="representante_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $representante;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registro", type="string", nullable=true)
+     */
+    private $registro;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -223,6 +247,76 @@ class Corresponsalia
     {
         return $this->responsable;
     }
+    
+    /**
+     * Set representante
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Representante $representante
+     * @return Representante
+     */
+    public function setRepresentante(\Frontend\CorresponsaliaBundle\Entity\Representante $representante = null)
+    {
+        $this->representante = $representante;
+    
+        return $this;
+    }
+
+    /**
+     * Get representante
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Representante 
+     */
+    public function getRepresentante()
+    {
+        return $this->representante;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Corresponsalia
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set registro
+     *
+     * @param string $registro
+     * @return Corresponsalia
+     */
+    public function setRegistro($registro)
+    {
+        $this->registro = $registro;
+    
+        return $this;
+    }
+
+    /**
+     * Get registro
+     *
+     * @return string 
+     */
+    public function getRegistro()
+    {
+        return $this->registro;
+    }
+
     
     public function __toString()
     {
