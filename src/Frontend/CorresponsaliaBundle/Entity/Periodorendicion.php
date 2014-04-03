@@ -99,6 +99,13 @@ class Periodorendicion
      * @ORM\Column(name="fechaperoceso", type="datetime", nullable=false)
      */
     private $fechaproceso;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="justificadevolucion", type="string", nullable=true)
+     */
+    private $justificadevolucion;
     
     /**
      * Get id
@@ -223,6 +230,29 @@ class Periodorendicion
     public function getObservacion()
     {
         return $this->observacion;
+    }
+
+    /**
+     * Set justificadevolucion
+     *
+     * @param string $justificadevolucion
+     * @return Tipocorresponsalia
+     */
+    public function setJustificadevolucion($justificadevolucion)
+    {
+        $this->justificadevolucion = $justificadevolucion;
+    
+        return $this;
+    }
+
+    /**
+     * Get justificadevolucion
+     *
+     * @return string 
+     */
+    public function getJustificadevolucion()
+    {
+        return $this->justificadevolucion;
     }
     
      /**
