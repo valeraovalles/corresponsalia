@@ -125,13 +125,22 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('corresponsalia_revisionrendicion',array('idperiodo'=>$idperiodo)));
         
     }
-    public function estatusrendicionAction($idperiodo,$estatus)
+    public function estatusrendicionAction(Request $request, $idperiodo,$estatus)
     {  
         $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
         $consulta->execute();
+
+        //devuelto para correción
+        if($estatus==3){
+            $datos=$request->request->all();
+            $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.justificadevolucion= :justificadev WHERE p.id = :id');
+            $consulta->setParameter('id', $idperiodo);
+            $consulta->setParameter('justificadev', $datos['justificadev']);
+            $consulta->execute();
+        }
 
         //cambio los estatus de las rendiciones a aprobadas si no han sido cambiadas
         if($estatus==4){

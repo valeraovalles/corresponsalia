@@ -60,7 +60,8 @@
 
         {% if oculta==1 %}
             <form name="formdevolucion" novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':3 }) }}" onsubmit="return confirm('¿Está seguro que desea devolver esta rendición para su corrección? Recuerde actualizar las rediciones que se deben corregir antes de devolver la rendición!!');">  
-               <textarea placeholder="Describa el error" id="justificadev"></textarea><br>
+               
+               <textarea name="justificadev" placeholder="Describa el error" id="justificadev"></textarea><br>
                <input type="button" onclick="devolver()" value="DEVOLVER PARA CORRECIÓN" class="btn btn-danger">
 
             </form> 

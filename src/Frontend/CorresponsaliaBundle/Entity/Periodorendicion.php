@@ -19,7 +19,7 @@ class Periodorendicion
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="rendicion.rendicion_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="rendicion.periodorendicion_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
