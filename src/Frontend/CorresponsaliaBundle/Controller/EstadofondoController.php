@@ -199,6 +199,8 @@ class EstadofondoController extends Controller
 
         $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
 
+        $recursoanterior=$entity->getRecursorecibido();
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Estadofondo entity.');
         }
@@ -210,12 +212,14 @@ class EstadofondoController extends Controller
         if ($editForm->isValid()) {
             
             $data = $editForm->getData();
-       
+
+
             
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario=$em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
-            $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido())-$entity->getPagos());
+            $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido()+$recursoanterior)-$entity->getPagos());
+            $entity->setRecursorecibido($data->getRecursorecibido()+$recursoanterior);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Registro actualizado exitosamente');

@@ -21,20 +21,18 @@
     <br><table id="tablalista" style="width: 97%;" cellpadding="5px">
         <thead>
             <tr>
-                <th>Id</th>
                 <th style="width: 5%">Anio</th>
                 <th style="width: 5%">Mes</th>
-                <th style="width: 30%">Corresponsalía</th>
-                <th>Tipo gasto</th>
-                <th>Cobertura</th>
-                <th>Estatus</th>
-                <th>Actions</th>
+                <th style="width: 24%">Corresponsalía</th>
+                <th style="width: 18%">Tipo gasto</th>
+                <th style="width: 28%">Cobertura</th>
+                <th style="width: 5%">Estatus</th>
+                <th style="width: 15%">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.anio }}</td>
                 <td>{{ entity.mes }}</td>
                 <td>{{ entity.corresponsalia.nombre }}</td>
