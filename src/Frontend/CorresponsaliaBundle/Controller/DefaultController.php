@@ -150,16 +150,18 @@ class DefaultController extends Controller
 
             $anioac=$periodo->getAnio();
             $mesac=$periodo->getMes();
+            $tipog=$periodo->getTipogasto()->getId();
             $sf=$ef[0]->getSaldofinal();
 
             if($mesac==12){ $messig=1; $anioac=$anioac+1; } 
             else $messig=$mesac+1;
 
-            $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor";
+            $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor and p.tipogasto= :idtipogasto";
             $query = $em->createQuery($dql);
             $query->setParameter('anio', $anioac);
             $query->setParameter('mes', $messig);
             $query->setParameter('idcor', $periodo->getCorresponsalia()->getId());
+            $query->setParameter('idtipogasto', $tipog);
             $periodosig = $query->getResult(); 
 
             if($periodosig){
