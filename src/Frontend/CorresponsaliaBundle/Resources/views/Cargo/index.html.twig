@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CARGOS{% endblock %}
+
+{% block titulobanner %}
+    CARGOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTADO DE CARGOS</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table id="tablalista" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            {% if entity.descripcion != 'Representante Legal' %}
+            <tr>
+                <td><a href="{{ path('cargo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.descripcion }}</td>
+                    <td>
+                        <a href="{{ path('cargo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                        <a href="{{ path('cargo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+    <a class="btn btn-primary" href="{{ path('cargo_new') }}">NUEVO CARGO</a><br>
+
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
+
+    {% endblock %}

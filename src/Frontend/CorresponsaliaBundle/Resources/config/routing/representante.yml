@@ -1,0 +1,30 @@
+representante:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Representante:index" }
+
+representante_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Representante:show" }
+
+representante_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Representante:new" }
+
+representante_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Representante:create" }
+    requirements: { _method: post }
+
+representante_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Representante:edit" }
+
+representante_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Representante:update" }
+    requirements: { _method: post|put }
+
+representante_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Representante:delete" }
+    requirements: { _method: post|delete }

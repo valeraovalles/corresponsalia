@@ -1,0 +1,30 @@
+personal:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Personal:index" }
+
+personal_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Personal:show" }
+
+personal_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Personal:new" }
+
+personal_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Personal:create" }
+    requirements: { _method: post }
+
+personal_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Personal:edit" }
+
+personal_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Personal:update" }
+    requirements: { _method: post|put }
+
+personal_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Personal:delete" }
+    requirements: { _method: post|delete }

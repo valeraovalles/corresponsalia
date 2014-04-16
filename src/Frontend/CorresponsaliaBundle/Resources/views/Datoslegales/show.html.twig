@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - DATOS LEGALES POR CORRESPONSAL&Iacute;A{% endblock %}
+
+{% block titulobanner %}
+    DATOS LEGALES POR CORRESPONSAL&Iacute;A
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>DETALLE DE DATOS LEGALES</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if entity.registro != NULL or entity.direccion != NULL or entity.representanteId != NULL %}
+
+        <div class="formShow" style="width:80%;">
+            <div class="contenedorform">
+                <div class="labelform">Corresponsal&iacute;a:</div>
+                <div class="widgetform">{{ entity.nombre }} | {{ entity.pais }}</div>
+            </div>
+            {% if entity.direccion != NULL %}
+                <div class="contenedorform">
+                    <div class="labelform">Direcci&oacute;n:</div>
+                    <div class="widgetform">{{ entity.direccion }}</div>
+                </div>
+            {% endif %}
+            {% if entity.registro != NULL %}
+                <div class="contenedorform">
+                    <div class="labelform">Datos del Registro:</div>
+                    <div class="widgetform">{{ entity.registro }}</div>
+                </div>
+            {% endif %}
+            {% if entity.representanteId != NULL %}
+                <div class="contenedorform">
+                    <div class="labelform">Representante Legal:</div>
+                    <div class="widgetform">{{ entity.representanteId }}</div>
+                </div>
+            {% endif %}
+        </div>
+        <a class="btn btn-default" href="{{ path('datoslegales_edit', { 'id': entity.id }) }}">IR A EDITAR</a> |
+    {% else %}
+
+        <div class="formShow" style="width:80%;">
+            <div class="contenedorform">
+                NO EXISTEN DATOS LEGALES ASOCIADOS A ESTA CORRESPONSAL&Iacute;A
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('datoslegales_edit', { 'id': entity.id }) }}">AGREGAR DATOS</a> |
+
+    {% endif %}
+    
+    <a class="btn btn-default" href="{{ path('datoslegales') }}">IR AL LISTADO</a>
+    
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

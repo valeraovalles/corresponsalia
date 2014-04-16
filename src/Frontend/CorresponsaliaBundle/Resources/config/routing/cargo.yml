@@ -1,0 +1,30 @@
+cargo:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:index" }
+
+cargo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:show" }
+
+cargo_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:new" }
+
+cargo_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:create" }
+    requirements: { _method: post }
+
+cargo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:edit" }
+
+cargo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:update" }
+    requirements: { _method: post|put }
+
+cargo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:delete" }
+    requirements: { _method: post|delete }

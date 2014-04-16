@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONTRATOS{% endblock %}
+
+{% block titulobanner %}
+    CONTRATOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>DETALLES DEL CONTRATO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">C&oacute;digo:</div>
+            <div class="widgetform">{{ entity.0.codigo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Inicio:</div>
+            <div class="widgetform">{{ entity.0.fecha_inicio|date('Y-m-d') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Fin:</div>
+            <div class="widgetform">{{ entity.0.fecha_fin|date('Y-m-d') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Duraci&oacute;n:</div>
+            <div class="widgetform">{{ entity.0.duracion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Monto en Bs:</div>
+            <div class="widgetform">{{ entity.0.monto_bs }}</div>
+        </div>
+        {% if entity.0.monto_dolares != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Monto en Moneda Extranjera (Dolares):</div>
+                <div class="widgetform">{{ entity.0.monto_dolares }}</div>
+            </div>
+        {% endif %}
+        {% if entity.0.monto_euros != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Monto en Moneda Extranjera (Euros):</div>
+                <div class="widgetform">{{ entity.0.monto_euros }}</div>
+            </div>
+        {% endif %}
+    </div> 
+    <a class="btn btn-default" href="{{ path('contrato') }}">IR AL LISTADO</a>
+    
+    <BR><BR>
+    
+{% endblock %}

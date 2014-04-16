@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CARGOS{% endblock %}
+
+{% block titulobanner %}
+    CARGOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>EDITAR EL CARGO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('cargo_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Descripcion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+        </div>        
+         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('cargo') }}">IR AL LISTADO</a>
+    </form>
+
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

@@ -1,0 +1,30 @@
+contrato:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:index" }
+
+contrato_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:show" }
+
+contrato_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:new" }
+
+contrato_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:create" }
+    requirements: { _method: post }
+
+contrato_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:edit" }
+
+contrato_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:update" }
+    requirements: { _method: post|put }
+
+contrato_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:delete" }
+    requirements: { _method: post|delete }

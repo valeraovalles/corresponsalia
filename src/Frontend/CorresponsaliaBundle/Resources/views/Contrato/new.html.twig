@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONTRATOS{% endblock %}
+
+{% block titulobanner %}
+    CONTRATOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CREAR UN CONTRATO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('contrato_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">C&oacute;digo:</div>
+                <div class="widgetform">{{ form_widget(form.codigo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Inicio:</div>
+                <div class="widgetform">{{ form_widget(form.fechainicio) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Fin:</div>
+                <div class="widgetform">{{ form_widget(form.fechafin) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Durác&oacute;n del Contrato:</div>
+                <div class="widgetform">{{ form_widget(form.duracion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Monto en Bolivares:</div>
+                <div class="widgetform">{{ form_widget(form.montobs) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Monto en Moneda Extranjera:</div>
+                <div class="widgetform">{{ form_widget(form.montome) }}</div>
+            </div>
+        </div>
+        <input type="submit" value="CREAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('contrato') }}">IR AL LISTADO</a>
+    </form>
+
+       
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - REPRESENTANTES{% endblock %}
+
+{% block titulobanner %}
+    REPRESENTANTES
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CREAR REPRESENTANTE</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('representante_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Sueldo:</div>
+                <div class="widgetform">{{ form_widget(form.sueldo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Pasaporte:</div>
+                <div class="widgetform">{{ form_widget(form.pasaporte) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Ingreso:</div>
+                <div class="widgetform">{{ form_widget(form.fechaingreso) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(form.correo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tel&eacute;fono:</div>
+                <div class="widgetform">{{ form_widget(form.telefono) }}</div>
+            </div>  
+            <div class="contenedorform">
+                <div class="labelform">Corresponsal&iacute;a:</div>
+                <div class="widgetform">{{ form_widget(form.corresponsaliaId) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ form_widget(form.cargoId) }}</div>
+            </div>          
+            <div class="contenedorform">
+                <div class="labelform">C&oacute;digo del Contrato:</div>
+                <div class="widgetform">{{ form_widget(form.contratoId) }}</div>
+            </div>
+        </div>
+        <input type="submit" value="CREAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('representante') }}">IR AL LISTADO</a>
+    </form>
+{% endblock %}

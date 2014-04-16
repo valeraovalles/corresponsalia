@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - DATOS LEGALES POR CORRESPONSAL&Iacute;A{% endblock %}
+
+{% block titulobanner %}
+    DATOS LEGALES POR CORRESPONSAL&Iacute;A
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CREAR DATOS LEGALES</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+     <form novalidate method="post" action="{{ path('datoslegales_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Corresponsal&iacute;a:</div>
+                <div class="widgetform">{{ form_widget(form.id) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Representante Legal:</div>
+                <div class="widgetform">{{ form_widget(form.representanteId) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Direcci&oacute;n:</div>
+                <div class="widgetform">{{ form_widget(form.direccion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Datos del Registro:</div>
+                <div class="widgetform">{{ form_widget(form.registro) }}</div>
+            </div>
+
+        </div>
+        <input type="submit" value="CREAR" class="btn btn-primary"> | 
+        <a href="{{ path('datoslegales') }}">
+        <a class="btn btn-default" href="{{ path('personal') }}">IR AL LISTADO</a>
+    </form>
+{% endblock %}
