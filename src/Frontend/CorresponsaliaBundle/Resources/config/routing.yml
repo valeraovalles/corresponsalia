@@ -44,6 +44,10 @@ corresponsalia_revisionrendicion:
 corresponsalia_guardarevisionrendicion:
     pattern:  /guardarevisionrendicion/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:guardarevisionrendicion" }
+
+reporte_excelrendicion:
+    pattern:  /excelrendicion/{idperiodo}
+    defaults: { _controller: "CorresponsaliaBundle:Reporte:excelrendicion" }
 ################################################################################
 
 tipocorresponsalia:
