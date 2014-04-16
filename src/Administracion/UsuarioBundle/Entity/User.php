@@ -46,7 +46,6 @@ class User implements UserInterface, AdvancedUserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=40, nullable=true)
-     * @Assert\NotBlank(message="La clave no debe estar en blanco."))
      */
     private $password;
 
