@@ -57,9 +57,15 @@
         <div style="width: 420px;">
         <div style="float: left;">
     {% endif %}
-            <form novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':3 }) }}" onsubmit="return confirm('¿Está seguro que desea devolver esta rendición para su corrección? Recuerde actualizar las rediciones que se deben corregir antes de devolver la rendición!!')">  
-               <input type="submit" value="DEVOLVER PARA CORRECIÓN" class="btn btn-danger">
+
+        {% if oculta==1 %}
+            <form name="formdevolucion" novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':3 }) }}" onsubmit="return confirm('¿Está seguro que desea devolver esta rendición para su corrección? Recuerde actualizar las rediciones que se deben corregir antes de devolver la rendición!!');">  
+               
+               <textarea name="justificadev" placeholder="Describa el error" id="justificadev"></textarea><br>
+               <input type="button" onclick="devolver()" value="DEVOLVER PARA CORRECIÓN" class="btn btn-danger">
+
             </form> 
+        {% endif %}
         
         {% if oculta==0 %}
             </div>
@@ -79,6 +85,14 @@
               "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
               "aaSorting": [[0,'desc']],
           } );
+
+
       })
+        function devolver(){
+            if($('#justificadev').val()=="") alert("Debe justificar la devolución.")
+            else
+            document.formdevolucion.submit()
+
+        }
    </script>
 {% endblock %}

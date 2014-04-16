@@ -44,17 +44,6 @@ corresponsalia_revisionrendicion:
 corresponsalia_guardarevisionrendicion:
     pattern:  /guardarevisionrendicion/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:guardarevisionrendicion" }
-    
-################################################################################
-
-reporte_excelrendicion:
-    pattern:  /excelrendicion/{idperiodo}
-    defaults: { _controller: "CorresponsaliaBundle:Reporte:excelrendicion" }    
-    
-reporte_auditoriaestadofondo:
-    pattern:  /auditoriaestadofondo
-    defaults: { _controller: "CorresponsaliaBundle:Reporte:auditoriaestadofondo" }    
-
 ################################################################################
 
 tipocorresponsalia:
@@ -291,7 +280,10 @@ cobertura_delete:
     defaults: { _controller: "CorresponsaliaBundle:Cobertura:delete" }
     requirements: { _method: post|delete }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 #######################################################################################################################
 #
 #                                       RUTAS CONSULTORIA JURIDICA
@@ -403,18 +395,67 @@ representante_delete:
     requirements: { _method: post|delete }
 
 #DATOS JURIDICOS
-consultoria:
-    pattern: /datoslegales
-    defaults: { _controller: "CorresponsaliaBundle:Consultoria:index"}
 
-consultoria_show:
-    pattern: /datoslegales/show/{id}
-    defaults: { _controller: "CorresponsaliaBundle:Consultoria:show"}
-    
-consultoria_edit:
-    pattern: /datoslegales/edit/{id}
-    defaults: { _controller: "CorresponsaliaBundle:Consultoria:edit"}
-consultoria_update:
-    pattern: /datoslegales/update/{id}
-    defaults: { _controller: "CorresponsaliaBundle:Consultoria:update"}
+datoslegales:
+    pattern:  /datoslegales
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:index" }
+
+datoslegales_show:
+    pattern:  /datoslegales/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:show" }
+
+#datoslegales_new:
+#    pattern:  /datoslegales/new
+#    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:new" }
+
+#datoslegales_create:
+#    pattern:  /datoslegales/create
+#    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:create" }
+#    requirements: { _method: post }
+
+datoslegales_edit:
+    pattern:  /datoslegales/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:edit" }
+
+datoslegales_update:
+    pattern:  /datoslegales/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:update" }
+    requirements: { _method: post|put }
+
+datoslegales_delete:
+    pattern:  /datoslegales/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:delete" }
+    requirements: { _method: post|delete }
+
+#CONTRATO
+contrato:
+    pattern:  /contrato
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:index" }
+
+contrato_show:
+    pattern: /contrato/detalle/{id}
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:show"}
+
+contrato_new:
+    pattern:  /contrato/new
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:new" }
+
+contrato_create:
+    pattern:  /contrato/create
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:create" }
+    requirements: { _method: post }
+
+contrato_edit:
+    pattern:  /contrato/edit
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:edit" }
+
+contrato_update:
+    pattern:  /contrato/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:update" }
+    requirements: { _method: post|put }
+
+contrato_delete:
+    pattern:  /contrato/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:delete" }
+    requirements: { _method: post|delete }
 

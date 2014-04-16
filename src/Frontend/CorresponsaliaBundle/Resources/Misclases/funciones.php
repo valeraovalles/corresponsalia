@@ -1,6 +1,7 @@
 <?php
 
 namespace Frontend\CorresponsaliaBundle\Resources\Misclases;
+use Frontend\CorresponsaliaBundle\Resources\Misclases\conexion;
 
 class funciones
 {
@@ -62,5 +63,77 @@ class funciones
         $rendicion = $query->getResult(); 
         
         return $rendicion;
+    }
+
+    public function Contratos()
+    {
+        $a=new conexion();
+        $db=$a->postgresql_local();
+        $query="select c.id, c.codigo, c.fecha_inicio, c.fecha_fin, c.duracion, c.monto_bs, c.monto_dolares, c.monto_euros from contratos.contratos c where c.personal = TRUE";
+        
+        $rs = pg_query($query) or die('La consulta fallo: ' . pg_last_error());    
+        $row = pg_num_rows($rs);
+
+        $i = 0;
+        while ($line = pg_fetch_array($rs, null, PGSQL_ASSOC)) 
+        {
+            $registro[$i]['id'] = $line['id'];
+            $registro[$i]['codigo'] = $line['codigo'];
+            $registro[$i]['fecha_inicio'] = $line['fecha_inicio'];
+            $registro[$i]['fecha_fin'] = $line['fecha_fin'];
+            $registro[$i]['duracion'] = $line['duracion'];
+            $registro[$i]['monto_bs'] = $line['monto_bs'];
+            $registro[$i]['monto_dolares'] = $line['monto_dolares'];
+            $registro[$i]['monto_euros'] = $line['monto_euros'];
+            $i ++;
+        }
+       
+        return array ($registro, $row);
+    }
+
+    public function Detallesdecontrato($id)
+    {
+
+
+        $a=new conexion();
+        $db=$a->postgresql_local();
+        $query="select c.id, c.codigo, c.fecha_inicio, c.fecha_fin, c.duracion, c.monto_bs, c.monto_dolares, c.monto_euros from contratos.contratos c where c.id ='".$id."'";
+        
+        $rs = pg_query($query) or die('La consulta fallo: ' . pg_last_error());    
+        $row = pg_num_rows($rs);
+
+        $i = 0;
+        while ($line = pg_fetch_array($rs, null, PGSQL_ASSOC)) 
+        {
+            $registro[$i]['id'] = $line['id'];
+            $registro[$i]['codigo'] = $line['codigo'];
+            $registro[$i]['fecha_inicio'] = $line['fecha_inicio'];
+            $registro[$i]['fecha_fin'] = $line['fecha_fin'];
+            $registro[$i]['duracion'] = $line['duracion'];
+            $registro[$i]['monto_bs'] = $line['monto_bs'];
+            $registro[$i]['monto_dolares'] = $line['monto_dolares'];
+            $registro[$i]['monto_euros'] = $line['monto_euros'];
+            $i ++;
+        }
+        return array ($registro, $row);
+    }
+
+    public function Contratoscodigo()
+    {
+        $a=new conexion();
+        $db=$a->postgresql_local();
+        $query="select c.codigo from contratos.contratos c where c.personal = TRUE";
+        
+        $rs = pg_query($query) or die('La consulta fallo: ' . pg_last_error());    
+        $row = pg_num_rows($rs);
+
+   
+        while ($line = pg_fetch_array($rs, null, PGSQL_ASSOC)) 
+        {
+            $registro[$line['codigo']] = $line['codigo'];
+                
+        }
+        
+        return array($registro, $row);
     }
 }

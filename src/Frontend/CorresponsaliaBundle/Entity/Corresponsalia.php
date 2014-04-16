@@ -76,19 +76,10 @@ class Corresponsalia
     private $responsable;
 
     /**
-     * @var \Representante
-     *
-     * @ORM\ManyToOne(targetEntity="Representante")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="representante_id", referencedColumnName="id", nullable=true)
-     * })
-     */
-    private $representante;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="direccion", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo direccion no puede estar en blanco.").
      */
     private $direccion;
 
@@ -96,8 +87,16 @@ class Corresponsalia
      * @var string
      *
      * @ORM\Column(name="registro", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo registro no puede estar en blanco.").
      */
     private $registro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="representanteId", type="string", nullable=true)
+     */
+    private $representanteId;
 
     /**
      * Get id
@@ -247,35 +246,12 @@ class Corresponsalia
     {
         return $this->responsable;
     }
-    
-    /**
-     * Set representante
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Representante $representante
-     * @return Representante
-     */
-    public function setRepresentante(\Frontend\CorresponsaliaBundle\Entity\Representante $representante = null)
-    {
-        $this->representante = $representante;
-    
-        return $this;
-    }
-
-    /**
-     * Get representante
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Representante 
-     */
-    public function getRepresentante()
-    {
-        return $this->representante;
-    }
 
     /**
      * Set direccion
      *
      * @param string $direccion
-     * @return Corresponsalia
+     * @return Datoslegales
      */
     public function setDireccion($direccion)
     {
@@ -298,7 +274,7 @@ class Corresponsalia
      * Set registro
      *
      * @param string $registro
-     * @return Corresponsalia
+     * @return Datoslegales
      */
     public function setRegistro($registro)
     {
@@ -317,7 +293,30 @@ class Corresponsalia
         return $this->registro;
     }
 
+    /**
+     * Set representanteId
+     *
+     * @param string $representanteId
+     * @return Corresponsalia
+     */
+    public function setRepresentanteId($representanteId)
+    {
+        $this->representanteId = $representanteId;
     
+        return $this;
+    }
+
+    /**
+     * Get representanteId
+     *
+     * @return string 
+     */
+    public function getRepresentanteId()
+    {
+        return $this->representanteId;
+    }
+
+
     public function __toString()
     {
         return $this->getNombre().' | '.$this->getPais()->getPais();

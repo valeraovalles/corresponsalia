@@ -59,7 +59,7 @@
                             {% if entity.estatus==1 or entity.estatus==3 %}
                             <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
                             {% else %}
-                            <b>BLOQUEADO</b>
+                            <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
 
                             {% endif %}
                                 
@@ -85,7 +85,7 @@
 
     <br><br><br>
     {% if is_granted('ROLE_RENDICION_ADMIN') %}
-    <a class="btn btn-primary" href="{{ path('periodorendicion_new') }}">NUEVO PERÍODO</a> | 
+    <a class="btn btn-primary" href="{{ path('periodorendicion_new') }}">NUEVO PERÍODO</a>
     <br><br>
     {% endif %}
     

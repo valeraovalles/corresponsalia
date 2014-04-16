@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
         
-        
+      {% if is_granted('ROLE_SUPERADMIN') %}  
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">USUARIOS<b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -29,6 +29,7 @@
           <li><a href="{{ path('usercorresponsalia_new') }}">Nueva relación usuario-Corresponsalía</a></li>
         </ul>
       </li>
+      {% endif %}
       
       {% if is_granted('ROLE_RENDICION_ADMIN') %}
       <li class="dropdown">
@@ -67,9 +68,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTORIA <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="{{ path('consultoria') }}">Datos Legales por Corresponsalía</a></li>
+
+          <li><a href="{{ path('datoslegales') }}">Datos Legales por Corresponsalía</a></li>
           <li><a href="{{ path('representante') }}">Representantes</a></li>
-          <li><a href="{{ path('representante') }}">Contratos del Personal</a></li>
+          <li><a href="{{ path('contrato') }}">Contratos del Personal</a></li>
         </ul>
       </li>
       {% endif %}
@@ -78,13 +80,29 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
         <ul class="dropdown-menu">
+          <li><a href="#">Auditoria Estado Fondo</a></li>
+          <li><a href="#">Auditoria Rendición</a></li>
+          {% if is_granted('ROLE_CONSULTORIA') %}
+            <li><a href="#">Personal en Corresponsalías</a></li>
+          {% endif %}
+        </ul>        
+      </li>
+      
+      {#<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
+        <ul class="dropdown-menu">
           <li><a href="{{ path('reporte_auditoriaestadofondo') }}">Auditoria Estado Fondo</a></li>
           <li><a href="#">Auditoria Rendición</a></li>
+
           {% if is_granted('ROLE_CONSULTORIA') %}
             <li><a href="{{ path('reporteconsultoria') }}">Personal en Corresponsalías</a></li>
           {% endif %}
         </ul>        
       </li>
+
+        </ul>
+      </li>#}
+
       
       {#
       <li class="dropdown">
