@@ -34,9 +34,13 @@ class EstadofondoController extends Controller
         $query->setParameter('idtipogasto', $tipog);
         $periodoant = $query->getResult(); 
 
+
         if($periodoant){
-            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant);
-            $saldoinicial=$ef[0]->getSaldofinal();
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant[0]->getId());
+            if($ef) $saldoinicial=$ef[0]->getSaldofinal();
+            else{
+                $saldoinicial=null;
+            }
         }else $saldoinicial=0;
 
         return $saldoinicial;
@@ -151,6 +155,10 @@ class EstadofondoController extends Controller
 
         //verifico cual es el saldo incial actual
             $saldoinicial=$this->saldoinicial($idperiodo);
+            if($saldoinicial==null){
+                $this->get('session')->getFlashBag()->add('alert', 'El periodo anterior debe tener inicializado un fondo');
+                return $this->redirect($this->generateUrl('periodorendicion'));
+            }
         //fin    
 
         $entity = new Estadofondo();
