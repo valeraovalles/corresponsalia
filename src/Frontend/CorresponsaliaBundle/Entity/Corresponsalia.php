@@ -76,6 +76,29 @@ class Corresponsalia
     private $responsable;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo direccion no puede estar en blanco.").
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="registro", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo registro no puede estar en blanco.").
+     */
+    private $registro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="representanteId", type="string", nullable=true)
+     */
+    private $representanteId;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -224,6 +247,75 @@ class Corresponsalia
         return $this->responsable;
     }
     
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Datoslegales
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set registro
+     *
+     * @param string $registro
+     * @return Datoslegales
+     */
+    public function setRegistro($registro)
+    {
+        $this->registro = $registro;
+    
+        return $this;
+    }
+
+    /**
+     * Get registro
+     *
+     * @return string 
+     */
+    public function getRegistro()
+    {
+        return $this->registro;
+    }
+
+    /**
+     * Set representanteId
+     *
+     * @param string $representanteId
+     * @return Corresponsalia
+     */
+    public function setRepresentanteId($representanteId)
+    {
+        $this->representanteId = $representanteId;
+    
+        return $this;
+    }
+
+    /**
+     * Get representanteId
+     *
+     * @return string 
+     */
+    public function getRepresentanteId()
+    {
+        return $this->representanteId;
+    }
+
     public function __toString()
     {
         return $this->getNombre().' | '.$this->getPais()->getPais();

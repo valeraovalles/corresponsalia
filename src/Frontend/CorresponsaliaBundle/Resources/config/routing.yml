@@ -44,17 +44,6 @@ corresponsalia_revisionrendicion:
 corresponsalia_guardarevisionrendicion:
     pattern:  /guardarevisionrendicion/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:guardarevisionrendicion" }
-    
-################################################################################
-
-reporte_excelrendicion:
-    pattern:  /excelrendicion/{idperiodo}
-    defaults: { _controller: "CorresponsaliaBundle:Reporte:excelrendicion" }    
-    
-reporte_auditoriaestadofondo:
-    pattern:  /auditoriaestadofondo
-    defaults: { _controller: "CorresponsaliaBundle:Reporte:auditoriaestadofondo" }    
-
 ################################################################################
 
 tipocorresponsalia:
@@ -289,4 +278,178 @@ cobertura_update:
 cobertura_delete:
     pattern:  /cobertura/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Cobertura:delete" }
+    requirements: { _method: post|delete }
+
+#######################################################################################################################
+#
+#                                       RUTAS CONSULTORIA JURIDICA
+#
+#######################################################################################################################
+
+#PERSONAL
+personal:
+    pattern:  /personal
+    defaults: { _controller: "CorresponsaliaBundle:Personal:index" }
+
+personal_show:
+    pattern:  /personal/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Personal:show" }
+
+personal_new:
+    pattern:  /personal/new
+    defaults: { _controller: "CorresponsaliaBundle:Personal:new" }
+
+personal_create:
+    pattern:  /personal/create
+    defaults: { _controller: "CorresponsaliaBundle:Personal:create" }
+    requirements: { _method: post }
+
+personal_edit:
+    pattern:  /personal/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Personal:edit" }
+
+personal_update:
+    pattern:  /personal/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Personal:update" }
+    requirements: { _method: post|put }
+
+personal_delete:
+    pattern:  /personal/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Personal:delete" }
+    requirements: { _method: post|delete }
+
+reporteconsultoria:
+    pattern: /consultoria/reportes
+    defaults: { _controller: "CorresponsaliaBundle:Personal:reporte"}
+
+reportepersonal:
+    pattern: /personal/reporte
+    defaults: { _controller: "CorresponsaliaBundle:Personal:generareporte"}
+
+#CARGO
+cargo:
+    pattern:  /cargo
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:index" }
+
+cargo_show:
+    pattern:  /cargo/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:show" }
+
+cargo_new:
+    pattern:  /cargo/new
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:new" }
+
+cargo_create:
+    pattern:  /cargo/create
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:create" }
+    requirements: { _method: post }
+
+cargo_edit:
+    pattern:  /cargo/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:edit" }
+
+cargo_update:
+    pattern:  /cargo/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:update" }
+    requirements: { _method: post|put }
+
+cargo_delete:
+    pattern:  /cargo/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Cargo:delete" }
+    requirements: { _method: post|delete }
+
+#REPRESENTANTE
+representante:
+    pattern:  /representante
+    defaults: { _controller: "CorresponsaliaBundle:Representante:index" }
+
+representante_show:
+    pattern:  /representante/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Representante:show" }
+
+representante_new:
+    pattern:  /representante/new
+    defaults: { _controller: "CorresponsaliaBundle:Representante:new" }
+
+representante_create:
+    pattern:  /representante/create
+    defaults: { _controller: "CorresponsaliaBundle:Representante:create" }
+    requirements: { _method: post }
+
+representante_edit:
+    pattern:  /representante/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Representante:edit" }
+
+representante_update:
+    pattern:  /representante/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Representante:update" }
+    requirements: { _method: post|put }
+
+representante_delete:
+    pattern:  /representante/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Representante:delete" }
+    requirements: { _method: post|delete }
+
+#DATOS JURIDICOS
+datoslegales:
+    pattern:  /datoslegales
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:index" }
+
+datoslegales_show:
+    pattern:  /datoslegales/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:show" }
+
+#datoslegales_new:
+#    pattern:  /datoslegales/new
+#    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:new" }
+
+#datoslegales_create:
+#    pattern:  /datoslegales/create
+#    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:create" }
+#    requirements: { _method: post }
+
+datoslegales_edit:
+    pattern:  /datoslegales/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:edit" }
+
+datoslegales_update:
+    pattern:  /datoslegales/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:update" }
+    requirements: { _method: post|put }
+
+datoslegales_delete:
+    pattern:  /datoslegales/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:delete" }
+    requirements: { _method: post|delete }
+
+#CONTRATO
+contrato:
+    pattern:  /contrato
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:index" }
+
+contrato_show:
+    pattern: /contrato/detalle/{id}
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:show"}
+
+contrato_new:
+    pattern:  /contrato/new
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:new" }
+
+contrato_create:
+    pattern:  /contrato/create
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:create" }
+    requirements: { _method: post }
+
+contrato_edit:
+    pattern:  /contrato/edit
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:edit" }
+
+contrato_update:
+    pattern:  /contrato/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:update" }
+    requirements: { _method: post|put }
+
+contrato_delete:
+    pattern:  /contrato/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Contrato:delete" }
     requirements: { _method: post|delete }

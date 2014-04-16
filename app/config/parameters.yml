@@ -1,11 +1,18 @@
-# This file is auto-generated during the composer install
+# This file is auto-generated during the composer instal
 parameters:
-    database_driver: pdo_pgsql
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: corresponsalia
-    database_user: postgres
-    database_password: postgres
+    database_driver1: pdo_pgsql
+    database_host1: 127.0.0.1
+    database_port1: null
+    database_name1: corresponsalia
+    database_user1: postgres
+    database_password1: postgres
+
+    database_driver2: pdo_pgsql
+    database_host2: 127.0.0.1
+    database_port2: null
+    database_name2: sait
+    database_user2: postgres
+    database_password2: postgres
     
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
