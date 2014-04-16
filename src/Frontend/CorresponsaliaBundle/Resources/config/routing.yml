@@ -280,10 +280,6 @@ cobertura_delete:
     defaults: { _controller: "CorresponsaliaBundle:Cobertura:delete" }
     requirements: { _method: post|delete }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 #######################################################################################################################
 #
 #                                       RUTAS CONSULTORIA JURIDICA
