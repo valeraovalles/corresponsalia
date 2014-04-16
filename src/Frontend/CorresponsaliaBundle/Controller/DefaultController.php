@@ -142,11 +142,35 @@ class DefaultController extends Controller
             $consulta->execute();
         }
 
-        //cambio los estatus de las rendiciones a aprobadas si no han sido cambiadas
+        //asigono el saldo final al periodo siguiente
         if($estatus==4){
-            $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= true WHERE r.periodorendicion = :periodo and r.aprobada=false');
-            $consulta->setParameter('periodo', $idperiodo);
-            $consulta->execute();    
+
+            $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
+
+            $anioac=$periodo->getAnio();
+            $mesac=$periodo->getMes();
+            $tipog=$periodo->getTipogasto()->getId();
+            $sf=$ef[0]->getSaldofinal();
+
+            if($mesac==12){ $messig=1; $anioac=$anioac+1; } 
+            else $messig=$mesac+1;
+
+            $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor and p.tipogasto= :idtipogasto";
+            $query = $em->createQuery($dql);
+            $query->setParameter('anio', $anioac);
+            $query->setParameter('mes', $messig);
+            $query->setParameter('idcor', $periodo->getCorresponsalia()->getId());
+            $query->setParameter('idtipogasto', $tipog);
+            $periodosig = $query->getResult(); 
+
+            if($periodosig){
+
+                $consulta = $em->createQuery('update CorresponsaliaBundle:Estadofondo e set e.saldoinicial= :saldoinicial WHERE e.periodorendicion = :periodo');
+                $consulta->setParameter('periodo', $periodosig[0]->getId());
+                $consulta->setParameter('saldoinicial', $sf);
+                $consulta->execute();    
+            }
         }
                
         
