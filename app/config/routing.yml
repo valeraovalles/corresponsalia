@@ -9,3 +9,15 @@ usuario:
 login:
     pattern:  /
     defaults: { _controller: UsuarioBundle:Default:index }
+    
+CorresponsaliaBundle_tecnocategoria:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_categoria.yml"
+        prefix:   /tecnocategoria
+  
+CorresponsaliaBundle_tecnomarca:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_marca.yml"
+        prefix:   /tecnomarca
+        
+CorresponsaliaBundle_tecnoequipo:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_equipo.yml"
+        prefix:   /tecnoequipo

@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>EDITAR TIPO DE MONEDA</h1>{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(edit_form.nombre)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.nombre) }}</div>
+    </div>
+    {% endif %}
+    <form novalidate method="post" action="{{ path('tecnomarca_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+         <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombre Marca:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div>
+         </div>
+        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnomarca_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('tecnomarca') }}">IR AL LISTADO</a>
+    </form>
+
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

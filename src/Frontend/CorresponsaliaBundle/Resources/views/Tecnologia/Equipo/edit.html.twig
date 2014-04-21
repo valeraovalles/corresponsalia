@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>EDITAR EQUIPO</h1>{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(edit_form.serialEquipo)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.serialEquipo) }}</div>
+    </div>
+    {% endif %}
+    <form novalidate method="post" action="{{ path('tecnoequipo_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+         <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">serial Equipo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.serialEquipo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">descripcion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">modelo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.modelo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">status:</div>
+                <div class="widgetform">{{ form_widget(edit_form.status) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">observacion Condicion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.observacionCondicion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fecha Adquisicion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechaAdquisicion) }}</div>
+            </div>
+         </div>
+        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnoequipo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
+    </form>
+
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}
