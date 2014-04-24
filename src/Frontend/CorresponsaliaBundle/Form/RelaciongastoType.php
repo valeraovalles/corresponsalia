@@ -28,7 +28,7 @@ class RelaciongastoType extends AbstractType
             ->add('numerocomprobante','text')
             ->add('fechafactura', 'date',array(
                     'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy'))
+                    'format' => 'yyyy-MM-dd'))
             ->add('nombrerazonsocial')
             ->add('identificacionfiscal')
             ->add('numerofactura')

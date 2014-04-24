@@ -244,6 +244,7 @@ class DefaultController extends Controller
         $datos=$request->request->all();
         $datos=$datos['rendicion_relaciongasto'];
 
+
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
