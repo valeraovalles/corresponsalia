@@ -26,7 +26,7 @@ class Relaciongasto
     /**
      * @var decimal
      *
-     * @ORM\Column(name="numerocomprobante", type="decimal", nullable=false).
+     * @ORM\Column(name="numerocomprobante", type="string", nullable=false).
      * @Assert\NotBlank(message="Debe escribir el número de comprobante.").
      * @Assert\Type(type="digit", message="El numero conprobante no puede contener letras.").
      */
