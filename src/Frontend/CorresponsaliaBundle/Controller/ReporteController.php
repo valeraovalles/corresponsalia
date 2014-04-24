@@ -54,15 +54,53 @@ class ReporteController extends Controller
         die;
     } 
     
-    public function auditoriaestadofondoAction()
+    public function reporteauestadofondoAction()
     {    
+        $error=null;
+
         $entity = new AuditoriaEstadofondo();
         $form   = $this->createForm(new AuditoriaEstadofondoType(), $entity);
         return $this->render('CorresponsaliaBundle:Reporte:auditoriaestadofondo.html.twig', array(
             'form'=>$form->createView(),
+            'error'=>$error
         ));
-        
-        die;
+    }
+
+    public function creareporteauestadofondoAction(Request $request)
+    {    
+        $error=null;
+
+        $datos=$request->request->all();
+        $datos=$datos['reporte'];
+
+        $entity = new AuditoriaEstadofondo();
+        $form   = $this->createForm(new AuditoriaEstadofondoType(), $entity);
+
+        $form->handleRequest($request);
+   
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $dql=    "SELECT e FROM CorresponsaliaBundle:Estadofondo e join e.periodorendicion p where p.anio>= :aniodesde and p.anio<= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('aniodesde', $datos['aniodesde']);
+            $query->setParameter('aniohasta', $datos['aniohasta']);
+            $query->setParameter('mesdesde', $datos['mesdesde']);
+            $query->setParameter('meshasta', $datos['meshasta']);
+            $entities = $query->getResult(); 
+
+
+
+            return $this->render('CorresponsaliaBundle:Reporte:reporteestadofondoperiodos.html.twig',array('datos'=>$entities));
+     
+        }
+
+        return $this->render('CorresponsaliaBundle:Reporte:auditoriaestadofondo.html.twig', array(
+            'form'=>$form->createView(),
+            'error'=>$error
+        ));
+
+
                     //GENERO EL PDF
                 include("libs/MPDF/mpdf.php");
                 $mpdf=new \mPDF();
@@ -76,7 +114,10 @@ class ReporteController extends Controller
                 $mpdf->Output("reporte".".pdf","D");
                 exit;
     }
-                
+
+
+
+
     public function reporteinfoAction(Request $request)
     {
 

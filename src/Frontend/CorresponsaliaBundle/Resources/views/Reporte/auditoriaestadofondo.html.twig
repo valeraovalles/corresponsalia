@@ -13,21 +13,37 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(form.aniodesde) or form_errors(form.aniohasta) or form_errors(form.mesdesde) or form_errors(form.meshasta) or form_errors(form.corresponsalia) or form_errors(form.tipogasto) %}
+    {% if form_errors(form.aniodesde) or form_errors(form.aniohasta) or form_errors(form.mesdesde) or form_errors(form.meshasta)  %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(form.corresponsalia) }}</div>
-        <div>{{ form_errors(form.tipogasto) }}</div>
-        <div>{{ form_errors(form.cobertura) }}</div>
-        <div>{{ form_errors(form.anio) }}</div>
-        <div>{{ form_errors(form.mes) }}</div>
+        <div>{{ form_errors(form.aniodesde) }}</div>
+        <div>{{ form_errors(form.aniohasta) }}</div>
+        <div>{{ form_errors(form.mesdesde) }}</div>
+        <div>{{ form_errors(form.meshasta) }}</div>
         {% for e in error %}<div><ul><li>{{ e }}</li></ul></div>{% endfor %}
     </div>
     {% endif %}
     
-    <form novalidate method="post" action="{{ path('periodorendicion_create') }}">
+    <form novalidate method="post" action="{{ path('corresponsalia_creareporteauestadofondo') }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Corresponsalía:</div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo gasto:</div>
+                <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform" style="width:210px;">Año:</div>
+                <div class="widgetform">Desde: {{ form_widget(form.aniodesde,{'attr':{'style':'width:100px'}}) }} | Hasta: {{ form_widget(form.aniohasta,{'attr':{'style':'width:100px'}}) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform" style="width:210px;">Mes:</div>
+                <div class="widgetform">Desde: {{ form_widget(form.mesdesde,{'attr':{'style':'width:100px'}}) }} | Hasta: {{ form_widget(form.meshasta,{'attr':{'style':'width:100px'}}) }}</div>
+            </div>
+            {#
             <div class="contenedorform">
                 <div class="labelform">Corresponsalía:</div>
                 <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
@@ -40,22 +56,7 @@
                 <div class="labelform">Cobertura:</div>
                 <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
             </div>
-            <div class="contenedorform">
-                <div class="labelform">Año:</div>
-                <div class="widgetform"><b>D:</b> {{ form_widget(form.aniodesde,{'attr':{'style':'width:70px'}}) }} | <b>H:</b> {{ form_widget(form.aniohasta,{'attr':{'style':'width:70px'}}) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Mes:</div>
-                <div class="widgetform"><b>D:</b> {{ form_widget(form.mesdesde,{'attr':{'style':'width:70px'}}) }} | <b>H:</b> {{ form_widget(form.meshasta,{'attr':{'style':'width:70px'}}) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Reponsable:</div>
-                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Estatus Periodo:</div>
-                <div class="widgetform">{{ form_widget(form.estatus) }}</div>
-            </div>
+            #}
         </div>
 
         <input type="submit" value="CREAR" class="btn btn-primary"> | 

@@ -16,8 +16,8 @@ class AuditoriaEstadofondoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
                 
-        $meses= array(''=>'Seleccione un mes',1=>'Enero',2=>'Febrero',3=>'Marzo',4=>'Abril',5=>'Mayo',6=>'Junio',7=>'Julio',8=>'Agosto',9=>'Septiembre',10=>'Octubre',11=>'Noviembre',12=>'Diciembre');
-        $anios= array(''=>'Seleccione un año', date('Y') => date('Y'),date('Y')+1 => date('Y')+1);
+        $meses= array(''=>'Mes',1=>'Enero',2=>'Febrero',3=>'Marzo',4=>'Abril',5=>'Mayo',6=>'Junio',7=>'Julio',8=>'Agosto',9=>'Septiembre',10=>'Octubre',11=>'Noviembre',12=>'Diciembre');
+        $anios= array(''=>'Año', date('Y') => date('Y'),date('Y')+1 => date('Y')+1);
         
         $estatus= array(1 => 'Abierto',2 => 'Enviado para revisión',3 => 'Devuelto para corrección',4 => 'Cerrado');
         
@@ -48,21 +48,6 @@ class AuditoriaEstadofondoType extends AbstractType
                     ->orderBy('u.descripcion', 'ASC');
             }))
             
-            ->add('responsable', 'entity', array(
-            'class' => 'UsuarioBundle:Perfil',
-            'expanded'=>false, 
-            'multiple'=>true,
-            'empty_value'=>'Seleccione...',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                    ->orderBy('u.primerNombre', 'ASC');
-            }))
-            
-            ->add('estatus','choice',array(
-                'choices'   => $estatus,
-                'expanded'=>false, 
-                'multiple'=>true,
-            ))
             ->add('cobertura')
         ;
     }

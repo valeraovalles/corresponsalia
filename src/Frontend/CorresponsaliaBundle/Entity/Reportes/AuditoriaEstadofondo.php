@@ -43,18 +43,11 @@ class AuditoriaEstadofondo
      */
     private $tipogasto;
 
-    /*
-     */
-    private $estatus;
-    
+   
     /*
      */
     private $cobertura;
     
-    /*
-     */
-    private $responsable;
-
     
     public function setAniodesde($aniodesde)
     {
@@ -129,29 +122,6 @@ class AuditoriaEstadofondo
         return $this->tipogasto;
     }
     
-    public function setResponsable($responsable)
-    {
-        $this->responsable = $responsable;
-    
-        return $this;
-    }
-
-    public function getResponsable()
-    {
-        return $this->responsable;
-    }
-    
-    public function setEstatus($estatus)
-    {
-        $this->estatus = $estatus;
-    
-        return $this;
-    }
-
-    public function getEstatus()
-    {
-        return $this->estatus;
-    }
     
     public function setCobertura($cobertura)
     {

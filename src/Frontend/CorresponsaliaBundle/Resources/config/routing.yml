@@ -1,3 +1,13 @@
+corresponsalia_reporteauestadofondo:
+    pattern:  /reporte/auestadofondo
+    defaults: { _controller: CorresponsaliaBundle:Reporte:reporteauestadofondo }
+
+corresponsalia_creareporteauestadofondo:
+    pattern:  /reporte/creaauestadofondo
+    defaults: { _controller: CorresponsaliaBundle:Reporte:creareporteauestadofondo }
+
+
+##############################################################################
 corresponsalia_inicio:
     pattern:  /inicio
     defaults: { _controller: CorresponsaliaBundle:Default:inicio }
@@ -49,9 +59,6 @@ reporte_excelrendicion:
     pattern:  /excelrendicion/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Reporte:excelrendicion" }
 
-reporte_auditoriaestadofondo:
-    pattern:  /auditoriaestadofondo
-    defaults: { _controller: "CorresponsaliaBundle:Reporte:auditoriaestadofondo" }
 ################################################################################
 
 tipocorresponsalia:
