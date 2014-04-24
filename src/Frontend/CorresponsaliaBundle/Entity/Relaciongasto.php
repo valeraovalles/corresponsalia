@@ -5,9 +5,6 @@ namespace Frontend\CorresponsaliaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
- #* @Assert\NotBlank(message="Debe escribir el número de comprobante.").
- #* @Assert\Type(type="digit", message="El numero conprobante no puede contener letras.").
-
 /**
  * Relaciongasto
  *
@@ -27,7 +24,7 @@ class Relaciongasto
     private $id;
 
     /**
-     * @var integer
+     * @var decimal
      *
      * @ORM\Column(name="numerocomprobante", type="decimal", nullable=false).
      * @Assert\NotBlank(message="Debe escribir el número de comprobante.").
