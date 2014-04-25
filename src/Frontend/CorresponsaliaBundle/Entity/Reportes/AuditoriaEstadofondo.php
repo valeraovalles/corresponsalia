@@ -48,6 +48,18 @@ class AuditoriaEstadofondo
      */
     private $cobertura;
     
+
+    /**
+     * @var \Descripciongasto
+     *
+     * @ORM\ManyToOne(targetEntity="Descripciongasto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank(message="Debe seleccionar una descripción de gasto.")
+     
+     */
+    private $descripciongasto;
     
     public function setAniodesde($aniodesde)
     {
@@ -133,6 +145,29 @@ class AuditoriaEstadofondo
     public function getCobertura()
     {
         return $this->cobertura;
+    }
+
+    /**
+     * Set descripciongasto
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto
+     * @return Relaciongastos
+     */
+    public function setDescripciongasto(\Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto = null)
+    {
+        $this->descripciongasto = $descripciongasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripciongasto
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Descripciongasto 
+     */
+    public function getDescripciongasto()
+    {
+        return $this->descripciongasto;
     }
 
 }

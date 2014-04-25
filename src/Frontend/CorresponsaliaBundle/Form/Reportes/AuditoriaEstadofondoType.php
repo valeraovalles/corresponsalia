@@ -47,6 +47,16 @@ class AuditoriaEstadofondoType extends AbstractType
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.descripcion', 'ASC');
             }))
+
+            ->add('descripciongasto', 'entity', array(
+            'class' => 'CorresponsaliaBundle:Descripciongasto',
+            'expanded'=>false, 
+            'multiple'=>true,
+            
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.descripcion', 'ASC');
+            }))
             
             ->add('cobertura')
         ;

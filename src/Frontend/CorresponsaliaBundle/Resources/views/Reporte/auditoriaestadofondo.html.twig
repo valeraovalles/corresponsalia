@@ -36,6 +36,10 @@
                 <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
             </div>
             <div class="contenedorform">
+                <div class="labelform">Descripción gasto:</div>
+                <div class="widgetform">{{ form_widget(form.descripciongasto) }}</div>
+            </div>
+            <div class="contenedorform">
                 <div class="labelform" style="width:210px;">Año:</div>
                 <div class="widgetform">Desde: {{ form_widget(form.aniodesde,{'attr':{'style':'width:100px'}}) }} | Hasta: {{ form_widget(form.aniohasta,{'attr':{'style':'width:100px'}}) }}</div>
             </div>
@@ -43,6 +47,7 @@
                 <div class="labelform" style="width:210px;">Mes:</div>
                 <div class="widgetform">Desde: {{ form_widget(form.mesdesde,{'attr':{'style':'width:100px'}}) }} | Hasta: {{ form_widget(form.meshasta,{'attr':{'style':'width:100px'}}) }}</div>
             </div>
+
             {#
             <div class="contenedorform">
                 <div class="labelform">Corresponsalía:</div>
