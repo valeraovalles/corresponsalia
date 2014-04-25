@@ -470,3 +470,35 @@ contrato_delete:
     defaults: { _controller: "CorresponsaliaBundle:Contrato:delete" }
     requirements: { _method: post|delete }
 
+####################################################################################################
+
+descripciongasto:
+    pattern:  /descripciongasto
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:index" }
+
+descripciongasto_show:
+    pattern:  /descripciongasto/{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:show" }
+
+descripciongasto_new:
+    pattern:  /descripciongasto/new
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:new" }
+
+descripciongasto_create:
+    pattern:  /descripciongasto/create
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:create" }
+    requirements: { _method: post }
+
+descripciongasto_edit:
+    pattern:  /descripciongasto/{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:edit" }
+
+descripciongasto_update:
+    pattern:  /descripciongasto/{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:update" }
+    requirements: { _method: post|put }
+
+descripciongasto_delete:
+    pattern:  /descripciongasto/{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:delete" }
+    requirements: { _method: post|delete }
