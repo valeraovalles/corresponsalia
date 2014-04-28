@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block titulomodulo %}<h1>EQUIPO</h1>{% endblock %}
+{% block titulomodulo %}<h1>MODELO</h1>{% endblock %}
 
 {% block body -%}
     {{ parent() }}
@@ -16,9 +16,9 @@
             <div class="widgetform">{{ entity.nombre }}</div>
         </div>
         <div class="contenedorform">
-                <div class="labelform">Marca:</div>
-                <div class="widgetform">{{ form_widget(form.marca) }}</div>
-            </div>
+            <div class="labelform">Marca:</div>
+            <div class="widgetform">{{ entity.marca }}</div>
+        </div>
     </div>
 
     <a class="btn btn-default" href="{{ path('tecnomodelo_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 

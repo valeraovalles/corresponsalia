@@ -18,16 +18,20 @@
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
+                <div class="labelform">Categoria:</div>
+                <div class="widgetform">{{ form_widget(form.categoria) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Marca:</div>
+                <div class="widgetform">{{ form_widget(form.marca.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
                 <div class="labelform">serial Equipo:</div>
                 <div class="widgetform">{{ form_widget(form.serialEquipo) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">descripcion:</div>
                 <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">modelo:</div>
-                <div class="widgetform">{{ form_widget(form.modelo) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">status:</div>

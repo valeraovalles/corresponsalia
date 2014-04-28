@@ -21,3 +21,11 @@ CorresponsaliaBundle_tecnomarca:
 CorresponsaliaBundle_tecnoequipo:
         resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_equipo.yml"
         prefix:   /tecnoequipo
+        
+CorresponsaliaBundle_tecnoassign:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_asignacion.yml"
+        prefix:   /tecnoassign
+        
+CorresponsaliaBundle_tecnomodelo:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_modelo.yml"
+        prefix:   /tecnomodelo
