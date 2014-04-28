@@ -23,7 +23,7 @@ class Asignacion
      *      @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
-    private $equipo_id;
+    private $equipo;
     
     /**
      * @var | Rendicion.Corresponsalia
@@ -166,10 +166,6 @@ class Asignacion
         return $this->fechaRetorno;
     }
     
-    public function getEquipo_id() {
-        return $this->equipo_id;
-    }
-
     public function getCorresponsalia() {
         return $this->corresponsalia;
     }
@@ -180,11 +176,6 @@ class Asignacion
 
     public function getStatus() {
         return $this->status;
-    }
-
-    public function setEquipo_id($equipo_id) {
-        $this->equipo_id = $equipo_id;
-        return $this;
     }
 
     public function setCorresponsalia($corresponsalia) {
@@ -201,6 +192,19 @@ class Asignacion
         $this->status = $status;
         return $this;
     }
+    
+    function __construct() {
+        $this->fechaAsignacion = new \DateTime();
+    }
+    
+    public function getEquipo() {
+        return $this->equipo;
+    }
 
+    public function setEquipo($equipo) {
+        $this->equipo = $equipo;
+    }
 
+    
+    
 }

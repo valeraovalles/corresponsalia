@@ -1,0 +1,3 @@
+tecnoequipo_assign:
+    pattern:  /{id}/assign
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:new" }

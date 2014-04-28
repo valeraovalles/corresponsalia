@@ -37,13 +37,6 @@ class Equipo
     private $descripcion;
     
     /**
-     * @var string
-     * 
-     * @ORM\Column(name="modelo", type="text", nullable=false)
-     */
-    private $modelo;
-    
-    /**
      * @var boolean
      * 
      * @ORM\Column(name="status", type="boolean", nullable=false)
@@ -85,14 +78,14 @@ class Equipo
     private $condicion;
     
     /**
-     * @var | Tecnologia.Marca
+     * @var | Tecnologia.Modelo
      * 
-     * @ORM\ManyToOne(targetEntity="Marca")
+     * @ORM\ManyToOne(targetEntity="Modelo")
      * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="marca_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="modelo_id", referencedColumnName="id")
      * })
      */
-    private $marca;
+    private $modelo;
 
     /**
      * Get id
@@ -209,28 +202,6 @@ class Equipo
         $this->descripcion = $descripcion;
         return $this;
     }
-    
-    /**
-     * Get Marca
-     *
-     * @return integer 
-     */
-    public function getMarca()
-    {
-        return $this->marca;
-    }
-    
-    /**
-     * Set nombre
-     *
-     * @param string $marca
-     * @return Marca
-     */
-    public function setMarca($marca)
-    {
-        $this->marca = $marca;
-        return $this;
-    }
 
     /**
      * Get fechaAdquisicion
@@ -291,4 +262,9 @@ class Equipo
         $this->status = $status;
         return $this;
     }
+    
+    public function __toString() {
+        return $this->serialEquipo. $this->descripcion;
+    }
+
 }

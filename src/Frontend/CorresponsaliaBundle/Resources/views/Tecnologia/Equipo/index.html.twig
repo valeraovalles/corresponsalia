@@ -31,7 +31,7 @@
                 <td>
                     <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
-                 |  <a href="{{ path('tecnoequipo_new', {'id':entity.id}) }}"><b class="text-warning">ASIGNAR</b></a>
+                 |  <a href="{{ path('tecnoequipo_assign', {'id':entity.id}) }}"><b class="text-warning">ASIGNAR</b></a>
                  </td> 
             </tr>
         {% endfor %}
