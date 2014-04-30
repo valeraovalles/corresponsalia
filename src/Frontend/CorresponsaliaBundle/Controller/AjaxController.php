@@ -4,15 +4,11 @@ namespace Frontend\CorresponsaliaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Frontend\CorresponsaliaBundle\Entity\Reportes\AuditoriaEstadofondo;
+use Frontend\CorresponsaliaBundle\Form\Reportes\AuditoriaEstadofondoType;
+
 class AjaxController extends Controller
 {
-    public function gasfunAction($datos)
-    {
-        echo "sss";
-        die;
-        return $this->render('CorresponsaliaBundle:Ajax:gasfun.html.twig');
-    }
-    
      public function formdescripciongastoAction($idtipo,$data)
     {   
         $em = $this->getDoctrine()->getManager();
@@ -35,5 +31,18 @@ class AjaxController extends Controller
         
         return $this->render('CorresponsaliaBundle:Ajax:formdescripciongasto.html.twig',array('form'=>$form->createView()));
     }
+
+    public function ajaxreporteauditoriaestadofondoAction($dato,$muestra){
+
+        $entity = new AuditoriaEstadofondo();
+        $form   = $this->createForm(new AuditoriaEstadofondoType($dato,$muestra), $entity);
+
+        return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauditoriaestadofondo.html.twig', array(
+            'form'=>$form->createView(),
+            'muestra'=>$muestra
+        ));
+        die;
+    }
+
             
 }

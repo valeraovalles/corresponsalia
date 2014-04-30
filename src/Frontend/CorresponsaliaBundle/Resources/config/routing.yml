@@ -6,6 +6,9 @@ corresponsalia_creareporteauestadofondo:
     pattern:  /reporte/creaauestadofondo
     defaults: { _controller: CorresponsaliaBundle:Reporte:creareporteauestadofondo }
 
+ajaxreporteauditoriaestadofondo:
+    pattern:  /ajaxreporteauef/{dato}/{muestra}
+    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporteauditoriaestadofondo }
 
 ##############################################################################
 corresponsalia_inicio:
@@ -33,10 +36,6 @@ corresponsalia_borrarrendicion:
     pattern:  /borrarrendicion/{idrendicion}/{idperiodo}
     defaults: { _controller: "CorresponsaliaBundle:Default:borrarrendicion" }
     requirements: { _method: post|delete }
-    
-corresponsalia_ajax_gasfun:
-    pattern:  /ajax/gasfun/{datos}
-    defaults: { _controller: CorresponsaliaBundle:Ajax:gasfun }
     
 corresponsalia_ajax_formdescripciongasto:
     pattern:  /ajax/formdescripciongasto/{idtipo}/{data}

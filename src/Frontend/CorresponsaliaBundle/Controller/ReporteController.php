@@ -59,7 +59,7 @@ class ReporteController extends Controller
         $error=null;
 
         $entity = new AuditoriaEstadofondo();
-        $form   = $this->createForm(new AuditoriaEstadofondoType(), $entity);
+        $form   = $this->createForm(new AuditoriaEstadofondoType("","1"), $entity);
         return $this->render('CorresponsaliaBundle:Reporte:auditoriaestadofondo.html.twig', array(
             'form'=>$form->createView(),
             'error'=>$error
@@ -72,7 +72,8 @@ class ReporteController extends Controller
 
         $datos=$request->request->all();
         $datos=$datos['reporte'];
-
+        print_r($datos);
+        die;
         $entity = new AuditoriaEstadofondo();
         $form   = $this->createForm(new AuditoriaEstadofondoType(), $entity);
 
@@ -115,9 +116,6 @@ class ReporteController extends Controller
                 exit;
     }
 
-
-
-
     public function reporteinfoAction(Request $request)
     {
 
@@ -147,8 +145,6 @@ class ReporteController extends Controller
             'form'=>$form->createView(),
             ));
     }
-
-
 
 
     public function finalreporteAction(Request $request)
