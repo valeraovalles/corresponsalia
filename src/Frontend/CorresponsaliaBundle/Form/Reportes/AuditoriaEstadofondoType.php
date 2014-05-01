@@ -25,13 +25,12 @@ class AuditoriaEstadofondoType extends AbstractType
 
         $dato = $this->dato;
         $muestra = $this->muestra;
-                
-
 
         $meses= array(''=>'Mes',1=>'Enero',2=>'Febrero',3=>'Marzo',4=>'Abril',5=>'Mayo',6=>'Junio',7=>'Julio',8=>'Agosto',9=>'Septiembre',10=>'Octubre',11=>'Noviembre',12=>'Diciembre');
         $anios= array(''=>'Año', date('Y') => date('Y'),date('Y')+1 => date('Y')+1);
 
-        if($muestra==1)
+        if($muestra==1 or $muestra=='t')
+
             $builder->add('corresponsalia', 'entity', array(
             'class' => 'CorresponsaliaBundle:Corresponsalia',
             'expanded'=>false, 
@@ -42,7 +41,7 @@ class AuditoriaEstadofondoType extends AbstractType
                     ->orderBy('u.nombre', 'ASC');
             }));
 
-        else if($muestra==2)
+        if($muestra==2 or $muestra=='t')
             $builder->add('tipogasto', 'entity', array(
             'class' => 'CorresponsaliaBundle:Tipogasto',
             'expanded'=>false, 
@@ -53,8 +52,7 @@ class AuditoriaEstadofondoType extends AbstractType
                     ->orderBy('u.descripcion', 'ASC');
             }));
 
-        else if($muestra==3){
-
+        if($muestra==3 or $muestra=='t'){
             $dato=explode(",", $dato);
             $builder->add('descripciongasto', 'entity', array(
             'class' => 'CorresponsaliaBundle:Descripciongasto',
@@ -68,19 +66,19 @@ class AuditoriaEstadofondoType extends AbstractType
             }));
         }
 
-        else if($muestra==4)
+        if($muestra==4 or $muestra=='t')
             $builder->add('aniodesde','choice',array('choices'   => $anios,));
 
-        else if($muestra==5)
+        if($muestra==5 or $muestra=='t')
             $builder->add('aniohasta','choice',array('choices'   => $anios,));
 
-        else if($muestra==6)
+        if($muestra==6 or $muestra=='t')
             $builder->add('mesdesde','choice',array('choices'   => $meses,));
 
-        else if($muestra==7)
+        if($muestra==7 or $muestra=='t')
             $builder->add('meshasta','choice',array('choices'   => $meses,));
 
-        else if($muestra==8){
+        if($muestra==8 or $muestra=='t' and isset($dato['cobertura'])){
             $dato=explode("::", $dato);
             //elimino las comas al separar el periodo de las corresponsalia
             $periodo=substr($dato[0], 0, -1);

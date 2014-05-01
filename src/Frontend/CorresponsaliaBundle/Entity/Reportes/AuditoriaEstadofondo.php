@@ -3,9 +3,6 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Reportes;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
-
 
 /**
  * Estadofondo
@@ -14,32 +11,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 class AuditoriaEstadofondo
 {
     /**
-     * @Assert\NotBlank(message="Debe seleccionar un año desde.")
      */
     private $aniodesde;
 
     /**
-     * @Assert\NotBlank(message="Debe seleccionar un mes desde.")
      */
     private $mesdesde;
     
     /**
-     * @Assert\NotBlank(message="Debe seleccionar un año hasta.")
      */
     private $aniohasta;
 
     /**
-     * @Assert\NotBlank(message="Debe seleccionar un mes hasta.")
      */
     private $meshasta;
     
     /**
-     * @Assert\NotBlank(message="Debe seleccionar una Corresponsalía.")
      */
     private $corresponsalia;
 
     /**
-     * @Assert\NotBlank(message="Debe seleccionar un tipo de gasto.")
      */
     private $tipogasto;
 
@@ -56,7 +47,6 @@ class AuditoriaEstadofondo
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
      * })
-     * @Assert\NotBlank(message="Debe seleccionar una descripción de gasto.")
      
      */
     private $descripciongasto;

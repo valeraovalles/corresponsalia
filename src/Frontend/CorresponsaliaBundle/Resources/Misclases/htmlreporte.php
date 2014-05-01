@@ -4,8 +4,133 @@ namespace Frontend\CorresponsaliaBundle\Resources\Misclases;
 
 class htmlreporte
 {
-    public function excelrendicion($periodo,$ef,$c,$lr,$usuario,$parametros)
-    {
+
+  public function auditoriaestadofondo($em,$datos){
+
+      /*
+      $dql = "select x from CorresponsaliaBundle:Relaciongasto x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta and x.descripciongasto in (:iddesgas) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $query->setParameter('aniodesde', $datos['aniodesde']);
+      $query->setParameter('aniohasta', $datos['aniohasta']);
+      $query->setParameter('mesdesde', $datos['mesdesde']);
+      $query->setParameter('meshasta', $datos['meshasta']);
+      $query->setParameter('iddesgas', $datos['descripciongasto']);
+      $result = $query->getResult();
+      */
+
+
+      $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto,p.anio ASC, p.mes ASC, x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $query->setParameter('aniodesde', $datos['aniodesde']);
+      $query->setParameter('aniohasta', $datos['aniohasta']);
+      $query->setParameter('mesdesde', $datos['mesdesde']);
+      $query->setParameter('meshasta', $datos['meshasta']);
+      $result = $query->getResult();
+
+
+      //armo las corresponsalías
+      $dql = "select x from CorresponsaliaBundle:Corresponsalia x where x.id in (:idcorresponsalia) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $corresponsalia = $query->getResult();
+      $trcor="";
+      foreach ($corresponsalia as $v) {
+        $trcor .=$v->getNombre()." | ";
+      }
+
+      //armo los tipos de gastos
+      $dql = "select x from CorresponsaliaBundle:Tipogasto x where x.id in (:idtipogasto) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $tipogasto = $query->getResult();
+      $trtg="";
+      foreach ($tipogasto as $v) {
+        $trtg .=$v->getDescripcion()." | ";
+      }
+
+
+
+      //armo el detalle
+      $trdetalle="
+        <tr>
+          <th>CORRESPONSALÍA</th>
+          <th>TIPO DE GASTO</th>
+          <th>ANIO</th>
+          <th>MES</th>
+          <th>SALDO INICIAL</th>
+          <th>RECURSO TOTAL</th>
+          <th>RECURSO ANTERIOR</th>
+          <th>RECURSO NUEVO</th>
+          <th>FECHA PROCESO</th>
+          <th>HORA PROCESO</th>
+          <th>RESPONSABLE</th>
+        </tr>
+
+      ";
+      foreach ($result as $v) {
+        $hora=explode(".", $v->getHoraproceso());
+        $trdetalle .="<tr>
+                        <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
+                        <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$v->getPeriodorendicion()->getAnio()."</td>
+                        <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$v->getSaldoinicial()."</td>
+                        <td>".$v->getRecursorecibido()."</td>
+                        <td>".$v->getRecursoanterior()."</td>
+                        <td>".$v->getRecursonuevo()."</td>
+                        <td>".$v->getFechaproceso()->format('d-m-Y')."</td>
+                        <td>".$hora[0]."</td>
+                        <td>".$v->getResponsable()->getPrimerNombre()." ".$v->getResponsable()->getPrimerApellido()."</td>
+                      </tr>";
+      }
+
+
+
+
+      $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/auditoriaestadofondo.css' rel='stylesheet' type='text/css' />";
+      $html .="
+          <table cellspacing=1 width='100%'>
+            <tr>
+              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='titulo' align='center' colspan='4'>REPORTE DE ESTADO FONDO</td>
+            </tr>
+            <tr>
+              <th>CORRESPONSALÍA(S): </th>
+              <td colspan='3'>".substr($trcor,0,-2)."</td>
+            </tr>
+            <tr>
+              <th>TIPO(S) DE GASTO(S): </th>
+              <td colspan='3'>".substr($trtg,0,-2)."</td>
+            </tr>
+            <tr>
+              <th colspan='4'>PERIODO</th>
+            </tr>
+            <tr>
+              <th>DESDE:</th><td>".$datos['mesdesde']."/".$datos['aniodesde']."</td><th>HASTA:</th><td>".$datos['meshasta']."/".$datos['aniohasta']."</td>
+            </tr>
+          </table>
+
+          <br>
+          <table width='100%'>
+            ".$trdetalle."
+          </table>
+
+      ";
+
+
+
+
+
+      return $html;
+
+  }
+
+  public function excelrendicion($periodo,$ef,$c,$lr,$usuario,$parametros)
+  {
         //listado rendicion
         $listaren='';$totalmn=0;$totald=0;
         foreach ($lr as $v) {

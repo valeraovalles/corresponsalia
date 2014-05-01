@@ -8,7 +8,7 @@
 {% elseif muestra==3 %}
 	<div class="contenedorform">
 	    <div class="labelform">descripciongasto:</div>
-	    <div class="widgetform">{{ form_widget(form.descripciongasto) }}</div>
+	    <div class="widgetform">{{ form_widget(form.descripciongasto,{'attr':{'style':'width:250px'}}) }}</div>
 	</div>
 	<div id="aniodesde"></div>
 
@@ -41,16 +41,11 @@
     <div id="cobertura"></div>
 
 {% elseif muestra==8 %}
-
+	
     <div class="contenedorform">
         <div class="labelform">Cobertura:</div>
         <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
     </div>
-
-{% elseif muestra==9 %}
-        <input type="submit" value="GENERAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
-
 {% endif %}
 
 
@@ -62,6 +57,7 @@
             var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '3'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#descripciongasto').load(ruta);
+            $('#boton').hide();
         });
 
 
@@ -70,6 +66,7 @@
             var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '4'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#aniodesde').load(ruta);
+            $('#boton').hide();
         });
 
         $('#reporte_aniodesde').change(function(){
@@ -77,6 +74,7 @@
             var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '5'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#aniohasta').load(ruta);
+            $('#boton').hide();
         });
 
         $('#reporte_aniohasta').change(function(){
@@ -84,6 +82,7 @@
             var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '6'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#mesdesde').load(ruta);
+            $('#boton').hide();
         });
 
 
@@ -92,6 +91,7 @@
             var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '7'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#meshasta').load(ruta);
+            $('#boton').hide();
         });
 
         $('#reporte_meshasta').change(function(){
@@ -109,15 +109,13 @@
 	            var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '8'}) }}";
 	            ruta = ruta.replace("variable", dato);
 	            $('#cobertura').load(ruta);
+	            $('#boton').hide();
 
 	        }
         });
 
         $('#reporte_meshasta').change(function(){
-            var dato = $("#reporte_meshasta").val();
-            var ruta = "{{ path('ajaxreporteauditoriaestadofondo', {'dato': 'variable','muestra': '9'}) }}";
-            ruta = ruta.replace("variable", dato);
-            $('#boton').load(ruta);
+            $('#boton').show();
         });
     });
 </script>

@@ -39,7 +39,8 @@ class AjaxController extends Controller
 
         return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauditoriaestadofondo.html.twig', array(
             'form'=>$form->createView(),
-            'muestra'=>$muestra
+            'muestra'=>$muestra,
+            'dato'=>$dato
         ));
         die;
     }
