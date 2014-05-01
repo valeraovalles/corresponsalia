@@ -2,14 +2,13 @@
 
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository;
 use Doctrine\ORM\EntityRepository;
-
 /**
- * Description of EquipoRepository
+ * Description of ModeloRepository
  *
  * @author ecastro
  */
-class EquipoRepository extends EntityRepository{
-    
+class ModeloRepository extends EntityRepository{
+    //put your code here
     public function findByMarcaId($marca_id){
         $query = $this->getEntityManager()->createQuery("
             SELECT modelo

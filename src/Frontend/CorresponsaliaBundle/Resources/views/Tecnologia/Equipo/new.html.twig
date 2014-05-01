@@ -3,6 +3,40 @@
 {% block titulomodulo %}  
     <h1>NUEVO EQUIPO</h1>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#tecnologia_equipo_marca").change(function(){
+                var data = {
+                    marca_id: $(this).val()
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("tecnoequipo_select") }}',
+                    data: data,
+                    success: function(data) {
+                        var $modelo_selector = $('#tecnologia_equipo_modelo');
+                         $modelo_selector.html('<option>Selecciona</option>');
+                        for(var i in data){
+                            $modelo_selector.append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+        
+        $(function() {
+            $( ".datepicker" ).datepicker({
+                showOn: "button",
+                buttonImage: "{{ asset('images/calendario/calendar.gif') }}",
+                buttonImageOnly: true
+            });
+        });
+    </script>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
@@ -23,7 +57,11 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">Marca:</div>
-                <div class="widgetform">{{ form_widget(form.marca.nombre) }}</div>
+                <div class="widgetform">{{ form_widget(form.marca) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Modelo:</div>
+                <div class="widgetform">{{ form_widget(form.modelo) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">serial Equipo:</div>
@@ -34,22 +72,21 @@
                 <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">status:</div>
-                <div class="widgetform">{{ form_widget(form.status) }}</div>
+                <div class="labelform">Fecha Adquisicion:</div>
+                <div class="widgetform">{{ form_widget(form.fechaAdquisicion, { 'attr': {'class': 'datepicker'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Condicion:</div>
+                <div class="widgetform">{{ form_widget(form.condicion) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">observacion Condicion:</div>
                 <div class="widgetform">{{ form_widget(form.observacionCondicion) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">fecha Adquisicion:</div>
-                <div class="widgetform">{{ form_widget(form.fechaAdquisicion) }}</div>
             </div>
         </div>
         
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
     </form>
-
-
 {% endblock %}
+
