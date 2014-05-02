@@ -82,7 +82,8 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="{{ path('corresponsalia_reporteauestadofondo') }}">Auditoria Estado Fondo</a></li>
-          <li><a href="#">Auditoria Rendición</a></li>
+          <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Auditoria Rendición</a></li>
+          <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Rendición</a></li>
           {% if is_granted('ROLE_CONSULTORIA') %}
             <li><a href="#">Personal en Corresponsalías</a></li>
           {% endif %}

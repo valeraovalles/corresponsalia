@@ -4,8 +4,11 @@ namespace Frontend\CorresponsaliaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Frontend\CorresponsaliaBundle\Entity\Reportes\AuditoriaEstadofondo;
-use Frontend\CorresponsaliaBundle\Form\Reportes\AuditoriaEstadofondoType;
+use Frontend\CorresponsaliaBundle\Entity\Auditoriaestadofondo;
+use Frontend\CorresponsaliaBundle\Form\AuditoriaestadofondoType;
+
+use Frontend\CorresponsaliaBundle\Entity\Auditoriarendicion;
+use Frontend\CorresponsaliaBundle\Form\AuditoriarendicionType;
 
 class AjaxController extends Controller
 {
@@ -45,5 +48,18 @@ class AjaxController extends Controller
         die;
     }
 
+
+    public function ajaxreporteauditoriarendicionAction($dato,$muestra){
+
+        $entity = new Auditoriarendicion();
+        $form   = $this->createForm(new AuditoriarendicionType($dato,$muestra), $entity);
+
+        return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauditoriarendicion.html.twig', array(
+            'form'=>$form->createView(),
+            'muestra'=>$muestra,
+            'dato'=>$dato
+        ));
+        die;
+    }
             
 }
