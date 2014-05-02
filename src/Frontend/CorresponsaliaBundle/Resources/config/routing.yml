@@ -1,19 +1,31 @@
 
 ##REPORTE ESTADOFONDO
-corresponsalia_reporteauestadofondo:
-    pattern:  /reporte/auestadofondo
-    defaults: { _controller: CorresponsaliaBundle:Reporte:reporteauestadofondo }
+corresponsalia_reporteauef:
+    pattern:  /reporte/auef
+    defaults: { _controller: CorresponsaliaBundle:Reporte:reporteauef }
 
-corresponsalia_creareporteauestadofondo:
-    pattern:  /reporte/creaauestadofondo
-    defaults: { _controller: CorresponsaliaBundle:Reporte:creareporteauestadofondo }
+corresponsalia_creareporteauef:
+    pattern:  /reporte/creaauef
+    defaults: { _controller: CorresponsaliaBundle:Reporte:creareporteauef }
 
-ajaxreporteauditoriaestadofondo:
+ajaxreporteauef:
     pattern:  /ajaxreporteauef/{dato}/{muestra}
-    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporteauditoriaestadofondo }
-
+    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporteauef }
 
 ##REPORTE RENDICION
+corresponsalia_reporterendicion:
+    pattern:  /reporte/rendicion
+    defaults: { _controller: CorresponsaliaBundle:Reporte:reporterendicion }
+
+corresponsalia_creareporterendicion:
+    pattern:  /reporte/crearendicion
+    defaults: { _controller: CorresponsaliaBundle:Reporte:creareporterendicion }
+
+ajaxreporterendicion:
+    pattern:  /ajaxreporterendicion/{dato}/{muestra}
+    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporterendicion }    
+
+##REPORTE AUDITORIA RENDICION
 corresponsalia_reporteaurendicion:
     pattern:  /reporte/aurendicion
     defaults: { _controller: CorresponsaliaBundle:Reporte:reporteaurendicion }
@@ -25,6 +37,10 @@ corresponsalia_creareporteaurendicion:
 ajaxreporteauditoriarendicion:
     pattern:  /ajaxreporteaure/{dato}/{muestra}
     defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporteauditoriarendicion }
+
+
+
+
 
 ##############################################################################
 corresponsalia_inicio:

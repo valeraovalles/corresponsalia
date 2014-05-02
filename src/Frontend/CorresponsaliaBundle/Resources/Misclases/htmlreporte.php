@@ -8,7 +8,7 @@ class htmlreporte
   public function auditoriaestadofondo($em,$datos){
 
 
-      $dql = "select x from CorresponsaliaBundle:AuditoriaEstadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
+      $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
       $query = $em->createQuery($dql);
       $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
       $query->setParameter('idtipogasto', $datos['tipogasto']);
@@ -44,8 +44,8 @@ class htmlreporte
       //armo el detalle
       $trdetalle="
         <tr>
-          <th>CORRESPONSALÍA</th>
-          <th>TIPO DE GASTO</th>
+          <th width='20%'>CORRESPONSALÍA</th>
+          <th width='15%'>TIPO DE GASTO</th>
           <th>ANIO</th>
           <th>MES</th>
           <th>SALDO INICIAL</th>
@@ -113,7 +113,8 @@ class htmlreporte
       return $html;
   }
 
-   public function auditoriarendicion($em,$datos){
+
+   public function rendicion($em,$datos){
 
       $dql = "select x from CorresponsaliaBundle:Relaciongasto x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta and x.descripciongasto in (:iddesgas) order by x.id ASC";
       $query = $em->createQuery($dql);
@@ -151,47 +152,56 @@ class htmlreporte
 
       //armo el detalle
       $trdetalle="
+
         <tr>
           <th>CORRESPONSALÍA</th>
           <th>TIPO DE GASTO</th>
           <th>ANIO</th>
           <th>MES</th>
-          <th>SALDO INICIAL</th>
-          <th>RECURSO TOTAL</th>
-          <th>RECURSO ANTERIOR</th>
-          <th>RECURSO NUEVO</th>
-          <th>FECHA PROCESO</th>
-          <th>HORA PROCESO</th>
-          <th>RESPONSABLE</th>
+          <th>DESCRIPCIÓN GASTO</th>
+          <th>MONTO MONEDA NACIONAL</th>
+          <th>MONTO DOLARES</th>
+          <th>CAMBIO</th>
         </tr>
 
       ";
+      $totalmontomonnac=0;
+      $totalmontodolar=0;
       foreach ($result as $v) {
-        $hora=explode(".", $v->getHoraproceso());
         $trdetalle .="<tr>
                         <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
                         <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
                         <td>".$v->getPeriodorendicion()->getAnio()."</td>
                         <td>".$v->getPeriodorendicion()->getMes()."</td>
-                        <td>".$v->getSaldoinicial()."</td>
-                        <td>".$v->getRecursorecibido()."</td>
-                        <td>".$v->getRecursoanterior()."</td>
-                        <td>".$v->getRecursonuevo()."</td>
-                        <td>".$v->getFechaproceso()->format('d-m-Y')."</td>
-                        <td>".$hora[0]."</td>
-                        <td>".$v->getResponsable()->getPrimerNombre()." ".$v->getResponsable()->getPrimerApellido()."</td>
-                      </tr>";
+                        <td>".$v->getDescripciongasto()->getDescripcion()."</td>
+                        <td>".$v->getMontomonnac()."</td>
+                        <td>".$v->getMontodolar()."</td>
+                        <td>".$v->getCambio()."</td>
+                        </tr>";
+
+        $totalmontomonnac = $totalmontomonnac + $v->getMontomonnac();
+        $totalmontodolar = $totalmontodolar + $v->getMontodolar();
+                      
       }
+      $trdetalle .="
+        <tr class='trtotal'>
+          <td colspan=5 class='total'>TOTALES:</td>
+          <td class='montos'>".$totalmontomonnac."</td>
+          <td class='montos'>".$totalmontodolar."</td>
+          <td colspan=2></td>
+        </tr>
+      ";
+
+      if(isset($result[0])) $responsable=strtoupper($result[0]->getResponsable()->getPrimerNombre()." ".$result[0]->getResponsable()->getPrimerApellido());
+      else $responsable=null;
 
 
-
-
-      $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/auditoriaestadofondo.css' rel='stylesheet' type='text/css' />";
+      $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/reporterendicion.css' rel='stylesheet' type='text/css' />";
       $html .="
           <table cellspacing=1 width='100%'>
             <tr>
               <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
-              <td class='titulo' align='center' colspan='4'>REPORTE DE ESTADO FONDO</td>
+              <td class='titulo' align='center' colspan='4'>REPORTE DE RENDICION</td>
             </tr>
             <tr>
               <th>CORRESPONSALÍA(S): </th>
@@ -213,7 +223,8 @@ class htmlreporte
           <table width='100%'>
             ".$trdetalle."
           </table>
-
+          <br><br>
+          <div><b>RESPONSABLE: </b>".$responsable."</div>
       ";
 
 
@@ -224,7 +235,7 @@ class htmlreporte
 
   }
 
-  public function excelrendicion($periodo,$ef,$c,$lr,$usuario,$parametros)
+  public function excelrendicion($periodo,$ef,$c,$lr,$parametros)
   {
         //listado rendicion
         $listaren='';$totalmn=0;$totald=0;
@@ -243,7 +254,6 @@ class htmlreporte
                     <td>".$v->getCambio()."</td> 
                     <td>".$v->getMontomonnac()."</td> 
                     <td>".$v->getMontodolar()."</td> 
-                    
                 </tr>
             ";
             
@@ -367,7 +377,7 @@ class htmlreporte
                            <td colspan=5  style='background-color:#cacaca;' align='center'><b>24. N° JEFE DE SUCURSAL O CORRESPONSALÍA</b></td>
                        </tr>
                        <tr>
-                           <td colspan=3 align='center'>".strtoupper($usuario->getPrimerNombre()." ".$usuario->getPrimerApellido())."</td>
+                           <td colspan=3 align='center'>".strtoupper($lr[0]->getResponsable()->getPrimerNombre()." ".$lr[0]->getResponsable()->getPrimerApellido())."</td>
                            <td colspan=3 align='center'> </td>
                            <td colspan=2 align='center'>Apellidos y Nombres: </td>
                            <td colspan=3 align='center'>Nro Identificación: </td>
