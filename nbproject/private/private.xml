@@ -3,16 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/app/Resources/views/base.html.twig</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/Modelo.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/new.html.twig</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Form/Tecnologia/EventListener/AddMarcaFieldSubscriber.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/EntityRepository/ModeloRepository.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Form/Tecnologia/EquipoType.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/newEmptyPHP.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/Equipo.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/config/routing/tecnologia_equipo.yml</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Controller/Tecnologia/EquipoController.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Controller/Tecnologia/ModeloExtraController.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Form/Tecnologia/EventListener/AddMarcaFieldSubscriber.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/new.html.twig</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/EntityRepository/ModeloRepository.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Form/Tecnologia/EquipoType.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/web/js/Tecnologia/new_equipo.js</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/newEmptyPHP.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/config/routing/tecnologia_equipo.yml</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Form/Tecnologia/EventListener/AddModeloFieldSubscriber.php</file>
         </group>
     </open-files>
