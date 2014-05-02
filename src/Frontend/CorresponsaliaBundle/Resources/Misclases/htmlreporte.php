@@ -8,16 +8,25 @@ class htmlreporte
   public function auditoriaestadofondo($em,$datos){
 
 
-      $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
-      $query = $em->createQuery($dql);
-      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
-      $query->setParameter('idtipogasto', $datos['tipogasto']);
-      $query->setParameter('aniodesde', $datos['aniodesde']);
-      $query->setParameter('aniohasta', $datos['aniohasta']);
-      $query->setParameter('mesdesde', $datos['mesdesde']);
-      $query->setParameter('meshasta', $datos['meshasta']);
-      $result = $query->getResult();
-
+      if(isset($datos['cobertura'])){
+            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.id in (:idperiodo) order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+            $query->setParameter('idtipogasto', $datos['tipogasto']);
+            $query->setParameter('idperiodo', $datos['cobertura']);
+            $result = $query->getResult();
+      }
+      else{
+            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+            $query->setParameter('idtipogasto', $datos['tipogasto']);
+            $query->setParameter('aniodesde', $datos['aniodesde']);
+            $query->setParameter('aniohasta', $datos['aniohasta']);
+            $query->setParameter('mesdesde', $datos['mesdesde']);
+            $query->setParameter('meshasta', $datos['meshasta']);
+            $result = $query->getResult();
+      }
 
       //armo las corresponsalías
       $dql = "select x from CorresponsaliaBundle:Corresponsalia x where x.id in (:idcorresponsalia) order by x.id ASC";
@@ -40,12 +49,11 @@ class htmlreporte
       }
 
 
-
-      //armo el detalle
       $trdetalle="
         <tr>
-          <th width='20%'>CORRESPONSALÍA</th>
-          <th width='15%'>TIPO DE GASTO</th>
+          <th width='15%'>CORRESPONSALÍA</th>
+          <th width='10%'>TIPO DE GASTO</th>
+          <th width='20%'>COBERTURA</th>
           <th>ANIO</th>
           <th>MES</th>
           <th>SALDO INICIAL</th>
@@ -59,11 +67,19 @@ class htmlreporte
         </tr>
 
       ";
+
+
       foreach ($result as $v) {
         $hora=explode(".", $v->getHoraproceso());
+
+        if($v->getPeriodorendicion()->getCobertura()!='')
+          $cobertura=$v->getPeriodorendicion()->getCobertura();
+        else $cobertura='N/A';
+
         $trdetalle .="<tr>
                         <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
                         <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$cobertura."</td>
                         <td>".$v->getPeriodorendicion()->getAnio()."</td>
                         <td>".$v->getPeriodorendicion()->getMes()."</td>
                         <td>".$v->getSaldoinicial()."</td>
@@ -156,6 +172,7 @@ class htmlreporte
         <tr>
           <th>CORRESPONSALÍA</th>
           <th>TIPO DE GASTO</th>
+          <th width='20%'>COBERTURA</th>
           <th>ANIO</th>
           <th>MES</th>
           <th>DESCRIPCIÓN GASTO</th>
@@ -168,9 +185,14 @@ class htmlreporte
       $totalmontomonnac=0;
       $totalmontodolar=0;
       foreach ($result as $v) {
+        if($v->getPeriodorendicion()->getCobertura()!='')
+          $cobertura=$v->getPeriodorendicion()->getCobertura();
+        else $cobertura='N/A';
+
         $trdetalle .="<tr>
                         <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
                         <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$cobertura."</td>
                         <td>".$v->getPeriodorendicion()->getAnio()."</td>
                         <td>".$v->getPeriodorendicion()->getMes()."</td>
                         <td>".$v->getDescripciongasto()->getDescripcion()."</td>
