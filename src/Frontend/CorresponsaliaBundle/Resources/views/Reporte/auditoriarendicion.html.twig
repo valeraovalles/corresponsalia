@@ -26,8 +26,7 @@
         </div>
 
 
-        <span id="boton" style="display:none;"><input type="submit" value="GENERAR" class="btn btn-primary"> | </span>
-        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
+        <span id="boton" style="display:none;"><input type="submit" value="GENERAR" class="btn btn-primary"></span>
 
 
     </form>
@@ -38,7 +37,7 @@
 
             $('#reporte_corresponsalia').click(function(){
                 var dato = $("#reporte_corresponsalia").val();
-                var ruta = "{{ path('ajaxreporteauditoriarendicion', {'dato': 'variable','muestra': '2'}) }}";
+                var ruta = "{{ path('ajaxreporterendicion', {'dato': 'variable','muestra': '2'}) }}";
                 ruta = ruta.replace("variable", dato);
                 $('#ajax').load(ruta);
                 $('#boton').hide();

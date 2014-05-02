@@ -23,7 +23,7 @@ corresponsalia_creareporterendicion:
 
 ajaxreporterendicion:
     pattern:  /ajaxreporterendicion/{dato}/{muestra}
-    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporterendicion }    
+    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporterendicion }
 
 ##REPORTE AUDITORIA RENDICION
 corresponsalia_reporteaurendicion:
@@ -33,14 +33,6 @@ corresponsalia_reporteaurendicion:
 corresponsalia_creareporteaurendicion:
     pattern:  /reporte/creaaurendicion
     defaults: { _controller: CorresponsaliaBundle:Reporte:creareporteaurendicion }
-
-ajaxreporteauditoriarendicion:
-    pattern:  /ajaxreporteaure/{dato}/{muestra}
-    defaults: { _controller: CorresponsaliaBundle:Ajax:ajaxreporteauditoriarendicion }
-
-
-
-
 
 ##############################################################################
 corresponsalia_inicio:

@@ -61,26 +61,4 @@ class AjaxController extends Controller
         die;
     }
 
-
-
-
-
-
-
-
-
-    
-    public function ajaxreporteauditoriarendicionAction($dato,$muestra){
-
-        $entity = new Reporteauditoriarendicion();
-        $form   = $this->createForm(new ReporteauditoriarendicionType($dato,$muestra), $entity);
-
-        return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauditoriarendicion.html.twig', array(
-            'form'=>$form->createView(),
-            'muestra'=>$muestra,
-            'dato'=>$dato
-        ));
-        die;
-    }
-            
 }

@@ -103,12 +103,10 @@ class ReporteController extends Controller
         $this->pdf($html,'h','reporterendicion');
     }
 
-
-/*
     public function reporteaurendicionAction()
     {    
-        $entity = new Auditoriarendicion();
-        $form   = $this->createForm(new AuditoriarendicionType("","1"), $entity);
+        $entity = new Reporte();
+        $form   = $this->createForm(new ReporteType("","1"), $entity);
         return $this->render('CorresponsaliaBundle:Reporte:auditoriarendicion.html.twig', array(
             'form'=>$form->createView(),
         ));
@@ -119,17 +117,15 @@ class ReporteController extends Controller
         $post=$request->request->all();
         $datos=$post['reporte'];
 
-
         //INSTANCIO LA CLASE PARA GENERAR EL HTML DEL REPORTE
         $em = $this->getDoctrine()->getManager();
         $html=new htmlreporte;
         $html=$html->auditoriarendicion($em, $datos);
         $html=$html;
-
-        $this->pdf($html);
-
-
-    }*/
+        //echo $html;
+        //die;
+        $this->pdf($html,'h','reporterendicion');
+    }
 
     public function pdf($html,$orientacion,$hojacss){
 

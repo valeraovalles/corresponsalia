@@ -257,6 +257,134 @@ class htmlreporte
 
   }
 
+
+   public function auditoriarendicion($em,$datos){
+
+die;
+      $dql = "select x from CorresponsaliaBundle:Relaciongasto x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta and x.descripciongasto in (:iddesgas) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $query->setParameter('aniodesde', $datos['aniodesde']);
+      $query->setParameter('aniohasta', $datos['aniohasta']);
+      $query->setParameter('mesdesde', $datos['mesdesde']);
+      $query->setParameter('meshasta', $datos['meshasta']);
+      $query->setParameter('iddesgas', $datos['descripciongasto']);
+      $result = $query->getResult();
+
+
+      //armo las corresponsalías
+      $dql = "select x from CorresponsaliaBundle:Corresponsalia x where x.id in (:idcorresponsalia) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $corresponsalia = $query->getResult();
+      $trcor="";
+      foreach ($corresponsalia as $v) {
+        $trcor .=$v->getNombre()." | ";
+      }
+
+      //armo los tipos de gastos
+      $dql = "select x from CorresponsaliaBundle:Tipogasto x where x.id in (:idtipogasto) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $tipogasto = $query->getResult();
+      $trtg="";
+      foreach ($tipogasto as $v) {
+        $trtg .=$v->getDescripcion()." | ";
+      }
+
+
+
+      //armo el detalle
+      $trdetalle="
+
+        <tr>
+          <th>CORRESPONSALÍA</th>
+          <th>TIPO DE GASTO</th>
+          <th width='20%'>COBERTURA</th>
+          <th>ANIO</th>
+          <th>MES</th>
+          <th>DESCRIPCIÓN GASTO</th>
+          <th>MONTO MONEDA NACIONAL</th>
+          <th>MONTO DOLARES</th>
+          <th>CAMBIO</th>
+        </tr>
+
+      ";
+      $totalmontomonnac=0;
+      $totalmontodolar=0;
+      foreach ($result as $v) {
+        if($v->getPeriodorendicion()->getCobertura()!='')
+          $cobertura=$v->getPeriodorendicion()->getCobertura();
+        else $cobertura='N/A';
+
+        $trdetalle .="<tr>
+                        <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
+                        <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$cobertura."</td>
+                        <td>".$v->getPeriodorendicion()->getAnio()."</td>
+                        <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$v->getDescripciongasto()->getDescripcion()."</td>
+                        <td>".$v->getMontomonnac()."</td>
+                        <td>".$v->getMontodolar()."</td>
+                        <td>".$v->getCambio()."</td>
+                        </tr>";
+
+        $totalmontomonnac = $totalmontomonnac + $v->getMontomonnac();
+        $totalmontodolar = $totalmontodolar + $v->getMontodolar();
+                      
+      }
+      $trdetalle .="
+        <tr class='trtotal'>
+          <td colspan=5 class='total'>TOTALES:</td>
+          <td class='montos'>".$totalmontomonnac."</td>
+          <td class='montos'>".$totalmontodolar."</td>
+          <td colspan=2></td>
+        </tr>
+      ";
+
+      if(isset($result[0])) $responsable=strtoupper($result[0]->getResponsable()->getPrimerNombre()." ".$result[0]->getResponsable()->getPrimerApellido());
+      else $responsable=null;
+
+
+      $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/reporterendicion.css' rel='stylesheet' type='text/css' />";
+      $html .="
+          <table cellspacing=1 width='100%'>
+            <tr>
+              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='titulo' align='center' colspan='4'>REPORTE DE RENDICION</td>
+            </tr>
+            <tr>
+              <th>CORRESPONSALÍA(S): </th>
+              <td colspan='3'>".substr($trcor,0,-2)."</td>
+            </tr>
+            <tr>
+              <th>TIPO(S) DE GASTO(S): </th>
+              <td colspan='3'>".substr($trtg,0,-2)."</td>
+            </tr>
+            <tr>
+              <th colspan='4'>PERIODO</th>
+            </tr>
+            <tr>
+              <th>DESDE:</th><td>".$datos['mesdesde']."/".$datos['aniodesde']."</td><th>HASTA:</th><td>".$datos['meshasta']."/".$datos['aniohasta']."</td>
+            </tr>
+          </table>
+
+          <br>
+          <table width='100%'>
+            ".$trdetalle."
+          </table>
+          <br><br>
+          <div><b>RESPONSABLE: </b>".$responsable."</div>
+      ";
+
+
+
+
+
+      return $html;
+
+  }
   public function excelrendicion($periodo,$ef,$c,$lr,$parametros)
   {
         //listado rendicion
