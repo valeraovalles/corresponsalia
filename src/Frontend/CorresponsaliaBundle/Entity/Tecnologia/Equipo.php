@@ -25,7 +25,7 @@ class Equipo
     /**
      * @var string
      *
-     * @ORM\Column(name="serialEquipo", type="string", length=255, nullable=false)
+     * @ORM\Column(name="serialequipo", type="string", length=255, nullable=false)
      */
     private $serialEquipo;
 
@@ -46,14 +46,14 @@ class Equipo
     /**
      * @var string
      * 
-     * @ORM\Column(name="observacionCondicion", type="text", nullable=true)
+     * @ORM\Column(name="observacioncondicion", type="text", nullable=true)
      */
     private $observacionCondicion;
 
     /**
-     * @var \Date
+     * @var \DateTime
      *
-     * @ORM\Column(name="fechaAdquisicion", type="date")
+     * @ORM\Column(name="fechaadquisicion", type="date", nullable=true)
      */
     private $fechaAdquisicion;
     
@@ -96,79 +96,7 @@ class Equipo
     {
         return $this->id;
     }
-    
-    /**
-     * Get categoria
-     *
-     * @return string
-     */
-    public function getCategoria() {
-        return $this->categoria;
-    }
-    
-    /**
-     * Set categoria
-     *
-     * @param string $categoria
-     * @return Equipo
-     */
-    public function setCategoria($categoria) 
-    {
-        $this->categoria = $categoria;
-        return $this;
-    }
-    
-    /**
-     * Get condicion
-     *
-     * @return string
-     */
-    public function getCondicion() {
-        return $this->condicion;
-    }
-    
-    /**
-     * Set condicion
-     *
-     * @param string $condicion
-     * @return Equipo
-     */
-    public function setCondicion($condicion) {
-        $this->condicion = $condicion;
-        
-        return $this;
-    }
-    
-    /**
-     * Get observacion_condicion
-     *
-     * @return string
-     */
-    public function getObservacionCondicion() {
-        return $this->observacionCondicion;
-    }
-    
-    /**
-     * Set observacionCondicion
-     *
-     * @param string $observacionCondicion
-     * @return Equipo
-     */
-    public function setObservacionCondicion($observacionCondicion) {
-        $this->observacionCondicion = $observacionCondicion;
-        return $this;
-    }
-    
-    /**
-     * Get serialEquipo
-     *
-     * @return string 
-     */
-    public function getSerialEquipo()
-    {
-        return $this->serialEquipo;
-    }
-    
+
     /**
      * Set serialEquipo
      *
@@ -178,6 +106,30 @@ class Equipo
     public function setSerialEquipo($serialEquipo)
     {
         $this->serialEquipo = $serialEquipo;
+    
+        return $this;
+    }
+
+    /**
+     * Get serialEquipo
+     *
+     * @return string 
+     */
+    public function getSerialEquipo()
+    {
+        return $this->serialEquipo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Equipo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
         return $this;
     }
 
@@ -190,81 +142,142 @@ class Equipo
     {
         return $this->descripcion;
     }
-    
+
     /**
-     * Set descripcion
+     * Set status
      *
-     * @param string $descripcion
+     * @param boolean $status
      * @return Equipo
      */
-    public function setDescripcion($descripcion)
+    public function setStatus($status)
     {
-        $this->descripcion = $descripcion;
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set observacionCondicion
+     *
+     * @param string $observacionCondicion
+     * @return Equipo
+     */
+    public function setObservacionCondicion($observacionCondicion)
+    {
+        $this->observacionCondicion = $observacionCondicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get observacionCondicion
+     *
+     * @return string 
+     */
+    public function getObservacionCondicion()
+    {
+        return $this->observacionCondicion;
+    }
+
+    /**
+     * Set fechaAdquisicion
+     *
+     * @param \DateTime $fechaAdquisicion
+     * @return Equipo
+     */
+    public function setFechaAdquisicion($fechaAdquisicion)
+    {
+        $this->fechaAdquisicion = $fechaAdquisicion;
+    
         return $this;
     }
 
     /**
      * Get fechaAdquisicion
      *
-     * @return date
+     * @return \DateTime 
      */
-    public function getFechaAdquisicion() {
+    public function getFechaAdquisicion()
+    {
         return $this->fechaAdquisicion;
     }
 
     /**
-     * Set fechaAdquisicion
+     * Set categoria
      *
-     * @param date $fechaAdquisicion
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Categoria $categoria
      * @return Equipo
      */
-    public function setFechaAdquisicion(\DateTime $fechaAdquisicion) {
-        $this->fechaAdquisicion = $fechaAdquisicion;
-        return $this; 
+    public function setCategoria(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\Categoria $categoria = null)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
     }
 
     /**
-     * Get modelo
+     * Get categoria
      *
-     * @return string
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Categoria 
      */
-    public function getModelo() {
-        return $this->modelo;
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set condicion
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Condicion $condicion
+     * @return Equipo
+     */
+    public function setCondicion(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\Condicion $condicion = null)
+    {
+        $this->condicion = $condicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get condicion
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Condicion 
+     */
+    public function getCondicion()
+    {
+        return $this->condicion;
     }
 
     /**
      * Set modelo
      *
-     * @param date $modelo
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Modelo $modelo
      * @return Equipo
      */
-    public function setModelo($modelo) {
+    public function setModelo(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\Modelo $modelo = null)
+    {
         $this->modelo = $modelo;
+    
         return $this;
-    }
-    
-    /**
-     * Get status
-     *
-     * @return boolean
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-    
-    /**
-     * Set boolean
-     *
-     * @param boolean $status
-     * @return Equipo
-     */
-    public function setStatus($status) {
-        $this->status = $status;
-        return $this;
-    }
-    
-    public function __toString() {
-        return $this->serialEquipo. $this->descripcion;
     }
 
+    /**
+     * Get modelo
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\Modelo 
+     */
+    public function getModelo()
+    {
+        return $this->modelo;
+    }
 }

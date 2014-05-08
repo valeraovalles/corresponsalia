@@ -32,7 +32,6 @@ class AddModeloFieldSubscriber implements EventSubscriberInterface
             'class'         => 'CorresponsaliaBundle:Tecnologia\Modelo',
             'empty_value'   => 'Seleccione',
             'label'         => 'Modelo',
-            'mapped'        => false,
             'attr'          => array(
                 'class' => 'modelo_selector',
             ),

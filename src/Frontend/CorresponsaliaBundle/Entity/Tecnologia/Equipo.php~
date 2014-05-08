@@ -1,0 +1,91 @@
+<?php
+
+namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Equipo
+ *
+ * @ORM\Table(name="tecnologia.equipo")
+ * @ORM\Entity(repositoryClass="Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository\EquipoRepository")
+ */
+class Equipo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tecnologia.equipo_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="serialequipo", type="string", length=255, nullable=false)
+     */
+    private $serialEquipo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=false)
+     */
+    private $descripcion;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="status", type="boolean", nullable=false)
+     */
+    private $status;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="observacioncondicion", type="text", nullable=true)
+     */
+    private $observacionCondicion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechaadquisicion", type="date", nullable=true)
+     */
+    private $fechaAdquisicion;
+    
+    /**
+     * @var | Tecnologia.Categoria
+     * 
+     * @ORM\ManyToOne(targetEntity="Categoria")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * })
+     */
+    private $categoria;
+    
+    /**
+     * @var | Tecnologia.Condicion
+     * 
+     * @ORM\ManyToOne(targetEntity="Condicion")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="condicion_id", referencedColumnName="id")
+     * })
+     */
+    private $condicion;
+    
+    /**
+     * @var | Tecnologia.Modelo
+     * 
+     * @ORM\ManyToOne(targetEntity="Modelo")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="modelo_id", referencedColumnName="id")
+     * })
+     */
+    private $modelo;
+
+    
+}

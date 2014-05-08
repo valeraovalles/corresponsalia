@@ -2,7 +2,7 @@ $.noConflict();
 jQuery(document).ready(function(){
     
     jQuery("#tecnologia_equipo_condicion").on('change',function(){
-        var valor = jQuery("#tecnologia_equipo_condicion :selected").text(); 
+        var valor = jQuery("#tecnologia_equipo_condicion :selected").text();
         if(valor==='REGULAR' || valor==='MALO'){
             if (!jQuery('#observcondicion').length) {
                 var newElems = jQuery("<div id='observcondicion' class='contenedorform'></div>")

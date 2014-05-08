@@ -37,8 +37,9 @@ class EquipoController extends Controller
     {
         $entity = new Equipo();
         $form = $this->createCreateForm($entity);
+        
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

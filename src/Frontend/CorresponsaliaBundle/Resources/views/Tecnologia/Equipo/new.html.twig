@@ -31,25 +31,36 @@
         jQuery(function() {
             jQuery( ".datepicker" ).datepicker({
                 showOn: "button",
-                buttonImage: "{{ asset('images/calendario/calendar.gif') }}",
+                buttonImage: "{{ asset('images/calendario/calendar.png') }}",
                 buttonImageOnly: true
             });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('js/Tecnologia/new_equipo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(form.serialEquipo)%}
+    {% if form_errors(form.categoria) or form_errors(form.marca) or form_errors(form.modelo) or form_errors(form.serialEquipo) or form_errors(form.descripcion) or form_errors(form.fechaAdquisicion) or form_errors(form.condicion)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(form.serialEquipo) }}</div>
+        <div>Categoria: {{ form_errors(form.categoria) }}</div>
+        <div>Marca: {{ form_errors(form.marca) }}</div>
+        <div>Modelo: {{ form_errors(form.modelo) }}</div>
+        <div>Serial: {{ form_errors(form.serialEquipo) }}</div>
+        <div>Descripcion: {{ form_errors(form.descripcion) }}</div>
+        <div>Fecha: {{ form_errors(form.fechaAdquisicion) }}</div>
+        <div>Condicion: {{ form_errors(form.condicion) }}</div>
     </div>
     {% endif %}
 
-    <form novalidate method="post" action="{{ path('tecnoequipo_create') }}">
+    <form novalidate method="POST" action="{{ path('tecnoequipo_create') }}">
         {{ form_widget(form._token) }}
         <div id="wrapper-form" class="formShow" style="width:70%;">
             <div class="contenedorform">
