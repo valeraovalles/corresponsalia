@@ -15,10 +15,6 @@ class DefaultController extends Controller
         
         $PASSPASS=$_SESSION['PASSPASS'];
        
-        /*     return new Response(
-            'Created perfil id: '.$perfil->getId().' and user id: '.$user->getId()
-        );*/
-        
         //VERIFICAR SI EL USUARIO ESTA LOGUEADO
         if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
           throw new AccessDeniedException();
@@ -38,6 +34,10 @@ class DefaultController extends Controller
     }
     public function loginAction()
     {
+
+        $navegador=$this->ObtenerNavegador($_SERVER['HTTP_USER_AGENT']);
+        $navegador=explode(" ", $navegador);
+
         $peticion = $this->getRequest();
         $sesion = $peticion->getSession();
         $error = $peticion->attributes->get(
@@ -48,13 +48,38 @@ class DefaultController extends Controller
         
         return $this->render('UsuarioBundle:Default:login.html.twig', array(
         'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
-        'error'
-        => $error,'mensaje'=>''
+        'error'=> $error,
+        'mensaje'=>'',
+        'navegador'=>$navegador[0]
         ));
     }
 
     public function sincronizacionAction()
     {
         return $this->render('UsuarioBundle:Default:sincronizacion.html.twig');
+    }
+
+    function ObtenerNavegador($user_agent) {
+         $navegadores = array(
+              'Opera' => 'Opera',
+              'Mozilla Firefox'=> '(Firebird)|(Firefox)',
+              'Galeon' => 'Galeon',
+              'Mozilla'=>'Gecko',
+              'MyIE'=>'MyIE',
+              'Lynx' => 'Lynx',
+              'Netscape' => '(Mozilla/4\.75)|(Netscape6)|(Mozilla/4\.08)|(Mozilla/4\.5)|(Mozilla/4\.6)|(Mozilla/4\.79)',
+              'Konqueror'=>'Konqueror',
+              'IExplorer 8' => '(MSIE 8\.[0-9]+)',
+              'IExplorer 7' => '(MSIE 7\.[0-9]+)',
+              'IExplorer 6' => '(MSIE 6\.[0-9]+)',
+              'IExplorer 5' => '(MSIE 5\.[0-9]+)',
+              'IExplorer 4' => '(MSIE 4\.[0-9]+)',
+    );
+
+    foreach($navegadores as $navegador=>$pattern){
+           if (eregi($pattern, $user_agent))
+           return $navegador;
+        }
+    return 'Desconocido';
     }
 }
