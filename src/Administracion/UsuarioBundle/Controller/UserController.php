@@ -117,8 +117,10 @@ class UserController extends Controller
             $consulta->setParameter('pass', md5($datos['clavenueva']));
             $consulta->execute();
             
+            $_SESSION['PASSPASS']=$datos['clavenueva'];
+            
             $this->get('session')->getFlashBag()->add('notice', 'Su clave fue actualizada correctamente!!.');
-            return $this->redirect($this->generateUrl('usuario_homepage'));
+            return $this->redirect($this->generateUrl('corresponsalia_inicio'));
         }
         $this->get('session')->getFlashBag()->add('alert', 'Hay conflictos en el formulario, por favor verifique!!');
         return $this->render('UsuarioBundle:User:cambioclave.html.twig', array(

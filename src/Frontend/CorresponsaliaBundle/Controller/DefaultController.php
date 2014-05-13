@@ -133,6 +133,25 @@ class DefaultController extends Controller
         $consulta->setParameter('estatus', $estatus);
         $consulta->execute();
 
+
+
+
+        if($estatus==2){
+/*
+            //CORREO
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Corresponsalia-Revision')     // we configure the title
+            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
+            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:solucion.html.twig',
+                    array('ticket' => $ticket)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);    // then we send the message.
+            //FIN CORREO*/
+        }
+
         //devuelto para correción
         if($estatus==3){
             $datos=$request->request->all();
@@ -142,7 +161,7 @@ class DefaultController extends Controller
             $consulta->execute();
         }
 
-        //asigono el saldo final al periodo siguiente
+        //asigno el saldo final al periodo siguiente
         if($estatus==4){
 
             $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);

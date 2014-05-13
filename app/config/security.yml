@@ -29,16 +29,23 @@ security:
         #Symfony\Component\Security\Core\User\User: plaintext
         
     access_control:
+        #usuario general
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/corresponsalia/inicio, roles: ROLE_USER }
+        - { path: ^/usuario/cambioclave, roles: ROLE_USER }
 
+        #super admin
         - { path: ^/usuario, roles: ROLE_SUPERADMIN }
         - { path: ^/corresponsalia/reporte/aurendicion, roles: ROLE_SUPERADMIN }
 
+        #combinados
         - { path: ^/corresponsalia/periodorendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA] }
         - { path: ^/corresponsalia/reporte/rendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA,ROLE_SUPERADMIN] }
         - { path: ^/corresponsalia/reporte/auef, roles: [ROLE_RENDICION_ADMIN,ROLE_SUPERADMIN] }
 
+        
+
+        #administrador
         - { path: ^/corresponsalia/descripciongasto, roles: ROLE_RENDICION_ADMIN }
         - { path: ^/corresponsalia/tipomoneda, roles: ROLE_RENDICION_ADMIN }
         - { path: ^/corresponsalia/tipocorresponsalia, roles: ROLE_RENDICION_ADMIN }
@@ -46,6 +53,7 @@ security:
         - { path: ^/corresponsalia/estadofondo, roles: ROLE_RENDICION_ADMIN }
         - { path: ^/corresponsalia/revisionrendicion, roles: ROLE_RENDICION_ADMIN }
 
+        #corresponsal
         - { path: ^/corresponsalia/cambio, roles: ROLE_RENDICION_CORRESPONSALIA }
         - { path: ^/corresponsalia/rendirgasto, roles: ROLE_RENDICION_CORRESPONSALIA }
 
