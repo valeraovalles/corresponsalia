@@ -41,7 +41,7 @@ class EstadofondoController extends Controller
             else{
                 $saldoinicial=null;
             }
-        }else $saldoinicial=0;
+        }else $saldoinicial='0';
 
         return $saldoinicial;
     }

@@ -31,3 +31,31 @@ security:
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/corresponsalia/inicio, roles: ROLE_USER }
+
+        - { path: ^/usuario, roles: ROLE_SUPERADMIN }
+        - { path: ^/corresponsalia/reporte/aurendicion, roles: ROLE_SUPERADMIN }
+
+        - { path: ^/corresponsalia/periodorendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA] }
+        - { path: ^/corresponsalia/reporte/rendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA,ROLE_SUPERADMIN] }
+        - { path: ^/corresponsalia/reporte/auef, roles: [ROLE_RENDICION_ADMIN,ROLE_SUPERADMIN] }
+
+        - { path: ^/corresponsalia/descripciongasto, roles: ROLE_RENDICION_ADMIN }
+        - { path: ^/corresponsalia/tipomoneda, roles: ROLE_RENDICION_ADMIN }
+        - { path: ^/corresponsalia/tipocorresponsalia, roles: ROLE_RENDICION_ADMIN }
+        - { path: ^/corresponsalia/corresponsalia, roles: ROLE_RENDICION_ADMIN }
+        - { path: ^/corresponsalia/estadofondo, roles: ROLE_RENDICION_ADMIN }
+        - { path: ^/corresponsalia/revisionrendicion, roles: ROLE_RENDICION_ADMIN }
+
+        - { path: ^/corresponsalia/cambio, roles: ROLE_RENDICION_CORRESPONSALIA }
+        - { path: ^/corresponsalia/rendirgasto, roles: ROLE_RENDICION_CORRESPONSALIA }
+
+        
+
+
+
+        
+
+
+
+
+        

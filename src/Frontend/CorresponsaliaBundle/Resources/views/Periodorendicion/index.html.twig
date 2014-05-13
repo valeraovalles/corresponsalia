@@ -57,7 +57,9 @@
                             {% if entity.estatus==1 or entity.estatus==3 %}
                             <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
                             {% else %}
-                            <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
+                            {#<a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>#}
+
+                            <b>N/A</b>
 
                             {% endif %}
                                 
