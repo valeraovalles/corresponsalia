@@ -31,3 +31,11 @@ security:
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/corresponsalia/inicio, roles: ROLE_USER }
+    #ROLES DE CONSULTORIA
+        - { path: ^/corresponsalia/personal, roles: [ROLE_ADMIN, ROLE_PERSONAL]}
+        - { path: ^/corresponsalia/cargo, roles: [ROLE_ADMIN, ROLE_PERSONAL]}
+        - { path: ^/corresponsalia/representante, roles: [ROLE_ADMIN, ROLE_CONSULTORIA]}
+        - { path: ^/corresponsalia/datoslegales, roles: [ROLE_ADMIN,ROLE_CONSULTORIA]}
+        - { path: ^/corresponsalia/contrato, roles: [ROLE_ADMIN,ROLE_CONSULTORIA]}
+        - { path: ^/corresponsalia/consultoria, roles: [ROLE_ADMIN,ROLE_CONSULTORIA]}
+        - { path: ^/corresponsalia/personal, roles: [ROLE_ADMIN, ROLE_PERSONAL]}
