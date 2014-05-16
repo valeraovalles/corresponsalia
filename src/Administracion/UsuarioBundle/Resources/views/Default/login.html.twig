@@ -17,6 +17,8 @@
     </script>
 
     <p class="text-info"><marquee scrollamount="3">SE RECOMIENDA EL USO DE CHROME O FIREFOX</marquee></p>
+
+    <h3><b>BIENVENIDOS AL SISTEMA DE CORRESPONSALÍAS</b></h3><br>
     
     {% block mensaje %}
         {% if error %}
@@ -31,7 +33,6 @@
     {% endfor %}
     
 
-    <h3>BIENVENIDOS</h3>
     
 
       <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">

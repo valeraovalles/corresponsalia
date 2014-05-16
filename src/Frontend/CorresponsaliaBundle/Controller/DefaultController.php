@@ -185,9 +185,12 @@ class DefaultController extends Controller
 
             if($periodosig){
 
-                $consulta = $em->createQuery('update CorresponsaliaBundle:Estadofondo e set e.saldoinicial= :saldoinicial WHERE e.periodorendicion = :periodo');
+                $efant = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodosig[0]->getId());
+
+                $consulta = $em->createQuery('update CorresponsaliaBundle:Estadofondo e set e.saldoinicial= :saldoinicial, e.saldofinal= :saldofinal WHERE e.periodorendicion = :periodo');
                 $consulta->setParameter('periodo', $periodosig[0]->getId());
                 $consulta->setParameter('saldoinicial', $sf);
+                $consulta->setParameter('saldofinal',($sf+$efant[0]->getRecursorecibido())-$efant[0]->getPagos());
                 $consulta->execute();    
             }
         }

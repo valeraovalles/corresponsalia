@@ -140,7 +140,6 @@ class EstadofondoController extends Controller
         $mes=$periodo->getMes();
         $idcor=$periodo->getCorresponsalia()->getId();
         
-        
         //valido si la corresponsalia tiene ya un fondo asignado
             $dql   = "SELECT ef FROM CorresponsaliaBundle:Estadofondo ef where ef.periodorendicion= :idperiodo";
             $query = $em->createQuery($dql); 
