@@ -86,7 +86,7 @@ class Equipo
      * })
      */
     private $modelo;
-
+    
     /**
      * Get id
      *
@@ -280,4 +280,9 @@ class Equipo
     {
         return $this->modelo;
     }
+    
+    public function __toString() {
+        return $this->descripcion;
+    }
+
 }

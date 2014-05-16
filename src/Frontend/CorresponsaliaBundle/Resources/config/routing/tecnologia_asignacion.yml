@@ -1,3 +1,30 @@
-tecnoequipo_assign:
-    pattern:  /{id}/assign
+tecnoasignar:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:index" }
+
+tecnoasignar_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:show" }
+
+tecnoasignar_new:
+    pattern:  /{id}/new
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:new" }
+
+tecnoasignar_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:create" }
+    requirements: { _method: post }
+
+tecnoasignar_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:edit" }
+
+tecnoasignar_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:update" }
+    requirements: { _method: post|put }
+
+tecnoasignar_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:delete" }
+    requirements: { _method: post|delete }

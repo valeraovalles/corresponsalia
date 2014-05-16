@@ -31,4 +31,5 @@ class Twig_Extensions_Extension_Debug extends Twig_Extension
     {
         return 'debug';
     }
+    
 }

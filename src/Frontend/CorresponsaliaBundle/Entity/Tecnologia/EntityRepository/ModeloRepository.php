@@ -2,6 +2,7 @@
 
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository;
 use Doctrine\ORM\EntityRepository;
+
 /**
  * Description of ModeloRepository
  *

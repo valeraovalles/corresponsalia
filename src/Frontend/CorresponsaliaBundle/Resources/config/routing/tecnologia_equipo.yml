@@ -31,4 +31,8 @@ tecnoequipo_delete:
     
 tecnoequipo_select:
     pattern: /modelo
-    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\ModeloExtra:modelo"}
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:modelo"}
+    
+tecnoequipo_fRetorno:
+    pattern: /fretorno
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:fechaRetorno"}

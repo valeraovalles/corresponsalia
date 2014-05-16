@@ -1,7 +1,7 @@
-$.noConflict();
+var jQuery = jQuery.noConflict();
 jQuery(document).ready(function(){
     
-    jQuery("#tecnologia_equipo_condicion").on('change',function(){
+    jQuery("#tecnologia_equipo_condicion").change(function(){
         var valor = jQuery("#tecnologia_equipo_condicion :selected").text(); 
         if(valor==='REGULAR' || valor==='MALO'){
             if (!jQuery('#observcondicion').length) {
@@ -12,7 +12,6 @@ jQuery(document).ready(function(){
             }
         }else {
             jQuery('#observcondicion').remove();
-
         }
     });
     

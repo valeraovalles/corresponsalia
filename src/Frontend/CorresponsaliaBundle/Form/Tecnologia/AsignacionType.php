@@ -16,12 +16,12 @@ class AsignacionType extends AbstractType
     {
         $builder
             ->add('responsable')
-            ->add('fechaAsignacion')
-            ->add('fechaEstimadaRetorno')
-            ->add('fechaRetorno')
-            ->add('status')
-            ->add('equipo')
-            ->add('corresponsalia')
+            ->add('fechaAsignacion', 'date', array('widget' => 'single_text', 'format' => 'dd-MM-y'))
+            ->add('fechaEstimadaRetorno', 'date', array('widget' => 'single_text', 'format' => 'dd-MM-y'))
+            ->add('fechaRetorno', 'date', array('widget' => 'single_text', 'format' => 'dd-MM-y'))
+            ->add('id','hidden')
+            ->add('corresponsalia', null, array('empty_value' => 'Seleccione'))
+            ->add('status', null, array('empty_value' => 'Seleccione'))
         ;
     }
     
@@ -40,6 +40,6 @@ class AsignacionType extends AbstractType
      */
     public function getName()
     {
-        return 'frontend_corresponsaliabundle_tecnologia_asignacion';
+        return 'tecnologia_asignacion';
     }
 }

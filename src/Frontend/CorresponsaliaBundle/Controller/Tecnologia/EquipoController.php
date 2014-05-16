@@ -23,10 +23,37 @@ class EquipoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
+        $equipos = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
 
+        $asignaciones = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->findAll();
+        
+        $listEquipo = array();
+        $indice = 0;
+        foreach ($equipos as $equipo) {
+            $listEquipo[$indice]['id'] = $equipo->getId(); 
+            $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
+            $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
+            $listEquipo[$indice]['status'] = $equipo->getStatus(); 
+            $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
+            $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
+            $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
+            $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
+            $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
+            foreach ($asignaciones as $asignar) {
+                if( $asignar->getId() == $equipo->getId() ){
+                    $listEquipo[$indice]['corresponsalia'] = $asignar->getCorresponsalia(); 
+                    $listEquipo[$indice]['responsable'] = $asignar->getResponsable(); 
+                    $listEquipo[$indice]['fechaAsignacion'] = $asignar->getFechaAsignacion(); 
+                    $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignar->getFechaEstimadaRetorno(); 
+                    $listEquipo[$indice]['fechaRetorno'] = $asignar->getFechaRetorno(); 
+                    $listEquipo[$indice]['statusAsignacion'] = $asignar->getStatus(); 
+                }
+            }
+            $indice++;
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:index.html.twig', array(
-            'entities' => $entities,
+            'listEquipo' => $listEquipo,
         ));
     }
     /**
@@ -42,9 +69,15 @@ class EquipoController extends Controller
         
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $condicion = $entity->getCondicion()->getNombre();
+            if($condicion == "MALO" or $condicion == "REGULAR"){
+                $entity->setStatus(FALSE);
+            }else{
+                $entity->setStatus(TRUE);
+            }
             $em->persist($entity);
             $em->flush();
-
+            
             return $this->redirect($this->generateUrl('tecnoequipo_show', array('id' => $entity->getId())));
         }
 
@@ -101,11 +134,19 @@ class EquipoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
         }
+        
+        $flag = FALSE;
+        $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+        
+        if ($asignacion) {
+            $flag = TRUE;
+        }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:show.html.twig', array(
             'entity'      => $entity,
+            'asignacion'  => $flag,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -125,9 +166,17 @@ class EquipoController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        
+        $flag = FALSE;
+        $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+        
+        if ($asignacion) {
+            $flag = TRUE;
+        }
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:edit.html.twig', array(
             'entity'      => $entity,
+            'asignacion'  => $flag,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -170,6 +219,12 @@ class EquipoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $condicion = $entity->getCondicion()->getNombre();
+            if($condicion == "MALO" or $condicion == "REGULAR"){
+                $entity->setStatus(FALSE);
+            }else{
+                $entity->setStatus(TRUE);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnoequipo_edit', array('id' => $id)));

@@ -29,7 +29,7 @@ class EquipoType extends AbstractType
             ->add('status')
             ->add('observacionCondicion')
             ->add('fechaAdquisicion', 'date', array('widget' => 'single_text', 'format' => 'dd-MM-y'))
-            ->add('categoria', null, array('empty_value' => 'Seleccione',))
+            ->add('categoria', null, array('empty_value' => 'Seleccione'))
             ->add('condicion')
         ;
     }

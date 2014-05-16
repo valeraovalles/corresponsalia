@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
-use Frontend\CorresponsaliaBundle\Form\Tecnologia\EventListener\AddMarcaFieldSubscriber;
 
 class AddModeloFieldSubscriber implements EventSubscriberInterface
 {

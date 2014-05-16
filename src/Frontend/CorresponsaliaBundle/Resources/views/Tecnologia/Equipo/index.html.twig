@@ -2,52 +2,134 @@
 
 {% block titulomodulo %}<h1>LISTADO DE EQUIPO</h1>{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery( ".datepicker" ).datepicker();
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-    
     <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Categoria</th>
                 <th>Serialequipo</th>
                 <th>Descripcion</th>
                 <th>Modelo</th>
                 <th>Status</th>
-                <th>Observacioncondicion</th>
-                <th>Fechaadquisicion</th>
-                <th>Actions</th>
+                <th>Asignacion</th>
+                <th>Corresponsalia</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for entity in listEquipo %}
             <tr>
-                <td><a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.categoria }}</td>
                 <td>{{ entity.serialEquipo }}</td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.modelo }}</td>
-                <td>{{ entity.status }}</td>
-                <td>{{ entity.observacionCondicion }}</td>
-                <td>{% if entity.fechaAdquisicion %}{{ entity.fechaAdquisicion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    {% if entity.status %}
+                        <span class="label label-success">&nbsp;Activo&nbsp;&nbsp;</span>
+                    {% else %}
+                        <span class="label label-danger">Inactivo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity|length > 9 %}
+                        {{ entity.statusAsignacion.nombre }}
+                    {% endif %}
+                </td>
+                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
                 <td>
                     <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
-                 |  <a href="{{ path('tecnoequipo_assign', {'id':entity.id}) }}"><b class="text-warning">ASIGNAR</b></a>
+                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>|
+                    {% if entity.status %}
+                        {% if entity|length > 9 %}
+                            {% if entity.statusAsignacion == "PRESTAMO" %}
+                                <a href=""><b class="text-warning"><span class="prestamo label label-info" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></b></a>
+                            {% else %}
+                                <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-info">REASIGNAR</span></b></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-primary">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></b></a>
+                        {% endif %}
+                    {% endif %}
                  </td> 
             </tr>
         {% endfor %}
         </tbody>
     </table>
-        
     <br><br><a class="btn btn-primary" href="{{ path('tecnoequipo_new') }}">
           NUEVO EQUIPO
     </a><br><br>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">RETORNO DE EQUIPO</h4>
+          </div>
+          <div class="modal-body">
+            <form id="form_fecha" class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="fechaRetorno" class="col-sm-4 control-label">Fecha Retorno:</label>
+              <div class="col-sm-6">
+                <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
+              </div>
+            </div>
+            <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+            <button type="button" class="btn btn-primary" id="guardar"/>GUARDAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script>
-        $(document).ready(function(){
-            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                 "aaSorting": [[0,'desc']]
-             } );
-         });
+    var jQuery = jQuery.noConflict();
+    jQuery(document).ready(function(){
+        
+        jQuery('.prestamo').on('mouseover', function() {
+            var id = jQuery(this).data('id');
+            jQuery("#select_equipo_id").val(id);
+        });
+        
+        jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+             "aaSorting": [[0,'desc']]
+         } );
+
+        jQuery("#guardar").click(function(e){
+            e.preventDefault();
+            var data = {
+                fecha: jQuery("#fechaRetorno").val(),
+                id: jQuery("#select_equipo_id").val()
+            };
+            alert(data.fecha);
+            alert(data.id);
+            jQuery.ajax({
+                type: 'post',
+                url: '{{ path("tecnoequipo_fRetorno") }}',
+                data: data,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+        });
+
+    });
     </script>
     {% endblock %}

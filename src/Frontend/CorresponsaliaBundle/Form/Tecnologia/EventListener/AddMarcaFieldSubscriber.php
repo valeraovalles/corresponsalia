@@ -55,7 +55,7 @@ class AddMarcaFieldSubscriber implements EventSubscriberInterface
         $accessor = PropertyAccess::getPropertyAccessor();
 
         $modelo    = $accessor->getValue($data, $this->propertyPathToModelo);
-        $marca = ($modelo) ? $modelo->getModelo()->getMarca() : null;
+        $marca = ($modelo) ? $modelo->getMarca() : null;
 
         $this->addMarcaForm($form, $marca);
     }

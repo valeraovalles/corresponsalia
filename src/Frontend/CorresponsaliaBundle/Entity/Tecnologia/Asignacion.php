@@ -15,20 +15,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Asignacion 
 {
     /**
-     * @var | Tecnologia.Equipo
-     * 
+     * @var integer
+     *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Equipo")
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo", inversedBy="asignacion")
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
-    private $equipo;
+    private $id;
     
     /**
      * @var | Rendicion.Corresponsalia
      * 
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Corresponsalia")
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
@@ -53,14 +54,14 @@ class Asignacion
     /**
      * @var \Date
      *
-     * @ORM\Column(name="fechaEstimadaRetorno", type="date")
+     * @ORM\Column(name="fechaEstimadaRetorno", type="date", nullable=true)
      */
     private $fechaEstimadaRetorno;
 
     /**
      * @var \Date
      *
-     * @ORM\Column(name="fechaRetorno", type="date")
+     * @ORM\Column(name="fechaRetorno", type="date", nullable=true)
      */
     private $fechaRetorno;
     
@@ -74,34 +75,36 @@ class Asignacion
      */
     private $status;   
     
+    
+
     /**
-     * Set fechaAdquisicion
+     * Set responsable
      *
-     * @param \DateTime $fechaAdquisicion
-     * @return Equipo
+     * @param string $responsable
+     * @return Asignacion
      */
-    public function setFechaAdquisicion($fechaAdquisicion)
+    public function setResponsable($responsable)
     {
-        $this->fechaAdquisicion = $fechaAdquisicion;
+        $this->responsable = $responsable;
     
         return $this;
     }
 
     /**
-     * Get fechaAdquisicion
+     * Get responsable
      *
-     * @return \DateTime 
+     * @return string 
      */
-    public function getFechaAdquisicion()
+    public function getResponsable()
     {
-        return $this->fechaAdquisicion;
+        return $this->responsable;
     }
 
     /**
      * Set fechaAsignacion
      *
      * @param \DateTime $fechaAsignacion
-     * @return Equipo
+     * @return Asignacion
      */
     public function setFechaAsignacion($fechaAsignacion)
     {
@@ -124,7 +127,7 @@ class Asignacion
      * Set fechaEstimadaRetorno
      *
      * @param \DateTime $fechaEstimadaRetorno
-     * @return Equipo
+     * @return Asignacion
      */
     public function setFechaEstimadaRetorno($fechaEstimadaRetorno)
     {
@@ -147,7 +150,7 @@ class Asignacion
      * Set fechaRetorno
      *
      * @param \DateTime $fechaRetorno
-     * @return Equipo
+     * @return Asignacion
      */
     public function setFechaRetorno($fechaRetorno)
     {
@@ -159,52 +162,79 @@ class Asignacion
     /**
      * Get fechaRetorno
      *
-     * @return \Date
+     * @return \DateTime 
      */
     public function getFechaRetorno()
     {
         return $this->fechaRetorno;
     }
+
+    /**
+     * Set corresponsalia
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia
+     * @return Asignacion
+     */
+    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = null)
+    {
+        $this->corresponsalia = $corresponsalia;
     
-    public function getCorresponsalia() {
+        return $this;
+    }
+
+    /**
+     * Get corresponsalia
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Corresponsalia 
+     */
+    public function getCorresponsalia()
+    {
         return $this->corresponsalia;
     }
 
-    public function getResponsable() {
-        return $this->responsable;
+    /**
+     * Set status
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $status
+     * @return Asignacion
+     */
+    public function setStatus(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $status = null)
+    {
+        $this->status = $status;
+    
+        return $this;
     }
 
-    public function getStatus() {
+    /**
+     * Get status
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion 
+     */
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setCorresponsalia($corresponsalia) {
-        $this->corresponsalia = $corresponsalia;
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Asignacion
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    
         return $this;
     }
 
-    public function setResponsable($responsable) {
-        $this->responsable = $responsable;
-        return $this;
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
-
-    public function setStatus($status) {
-        $this->status = $status;
-        return $this;
-    }
-    
-    function __construct() {
-        $this->fechaAsignacion = new \DateTime();
-    }
-    
-    public function getEquipo() {
-        return $this->equipo;
-    }
-
-    public function setEquipo($equipo) {
-        $this->equipo = $equipo;
-    }
-
-    
-    
 }

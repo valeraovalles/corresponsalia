@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  * @author ecastro
  */
 class EquipoRepository extends EntityRepository{
-    
+ 
     public function findByMarcaId($marca_id){
         $query = $this->getEntityManager()->createQuery("
             SELECT modelo
@@ -20,4 +20,5 @@ class EquipoRepository extends EntityRepository{
 
         return $query->getArrayResult();
     }
+
 }
