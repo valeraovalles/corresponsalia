@@ -1,5 +1,13 @@
+##REPORTE TOTAL ESTADOFONDO
+corresponsalia_reporteeftotal:
+    pattern:  /reporte/eftotal
+    defaults: { _controller: CorresponsaliaBundle:Reporte:reporteeftotal }
 
-##REPORTE ESTADOFONDO
+corresponsalia_creareporteeftotal:
+    pattern:  /reporte/creaeftotal
+    defaults: { _controller: CorresponsaliaBundle:Reporte:creaeftotal }
+
+##REPORTE AUDITORIA ESTADOFONDO
 corresponsalia_reporteauef:
     pattern:  /reporte/auef
     defaults: { _controller: CorresponsaliaBundle:Reporte:reporteauef }

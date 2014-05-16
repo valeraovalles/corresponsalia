@@ -5,6 +5,135 @@ namespace Frontend\CorresponsaliaBundle\Resources\Misclases;
 class htmlreporte
 {
 
+  public function totalestadofondo($em,$datos){
+
+   if(isset($datos['cobertura'])){
+            $dql = "select x from CorresponsaliaBundle:Estadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.id in (:idperiodo) order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.id ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+            $query->setParameter('idtipogasto', $datos['tipogasto']);
+            $query->setParameter('idperiodo', $datos['cobertura']);
+            $result = $query->getResult();
+      }
+      else{
+            $dql = "select x from CorresponsaliaBundle:Estadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.id ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+            $query->setParameter('idtipogasto', $datos['tipogasto']);
+            $query->setParameter('aniodesde', $datos['aniodesde']);
+            $query->setParameter('aniohasta', $datos['aniohasta']);
+            $query->setParameter('mesdesde', $datos['mesdesde']);
+            $query->setParameter('meshasta', $datos['meshasta']);
+            $result = $query->getResult();
+      }
+
+      //armo las corresponsalías
+      $dql = "select x from CorresponsaliaBundle:Corresponsalia x where x.id in (:idcorresponsalia) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
+      $corresponsalia = $query->getResult();
+      $trcor="";
+      foreach ($corresponsalia as $v) {
+        $trcor .=$v->getNombre()." | ";
+      }
+
+      //armo los tipos de gastos
+      $dql = "select x from CorresponsaliaBundle:Tipogasto x where x.id in (:idtipogasto) order by x.id ASC";
+      $query = $em->createQuery($dql);
+      $query->setParameter('idtipogasto', $datos['tipogasto']);
+      $tipogasto = $query->getResult();
+      $trtg="";
+      foreach ($tipogasto as $v) {
+        $trtg .=$v->getDescripcion()." | ";
+      }
+
+      $trdetalle="
+        <tr>
+          <th width='15%'>CORRESPONSALÍA</th>
+          <th width='10%'>TIPO DE GASTO</th>
+          <th width='20%'>COBERTURA</th>
+          <th>ANIO</th>
+          <th>MES</th>
+          <th>SALDO INICIAL</th>
+          <th>RECURSO ENVIADO</th>
+          <th>GASTADO</th>
+          <th>TOTAL</th>
+        </tr>";
+
+      $cont=0;
+      $totalsi=0;
+      $totalrr=0;
+      $totalpag=0;
+      $totalt=0;
+      foreach ($result as $v) {
+
+        if($v->getPeriodorendicion()->getCobertura()!='')
+          $cobertura=$v->getPeriodorendicion()->getCobertura();
+        else $cobertura='N/A';
+
+
+        if ($cont % 2 != 0) # An odd row 
+          $rowColor = "#ececec"; 
+        else # An even row 
+          $rowColor = "white"; 
+
+
+        $total=($v->getSaldoinicial()+$v->getRecursorecibido())-$v->getPagos();
+
+        $trdetalle .="<tr style='background-color:".$rowColor."'>
+                        <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
+                        <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$cobertura."</td>
+                        <td>".$v->getPeriodorendicion()->getAnio()."</td>
+                        <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$v->getSaldoinicial()."</td>
+                        <td>".$v->getRecursorecibido()."</td>
+                        <td>".$v->getPagos()."</td>
+                        <td>".$total."</td>
+                      </tr>";
+        $cont++;
+        $totalsi=$totalsi+$v->getSaldoinicial();
+        $totalrr=$totalrr+$v->getRecursorecibido();
+        $totalpag=$totalpag+$v->getPagos();
+        $totalt=$totalt+$total;
+      }
+
+      $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/auditoriaestadofondo.css' rel='stylesheet' type='text/css' />";
+      $html .="
+          <table cellspacing=1 width='100%'>
+            <tr>
+              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='titulo' align='center' colspan='4'>REPORTE TOTAL ESTADO FONDO</td>
+            </tr>
+            <tr>
+              <th>CORRESPONSALÍA(S): </th>
+              <td colspan='3'>".substr($trcor,0,-2)."</td>
+            </tr>
+            <tr>
+              <th>TIPO(S) DE GASTO(S): </th>
+              <td colspan='3'>".substr($trtg,0,-2)."</td>
+            </tr>
+            <tr>
+              <th colspan='4'>PERIODO</th>
+            </tr>
+            <tr>
+              <th>DESDE:</th><td>".$datos['mesdesde']."/".$datos['aniodesde']."</td><th>HASTA:</th><td>".$datos['meshasta']."/".$datos['aniohasta']."</td>
+            </tr>
+          </table>
+
+          <br>
+          <table width='100%'>
+            ".$trdetalle."
+
+            <tr style='background-color:yellow;'><th colspan=5>TOTALES</th><th>".$totalsi."</th><th>".$totalrr."</th><th>".$totalpag."</th><th>".$totalt."</th></tr>
+          </table>
+
+
+      ";
+
+      return $html;
+    die;
+  }
   public function auditoriaestadofondo($em,$datos){
 
 
@@ -48,7 +177,6 @@ class htmlreporte
         $trtg .=$v->getDescripcion()." | ";
       }
 
-
       $trdetalle="
         <tr>
           <th width='15%'>CORRESPONSALÍA</th>
@@ -64,11 +192,7 @@ class htmlreporte
           <th>HORA PROCESO</th>
           <th>RESPONSABLE</th>
           <th>PROCESO</th>
-        </tr>
-
-      ";
-
-
+        </tr>";
 
       $cont=0;
       foreach ($result as $v) {
@@ -102,9 +226,6 @@ class htmlreporte
                       </tr>";
         $cont++;
       }
-
-
-
 
       $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/auditoriaestadofondo.css' rel='stylesheet' type='text/css' />";
       $html .="

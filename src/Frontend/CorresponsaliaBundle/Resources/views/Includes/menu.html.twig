@@ -83,6 +83,7 @@
         <ul class="dropdown-menu">
           {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN')%} 
             <li><a href="{{ path('corresponsalia_reporteauef') }}">Auditoria Estado Fondo</a></li>
+            <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Total Estado Fondo</a></li>
           {% endif %}
           {% if is_granted('ROLE_SUPERADMIN') %} 
             <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Auditoria Rendición</a></li>

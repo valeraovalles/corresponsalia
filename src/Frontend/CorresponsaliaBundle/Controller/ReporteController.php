@@ -53,6 +53,33 @@ class ReporteController extends Controller
         die;
     } 
     
+
+    //reporte estado fondo
+    public function reporteeftotalAction()
+    {    
+
+        $entity = new Reporte();
+        $form   = $this->createForm(new ReporteType("","1"), $entity);
+        return $this->render('CorresponsaliaBundle:Reporte:totalestadofondo.html.twig', array(
+            'form'=>$form->createView(),
+        ));
+    }
+
+    public function creaeftotalAction(Request $request)
+    {    
+        $post=$request->request->all();
+        $datos=$post['reporte'];
+
+        //INSTANCIO LA CLASE PARA GENERAR EL HTML DEL REPORTE
+        $em = $this->getDoctrine()->getManager();
+        $html=new htmlreporte;
+        $html=$html->totalestadofondo($em, $datos);
+        $html=$html;
+
+        $this->pdf($html,'h','auditoriaestadofondo');
+    }
+
+
     //reporte estado fondo
     public function reporteauefAction()
     {    
@@ -62,6 +89,8 @@ class ReporteController extends Controller
             'form'=>$form->createView(),
         ));
     }
+
+
 
     public function creareporteauefAction(Request $request)
     {    
