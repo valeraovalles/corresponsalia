@@ -1,0 +1,10 @@
+tecnobitacora:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Bitacora:index" }
+
+tecnobitacora_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Bitacora:show" }
+
+
+

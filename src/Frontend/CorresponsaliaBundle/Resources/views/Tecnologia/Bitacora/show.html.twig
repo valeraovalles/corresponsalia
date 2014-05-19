@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>ASIGNACION EQUIPO - CORRESPONSALIA</h1>{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="formShow" style="width:80%;">
+        <table class='table table-condensed table-bordered table-striped'>
+            <caption>Datos Generales del Equipo</caption>
+            <tr>
+              <td><strong>categoria</strong></td>
+              <td><strong>Modelo</strong></td>
+              <td><strong>Serial</strong></td>
+              <td><strong>Descripcion</strong></td>
+            </tr>
+            <tr>
+              <td>{{ equipo.categoria }}</td>
+              <td>{{ equipo.modelo }}</td>
+              <td>{{ equipo.serialEquipo }}</td>
+              <td>{{ equipo.descripcion }}</td>
+            </tr>
+        </table>
+        <div class="contenedorform">
+            <div class="labelform">Tipo de Asignacion:</div>
+            <div class="widgetform">{{ entity.status }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Corresponsalia:</div>
+            <div class="widgetform">{{ entity.corresponsalia }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Responsable:</div>
+            <div class="widgetform">{{ entity.responsable }}aaaaa</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">fecha Asignacion:</div>
+            <div class="widgetform">{{ entity.fechaAsignacion|date('d-m-Y') }}</div>
+        </div>
+        {% if entity.fechaEstimadaRetorno|length > 0 %}
+            <div class="contenedorform">
+                <div class="labelform">fecha Estimada Retorno:</div>
+                <div class="widgetform">{{ entity.fechaEstimadaRetorno|date('d-m-Y') }}</div>
+            </div>
+        {% endif %}
+        {% if entity.fechaRetorno|length > 0 %}
+            <div class="contenedorform">
+                <div class="labelform">fecha Retorno:</div>
+                <div class="widgetform">{{ entity.fechaRetorno|date('d-m-Y') }}</div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a> 
+    
+{% endblock %}

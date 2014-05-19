@@ -229,4 +229,91 @@ class AsignacionController extends Controller
             ->getForm()
         ;
     }
+    
+    
+//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
+//-----------------------REASIGNAR EQUIPO A CORRESPONSALIA------------------------------
+//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------    
+    /**
+     * Displays a form to create a new Tecnologia\Asignacion entity.
+     *
+     */
+    public function reasignarAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $asignar_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+        if (!$asignar_actual) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
+        }
+        
+        $equipo_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
+        if (!$equipo_actual) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
+        }
+
+        $asignar_nuevo = new Asignacion();
+        $form   = $this->reasignarCreateForm($asignar_nuevo);
+
+        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:reasignar.html.twig', array(
+            'entity' => $asignar_nuevo,
+            'asignar_actual' => $asignar_actual,
+            'equipo_actual' => $equipo_actual,
+            'form'   => $form->createView(),
+        ));
+    }
+    
+    /**
+    * Creates a form to create a Tecnologia\Asignacion entity.
+    *
+    * @param Asignacion $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function reasignarCreateForm(Asignacion $entity)
+    {
+        $form = $this->createForm(new AsignacionType(), $entity, array(
+            'action' => $this->generateUrl('tecnoasignar_Rcreate'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    /**
+     * Creates a new Tecnologia\Asignacion entity.
+     *
+     */
+    public function RcreateAction(Request $request)
+    {
+        $entity = new Asignacion(); 
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            /*
+             * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
+             * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
+             * GUARDAR ASIGNACION ACTUAL EN BITACORA
+             * ELIMINAR ASIGNACION ACTUAL EN ASIGNACION
+             * GUARDAR NUEVA ASIGNACION EN ASIGNACION
+             * 
+             */
+            
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    
 }

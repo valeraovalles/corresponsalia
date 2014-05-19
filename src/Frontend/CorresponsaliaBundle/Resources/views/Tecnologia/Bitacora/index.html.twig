@@ -2,16 +2,6 @@
 
 {% block titulomodulo %}<h1>LISTADO DE EQUIPO</h1>{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        jQuery(function() {
-            jQuery( ".datepicker" ).datepicker();
-        });
-    </script>
-    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
-{% endblock %}
-
 {% block body -%}
     {{ parent() }}
     <table id="tablalista" style="width: 97%;">
@@ -28,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in listEquipo %}
+        {% for entity in entities %}
             <tr>
                 <td>{{ entity.categoria }}</td>
                 <td>{{ entity.serialEquipo }}</td>
@@ -55,7 +45,7 @@
                             {% if entity.statusAsignacion == "PRESTAMO" %}
                                 <a href=""><b class="text-warning"><span class="prestamo label label-info" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></b></a>
                             {% else %}
-                                <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-info">REASIGNAR</span></b></a>
+                                <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-info">REASIGNAR</span></b></a>
                             {% endif %}
                         {% else %}
                             <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-primary">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></b></a>
@@ -66,67 +56,15 @@
         {% endfor %}
         </tbody>
     </table>
-    <br><br><a class="btn btn-primary" href="{{ path('tecnoequipo_new') }}">
-          NUEVO EQUIPO
-    </a><br><br>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">RETORNO DE EQUIPO</h4>
-          </div>
-          <div class="modal-body">
-            <form id="form_fecha" class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="fechaRetorno" class="col-sm-4 control-label">Fecha Retorno:</label>
-              <div class="col-sm-6">
-                <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
-              </div>
-            </div>
-            <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-            <button type="button" class="btn btn-primary" id="guardar"/>GUARDAR</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
 
     <script>
     var jQuery = jQuery.noConflict();
     jQuery(document).ready(function(){
         
-        jQuery('.prestamo').on('mouseover', function() {
-            var id = jQuery(this).data('id');
-            jQuery("#select_equipo_id").val(id);
-        });
-        
         jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
              "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
              "aaSorting": [[0,'desc']]
          } );
-
-        jQuery("#guardar").click(function(e){
-            e.preventDefault();
-            var data = {
-                fecha: jQuery("#fechaRetorno").val(),
-                id: jQuery("#select_equipo_id").val()
-            };
-            jQuery.ajax({
-                type: 'post',
-                url: '{{ path("tecnoequipo_fRetorno") }}',
-                data: data,
-                success: function(data) {
-                    alert(data);
-                }
-            });
-        });
 
     });
     </script>

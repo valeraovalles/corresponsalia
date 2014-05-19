@@ -1,0 +1,160 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>ASIGNAR EQUIPO - CORRESPONSALIA</h1>{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+    $.noConflict();
+    jQuery(document).ready(function () {
+        
+        jQuery(document).on({
+            mouseenter: function () {
+                jQuery(".parent").datepicker({
+                    showOn: "button",
+                    showAnim: "drop",
+                    buttonImage: "{{ asset('images/calendario/calendar.png') }}",
+                    buttonImageOnly: true,
+                    onClose: function( selectedDate ) {
+                        jQuery( ".child" ).datepicker( "option", "minDate", selectedDate );
+                    }
+                });
+                jQuery(".child").datepicker({
+                    showOn: "button",
+                    showAnim: "drop",
+                    buttonImage: "{{ asset('images/calendario/calendar.png') }}",
+                    buttonImageOnly: true,
+                    onClose: function( selectedDate ) {
+                        jQuery( ".parent" ).datepicker( "option", "maxDate", selectedDate );
+                    }
+                });
+            },
+            mouseout: function() {
+                jQuery(".parent").datepicker({
+                    showOn: "button",
+                    showAnim: "drop",
+                    buttonImage: "{{ asset('images/calendario/calendar.png') }}",
+                    buttonImageOnly: true,
+                    onClose: function( selectedDate ) {
+                        jQuery( ".child" ).datepicker( "option", "minDate", selectedDate );
+                    }
+                });
+                jQuery(".child").datepicker({
+                    showOn: "button",
+                    showAnim: "drop",
+                    buttonImage: "{{ asset('images/calendario/calendar.png') }}",
+                    buttonImageOnly: true,
+                    onClose: function( selectedDate ) {
+                        jQuery( ".parent" ).datepicker( "option", "maxDate", selectedDate );
+                    }
+                });
+            }
+        });
+
+        jQuery("#tecnologia_asignacion_status").change(function(){
+            var valor = jQuery( "option:contains('Venezuela')" ).val();
+            var texto = jQuery( "option:contains('Venezuela')" ).text();
+            var selector_option = jQuery("#tecnologia_asignacion_corresponsalia option[value="+ valor +"]");
+            var $status_id = jQuery("#tecnologia_asignacion_status :selected").text();
+            if($status_id === "PRESTAMO" || $status_id === "COBERTURA"){
+                if (!jQuery('#fechaEstimadaRetorno').length) {
+                    var html= '<div class="contenedorform" id="fechaEstimadaRetorno">'+
+                        '<div class="labelform">fechaEstimadaRetorno:</div>'+
+                        '<div class="widgetform"><input type="text" id="tecnologia_asignacion_fechaEstimadaRetorno" class="child" name="tecnologia_asignacion[fechaEstimadaRetorno]" required="required" /></div>'+
+                        '</div>';
+                    var $wrapper = jQuery('div.formShow');
+                    $wrapper.append(html);
+                }
+                
+                if($status_id === "COBERTURA"){
+                    selector_option.text(texto);
+                    selector_option.remove();
+                    var selector_padre = jQuery( "#tecnologia_asignacion_corresponsalia" );
+                    selector_padre.append("<option selected='selected' value='"+valor+"'>"+texto+"</option></select>");
+                    selector_padre.prop('disabled', 'disabled');
+                    jQuery("#wrapper-form").append("<input type='hidden' id='tecnologia_corresp' name='tecnologia_asignacion[corresponsalia]' value='"+valor+"'/>");
+                }else{
+                    selector_option.removeProp("selected");
+                    jQuery('#tecnologia_corresp').remove();
+                }
+            }else {
+                selector_option.removeProp("selected");
+                jQuery('#fechaEstimadaRetorno').remove();
+                jQuery('#tecnologia_corresp').remove();
+            }
+        });
+    });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        thead td {
+            text-align: center;
+        }
+        .sombra_td {
+            background-color: #F9F9F9;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    {% if form_errors(form.status) or form_errors(form.corresponsalia) or form_errors(form.fechaAsignacion) or form_errors(form.fechaEstimadaRetorno)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>Categoria: {{ form_errors(form.status) }}</div>
+        <div>Marca: {{ form_errors(form.corresponsalia) }}</div>
+        <div>Modelo: {{ form_errors(form.fechaAsignacion) }}</div>
+        <div>Serial: {{ form_errors(form.fechaEstimadaRetorno) }}</div>
+    </div>
+    {% endif %}
+    
+    <form novalidate method="post" action="{{ path('tecnoasignar_create') }}">
+        {{ form_widget(form._token) }}
+        <div id="wrapper-form" class="formShow" style="width:70%;">
+            <table class='table table-condensed table-bordered'>
+                <legend>ASIGNACION ACTUAL</legend>
+                <tr>
+                    <td class="sombra_td"><strong></br>Descripcion del Equipo</strong></td>
+                    <td>Categoria: {{ equipo_actual.categoria }} </br> 
+                      Modelo: {{ equipo_actual.modelo }} </br>
+                      Serial: {{ equipo_actual.serialEquipo }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="sombra_td"><strong></br>Asignacion Actual</strong></td>
+                  <td>Tipo de Asignacion: {{ asignar_actual.status }} </br> 
+                      Corresponsalia: {{ asignar_actual.corresponsalia }} </br>
+                      Fecha Asignacion: {{ asignar_actual.fechaAsignacion|date('d-m-Y') }}
+                  </td>
+                </tr>
+            </table>
+            <legend>NUEVA ASIGNACION</legend>
+             <div class="contenedorform">
+                <div class="labelform">Tipo de Asignacion:</div>
+                <div class="widgetform">{{ form_widget(form.status) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Corresponsalia:</div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fechaAsignacion:</div>
+                <div class="widgetform">{{ form_widget(form.fechaAsignacion, { 'attr': {'class': 'parent'} }) }}</div>
+            </div>
+        </div>
+            <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo_actual.id }}" />
+        <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
+    </form>
+    
+    <BR>
+{% endblock %}
+
+

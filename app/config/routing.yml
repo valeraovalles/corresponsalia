@@ -29,3 +29,4 @@ CorresponsaliaBundle_tecnoasignar:
 CorresponsaliaBundle_tecnomodelo:
         resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_modelo.yml"
         prefix:   /tecnomodelo
+

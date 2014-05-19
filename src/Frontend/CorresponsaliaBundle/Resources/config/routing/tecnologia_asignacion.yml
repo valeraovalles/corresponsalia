@@ -28,3 +28,11 @@ tecnoasignar_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:delete" }
     requirements: { _method: post|delete }
+    
+tecnoasignar_reasignar:
+    pattern:  /{id}/reasignar
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:reasignar" }
+    
+tecnoasignar_Rcreate:
+    pattern:  /{id}/Rcreate
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:Rcreate" }

@@ -252,7 +252,13 @@ class EquipoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
             }
-
+            
+//            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+//
+//            if ($asignacion) {
+//                throw $this->createNotFoundException('Este Equipo no puede ser eliminado por que se encuentra asignado a una Corresponsalia');
+//            }
+            
             $em->remove($entity);
             $em->flush();
         }

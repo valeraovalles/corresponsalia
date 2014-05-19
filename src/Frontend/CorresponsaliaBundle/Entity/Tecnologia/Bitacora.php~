@@ -1,0 +1,78 @@
+<?php
+
+namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Description of Asignacion
+ *
+ * @author ecastro
+ *
+ * @ORM\Table(name="tecnologia.bitacora")
+ * @ORM\Entity
+ */
+class Bitacora 
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tecnologia.bitacora_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="equipo_id", type="integer", nullable=false)
+     */
+    private $equipoId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status_id", type="integer", nullable=false)
+     */
+    private $statusId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="responsable", type="string", nullable=true)
+     */
+    private $responsable;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_asignacion", type="date", nullable=true)
+     */
+    private $fechaAsignacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_estima_retorno", type="date", nullable=true)
+     */
+    private $fechaEstimaRetorno;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_retorno", type="date", nullable=true)
+     */
+    private $fechaRetorno;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="corresponsalia_id", type="integer", nullable=true)
+     */
+    private $corresponsaliaId;
+    
+    
+    
+}
