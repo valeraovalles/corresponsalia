@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\CorresponsaliaBundle\Entity\Estadofondo;
 use Frontend\CorresponsaliaBundle\Form\EstadofondoType;
 
+use Frontend\CorresponsaliaBundle\Resources\Misclases\funciones;
+
 /**
  * Estadofondo controller.
  *
@@ -15,36 +17,6 @@ use Frontend\CorresponsaliaBundle\Form\EstadofondoType;
 class EstadofondoController extends Controller
 {
 
-    public function saldoinicial($idperiodo){
-        $em = $this->getDoctrine()->getManager();
-        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
-        $anioac=$periodo->getAnio();
-        $mesac=$periodo->getMes();
-        $idcor=$periodo->getCorresponsalia()->getId();
-        $tipog=$periodo->getTipogasto()->getId();
-
-        if($mesac==1){ $messig=12; $anioac=$anioac-1; } 
-        else $messig=$mesac-1;
-
-        $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor and p.tipogasto= :idtipogasto";
-        $query = $em->createQuery($dql);
-        $query->setParameter('anio', $anioac);
-        $query->setParameter('mes', $messig);
-        $query->setParameter('idcor', $idcor);
-        $query->setParameter('idtipogasto', $tipog);
-        $periodoant = $query->getResult(); 
-
-
-        if($periodoant){
-            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant[0]->getId());
-            if($ef) $saldoinicial=$ef[0]->getSaldofinal();
-            else{
-                $saldoinicial=null;
-            }
-        }else $saldoinicial='0';
-
-        return $saldoinicial;
-    }
     /**
      * Lists all Estadofondo entities.
      *
@@ -59,10 +31,8 @@ class EstadofondoController extends Controller
             'idperiodo'=>$idperiodo
         ));
     }
-    /**
-     * Creates a new Estadofondo entity.
-     *
-     */
+
+
     public function createAction(Request $request,$idperiodo)
     {
         $em = $this->getDoctrine()->getManager();
@@ -95,7 +65,8 @@ class EstadofondoController extends Controller
 
 
         //verifico cual es el saldo incial actual
-            $saldoinicial=$this->saldoinicial($idperiodo);
+        $f=new Funciones;
+        $saldoinicial=$f->saldoinicial($idperiodo,$em);
         //fin    
 
 
@@ -153,7 +124,8 @@ class EstadofondoController extends Controller
         //fin
 
         //verifico cual es el saldo incial actual
-            $saldoinicial=$this->saldoinicial($idperiodo);
+            $f=new funciones;
+            $saldoinicial=$f->saldoinicial($idperiodo,$em);
             if($saldoinicial==null){
                 $this->get('session')->getFlashBag()->add('alert', 'El periodo anterior debe tener inicializado un fondo');
                 return $this->redirect($this->generateUrl('periodorendicion'));
@@ -264,6 +236,9 @@ class EstadofondoController extends Controller
             $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido()+$recursoanterior)-$entity->getPagos());
             $entity->setRecursorecibido($data->getRecursorecibido()+$recursoanterior);
             $em->flush();
+            $f=new Funciones;
+            $f->actualizasaldos($entity->getPeriodorendicion()->getId(),$em);
+
 
             $this->get('session')->getFlashBag()->add('notice', 'Registro actualizado exitosamente');
             return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $id)));

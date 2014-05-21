@@ -136,4 +136,74 @@ class funciones
         
         return array($registro, $row);
     }
+
+    //actualiza saldos al cerrar una rendicion o cambiar montos de recursos enviados
+    public function actualizasaldos($idperiodo,$em){
+
+        $periodoactual = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        $anio=$periodoactual->getAnio();
+        $mes=$periodoactual->getMes();
+        $idco=$periodoactual->getCorresponsalia()->getId();
+        $idtg=$periodoactual->getTipogasto()->getId();
+
+        //busco el periodo siguiente
+        $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.corresponsalia= :idco and p.tipogasto= :idtg  and p.id> :idp order by p.id ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idco', $idco);
+        $query->setParameter('idtg', $idtg);
+        $query->setParameter('idp', $idperiodo);
+        $periodosig = $query->getResult(); 
+
+
+        if($periodosig){
+            
+            $idperiodoant=$idperiodo;
+            foreach ($periodosig as $p) {
+
+                $efant = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodoant);    
+                $efnue = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($p->getId());
+
+                if($efnue){
+
+                    $si=$efant[0]->getSaldofinal();
+                    $sf=($efant[0]->getSaldofinal()+$efnue[0]->getRecursorecibido())-$efnue[0]->getPagos();
+
+                    $efnue[0]->setSaldoinicial($si);
+                    $efnue[0]->setSaldofinal($sf);
+                    $em->flush();
+
+                } 
+
+                $idperiodoant=$p->getId();
+            }
+        }
+    }
+
+    //busca el saldo inicial al crear un fondo nuevo
+    public function saldoinicial($idperiodo,$em){
+
+        $periodoactual = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        $anio=$periodoactual->getAnio();
+        $mes=$periodoactual->getMes();
+        $idco=$periodoactual->getCorresponsalia()->getId();
+        $idtg=$periodoactual->getTipogasto()->getId();
+
+        $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.corresponsalia= :idco and p.tipogasto= :idtg  and p.id< :idp order by p.id DESC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idco', $idco);
+        $query->setParameter('idtg', $idtg);
+        $query->setParameter('idp', $idperiodo);
+        $query->setMaxResults(1);
+        $periodoant = $query->getResult(); 
+
+        if($periodoant){
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant[0]->getId());
+            if($ef) $saldoinicial=$ef[0]->getSaldofinal();
+            else{
+                $saldoinicial=null;
+            }
+        }else $saldoinicial='0';
+
+        return $saldoinicial;
+    }
 }
