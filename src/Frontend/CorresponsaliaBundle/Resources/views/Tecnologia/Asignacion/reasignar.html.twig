@@ -115,7 +115,7 @@
     </div>
     {% endif %}
     
-    <form novalidate method="post" action="{{ path('tecnoasignar_create') }}">
+    <form novalidate method="post" action="{{ path('tecnoasignar_Rcreate') }}">
         {{ form_widget(form._token) }}
         <div id="wrapper-form" class="formShow" style="width:70%;">
             <table class='table table-condensed table-bordered'>
@@ -150,7 +150,7 @@
             </div>
         </div>
             <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo_actual.id }}" />
-        <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
+        <input type="submit" value="REASIGNAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
     </form>
     

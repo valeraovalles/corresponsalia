@@ -22,34 +22,34 @@
         </table>
         <div class="contenedorform">
             <div class="labelform">Tipo de Asignacion:</div>
-            <div class="widgetform">{{ entity.status }}</div>
+            <div class="widgetform">{{ asignacion.statusId }}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Corresponsalia:</div>
-            <div class="widgetform">{{ entity.corresponsalia }}</div>
+            <div class="widgetform">{{ asignacion.corresponsalia }}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Responsable:</div>
-            <div class="widgetform">{{ entity.responsable }}aaaaa</div>
+            <div class="widgetform">{{ asignacion.responsable }}aaaaa</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">fecha Asignacion:</div>
-            <div class="widgetform">{{ entity.fechaAsignacion|date('d-m-Y') }}</div>
+            <div class="widgetform">{{ asignacion.fechaAsignacion|date('d-m-Y') }}</div>
         </div>
-        {% if entity.fechaEstimadaRetorno|length > 0 %}
+        {% if asignacion.fechaEstimadaRetorno|length > 0 %}
             <div class="contenedorform">
                 <div class="labelform">fecha Estimada Retorno:</div>
-                <div class="widgetform">{{ entity.fechaEstimadaRetorno|date('d-m-Y') }}</div>
+                <div class="widgetform">{{ asignacion.fechaEstimadaRetorno|date('d-m-Y') }}</div>
             </div>
         {% endif %}
-        {% if entity.fechaRetorno|length > 0 %}
+        {% if asignacion.fechaRetorno|length > 0 %}
             <div class="contenedorform">
                 <div class="labelform">fecha Retorno:</div>
-                <div class="widgetform">{{ entity.fechaRetorno|date('d-m-Y') }}</div>
+                <div class="widgetform">{{ asignacion.fechaRetorno|date('d-m-Y') }}</div>
             </div>
         {% endif %}
     </div>
     
-    <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a> 
-    
+    <a class="btn btn-default" href="{{ path('tecnobitacora') }}">IR AL LISTADO</a> 
+    <br><br>
 {% endblock %}

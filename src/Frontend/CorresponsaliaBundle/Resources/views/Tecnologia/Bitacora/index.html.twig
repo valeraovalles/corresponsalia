@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block titulomodulo %}<h1>LISTADO DE EQUIPO</h1>{% endblock %}
+{% block titulomodulo %}<h1>BITACORA DE ASIGNACIONES</h1>{% endblock %}
 
 {% block body -%}
     {{ parent() }}
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for entity in listEquipo %}
             <tr>
                 <td>{{ entity.categoria }}</td>
                 <td>{{ entity.serialEquipo }}</td>
@@ -38,25 +38,13 @@
                 </td>
                 <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>|
-                    {% if entity.status %}
-                        {% if entity|length > 9 %}
-                            {% if entity.statusAsignacion == "PRESTAMO" %}
-                                <a href=""><b class="text-warning"><span class="prestamo label label-info" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></b></a>
-                            {% else %}
-                                <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-info">REASIGNAR</span></b></a>
-                            {% endif %}
-                        {% else %}
-                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-primary">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></b></a>
-                        {% endif %}
-                    {% endif %}
+                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id_bitacora }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                  </td> 
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+<br><br>
     <script>
     var jQuery = jQuery.noConflict();
     jQuery(document).ready(function(){

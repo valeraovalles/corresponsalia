@@ -22,34 +22,35 @@ class BitacoraController extends Controller
 
         $equipos = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
 
-        $asignaciones = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->findAll();
+        $bitacora = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->findAll();
         
         $listEquipo = array();
         $indice = 0;
-        foreach ($equipos as $equipo) {
-            $listEquipo[$indice]['id'] = $equipo->getId(); 
-            $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
-            $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
-            $listEquipo[$indice]['status'] = $equipo->getStatus(); 
-            $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
-            $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
-            $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
-            $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
-            $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
-            foreach ($asignaciones as $asignar) {
-                if( $asignar->getId() == $equipo->getId() ){
-                    $listEquipo[$indice]['corresponsalia'] = $asignar->getCorresponsalia(); 
-                    $listEquipo[$indice]['responsable'] = $asignar->getResponsable(); 
-                    $listEquipo[$indice]['fechaAsignacion'] = $asignar->getFechaAsignacion(); 
-                    $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignar->getFechaEstimadaRetorno(); 
-                    $listEquipo[$indice]['fechaRetorno'] = $asignar->getFechaRetorno(); 
-                    $listEquipo[$indice]['statusAsignacion'] = $asignar->getStatus(); 
+        foreach ($bitacora as $asignacion) {
+            $listEquipo[$indice]['id_bitacora'] = $asignacion->getId(); 
+            $listEquipo[$indice]['corresponsalia'] = $asignacion->getCorresponsalia(); 
+            $listEquipo[$indice]['responsable'] = $asignacion->getResponsable(); 
+            $listEquipo[$indice]['fechaAsignacion'] = $asignacion->getFechaAsignacion(); 
+            $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignacion->getFechaEstimadaRetorno(); 
+            $listEquipo[$indice]['fechaRetorno'] = $asignacion->getFechaRetorno(); 
+            $listEquipo[$indice]['statusAsignacion'] = $asignacion->getStatusId();
+            foreach ($equipos as $equipo) {
+                if( $asignacion->getEquipoId() == $equipo->getId() ){
+                    $listEquipo[$indice]['id'] = $equipo->getId(); 
+                    $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
+                    $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
+                    $listEquipo[$indice]['status'] = $equipo->getStatus(); 
+                    $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
+                    $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
+                    $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
+                    $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
+                    $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
                 }
             }
             $indice++;
         }
         
-        return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:index.html.twig', array(
+        return $this->render('CorresponsaliaBundle:Tecnologia/Bitacora:index.html.twig', array(
             'listEquipo' => $listEquipo,
         ));
     }
@@ -62,14 +63,22 @@ class BitacoraController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->find($id);
-
-        if (!$entity) {
+               
+        $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->find($id);
+        
+        if (!$asignacion) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Bitacora entity.');
         }
+        
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($asignacion->getEquipoId());
 
+        if (!$equipo){
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Bitacora:show.html.twig', array(
-            'entity'      => $entity,
+            'equipo'      => $equipo,
+            'asignacion'  => $asignacion,
         ));
     }
 }

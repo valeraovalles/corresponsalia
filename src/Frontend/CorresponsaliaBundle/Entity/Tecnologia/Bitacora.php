@@ -28,13 +28,20 @@ class Bitacora
      * @var integer
      *
      * @ORM\Column(name="equipo_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * })
      */
     private $equipoId;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="status_id", type="integer", nullable=false)
+     * @var | Tecnologia.StatusAsignacion
+     * 
+     * @ORM\ManyToOne(targetEntity="StatusAsignacion")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     * })
      */
     private $statusId;
 
@@ -55,9 +62,9 @@ class Bitacora
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_estima_retorno", type="date", nullable=true)
+     * @ORM\Column(name="fecha_estimada_retorno", type="date", nullable=true)
      */
-    private $fechaEstimaRetorno;
+    private $fechaEstimadaRetorno;
 
     /**
      * @var \DateTime
@@ -67,11 +74,14 @@ class Bitacora
     private $fechaRetorno;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="corresponsalia_id", type="integer", nullable=true)
+     * @var | Rendicion.Corresponsalia
+     * 
+     * @ORM\ManyToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Corresponsalia")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
+     * })
      */
-    private $corresponsaliaId;
+    private $corresponsalia;
 
     /**
      * Get id
@@ -104,29 +114,6 @@ class Bitacora
     public function getEquipoId()
     {
         return $this->equipoId;
-    }
-
-    /**
-     * Set statusId
-     *
-     * @param integer $statusId
-     * @return Bitacora
-     */
-    public function setStatusId($statusId)
-    {
-        $this->statusId = $statusId;
-    
-        return $this;
-    }
-
-    /**
-     * Get statusId
-     *
-     * @return integer 
-     */
-    public function getStatusId()
-    {
-        return $this->statusId;
     }
 
     /**
@@ -176,26 +163,26 @@ class Bitacora
     }
 
     /**
-     * Set fechaEstimaRetorno
+     * Set fechaEstimadaRetorno
      *
-     * @param \DateTime $fechaEstimaRetorno
+     * @param \DateTime $fechaEstimadaRetorno
      * @return Bitacora
      */
-    public function setFechaEstimaRetorno($fechaEstimaRetorno)
+    public function setFechaEstimadaRetorno($fechaEstimadaRetorno)
     {
-        $this->fechaEstimaRetorno = $fechaEstimaRetorno;
+        $this->fechaEstimadaRetorno = $fechaEstimadaRetorno;
     
         return $this;
     }
 
     /**
-     * Get fechaEstimaRetorno
+     * Get fechaEstimadaRetorno
      *
      * @return \DateTime 
      */
-    public function getFechaEstimaRetorno()
+    public function getFechaEstimadaRetorno()
     {
-        return $this->fechaEstimaRetorno;
+        return $this->fechaEstimadaRetorno;
     }
 
     /**
@@ -222,25 +209,48 @@ class Bitacora
     }
 
     /**
-     * Set corresponsaliaId
+     * Set statusId
      *
-     * @param integer $corresponsaliaId
+     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $statusId
      * @return Bitacora
      */
-    public function setCorresponsaliaId($corresponsaliaId)
+    public function setStatusId(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $statusId = null)
     {
-        $this->corresponsaliaId = $corresponsaliaId;
+        $this->statusId = $statusId;
     
         return $this;
     }
 
     /**
-     * Get corresponsaliaId
+     * Get statusId
      *
-     * @return integer 
+     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion 
      */
-    public function getCorresponsaliaId()
+    public function getStatusId()
     {
-        return $this->corresponsaliaId;
+        return $this->statusId;
+    }
+
+    /**
+     * Set corresponsalia
+     *
+     * @param \Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia
+     * @return Bitacora
+     */
+    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = null)
+    {
+        $this->corresponsalia = $corresponsalia;
+    
+        return $this;
+    }
+
+    /**
+     * Get corresponsalia
+     *
+     * @return \Frontend\CorresponsaliaBundle\Entity\Corresponsalia 
+     */
+    public function getCorresponsalia()
+    {
+        return $this->corresponsalia;
     }
 }

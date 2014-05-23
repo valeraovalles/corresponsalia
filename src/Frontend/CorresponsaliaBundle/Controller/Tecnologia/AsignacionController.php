@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
 use Frontend\CorresponsaliaBundle\Form\Tecnologia\AsignacionType;
 
+use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
 
 /**
  * Tecnologia\Asignacion controller.
@@ -278,7 +279,7 @@ class AsignacionController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'REASIGNAR'));
 
         return $form;
     }
@@ -289,12 +290,10 @@ class AsignacionController extends Controller
      */
     public function RcreateAction(Request $request)
     {
-        $entity = new Asignacion(); 
-        $form = $this->createCreateForm($entity);
+        $asignacion_nueva = new Asignacion(); 
+        $form = $this->createCreateForm($asignacion_nueva);
         $form->handleRequest($request);
-        
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
             /*
              * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
              * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
@@ -303,15 +302,28 @@ class AsignacionController extends Controller
              * GUARDAR NUEVA ASIGNACION EN ASIGNACION
              * 
              */
-            
-            $em->persist($entity);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
+            $asignacion_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
+            $bitacora = new Bitacora();
+            $bitacora->setEquipoId($asignacion_nueva->getId());
+            $bitacora->setCorresponsaliaId($asignacion_actual->getCorresponsalia()->getId());
+            $bitacora->setFechaAsignacion($asignacion_actual->getFechaAsignacion());
+            $bitacora->setFechaEstimaRetorno($asignacion_actual->getFechaEstimadaRetorno());
+            $bitacora->setFechaRetorno($asignacion_actual->getFechaRetorno());
+            $bitacora->setResponsable($asignacion_actual->getResponsable());
+            $bitacora->setStatusId($asignacion_actual->getStatus()->getId());            
+            
+        if ($form->isValid()) {
+            $em->remove($asignacion_actual);
+            $em->persist($bitacora);
+            $em->flush();
+            $em->persist($asignacion_nueva);
+            $em->flush();
+            return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $asignacion_nueva->getId())));
         }
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
-            'entity' => $entity,
+            'entity' => $asignacion_nueva,
             'form'   => $form->createView(),
         ));
     }

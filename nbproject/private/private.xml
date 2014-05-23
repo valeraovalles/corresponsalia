@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/index.html.twig</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/Misclases/Tecnologia/sortFunctions.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/Equipo.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/Asignacion.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/EntityRepository/EquipoRepository.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
