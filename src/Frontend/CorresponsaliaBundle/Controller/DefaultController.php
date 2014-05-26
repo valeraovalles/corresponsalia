@@ -134,7 +134,7 @@ class DefaultController extends Controller
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
-        //$consulta->execute();
+        $consulta->execute();
 
         if($estatus==2){
 /*

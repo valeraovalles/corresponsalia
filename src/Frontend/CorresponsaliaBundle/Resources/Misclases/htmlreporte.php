@@ -584,8 +584,8 @@ class htmlreporte
         
         
         //tipo gasto
-        if($periodo->getTipogasto()->getId()==2)
-            $tg=strtoupper($periodo->getTipogasto()->getDescripcion()." (".$periodo->getCobertura()).")";
+        if($periodo->getDescripcionperiodo()!='')
+            $tg=strtoupper($periodo->getTipogasto()->getDescripcion()." (".$periodo->getDescripcionperiodo()).")";
         else
             $tg=strtoupper($periodo->getTipogasto()->getDescripcion());
             

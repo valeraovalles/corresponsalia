@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block titulomodulo %}
-    <h1>REVISIÓN DE RENDICIÓN</h1><h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }} | AÑO: {{periodo.anio}} | MES: {{ periodo.mes }}</h4>
+    <h1>REVISIÓN DE RENDICIÓN</h1>
+    <h4>{{ periodo.tipogasto.descripcion|upper }} {% if periodo.descripcionperiodo!='' %}('{{ periodo.descripcionperiodo|upper }}')</h4>{% endif %}
+    <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4>
+    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }}</h4><br>
 {% endblock %}
     
 {% block body %}
