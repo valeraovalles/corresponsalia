@@ -41,6 +41,9 @@ class MarcaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $entity->setNombre(strtoupper($entity->getNombre()));
+            
             $em->persist($entity);
             $em->flush();
 
@@ -169,6 +172,7 @@ class MarcaController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setNombre(strtoupper($entity->getNombre()));
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnomarca_edit', array('id' => $id)));

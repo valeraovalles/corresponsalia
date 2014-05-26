@@ -75,6 +75,13 @@ class EquipoController extends Controller
             }else{
                 $entity->setStatus(TRUE);
             }
+            
+            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+            $entity->setSerialEquipo(strtoupper($entity->getSerialEquipo()));
+            $entity->setObservacionCondicion(strtoupper($entity->getObservacionCondicion()));
+            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+            
+            
             $em->persist($entity);
             $em->flush();
             
@@ -225,6 +232,12 @@ class EquipoController extends Controller
             }else{
                 $entity->setStatus(TRUE);
             }
+            
+            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+            $entity->setSerialEquipo(strtoupper($entity->getSerialEquipo()));
+            $entity->setObservacionCondicion(strtoupper($entity->getObservacionCondicion()));
+            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+            
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnoequipo_edit', array('id' => $id)));

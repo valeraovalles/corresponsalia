@@ -2,21 +2,45 @@
 
 {% block titulomodulo %}<h1>LISTADO DE MARCAS</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .table-bordered > thead > tr > th, 
+        .table-bordered > tbody > tr > th, 
+        .table-bordered > tfoot > tr > th, 
+        .table-bordered > thead > tr > td, 
+        .table-bordered > tbody > tr > td, 
+        .table-bordered > tfoot > tr > td {
+            border-color: #A5D9FF;
+        }
+        
+        .sorting_asc, 
+        .sorting_desc, 
+        .sorting, 
+        .sorting_asc_disabled,
+        .sorting_desc_disabled {
+            background-image: none;
+        }
+        
+        .table > thead >tr >th {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
     
-    <table id="tablalista" style="width: 97%;">
+    <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nombre</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('tecnomarca_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombre }}</td>
                 <td>
                     <a href="{{ path('tecnomarca_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>

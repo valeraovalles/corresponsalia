@@ -41,6 +41,7 @@ class ModeloController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setNombre(strtoupper($entity->getNombre()));
             $em->persist($entity);
             $em->flush();
 
@@ -169,6 +170,7 @@ class ModeloController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setNombre(strtoupper($entity->getNombre()));
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnomodelo_edit', array('id' => $id)));

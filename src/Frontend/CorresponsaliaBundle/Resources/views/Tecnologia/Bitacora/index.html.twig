@@ -2,9 +2,35 @@
 
 {% block titulomodulo %}<h1>BITACORA DE ASIGNACIONES</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .table-bordered > thead > tr > th, 
+        .table-bordered > tbody > tr > th, 
+        .table-bordered > tfoot > tr > th, 
+        .table-bordered > thead > tr > td, 
+        .table-bordered > tbody > tr > td, 
+        .table-bordered > tfoot > tr > td {
+            border-color: #A5D9FF;
+        }
+        
+        .sorting_asc, 
+        .sorting_desc, 
+        .sorting, 
+        .sorting_asc_disabled,
+        .sorting_desc_disabled {
+            background-image: none;
+        }
+        
+        .table > thead >tr >th {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-    <table id="tablalista" style="width: 97%;">
+    <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
         <thead>
             <tr>
                 <th>Categoria</th>
