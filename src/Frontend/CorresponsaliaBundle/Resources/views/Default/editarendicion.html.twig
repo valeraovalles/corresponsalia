@@ -7,7 +7,7 @@
           
 {% block titulomodulo %}  
     <h2>EDITAR {{ periodo.tipogasto.descripcion|upper }}</h2>
-    {% if periodo.cobertura!='' %}<h4>COBERTURA: '{{ periodo.cobertura|upper }}'</h4>{% endif %}
+    {% if periodo.descripcionperiodo!='' %}<h4><b>DESCRIPCIÓN: '{{ periodo.descripcionperiodo|upper }}'</b></h4>{% endif %}
     <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4>
     <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
 {% endblock %}

@@ -13,11 +13,12 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(edit_form.anio) or form_errors(edit_form.mes) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.tipogasto) or error %}
+    {% if form_errors(edit_form.anio) or form_errors(edit_form.mes) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.tipogasto) or form_errors(edit_form.descripcionperiodo) or error %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el edit_formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.corresponsalia) }}</div>
         <div>{{ form_errors(edit_form.tipogasto) }}</div>
+        <div>{{ form_errors(form.descripcionperiodo) }}</div>
         <div>{{ form_errors(edit_form.anio) }}</div>
         <div>{{ form_errors(edit_form.mes) }}</div>
         {% for e in error %}<div><ul><li>{{ e }}</li></ul></div>{% endfor %}
@@ -35,9 +36,9 @@
                 <div class="labelform">Tipo gasto:</div>
                 <div class="widgetform">{{ form_widget(edit_form.tipogasto) }}</div>
             </div>
-            <div class="contenedorform" style="display: none;" id="cobertura">
-                <div class="labelform">Cobertura:</div>
-                <div class="widgetform">{{ form_widget(edit_form.cobertura) }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Descripcion periodo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcionperiodo) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Anio:</div>
@@ -68,17 +69,5 @@
         {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
     {{ form_end(delete_form) }}
     
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#frontend_corresponsaliabundle_periodorendicion_tipogasto').change(function(){
-                if($("#frontend_corresponsaliabundle_periodorendicion_tipogasto").val()==2)
-                    $("#cobertura").show()
-                else
-                    $("#cobertura").hide()
-            });
-            
-            if($("#frontend_corresponsaliabundle_periodorendicion_tipogasto").val()==2)
-                    $("#cobertura").show()
-        });
-     </script>
+
 {% endblock %}

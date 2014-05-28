@@ -89,9 +89,10 @@ class Periodorendicion
     /**
      * @var integer
      *
-     * @ORM\Column(name="cobertura", type="string", nullable=true)
+     * @ORM\Column(name="descripcionperiodo", type="string", nullable=true)
+     * @Assert\NotBlank(message="Debe colocar una descripcion del período.")
      */
-    private $cobertura;
+    private $descripcionperiodo;
     
     /**
      * @var integer
@@ -306,26 +307,26 @@ class Periodorendicion
     }
     
     /**
-     * Set cobertura
+     * Set descripcionperiodo
      *
-     * @param integer $cobertura
+     * @param integer $descripcionperiodo
      * @return Relaciongastos
      */
-    public function setCobertura($cobertura)
+    public function setDescripcionperiodo($descripcionperiodo)
     {
-        $this->cobertura = $cobertura;
+        $this->descripcionperiodo = $descripcionperiodo;
     
         return $this;
     }
 
     /**
-     * Get cobertura
+     * Get descripcionperiodo
      *
      * @return integer 
      */
-    public function getCobertura()
+    public function getDescripcionperiodo()
     {
-        return $this->cobertura;
+        return $this->descripcionperiodo;
     }
     
     /**

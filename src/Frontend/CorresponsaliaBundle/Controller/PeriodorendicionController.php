@@ -74,17 +74,13 @@ class PeriodorendicionController extends Controller
         
         $data=$form->getData();
         
-        if($data->getTipogasto()->getId()==2 and $data->getCobertura()==null){
-            $error[0]="La cobertura no debe estar en blanco";
-        }
-
         if ($form->isValid() and $error==null) {
 
             //validar que no cree un mismo periodo
             $datos=$request->request->all();
             $datos=$datos['frontend_corresponsaliabundle_periodorendicion'];     
             
-            //validar que no creen periodo en meses anteriores si en el actual ya existen porque los saldos iniciales se vualven un caldo. Ellos deben tener un orden
+            //validar que no creen periodos en meses anteriores si en el actual ya existen porque los saldos iniciales se vualven un caldo. Ellos deben tener un orden
             $anio=$datos['anio'];
             $mes=$datos['mes'];
             if($mes==12){$mes=1;$anio=$anio+1;}else $mes=$mes+1;
@@ -94,11 +90,7 @@ class PeriodorendicionController extends Controller
                 return $this->redirect($this->generateUrl('periodorendicion'));
             }
             
-            if($data->getTipogasto()->getId()==2)
-                $where=array('corresponsalia'=>$data->getCorresponsalia()->getId(),'tipogasto'=>$data->getTipogasto()->getId(),'anio'=>$data->getAnio(),'mes'=>$data->getMes(),'cobertura'=>$data->getCobertura());
-            else
-                $where=array('corresponsalia'=>$data->getCorresponsalia()->getId(),'tipogasto'=>$data->getTipogasto()->getId(),'anio'=>$data->getAnio(),'mes'=>$data->getMes());
-            
+            $where=array('corresponsalia'=>$data->getCorresponsalia()->getId(),'tipogasto'=>$data->getTipogasto()->getId(),'anio'=>$data->getAnio(),'mes'=>$data->getMes(),'descripcionperiodo'=>$data->getDescripcionperiodo());
             $periodorendicion= $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findBy($where);
             if(!empty($periodorendicion)){
                 $this->get('session')->getFlashBag()->add('alert', 'Ya existe un periodo con los mismos parámetros.');
@@ -166,10 +158,6 @@ class PeriodorendicionController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Periodorendicion entity.
-     *
-     */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();

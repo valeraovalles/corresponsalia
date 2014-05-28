@@ -36,12 +36,12 @@
     
 
       <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
-        <h4 class="form-signin-heading">INGRESE SUS DATOS</h4>
-        <input type="text" id="username" name="_username" class="input-block-level"placeholder="Ingrese usuario..." data-placement="right" data-content="Ante cualquier inconveniente, escríbenos a la siguiente dirección: aplicaciones@telesurtv.net" title="USUARIO">
-        <input type="password" name="_password" class="input-block-level" placeholder="Ingrese clave...">
+        <h4 class="form-signin-heading" style="font-size:14px;">POR FAVOR INGRESE SUS DATOS</h4>
+        <input  type="text" id="username" name="_username" class="form-control" placeholder="Ingrese usuario..." data-placement="right" data-content="Ante cualquier inconveniente, escríbenos a la siguiente dirección: aplicaciones@telesurtv.net" title="USUARIO">
+        <input type="password" name="_password" class="form-control" placeholder="Ingrese clave...">
 
 
-        <button class="btn btn-large btn-primary" type="submit" id="botonsubmit"
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonsubmit"
         {% if navegador=='IExplorer' %}
             disabled="disabled"
         {% endif %}
@@ -58,6 +58,5 @@
         {% endif %}
 
     </script>
-
 
 {% endblock %}
