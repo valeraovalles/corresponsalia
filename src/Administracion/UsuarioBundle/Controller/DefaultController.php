@@ -13,8 +13,6 @@ class DefaultController extends Controller
     public function indexAction()
     {
         
-        $PASSPASS=$_SESSION['PASSPASS'];
-       
         //VERIFICAR SI EL USUARIO ESTA LOGUEADO
         if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
           throw new AccessDeniedException();
@@ -24,12 +22,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
-
-        $f=new Funcion;
-        $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
-        
-        
-        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$entity,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
+        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$entity)
         );
     }
     public function loginAction()
