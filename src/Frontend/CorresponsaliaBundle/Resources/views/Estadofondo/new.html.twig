@@ -39,7 +39,7 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">Descripción período:</div>
-                <div class="widgetform">{{ periodo.descripcionperiodo|upper }}</div>
+                <div class="widgetform">{% if periodo.descripcionperiodo is null %}N/A{% else %}{{ periodo.descripcionperiodo|upper }}{% endif %}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">País:</div>
