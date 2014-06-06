@@ -71,7 +71,13 @@ class ReporteType extends AbstractType
 
             //las variables enviadasd son ad,ah,md,mh,tg,cor
 
-            $dato=explode(",", $dato);
+            //separo años y meses de corresponsalias y tipos de gastos ya que pueden seleccionar varias cor y tg
+            $dato=explode("::", $dato);
+
+            $datoaniomes=explode(",", $dato[0]);
+            $co=explode(",", $dato[1]);
+            $tg=explode(",", $dato[2]);
+
 
             $builder->add('descripcionperiodo', 'entity', array(
             'class' => 'CorresponsaliaBundle:Periodorendicion',
@@ -79,15 +85,15 @@ class ReporteType extends AbstractType
             'multiple'=>true,
             'property'=>'descripcionperiodo',
             'empty_value' => 'Todas',
-            'query_builder' => function(EntityRepository $er)  use ($dato) {
+            'query_builder' => function(EntityRepository $er)  use ($datoaniomes,$co,$tg) {
                 return $er->createQueryBuilder('x')
-                    ->where('x.descripcionperiodo is not null and x.corresponsalia in (:idcor) and x.anio >= :aniod and x.mes >= :mesd and x.anio<= :anioh and x.mes <= :mesh and x.tipogasto= :tg')
-                    ->setParameter('aniod', $dato[0])
-                    ->setParameter('anioh', $dato[1])
-                    ->setParameter('mesd', $dato[2])
-                    ->setParameter('mesh', $dato[3])
-                    ->setParameter('idcor', $dato[4])
-                    ->setParameter('tg', $dato[5]);
+                    ->where('x.descripcionperiodo is not null and x.corresponsalia in (:idcor) and x.anio >= :aniod and x.mes >= :mesd and x.anio<= :anioh and x.mes <= :mesh and x.tipogasto in (:tg)')
+                    ->setParameter('aniod', $datoaniomes[0])
+                    ->setParameter('anioh', $datoaniomes[1])
+                    ->setParameter('mesd', $datoaniomes[2])
+                    ->setParameter('mesh', $datoaniomes[3])
+                    ->setParameter('idcor', $co)
+                    ->setParameter('tg', $tg);
                     
                     
             }));

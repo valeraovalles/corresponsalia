@@ -102,7 +102,7 @@
             var md = $("#reporte_mesdesde").val();
             var mh = $("#reporte_meshasta").val();
 
-            var dato = [ad,ah,md,mh,cor,tg];
+            var dato = [ad,ah,md,mh+"::"+cor+"::"+tg];
 
             var ruta = "{{ path('ajaxreporterendicion', {'dato': 'variable','muestra': '7'}) }}";
             ruta = ruta.replace("variable", dato);

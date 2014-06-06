@@ -40,6 +40,8 @@ class AjaxController extends Controller
         $entity = new Reporte();
         $form   = $this->createForm(new ReporteType($dato,$muestra), $entity);
 
+
+print_r($dato);
         return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauef.html.twig', array(
             'form'=>$form->createView(),
             'muestra'=>$muestra,
