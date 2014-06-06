@@ -14,31 +14,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style type="text/css">
-        .table-bordered > thead > tr > th, 
-        .table-bordered > tbody > tr > th, 
-        .table-bordered > tfoot > tr > th, 
-        .table-bordered > thead > tr > td, 
-        .table-bordered > tbody > tr > td, 
-        .table-bordered > tfoot > tr > td {
-            border-color: #A5D9FF;
-        }
-        
-        .sorting_asc, 
-        .sorting_desc, 
-        .sorting, 
-        .sorting_asc_disabled,
-        .sorting_desc_disabled {
-            background-image: none;
-        }
-        
-        .table > thead >tr >th {
-            text-align: center;
-        }
-        .ajustar_label {
-            line-height: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
 {% endblock %}
 
 

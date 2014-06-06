@@ -4,28 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style type="text/css">
-        .table-bordered > thead > tr > th, 
-        .table-bordered > tbody > tr > th, 
-        .table-bordered > tfoot > tr > th, 
-        .table-bordered > thead > tr > td, 
-        .table-bordered > tbody > tr > td, 
-        .table-bordered > tfoot > tr > td {
-            border-color: #A5D9FF;
-        }
-        
-        .sorting_asc, 
-        .sorting_desc, 
-        .sorting, 
-        .sorting_asc_disabled,
-        .sorting_desc_disabled {
-            background-image: none;
-        }
-        
-        .table > thead >tr >th {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
 {% endblock %}
 
 {% block body -%}
@@ -34,19 +13,19 @@
     <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
         <thead>
             <tr>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Acciones</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.marca }}</td>
-                <td>{{ entity.nombre }}</td>
+                <td class="indentar_texto_tabular">{{ entity.marca }}</td>
+                <td class="indentar_texto_tabular">{{ entity.nombre }}</td>
                 <td>
-                    <a href="{{ path('tecnomodelo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('tecnomodelo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="indentar_enlace" href="{{ path('tecnomodelo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a class="indentar_enlace" href="{{ path('tecnomodelo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
                  </td> 
             </tr>
         {% endfor %}
@@ -61,7 +40,7 @@
         $(document).ready(function(){
             $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                  "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                 "aaSorting": [[0,'desc']]
+                 "aaSorting": [[0,'asc'], [1,'asc']]
              } );
          });
     </script>

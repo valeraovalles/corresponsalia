@@ -38,10 +38,10 @@ class CategoriaController extends Controller
         $entity = new Categoria();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setNombre(strtoupper($entity->getNombre()));
+            $entity->setNombre(strtolower($entity->getNombre()));
             $em->persist($entity);
             $em->flush();
 
@@ -67,9 +67,9 @@ class CategoriaController extends Controller
             'action' => $this->generateUrl('tecnocategoria_create'),
             'method' => 'POST',
         ));
-
+        
         $form->add('submit', 'submit', array('label' => 'Create'));
-
+      
         return $form;
     }
 
@@ -122,10 +122,9 @@ class CategoriaController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Categoria entity.');
         }
-
+        
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CorresponsaliaBundle:Tecnologia/Categoria:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -147,7 +146,7 @@ class CategoriaController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -168,9 +167,9 @@ class CategoriaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
+        
         if ($editForm->isValid()) {
-            $entity->setNombre(strtoupper($entity->getNombre()));
+            $entity->setNombre(strtolower($entity->getNombre()));
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnocategoria_edit', array('id' => $id)));
@@ -218,7 +217,7 @@ class CategoriaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tecnocategoria_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Eliminar'))
             ->getForm()
         ;
     }

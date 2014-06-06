@@ -3,7 +3,12 @@
 {% block titulomodulo %}  
     <h1>NUEVA CATEGORIA</h1>
 {% endblock %}
-    
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
 
@@ -19,12 +24,12 @@
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
                 <div class="labelform">Nombre Categoria:</div>
-                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+                <div class="widgetform">{{ form_widget(form.nombre, {'attr': {'class': 'strtoupper'} } ) }}</div>
             </div>
         </div>
         
-        <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">IR AL LISTADO</a>
+        <input type="submit" value="Guardar" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">Listado</a>
     </form>
 
 

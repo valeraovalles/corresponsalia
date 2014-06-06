@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Equipo
@@ -33,6 +34,8 @@ class Equipo
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text", nullable=false)
+     * @Assert\NotBlank(message="El campo nombre de categoria no puede estar vacio.")
+     * 
      */
     private $descripcion;
     

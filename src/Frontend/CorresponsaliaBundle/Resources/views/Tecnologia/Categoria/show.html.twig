@@ -8,17 +8,13 @@
 
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
-            <div class="labelform">Id:</div>
-            <div class="widgetform">{{ entity.id }}</div>
-        </div>
-        <div class="contenedorform">
-            <div class="labelform">Id:</div>
-            <div class="widgetform">{{ entity.nombre }}</div>
+            <div class="labelform">Nombre de Categoria:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
         </div>
     </div>
 
-    <a class="btn btn-default" href="{{ path('tecnocategoria_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
-    <a class="btn btn-default" href="{{ path('tecnocategoria') }}">IR AL LISTADO</a>
+    <a class="btn btn-default" href="{{ path('tecnocategoria_edit', { 'id': entity.id }) }}">Editar</a> | 
+    <a class="btn btn-default" href="{{ path('tecnocategoria') }}">Listado</a>
   
     <BR><BR>
     {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}

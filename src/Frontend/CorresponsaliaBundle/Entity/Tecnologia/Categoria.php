@@ -3,12 +3,16 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Categoria
  *
- * @ORM\Table(name="tecnologia.categoria")
+ * @ORM\Table(name="tecnologia.categoria", uniqueConstraints={@ORM\UniqueConstraint(columns={"nombre"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"nombre"}, message="La categoria ya se encuentra registrada.")
+ * 
  */
 class Categoria
 {
@@ -26,6 +30,12 @@ class Categoria
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="El campo nombre de categoria no puede estar vacio.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zñÑáéíóúÁÉÍÓÚA-Z ]+$/",
+     *     message="El nombre de la categoria no puede contener numeros"
+     * )
+     * 
      */
     private $nombre;
 
@@ -58,7 +68,7 @@ class Categoria
      */
     public function setNombre($nombre)
     {
-        $this->nombre = $nombre;
+        $this->nombre = strtolower($nombre);
     
         return $this;
     }

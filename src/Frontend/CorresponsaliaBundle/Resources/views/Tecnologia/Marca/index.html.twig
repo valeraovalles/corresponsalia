@@ -4,28 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style type="text/css">
-        .table-bordered > thead > tr > th, 
-        .table-bordered > tbody > tr > th, 
-        .table-bordered > tfoot > tr > th, 
-        .table-bordered > thead > tr > td, 
-        .table-bordered > tbody > tr > td, 
-        .table-bordered > tfoot > tr > td {
-            border-color: #A5D9FF;
-        }
-        
-        .sorting_asc, 
-        .sorting_desc, 
-        .sorting, 
-        .sorting_asc_disabled,
-        .sorting_desc_disabled {
-            background-image: none;
-        }
-        
-        .table > thead >tr >th {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
 {% endblock %}
 
 {% block body -%}
@@ -34,17 +13,17 @@
     <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Acciones</th>
+                <th>NOMBRE</th>
+                <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.nombre }}</td>
+                <td class="indentar_texto_tabular">{{ entity.nombre }}</td>
                 <td>
-                    <a href="{{ path('tecnomarca_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('tecnomarca_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="indentar_enlace" href="{{ path('tecnomarca_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a class="indentar_enlace" href="{{ path('tecnomarca_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
                 </td>
             </tr>
         {% endfor %}

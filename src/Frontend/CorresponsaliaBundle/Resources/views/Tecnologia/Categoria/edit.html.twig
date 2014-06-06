@@ -2,6 +2,11 @@
 
 {% block titulomodulo %}<h1>EDITAR CATEGORIA</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
 
@@ -15,13 +20,19 @@
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
             <div class="contenedorform">
-                <div class="labelform">Tipo moneda:</div>
-                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+                <div class="contenedorform">
+                    <div class="labelform">Nombre de Categoria:</div>
+                    <div class="widgetform">
+                        <input type="text" id="frontend_corresponsaliabundle_tecnologia_categoria_nombre" 
+                               name="frontend_corresponsaliabundle_tecnologia_categoria[nombre]" required="required" maxlength="255"    
+                               class="form_input" value="{{entity.nombre|capitalize}}" />
+                    </div>
+                </div>
             </div>
          </div>
-        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('tecnocategoria_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
-        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">IR AL LISTADO</a>
+        <input type="submit" value="Guardar" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnocategoria_show',{'id':entity.id}) }}">Consulta</a> | 
+        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">Listado</a>
     </form>
 
     <BR>
