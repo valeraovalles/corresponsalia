@@ -31,16 +31,18 @@
         <div class="labelform" style="width:285px;">Mes hasta:</div>
         <div class="widgetform">Hasta: {{ form_widget(form.meshasta,{'attr':{'style':'width:100px'}}) }}</div>
     </div>
-    <div id="cobertura"></div>
+    <div id="descripcionperiodo"></div>
 
 {% elseif muestra==7 %}
-	
+    
     <div class="contenedorform">
-        <div class="labelform">Cobertura:</div>
-        <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
+        <div class="labelform">Descripción Periodo:</div>
+        <div class="widgetform">{{ form_widget(form.descripcionperiodo) }}</div>
     </div>
+    
 
 {% endif %}
+
 
 
 <script type="text/javascript">
@@ -81,23 +83,19 @@
         });
 
         $('#reporte_meshasta').change(function(){
-        	var dato = $("#reporte_tipogasto").val();
-        	if(dato[0]==2){
+        	var tg = $("#reporte_tipogasto").val();
+        	var cor = $("#reporte_corresponsalia").val();
+        	var ad = $("#reporte_aniodesde").val();
+        	var ah = $("#reporte_aniohasta").val();
+        	var md = $("#reporte_mesdesde").val();
+        	var mh = $("#reporte_meshasta").val();
 
-	        	var cor = $("#reporte_corresponsalia").val();
-	        	var ad = $("#reporte_aniodesde").val();
-	        	var ah = $("#reporte_aniohasta").val();
-	        	var md = $("#reporte_mesdesde").val();
-	        	var mh = $("#reporte_meshasta").val();
+        	var dato = [ad,ah,md,mh,cor,tg];
+            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '7'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#descripcionperiodo').load(ruta);
+            $('#boton').hide();
 
-	        	var dato = [ad,ah,md,mh,"::",cor];
-
-	            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '7'}) }}";
-	            ruta = ruta.replace("variable", dato);
-	            $('#cobertura').load(ruta);
-	            $('#boton').hide();
-
-	        }
         });
 
         $('#reporte_meshasta').change(function(){

@@ -22,7 +22,7 @@ class Reporte
 
     private $tipogasto;
 
-    private $cobertura;
+    private $descripcionperiodo;
 
     private $descripciongasto;
     
@@ -112,6 +112,18 @@ class Reporte
         return $this->cobertura;
     }
 
+    public function setDescripcionperiodo($descripcionperiodo)
+    {
+        $this->descripcionperiodo = $descripcionperiodo;
+    
+        return $this;
+    }
+
+    public function getDescripcionperiodo()
+    {
+        return $this->descripcionperiodo;
+    }
+
     public function setDescripciongasto($descripciongasto)
     {
         $this->descripciongasto = $descripciongasto;
@@ -123,5 +135,4 @@ class Reporte
     {
         return $this->descripciongasto;
     }
-
 }

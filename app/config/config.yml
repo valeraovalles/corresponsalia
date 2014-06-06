@@ -19,7 +19,7 @@ framework:
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
-        cookie_lifetime:       600
+        cookie_lifetime:       1800
     fragments:       ~
     http_method_override: true
 
