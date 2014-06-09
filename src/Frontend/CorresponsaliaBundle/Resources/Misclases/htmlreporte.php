@@ -55,6 +55,7 @@ class htmlreporte
           <th width='20%'>DESCRIPCIÓN</th>
           <th>ANIO</th>
           <th>MES</th>
+          <th>ESTATUS</th>
           <th>SALDO INICIAL</th>
           <th>RECURSO ENVIADO</th>
           <th>GASTADO</th>
@@ -68,9 +69,15 @@ class htmlreporte
       $totalt=0;
       foreach ($result as $v) {
 
+        //coloco algo si no hay descripciopn
         if($v->getPeriodorendicion()->getDescripcionperiodo()!='')
           $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();
         else $descripcionperiodo='N/A';
+
+        //verifico estatus
+        if($v->getPeriodorendicion()->getEstatus()!='4')
+          $estatus="Abierto";
+        else $estatus="Cerrado";
 
 
         if ($cont % 2 != 0) # An odd row 
@@ -87,6 +94,7 @@ class htmlreporte
                         <td>".$descripcionperiodo."</td>
                         <td>".$v->getPeriodorendicion()->getAnio()."</td>
                         <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$estatus."</td>
                         <td>".$v->getSaldoinicial()."</td>
                         <td>".$v->getRecursorecibido()."</td>
                         <td>".$v->getPagos()."</td>
@@ -126,7 +134,7 @@ class htmlreporte
           <table width='100%'>
             ".$trdetalle."
 
-            <tr style='background-color:yellow;'><th colspan=5>TOTALES</th><th>".$totalsi."</th><th>".$totalrr."</th><th>".$totalpag."</th><th>".$totalt."</th></tr>
+            <tr style='background-color:yellow;'><th colspan=6>TOTALES</th><th>".$totalsi."</th><th>".$totalrr."</th><th>".$totalpag."</th><th>".$totalt."</th></tr>
           </table>
 
 
