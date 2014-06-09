@@ -111,7 +111,7 @@ class htmlreporte
       $html .="
           <table cellspacing=1 width='100%'>
             <tr>
-              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='imagen' rowspan='5' style='text-align:center;'><img src='images/logo.jpg' height='150px'></td>
               <td class='titulo' align='center' colspan='4'>REPORTE TOTAL ESTADO FONDO</td>
             </tr>
             <tr>
@@ -240,7 +240,7 @@ class htmlreporte
       $html .="
           <table cellspacing=1 width='100%'>
             <tr>
-              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='imagen' rowspan='5' style='text-align:center;'><img src='images/logo.jpg' height='150px'></td>
               <td class='titulo' align='center' colspan='4'>REPORTE DE ESTADO FONDO</td>
             </tr>
             <tr>
@@ -385,7 +385,7 @@ class htmlreporte
       $html .="
           <table cellspacing=1 width='100%'>
             <tr>
-              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='imagen' rowspan='5' style='text-align:center;'><img src='images/logo.jpg' height='150px'></td>
               <td class='titulo' align='center' colspan='4'>REPORTE DE RENDICION</td>
             </tr>
             <tr>
@@ -538,7 +538,7 @@ class htmlreporte
       $html .="
           <table cellspacing=1 width='100%'>
             <tr>
-              <td class='imagen' rowspan='5'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+              <td class='imagen' rowspan='5' style='text-align:center;'><img src='images/logo.jpg' height='150px'></td>
               <td class='titulo' align='center' colspan='4'>REPORTE DE RENDICION</td>
             </tr>
             <tr>
