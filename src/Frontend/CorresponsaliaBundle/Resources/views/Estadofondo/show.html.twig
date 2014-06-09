@@ -23,10 +23,10 @@
             <div class="widgetform">{{ entity.periodorendicion.tipogasto.descripcion|upper }}</div>
         </div>
         
-        {% if entity.periodorendicion.tipogasto.id==2 %}
+        {% if entity.periodorendicion.descripcionperiodo!='' %}
         <div class="contenedorform">
-            <div class="labelform">Cobertura:</div>
-            <div class="widgetform">{{ entity.periodorendicion.cobertura|upper }}</div>
+            <div class="labelform">Descripción Período:</div>
+            <div class="widgetform">{{ entity.periodorendicion.descripcionperiodo|upper }}</div>
         </div>
         {% endif %}
         
