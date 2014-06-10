@@ -35,6 +35,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMINISTRAR <b class="caret"></b></a>
         <ul class="dropdown-menu">
+          <li><a href="{{ path('descripciongasto') }}">Descripción de gastos</a></li>
           <li><a href="{{ path('tipomoneda') }}">Tipo de Moneda</a></li>
           <li><a href="{{ path('tipocorresponsalia') }}">Tipo de Corresponsalía</a></li>
           <li><a href="{{ path('corresponsalia') }}">Corresponsalia</a></li>
@@ -54,7 +55,7 @@
       </li>
       {% endif %}
 
-      {% if is_granted('ROLE_PERSONAL') or is_granted('ROLE_ADMIN') %}
+      {% if is_granted('ROLE_PERSONAL') %}
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">PERSONAL <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -64,14 +65,11 @@
       </li>
       {% endif %}
 
-      {% if is_granted('ROLE_CONSULTORIA') or is_granted('ROLE_ADMIN') %}
+      {% if is_granted('ROLE_CONSULTORIA') %}
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTORIA <b class="caret"></b></a>
         <ul class="dropdown-menu">
-
           <li><a href="{{ path('datoslegales') }}">Datos Legales por Corresponsalía</a></li>
-          <li><a href="{{ path('representante') }}">Representantes</a></li>
-          <li><a href="{{ path('contrato') }}">Contratos del Personal</a></li>
         </ul>
       </li>
       {% endif %}
@@ -80,8 +78,14 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Auditoria Estado Fondo</a></li>
-          <li><a href="#">Auditoria Rendición</a></li>
+          {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN')%} 
+            <li><a href="{{ path('corresponsalia_reporteauef') }}">Auditoria Estado Fondo</a></li>
+            <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Total Estado Fondo</a></li>
+          {% endif %}
+          {% if is_granted('ROLE_SUPERADMIN') %} 
+            <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Auditoria Rendición</a></li>
+          {% endif %}
+          <li><a href="{{ path('corresponsalia_reporterendicion') }}">Rendición</a></li>
           {% if is_granted('ROLE_CONSULTORIA') %}
             <li><a href="#">Personal en Corresponsalías</a></li>
           {% endif %}
@@ -122,6 +126,7 @@
         #}
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="{{ path('cambioclave') }}">CAMBIAR CLAVE</a></li>
       <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
       
     </ul>

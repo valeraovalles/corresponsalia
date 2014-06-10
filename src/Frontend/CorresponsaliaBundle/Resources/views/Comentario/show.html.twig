@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - COMENTARIOS{% endblock %}
+
+{% block titulobanner %}
+    COMENTARIOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>DETALLE DEL COMENTARIO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Corresponsal&iacute;a:</div>
+            <div class="widgetform">{{ entity.corresponsaliaId.nombre }} | {{ entity.corresponsaliaId.pais }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Corresponsal&iacute;a:</div>
+            <div class="widgetform" style:"width:100%;height:300px;">{{ entity.comentario }}</div>
+        </div>
+    <a class="btn btn-primary" href="{{ path('comentario',{'corresponsalia':corresponsalia}) }}">IR AL HISTORIAL</a> | <a class= "btn btn-primary" href="{{ path('comentario_edit', { 'id': entity.id, 'corresponsalia': corresponsalia }) }}">EDITAR COMENTARIO</a>
+    <BR><BR>
+
+{% endblock %}

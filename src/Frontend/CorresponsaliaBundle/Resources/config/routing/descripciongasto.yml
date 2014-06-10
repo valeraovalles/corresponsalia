@@ -1,0 +1,30 @@
+descripciongasto:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:index" }
+
+descripciongasto_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:show" }
+
+descripciongasto_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:new" }
+
+descripciongasto_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:create" }
+    requirements: { _method: post }
+
+descripciongasto_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:edit" }
+
+descripciongasto_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:update" }
+    requirements: { _method: post|put }
+
+descripciongasto_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:delete" }
+    requirements: { _method: post|delete }

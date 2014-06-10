@@ -23,13 +23,13 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            {% if entity.descripcion != 'Representante Legal' %}
+            {% if entity.descripcion != 'REPRESENTANTE LEGAL' %}
             <tr>
-                <td><a href="{{ path('cargo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('cargo_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle del Cargo">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                     <td>
-                        <a href="{{ path('cargo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                        <a href="{{ path('cargo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                        <a href="{{ path('cargo_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle del Cargo"><b class="glyphicon glyphicon-eye-open"></b></a>
+                        <a href="{{ path('cargo_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar el Cargo"><b class="glyphicon glyphicon-edit"></b></a>
                     </td>
             </tr>
             {% endif %}

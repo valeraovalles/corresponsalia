@@ -15,8 +15,8 @@ class DatoslegalesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('direccion')
-            ->add('registro')
+            ->add('direccion','textarea')
+            ->add('registro','textarea')
             ->add('corresponsaliaId')
             ->add('representanteId')
         ;

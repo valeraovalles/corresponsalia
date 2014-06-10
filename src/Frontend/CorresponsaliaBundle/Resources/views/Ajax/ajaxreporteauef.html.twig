@@ -1,0 +1,107 @@
+{% if muestra==2 %}
+	<div class="contenedorform">
+	    <div class="labelform">Tipo gasto:</div>
+	    <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
+	</div>
+	<div id="aniodesde"></div>
+
+{% elseif muestra==3 %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:285px;">Año desde:</div>
+        <div class="widgetform">Desde: {{ form_widget(form.aniodesde,{'attr':{'style':'width:100px'}}) }}</div>
+    </div>
+        <div id="aniohasta"></div>
+
+{% elseif muestra==4 %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:285px;">Año hasta:</div>
+        <div class="widgetform">Hasta: {{ form_widget(form.aniohasta,{'attr':{'style':'width:100px'}}) }}</div>
+    </div>
+    <div id="mesdesde"></div>
+
+{% elseif muestra==5 %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:285px;">Mes desde:</div>
+        <div class="widgetform">Desde: {{ form_widget(form.mesdesde,{'attr':{'style':'width:100px'}}) }}</div>
+    </div>
+    <div id="meshasta"></div>
+
+{% elseif muestra==6 %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:285px;">Mes hasta:</div>
+        <div class="widgetform">Hasta: {{ form_widget(form.meshasta,{'attr':{'style':'width:100px'}}) }}</div>
+    </div>
+    <div id="cobertura"></div>
+
+{% elseif muestra==7 %}
+	
+    <div class="contenedorform">
+        <div class="labelform">Cobertura:</div>
+        <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
+    </div>
+
+{% endif %}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#reporte_tipogasto').click(function(){
+            var dato = $("#reporte_tipogasto").val();
+            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '3'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#aniodesde').load(ruta);
+            $('#boton').hide();
+        });
+
+
+        $('#reporte_aniodesde').change(function(){
+            var dato = $("#reporte_aniodesde").val();
+            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '4'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#aniohasta').load(ruta);
+            $('#boton').hide();
+        });
+
+        $('#reporte_aniohasta').change(function(){
+            var dato = $("#reporte_aniohasta").val();
+            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '5'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#mesdesde').load(ruta);
+            $('#boton').hide();
+        });
+
+
+        $('#reporte_mesdesde').change(function(){
+            var dato = $("#reporte_mesdesde").val();
+            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '6'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#meshasta').load(ruta);
+            $('#boton').hide();
+        });
+
+        $('#reporte_meshasta').change(function(){
+        	var dato = $("#reporte_tipogasto").val();
+        	if(dato[0]==2){
+
+	        	var cor = $("#reporte_corresponsalia").val();
+	        	var ad = $("#reporte_aniodesde").val();
+	        	var ah = $("#reporte_aniohasta").val();
+	        	var md = $("#reporte_mesdesde").val();
+	        	var mh = $("#reporte_meshasta").val();
+
+	        	var dato = [ad,ah,md,mh,"::",cor];
+
+	            var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '7'}) }}";
+	            ruta = ruta.replace("variable", dato);
+	            $('#cobertura').load(ruta);
+	            $('#boton').hide();
+
+	        }
+        });
+
+        $('#reporte_meshasta').change(function(){
+            $('#boton').show();
+        });
+    });
+</script>

@@ -14,11 +14,11 @@
             <th>Nombre/Razón</th>
             <td>{{ form_widget(form.nombrerazonsocial) }}</td>
             <th>Identif. fiscal</th>
-            <td>{{ form_widget(form.identificacionfiscal) }}</td>
+            <td>{{ form_widget(form.identificacionfiscal, {'attr':{'value':'N/A'}}) }}</td>
         </tr>
         <tr>
             <th>Nro. factura</th>
-            <td>{{ form_widget(form.numerofactura) }}</td>
+            <td>{{ form_widget(form.numerofactura, {'attr':{'value':'N/A'}}) }}</td>
             <th>Monto MN.</th>
             <td>{{ form_widget(form.montomonnac) }}</td>
             <th>Dólares</th>

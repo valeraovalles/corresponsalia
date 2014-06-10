@@ -26,16 +26,14 @@ class Datoslegales
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion", type="string", nullable=false)
-     * @Assert\NotBlank(message="El campo direccion no puede estar en blanco.").
+     * @ORM\Column(name="direccion", type="string", nullable=true)
      */
     private $direccion;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="registro", type="string", nullable=false)
-     * @Assert\NotBlank(message="El campo registro no puede estar en blanco.").
+     * @ORM\Column(name="registro", type="string", nullable=true)
      */
     private $registro;
 

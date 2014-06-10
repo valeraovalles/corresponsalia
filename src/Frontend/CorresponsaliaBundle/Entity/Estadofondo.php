@@ -26,7 +26,7 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 3, nullable=true)
+     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=true)
      * @Assert\NotBlank(message="El saldo inicial no puede estar en blanco.").
      * 
      */
@@ -35,7 +35,7 @@ class Estadofondo
     /**
      * @var float
      *
-     * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 3, nullable=false)
+     * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 2, nullable=false)
      * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
      */
     private $recursorecibido;

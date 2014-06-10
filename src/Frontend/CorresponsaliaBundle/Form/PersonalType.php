@@ -25,7 +25,8 @@ class PersonalType extends AbstractType
             ->add('telefono')
             ->add('corresponsaliaId')
             ->add('cargoId')
-            //->add('contratoId')
+            ->add('file','file')
+            ->add('archivo')
         ;
     }
     
