@@ -57,7 +57,7 @@ class Categoria
      */
     public function getNombre()
     {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
     
     /**
@@ -79,7 +79,7 @@ class Categoria
      * @return string 
      */
     public function __toString() {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
 
 }

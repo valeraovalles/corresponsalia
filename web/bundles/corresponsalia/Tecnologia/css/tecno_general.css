@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : ecastro
 */
 
+*{
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
 .oculto{
     display: none;
 }
@@ -53,6 +57,10 @@ legend.scheduler-border {
     cursor: pointer;
 }
 
+.table > tbody >tr >td {
+    font-size: 13px;
+}
+
 .indentar_texto_tabular {
     text-indent: 5%;
 }
@@ -73,6 +81,8 @@ tr.even td.sorting_2 {
     line-height: 20px;
 }
 
+
+
 a{
     outline: none;
 }
@@ -82,5 +92,14 @@ a:hover, a:active, a:focus {
 }
 
 input.form_input {
-    width: 100% !important;
+    width: 80% !important;
+}
+
+.etiqueta{
+    font-weight: bold !important;
+}
+
+.label{
+    line-height: 2.5;
+    text-indent: 1%;
 }

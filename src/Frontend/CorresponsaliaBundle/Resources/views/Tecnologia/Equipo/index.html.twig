@@ -20,7 +20,7 @@
 
 {% block body -%}
     {{ parent() }}
-    <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
+    <table id="tablalista" class="table table-bordered table-condensed" style="width: 98.7%;">
         <thead>
             <tr>
                 <th style="width: 11%;">Categoria</th>
@@ -30,41 +30,41 @@
                 <th>Status</th>
                 <th>Asignacion</th>
                 <th>Corresponsalia</th>
-                <th style="width: 12%;">Acciones</th>
+                <th style="width: 13%;">Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in listEquipo %}
             <tr>
-                <td><small>{{ entity.categoria }}</small></td>
-                <td><small>{{ entity.modelo.marca }}</small></td>
-                <td><small>{{ entity.modelo }}</small></td>
-                <td><small>{{ entity.descripcion }}</small></td>
+                <td>{{ entity.categoria }}</td>
+                <td>{{ entity.modelo.marca }}</td>
+                <td>{{ entity.modelo }}</td>
+                <td>{{ entity.descripcion }}</td>
                 <td>
                     {% if entity.status %}
-                        <span class="label label-success"><small class="ajustar_label">&nbsp;Activo&nbsp;&nbsp;</small></span>
+                        <span class="label label-success">&nbsp;ACTIVO&nbsp;&nbsp;</span>
                     {% else %}
-                        <span class="label label-danger"><small class="ajustar_label">Inactivo</small></span>
+                        <span class="label label-danger">INACTIVO</span>
                     {% endif %}
                 </td>
-                <td>
+                <td class="indentar_short">
                     {% if entity|length > 9 %}
-                        <small>{{ entity.statusAsignacion.nombre }}</small>
+                        {{ entity.statusAsignacion.nombre|capitalize }}
                     {% endif %}
                 </td>
-                <td><small>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</small></td>
+                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
                 <td>
                     <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>|
+                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |
                     {% if entity.status %}
                         {% if entity|length > 9 %}
-                            {% if entity.statusAsignacion == "PRESTAMO" %}
-                            <a href=""><b class="text-warning"><span class="prestamo label label-info" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal"><small>&nbsp;PRESTAMO&nbsp;</small></span></b></a>
+                            {% if entity.statusAsignacion == "prestamo" %}
+                            <a href=""><span class="label label-primary etiqueta" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></a>
                             {% else %}
-                                <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-info"><small>REASIGNAR</small></span></b></a>
+                                <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><span class="label label-primary etiqueta">REASIGNAR</span></a>
                             {% endif %}
                         {% else %}
-                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><b class="text-warning"><span class="label label-primary"><small>&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</small></span></b></a>
+                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><span class="label label-primary etiqueta">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></a>
                         {% endif %}
                     {% endif %}
                  </td> 

@@ -4,17 +4,28 @@
 
 {% block body -%}
     {{ parent() }}
-    
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
+
 
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
-            <div class="labelform">Nombre de Categoria:</div>
+            <div class="labelform">Nombre:</div>
             <div class="widgetform">{{ entity.nombre|capitalize }}</div>
         </div>
     </div>
 
-    <a class="btn btn-default" href="{{ path('tecnocategoria_edit', { 'id': entity.id }) }}">Editar</a> | 
-    <a class="btn btn-default" href="{{ path('tecnocategoria') }}">Listado</a>
+    <a class="btn btn-default" href="{{ path('tecnocategoria_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('tecnocategoria') }}">IR AL LISTADO</a>
   
     <BR><BR>
     {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}

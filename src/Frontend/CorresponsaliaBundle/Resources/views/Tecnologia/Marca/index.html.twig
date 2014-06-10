@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block titulomodulo %}<h1>LISTADO DE MARCAS</h1>{% endblock %}
+{% block titulomodulo %}<h1>LISTADO DE MARCA</h1>{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -20,7 +20,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td class="indentar_texto_tabular">{{ entity.nombre }}</td>
+                <td class="indentar_texto_tabular">{{ entity.nombre|capitalize }}</td>
                 <td>
                     <a class="indentar_enlace" href="{{ path('tecnomarca_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a class="indentar_enlace" href="{{ path('tecnomarca_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
@@ -38,7 +38,7 @@
         $(document).ready(function(){
             $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                  "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                 "aaSorting": [[0,'desc']]
+                 "aaSorting": [[0,'asc']]
              } );
          });
     </script>

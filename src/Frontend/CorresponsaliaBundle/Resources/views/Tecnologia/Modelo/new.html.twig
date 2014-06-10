@@ -3,6 +3,25 @@
 {% block titulomodulo %}  
     <h1>NUEVO MODELO</h1>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 164px !important;
+        }
+    </style>
+{% endblock %}  
+  
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
@@ -19,14 +38,13 @@
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
                 <div class="labelform">Marca:</div>
-                <div class="widgetform">{{ form_widget(form.marca) }}</div>
+                <div class="widgetform">{{ form_widget(form.marca, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Nombre:</div>
-                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+                <div class="labelform">Modelo:</div>
+                <div class="widgetform">{{ form_widget(form.nombre, {'attr': {'class': 'strtoupper'} }) }}</div>
             </div>
         </div>
-        
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('tecnomodelo') }}">IR AL LISTADO</a>
     </form>

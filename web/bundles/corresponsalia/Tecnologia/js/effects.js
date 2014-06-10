@@ -2,9 +2,8 @@ var jQuery = jQuery.noConflict();
 jQuery(document).ready(function(){
 
     jQuery(".strtoupper").keyup(function(){
-        var strRpd = ucFirst(jQuery(this).val());
+        var strRpd = ucFirst(jQuery(this).val().toLowerCase());
         jQuery(this).val(strRpd);
-//        jQuery(this).val().toUpperCase();
     });
 
     function ucFirst(str) {
@@ -14,6 +13,9 @@ jQuery(document).ready(function(){
         return res.join("");
     }
 
+    
+    
+    
 });
 
 

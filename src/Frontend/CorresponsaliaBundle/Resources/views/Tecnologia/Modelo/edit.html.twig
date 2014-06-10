@@ -2,6 +2,25 @@
 
 {% block titulomodulo %}<h1>EDITAR MODELO</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 164px !important;
+        }
+    </style>
+{% endblock %}  
+  
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
 
@@ -11,16 +30,17 @@
         <div>{{ form_errors(edit_form.nombre) }}</div>
     </div>
     {% endif %}
+    
     <form novalidate method="post" action="{{ path('tecnomodelo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
              <div class="contenedorform">
                 <div class="labelform">Marca:</div>
-                <div class="widgetform">{{ form_widget(edit_form.marca) }}</div>
+                <div class="widgetform">{{ form_widget(edit_form.marca, {'attr': {'class': 'autocomplete_select'} } ) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">nombre:</div>
-                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+                <div class="labelform">Modelo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre, {'attr': {'class': 'strtoupper'} } ) }}</div>
             </div>
          </div>
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 

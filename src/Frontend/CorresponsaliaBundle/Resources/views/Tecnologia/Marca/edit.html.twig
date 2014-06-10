@@ -1,6 +1,16 @@
 {% extends '::base.html.twig' %}
 
-{% block titulomodulo %}<h1>EDITAR TIPO DE MONEDA</h1>{% endblock %}
+{% block titulomodulo %}<h1>EDITAR MARCA</h1>{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
@@ -15,8 +25,8 @@
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
             <div class="contenedorform">
-                <div class="labelform">Nombre Marca:</div>
-                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre, {'attr': {'class': 'form_input strtoupper'} } ) }}</div>
             </div>
          </div>
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 

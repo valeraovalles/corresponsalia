@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo;
 use Frontend\CorresponsaliaBundle\Form\Tecnologia\EquipoType;
 
+use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
+
 /**
  * Tecnologia\Equipo controller.
  *
@@ -22,35 +24,68 @@ class EquipoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $equipos = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
-
-        $asignaciones = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->findAll();
-        
         $listEquipo = array();
         $indice = 0;
-        foreach ($equipos as $equipo) {
-            $listEquipo[$indice]['id'] = $equipo->getId(); 
-            $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
-            $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
-            $listEquipo[$indice]['status'] = $equipo->getStatus(); 
-            $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
-            $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
-            $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
-            $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
-            $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
-            foreach ($asignaciones as $asignar) {
-                if( $asignar->getId() == $equipo->getId() ){
-                    $listEquipo[$indice]['corresponsalia'] = $asignar->getCorresponsalia(); 
-                    $listEquipo[$indice]['responsable'] = $asignar->getResponsable(); 
-                    $listEquipo[$indice]['fechaAsignacion'] = $asignar->getFechaAsignacion(); 
-                    $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignar->getFechaEstimadaRetorno(); 
-                    $listEquipo[$indice]['fechaRetorno'] = $asignar->getFechaRetorno(); 
-                    $listEquipo[$indice]['statusAsignacion'] = $asignar->getStatus(); 
+        if ($this->get('security.context')->isGranted('ROLE_TECNO_ADMIN')) {
+            // el usuario tiene el role 'ROLE_TECNO_ADMIN'
+            $equipos = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
+            $asignaciones = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->findAll();
+            foreach ($equipos as $equipo) {
+                $listEquipo[$indice]['id'] = $equipo->getId(); 
+                $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
+                $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
+                $listEquipo[$indice]['status'] = $equipo->getStatus(); 
+                $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
+                $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
+                $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
+                $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
+                $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
+                foreach ($asignaciones as $asignar) {
+                    if( $asignar->getId() == $equipo->getId() ){
+                        $listEquipo[$indice]['corresponsalia'] = $asignar->getCorresponsalia(); 
+                        $listEquipo[$indice]['responsable'] = $asignar->getResponsable(); 
+                        $listEquipo[$indice]['fechaAsignacion'] = $asignar->getFechaAsignacion(); 
+                        $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignar->getFechaEstimadaRetorno(); 
+                        $listEquipo[$indice]['fechaRetorno'] = $asignar->getFechaRetorno(); 
+                        $listEquipo[$indice]['statusAsignacion'] = $asignar->getStatus(); 
+                    }
                 }
+                $indice++;
             }
-            $indice++;
         }
+        elseif ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
+            // el usuario tiene el role 'ROLE_TECNO_CORRESPONSALIA'
+            $usuario = $this->get('security.context')->getToken()->getUser();
+            $userCorresp = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findOneByUsuario($usuario->getId());
+            $equipos = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findAll();
+            $asignaciones = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->findByCorresponsalia($userCorresp->getCorresponsalia()->getId());
+            
+            
+            foreach ($asignaciones as $asignar) {
+                $listEquipo[$indice]['corresponsalia'] = $asignar->getCorresponsalia(); 
+                $listEquipo[$indice]['responsable'] = $asignar->getResponsable(); 
+                $listEquipo[$indice]['fechaAsignacion'] = $asignar->getFechaAsignacion(); 
+                $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignar->getFechaEstimadaRetorno(); 
+                $listEquipo[$indice]['fechaRetorno'] = $asignar->getFechaRetorno(); 
+                $listEquipo[$indice]['statusAsignacion'] = $asignar->getStatus(); 
+                foreach ($equipos as $equipo) {
+                    if( $equipo->getId() == $asignar->getId()){
+                        $listEquipo[$indice]['id'] = $equipo->getId(); 
+                        $listEquipo[$indice]['serialEquipo'] = $equipo->getSerialEquipo(); 
+                        $listEquipo[$indice]['descripcion'] = $equipo->getDescripcion(); 
+                        $listEquipo[$indice]['status'] = $equipo->getStatus(); 
+                        $listEquipo[$indice]['observacionCondicion'] = $equipo->getObservacionCondicion(); 
+                        $listEquipo[$indice]['fechaAdquisicion'] = $equipo->getFechaAdquisicion(); 
+                        $listEquipo[$indice]['categoria'] = $equipo->getCategoria(); 
+                        $listEquipo[$indice]['condicion'] = $equipo->getCondicion(); 
+                        $listEquipo[$indice]['modelo'] = $equipo->getModelo(); 
+                    }
+                }
+                $indice++;
+            }
+        }
+        
+        
         
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:index.html.twig', array(
             'listEquipo' => $listEquipo,
@@ -80,10 +115,23 @@ class EquipoController extends Controller
             $entity->setSerialEquipo(strtoupper($entity->getSerialEquipo()));
             $entity->setObservacionCondicion(strtoupper($entity->getObservacionCondicion()));
             $entity->setDescripcion(strtoupper($entity->getDescripcion()));
-            
-            
             $em->persist($entity);
             $em->flush();
+            
+            if ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
+                // el usuario tiene el role 'ROLE_TECNO_CORRESPONSALIA'
+                $asignacion = new Asignacion();
+                $usuario = $this->get('security.context')->getToken()->getUser();
+                $userCorresp = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findOneByUsuario($usuario->getId());
+                $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($userCorresp->getCorresponsalia()->getId());
+                $asignacion->setCorresponsalia($corresponsalia);
+                $asignacion->setFechaAsignacion(new \DateTime);
+                $status = $em->getRepository('CorresponsaliaBundle:Tecnologia\StatusAsignacion')->findOneByNombre("permanente");
+                $asignacion->setStatus($status);
+                $asignacion->setId($entity->getId());
+                $em->persist($asignacion);
+                $em->flush();
+            }
             
             return $this->redirect($this->generateUrl('tecnoequipo_show', array('id' => $entity->getId())));
         }

@@ -8,16 +8,12 @@
 
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
-            <div class="labelform">Id:</div>
-            <div class="widgetform">{{ entity.id }}</div>
-        </div>
-        <div class="contenedorform">
-            <div class="labelform">NOMBRE:</div>
-            <div class="widgetform">{{ entity.nombre }}</div>
-        </div>
-        <div class="contenedorform">
             <div class="labelform">Marca:</div>
-            <div class="widgetform">{{ entity.marca }}</div>
+            <div class="widgetform">{{ entity.marca|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Modelo:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
         </div>
     </div>
 

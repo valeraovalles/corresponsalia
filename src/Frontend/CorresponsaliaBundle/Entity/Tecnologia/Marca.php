@@ -4,12 +4,16 @@ namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Marca
  *
- * @ORM\Table(name="tecnologia.marca")
+ * @ORM\Table(name="tecnologia.marca", uniqueConstraints={@ORM\UniqueConstraint(columns={"nombre"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"nombre"}, message="La Marca ya se encuentra registrada.")
+ * 
+ * 
  */
 class Marca
 {
@@ -27,8 +31,11 @@ class Marca
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="El campo nombre de categoria no puede estar vacio.")
-     * @Assert\Type(type="alpha", message="El nombre {{ value }} es invalido. Introduzca solo letras.")
+     * @Assert\NotBlank(message="El campo nombre de marca no puede estar vacio.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zñÑáéíóúÁÉÍÓÚA-Z ]+$/",
+     *     message="El nombre de la marca no puede contener numeros"
+     * )
      * 
      */
     private $nombre;
@@ -51,7 +58,7 @@ class Marca
      */
     public function getNombre()
     {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
     
     /**
@@ -62,7 +69,7 @@ class Marca
      */
     public function setNombre($nombre)
     {
-        $this->nombre = $nombre;
+        $this->nombre = strtolower($nombre);
     
         return $this;
     }
@@ -73,7 +80,7 @@ class Marca
      * @return string 
      */
     public function __toString() {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
 
     

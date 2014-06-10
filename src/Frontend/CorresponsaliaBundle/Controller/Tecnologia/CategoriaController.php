@@ -44,6 +44,14 @@ class CategoriaController extends Controller
             $entity->setNombre(strtolower($entity->getNombre()));
             $em->persist($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva! ',
+                    'message' => 'Categoria agregada.'
+                )
+            );
 
             return $this->redirect($this->generateUrl('tecnocategoria_show', array('id' => $entity->getId())));
         }
@@ -125,6 +133,7 @@ class CategoriaController extends Controller
         
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Categoria:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -146,7 +155,7 @@ class CategoriaController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Actualizar'));
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
@@ -172,6 +181,13 @@ class CategoriaController extends Controller
             $entity->setNombre(strtolower($entity->getNombre()));
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editada!',
+                    'message' => 'Categoria con exito.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnocategoria_edit', array('id' => $id)));
         }
 
@@ -189,6 +205,8 @@ class CategoriaController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
+        
+        $nombre = NULL;
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -197,11 +215,20 @@ class CategoriaController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Tecnologia\Categoria entity.');
             }
-
+            
+            $nombre = $entity->getNombre();
+            
             $em->remove($entity);
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminada! ',
+                'message' => 'Categoria '.$nombre.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnocategoria'));
     }
 
@@ -217,7 +244,7 @@ class CategoriaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tecnocategoria_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Eliminar'))
+            ->add('submit', 'submit', array('label' => 'ELIMINAR'))
             ->getForm()
         ;
     }

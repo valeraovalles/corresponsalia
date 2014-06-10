@@ -4,12 +4,14 @@ namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Description of Modelo
  *
- * @ORM\Table(name="tecnologia.modelo")
+ * @ORM\Table(name="tecnologia.modelo", uniqueConstraints={@ORM\UniqueConstraint(columns={"nombre"})})
  * @ORM\Entity(repositoryClass="Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository\ModeloRepository")
+ * @UniqueEntity(fields={"nombre"}, message="El modelo ya se encuentra registrada.")
  */
 class Modelo {
     /**
@@ -26,8 +28,11 @@ class Modelo {
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="El campo nombre de categoria no puede estar vacio.")
-     * @Assert\Type(type="alpha", message="El nombre {{ value }} es invalido. Introduzca solo letras.")
+     * @Assert\NotBlank(message="El campo nombre del modelo no puede estar vacio.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zñÑáéíóúÁÉÍÓÚA-Z1-9- ]+$/",
+     *     message="El nombre del modelo no puede contener numeros"
+     * )
      * 
      */
     private $nombre;
@@ -43,7 +48,7 @@ class Modelo {
     private $marca;
 
     public function __toString() {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
 
 
@@ -65,7 +70,7 @@ class Modelo {
      */
     public function setNombre($nombre)
     {
-        $this->nombre = $nombre;
+        $this->nombre = strtolower($nombre);
     
         return $this;
     }
@@ -77,7 +82,7 @@ class Modelo {
      */
     public function getNombre()
     {
-        return $this->nombre;
+        return ucfirst($this->nombre);
     }
 
     /**

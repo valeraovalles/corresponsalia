@@ -2,6 +2,11 @@
 
 {% block titulomodulo %}<h1>EDITAR CATEGORIA</h1>{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
@@ -9,6 +14,17 @@
 
 {% block body -%}
     {{ parent() }}
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
 
     {% if form_errors(edit_form.nombre)%}
     <div class="alert alert-danger errores" style="width:70%;">
@@ -20,19 +36,13 @@
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div class="formShow" style="width:70%;">
             <div class="contenedorform">
-                <div class="contenedorform">
-                    <div class="labelform">Nombre de Categoria:</div>
-                    <div class="widgetform">
-                        <input type="text" id="frontend_corresponsaliabundle_tecnologia_categoria_nombre" 
-                               name="frontend_corresponsaliabundle_tecnologia_categoria[nombre]" required="required" maxlength="255"    
-                               class="form_input" value="{{entity.nombre|capitalize}}" />
-                    </div>
-                </div>
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre, {'attr': {'class': 'form_input strtoupper'} } ) }}</div>
             </div>
          </div>
-        <input type="submit" value="Guardar" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('tecnocategoria_show',{'id':entity.id}) }}">Consulta</a> | 
-        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">Listado</a>
+        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnocategoria_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('tecnocategoria') }}">IR A LISTADO</a>
     </form>
 
     <BR>

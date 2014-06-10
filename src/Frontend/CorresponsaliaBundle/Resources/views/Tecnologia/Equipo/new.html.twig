@@ -4,6 +4,17 @@
     <h1>NUEVO EQUIPO</h1>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 200px !important;
+        }
+    </style>
+{% endblock %}  
+
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -38,11 +49,11 @@
     </script>
     <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
 {% endblock %}
     
 {% block body -%}
@@ -66,23 +77,23 @@
         <div id="wrapper-form" class="formShow" style="width:70%;">
             <div class="contenedorform">
                 <div class="labelform">Categoria:</div>
-                <div class="widgetform">{{ form_widget(form.categoria) }}</div>
+                <div class="widgetform">{{ form_widget(form.categoria, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Marca:</div>
-                <div class="widgetform">{{ form_widget(form.marca) }}</div>
+                <div class="widgetform">{{ form_widget(form.marca, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Modelo:</div>
-                <div class="widgetform">{{ form_widget(form.modelo) }}</div>
+                <div class="widgetform">{{ form_widget(form.modelo, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">serial Equipo:</div>
-                <div class="widgetform">{{ form_widget(form.serialEquipo) }}</div>
+                <div class="widgetform">{{ form_widget(form.serialEquipo, {'attr': {'class': 'strtoupper'} }) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">descripcion:</div>
-                <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
+                <div class="labelform">Descripcion:</div>
+                <div class="widgetform">{{ form_widget(form.descripcion, {'attr': {'class': 'strtoupper'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Fecha Adquisicion:</div>

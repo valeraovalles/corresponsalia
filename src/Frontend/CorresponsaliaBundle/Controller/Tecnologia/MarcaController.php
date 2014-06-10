@@ -41,9 +41,7 @@ class MarcaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
-            $entity->setNombre(strtoupper($entity->getNombre()));
-            
+            $entity->setNombre(strtolower($entity->getNombre()));
             $em->persist($entity);
             $em->flush();
 
@@ -172,7 +170,7 @@ class MarcaController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $entity->setNombre(strtoupper($entity->getNombre()));
+            $entity->setNombre(strtolower($entity->getNombre()));
             $em->flush();
 
             return $this->redirect($this->generateUrl('tecnomarca_edit', array('id' => $id)));
@@ -220,7 +218,7 @@ class MarcaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tecnomarca_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'ELIMINAR'))
             ->getForm()
         ;
     }
