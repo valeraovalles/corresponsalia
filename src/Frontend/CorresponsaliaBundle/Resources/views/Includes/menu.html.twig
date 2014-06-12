@@ -55,7 +55,7 @@
       </li>
       {% endif %}
 
-      {% if is_granted('ROLE_PERSONAL') %}
+      {% if is_granted('ROLE_PERSONAL') or is_granted('ROLE_SUPERADMIN') %}
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">PERSONAL <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -65,14 +65,11 @@
       </li>
       {% endif %}
 
-      {% if is_granted('ROLE_CONSULTORIA') %}
+      {% if is_granted('ROLE_CONSULTORIA') or is_granted('ROLE_SUPERADMIN') %}
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTORIA <b class="caret"></b></a>
         <ul class="dropdown-menu">
-
           <li><a href="{{ path('datoslegales') }}">Datos Legales por Corresponsalía</a></li>
-          <li><a href="{{ path('representante') }}">Representantes</a></li>
-          <li><a href="{{ path('contrato') }}">Contratos del Personal</a></li>
         </ul>
       </li>
       {% endif %}

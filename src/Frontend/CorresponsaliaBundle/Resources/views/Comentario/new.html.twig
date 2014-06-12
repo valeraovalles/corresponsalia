@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - COMENTARIOS{% endblock %}
+
+{% block titulobanner %}
+    COMENTARIOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>NUEVO COMENTARIO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+<form novalidate action="{{ path('comentario_create',{'corresponsalia':corresponsalia}) }}" method="post">
+{{ form_widget(form._token) }}
+    <div class="formShow" style="width:85%;">
+        <div class="contenedorform">
+            <div class="labelform">Corresponsal&iacute;a:</div>
+            <div class="widgetform">{{ nombre_c }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Comentario (Estatus Legal):</div>
+            <div class="widgetform">{{ form_widget(form.comentario, { 'attr': {'style': 'width:100%;height:300px;'} }) }}</div>
+        </div>
+    </div>
+    <input type="submit" value="CREAR" class="btn btn-primary"> | 
+    <a class="btn btn-default" href="{{ path('comentario',{'corresponsalia':corresponsalia}) }}">IR AL HISTORIAL</a>
+</form>
+
+<br><br>
+{% endblock %}
+
+
+
+
+
+
+
+

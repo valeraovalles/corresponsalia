@@ -7,7 +7,6 @@ class htmlreporte
 
   public function totalestadofondo($em,$datos){
 
-
    if(isset($datos['descripcionperiodo'])){
             $dql = "select x from CorresponsaliaBundle:Estadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.id in (:idperiodo) order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.id ASC";
             $query = $em->createQuery($dql);
@@ -211,7 +210,6 @@ class htmlreporte
           $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();
         else $descripcionperiodo='N/A';
 
-
         if ($cont % 2 != 0) # An odd row 
           $rowColor = "#ececec"; 
         else # An even row 
@@ -344,7 +342,6 @@ class htmlreporte
         if($v->getPeriodorendicion()->getDescripcionperiodo()!='')
           $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();
         else $descripcionperiodo='N/A';
-
 
         if ($cont % 2 != 0) # An odd row 
           $rowColor = "#ececec"; 
@@ -498,7 +495,6 @@ class htmlreporte
       $cont=0;
       foreach ($result as $v) {
         $hora=explode(".", $v->getHoraproceso());
-
 
         if($v->getPeriodorendicion()->getDescripcionperiodo()!='')
           $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();

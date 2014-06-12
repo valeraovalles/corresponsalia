@@ -13,8 +13,8 @@
 {% block body -%}
     {{ parent() }}
 
-    <form novalidate="novalidate" action="{{ path('personal_create') }}"method="post" {{ form_enctype(form) }}{{ form_enctype(form1) }} >
-        {{ form_widget(form._token) }}{{ form_widget(form1._token) }}
+    <form novalidate="novalidate" action="{{ path('personal_create') }}"method="post" {{ form_enctype(form) }} >
+        {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
                 <div class="labelform">Nombre:</div>
@@ -48,10 +48,6 @@
                 <div class="labelform">Cargo:</div>
                 <div class="widgetform">{{ form_widget(form.cargoId) }}</div>
             </div>          
-            <div class="contenedorform">
-                <div class="labelform">C&oacute;digo del Contrato:</div>
-                <div class="widgetform">{{ form_widget(form1.contratos) }}</div>
-            </div>
         </div>
         <input type="submit" value="CREAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('personal') }}">IR AL LISTADO</a>

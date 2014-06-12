@@ -52,7 +52,6 @@ class ReporteType extends AbstractType
                     ->orderBy('u.descripcion', 'ASC');
             }));
 
-
         if($muestra==3)
             $builder->add('aniodesde','choice',array('choices'   => $anios,));
 
@@ -98,6 +97,7 @@ class ReporteType extends AbstractType
                     
             }));
         }
+
         if($muestra==3.3){
             $dato=explode(",", $dato);
             $builder->add('descripciongasto', 'entity', array(
@@ -111,8 +111,10 @@ class ReporteType extends AbstractType
                     ->setParameter('idtipogasto', $dato);
             }));
         }
+
     
     }
+
     /**
      * @param OptionsResolverInterface $resolver
      */

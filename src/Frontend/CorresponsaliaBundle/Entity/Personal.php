@@ -90,12 +90,19 @@ class Personal
     private $cargoId;
 
     /**
+     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     *  
+     */
+    private $file;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="contratoId", type="string", nullable=true)
+     * @ORM\Column(name="archivo", type="string", length=500, nullable=true)
      */
-    private $contratoId;
+    private $archivo;
 
+  
 
     /**
      * Get id
@@ -292,26 +299,46 @@ class Personal
     }
 
     /**
-     * Set contratoId
+     * Sets file.
      *
-     * @param string $contratoId
+     * @param UploadedFile $file
+     */
+    public function setFile($file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
      * @return Personal
      */
-    public function setContratoId($contratoId)
+    public function setArchivo($archivo)
     {
-        $this->contratoId = $contratoId;
+        $this->archivo = $archivo;
     
         return $this;
     }
 
     /**
-     * Get contratoId
+     * Get archivo
      *
      * @return string 
      */
-    public function getContratoId()
+    public function getArchivo()
     {
-        return $this->contratoId;
+        return $this->archivo;
     }
 
     public function __toString()

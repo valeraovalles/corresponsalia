@@ -5,8 +5,9 @@ namespace Frontend\CorresponsaliaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class PersonalType extends AbstractType
+class DocumentoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,18 +16,10 @@ class PersonalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('sueldo')
-            ->add('pasaporte')
-            ->add('fechaingreso', 'date',array(
-                    'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd'))
-            ->add('correo')
-            ->add('telefono')
-            ->add('corresponsaliaId')
-            ->add('cargoId')
             ->add('file','file')
             ->add('archivo')
+            ->add('corresponsaliaId')
+            ->add('descripcion', 'textarea')
         ;
     }
     
@@ -36,7 +29,7 @@ class PersonalType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Frontend\CorresponsaliaBundle\Entity\Personal'
+            'data_class' => 'Frontend\CorresponsaliaBundle\Entity\Documento'
         ));
     }
 
@@ -45,6 +38,6 @@ class PersonalType extends AbstractType
      */
     public function getName()
     {
-        return 'frontend_corresponsaliabundle_personal';
+        return 'frontend_corresponsaliabundle_documento';
     }
 }
