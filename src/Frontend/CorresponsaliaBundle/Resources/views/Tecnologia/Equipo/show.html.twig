@@ -6,23 +6,27 @@
     {{ parent() }}
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
-            <div class="labelform">Id:</div>
-            <div class="widgetform">{{ entity.id }}</div>
+            <div class="labelform">Categoria:</div>
+            <div class="widgetform">{{ entity.categoria }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">serial Equipo:</div>
-            <div class="widgetform">{{ entity.serialEquipo }}</div>
+            <div class="labelform">Marca:</div>
+            <div class="widgetform">{{ entity.modelo.marca }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">descripcion:</div>
-            <div class="widgetform">{{ entity.descripcion }}</div>
-        </div>
-        <div class="contenedorform">
-            <div class="labelform">modelo:</div>
+            <div class="labelform">Modelo:</div>
             <div class="widgetform">{{ entity.modelo }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">status:</div>
+            <div class="labelform">Serial Equipo:</div>
+            <div class="widgetform">{{ entity.serialEquipo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ entity.descripcion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Status:</div>
             <div class="widgetform">
                 {% if entity.status %}
                     <span class="label label-success">Activo</span>
@@ -42,7 +46,7 @@
             </div>
         {% endif %}
         <div class="contenedorform">
-            <div class="labelform">fecha Adquisicion:</div>
+            <div class="labelform">Fecha Adquisicion:</div>
             <div class="widgetform">{{ entity.fechaAdquisicion|date('d-m-Y') }}</div>
         </div>
     </div>

@@ -3,7 +3,6 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Description of Asignacion
@@ -44,7 +43,7 @@ class Bitacora
      *      @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      * })
      */
-    private $statusId;
+    private $status;
 
     /**
      * @var string
@@ -215,9 +214,9 @@ class Bitacora
      * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $statusId
      * @return Bitacora
      */
-    public function setStatusId(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $statusId = null)
+    public function setStatus(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $status = null)
     {
-        $this->statusId = $statusId;
+        $this->status = $status;
     
         return $this;
     }
@@ -227,9 +226,9 @@ class Bitacora
      *
      * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion 
      */
-    public function getStatusId()
+    public function getStatus()
     {
-        return $this->statusId;
+        return $this->status;
     }
 
     /**

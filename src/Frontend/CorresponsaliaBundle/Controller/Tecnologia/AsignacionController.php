@@ -306,12 +306,12 @@ class AsignacionController extends Controller
             $asignacion_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
             $bitacora = new Bitacora();
             $bitacora->setEquipoId($asignacion_nueva->getId());
-            $bitacora->setCorresponsaliaId($asignacion_actual->getCorresponsalia()->getId());
+            $bitacora->setCorresponsalia($asignacion_actual->getCorresponsalia());
             $bitacora->setFechaAsignacion($asignacion_actual->getFechaAsignacion());
-            $bitacora->setFechaEstimaRetorno($asignacion_actual->getFechaEstimadaRetorno());
+            $bitacora->setFechaEstimadaRetorno($asignacion_actual->getFechaEstimadaRetorno());
             $bitacora->setFechaRetorno($asignacion_actual->getFechaRetorno());
             $bitacora->setResponsable($asignacion_actual->getResponsable());
-            $bitacora->setStatusId($asignacion_actual->getStatus()->getId());            
+            $bitacora->setStatus($asignacion_actual->getStatus());            
             
         if ($form->isValid()) {
             $em->remove($asignacion_actual);

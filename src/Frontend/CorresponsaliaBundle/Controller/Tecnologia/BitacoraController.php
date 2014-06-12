@@ -33,7 +33,7 @@ class BitacoraController extends Controller
             $listEquipo[$indice]['fechaAsignacion'] = $asignacion->getFechaAsignacion(); 
             $listEquipo[$indice]['fechaEstimadaRetorno'] = $asignacion->getFechaEstimadaRetorno(); 
             $listEquipo[$indice]['fechaRetorno'] = $asignacion->getFechaRetorno(); 
-            $listEquipo[$indice]['statusAsignacion'] = $asignacion->getStatusId();
+            $listEquipo[$indice]['statusAsignacion'] = $asignacion->getStatus();
             foreach ($equipos as $equipo) {
                 if( $asignacion->getEquipoId() == $equipo->getId() ){
                     $listEquipo[$indice]['id'] = $equipo->getId(); 

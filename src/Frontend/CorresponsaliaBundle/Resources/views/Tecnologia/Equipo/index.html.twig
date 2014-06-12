@@ -27,7 +27,7 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th style="width: 17%;">Descripción</th>
-                <th>Status</th>
+                <th style="width: 60px;">Status</th>
                 <th>Asignacion</th>
                 <th>Corresponsalia</th>
                 <th style="width: 13%;">Acciones</th>
@@ -40,14 +40,14 @@
                 <td>{{ entity.modelo.marca }}</td>
                 <td>{{ entity.modelo }}</td>
                 <td>{{ entity.descripcion }}</td>
-                <td>
+                <td class="centrar">
                     {% if entity.status %}
                         <span class="label label-success">&nbsp;ACTIVO&nbsp;&nbsp;</span>
                     {% else %}
                         <span class="label label-danger">INACTIVO</span>
                     {% endif %}
                 </td>
-                <td class="indentar_short">
+                <td>
                     {% if entity|length > 9 %}
                         {{ entity.statusAsignacion.nombre|capitalize }}
                     {% endif %}
@@ -72,9 +72,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <br><br><a class="btn btn-primary" href="{{ path('tecnoequipo_new') }}">
-          NUEVO EQUIPO
-    </a><br><br>
+    </br></br><a class="btn btn-primary" href="{{ path('tecnoequipo_new') }}">NUEVO EQUIPO</a></br></br>
     
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

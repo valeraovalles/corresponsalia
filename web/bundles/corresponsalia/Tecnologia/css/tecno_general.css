@@ -8,10 +8,6 @@ and open the template in the editor.
     Author     : ecastro
 */
 
-*{
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-}
 .oculto{
     display: none;
 }
@@ -81,8 +77,6 @@ tr.even td.sorting_2 {
     line-height: 20px;
 }
 
-
-
 a{
     outline: none;
 }
@@ -102,4 +96,8 @@ input.form_input {
 .label{
     line-height: 2.5;
     text-indent: 1%;
+}
+
+.centrar {
+    text-align: center;
 }
