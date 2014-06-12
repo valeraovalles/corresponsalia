@@ -1,0 +1,43 @@
+body{
+	font-size: 12px;
+}
+
+.titulo{
+	font-weight: bold;
+	font-size: 24px;
+}
+
+th{
+	font-weight: bold;
+	padding: 3px;
+}
+td{
+	padding: 3px;
+	text-align: justify;
+}
+
+table{
+	background-color: gray; 
+	font-size: 12px;
+}
+
+tr{
+	background-color: white;
+}
+
+.total{
+	font-weight: bold;
+	text-align: right;
+	padding-right: 5px;
+	font-size: 18px;
+}
+
+.montos{
+	font-weight: bold;
+	font-size: 18px;
+
+}
+
+.trtotal{
+	background-color: yellow;
+}

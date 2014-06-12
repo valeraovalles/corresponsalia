@@ -9,6 +9,17 @@
 
 {% block body -%}
     {{ parent() }}
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
     
     <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
         <thead>
