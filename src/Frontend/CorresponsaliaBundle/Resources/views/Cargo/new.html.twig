@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CARGOS{% endblock %}
+
+{% block titulobanner %}
+    CARGOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CREAR UN CARGO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('cargo_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Descripcion:</div>
+                <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
+            </div>
+        </div>
+        <input type="submit" value="CREAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('cargo') }}">IR AL LISTADO</a>
+    </form>
+{% endblock %}

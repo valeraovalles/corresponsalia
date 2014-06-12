@@ -53,6 +53,16 @@ class Perfil
      */
     private $segundoApellido;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correo", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="El correo no puede estar en blanco.")
+     * @Assert\Email()
+     */
+    private $correo;
+
     /**
      * @var \"user"
      *
@@ -96,6 +106,29 @@ class Perfil
     public function getPrimerNombre()
     {
         return $this->primerNombre;
+    }
+
+    /**
+     * Set primerNombre
+     *
+     * @param string $primerNombre
+     * @return Perfil
+     */
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
+    
+        return $this;
+    }
+
+    /**
+     * Get primerNombre
+     *
+     * @return string 
+     */
+    public function getCorreo()
+    {
+        return $this->correo;
     }
 
     /**

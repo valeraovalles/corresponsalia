@@ -1,0 +1,64 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - REPRESENTANTES{% endblock %}
+
+{% block titulobanner %}
+    REPRESENTANTES
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>EDITAR REPRESENTANTE</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('representante_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">sueldo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.sueldo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">pasaporte:</div>
+                <div class="widgetform">{{ form_widget(edit_form.pasaporte) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fechaingreso:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechaingreso) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">correo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.correo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">telefono:</div>
+                <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Corresponsal&iacute;a:</div>
+                <div class="widgetform">{{ form_widget(edit_form.corresponsaliaId) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.cargoId) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">C&oacute;digo del Contrato:</div>
+                <div class="widgetform">{{ form_widget(edit_form.contratoId) }}</div>
+            </div>
+        </div>        
+         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('representante') }}">IR AL LISTADO</a>
+    </form>
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

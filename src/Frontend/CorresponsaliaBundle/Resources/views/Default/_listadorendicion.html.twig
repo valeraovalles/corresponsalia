@@ -1,14 +1,14 @@
 <!-- Modal -->
 <div class="modal fade" id="{{ periodo.tipogasto.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 1500px;">
-    <div class="modal-content" style="width: 1500px;">
+  <div class="modal-dialog" style="width: 1250px;">
+    <div class="modal-content" style="width: 1250px;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">{{ periodo.tipogasto.descripcion|upper }}</h4>
       </div>
       <div class="modal-body">
           
-            <table id="tablalista1" style="width: 1400px;">
+            <table id="tablalista1" style="width: 1200px;">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -17,6 +17,7 @@
                             <th>Descripcion</th>
                             <th>Nombre/Razón</th>
                             <th>I. Fiscal</th>
+                            <th>Nro Fact.</th>
                             <th>Tasa</th>
                             <th>Monto MN.</th>
                             <th>Dólares.</th>
@@ -29,8 +30,8 @@
                                 <td>{{ entity.id }}</td>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                                
                                 <td>{{ entity.descripciongasto.descripcion }}</td>
+                                <td>{{ entity.nombrerazonsocial }}</td>
                                 <td>{{ entity.identificacionfiscal }}</td>
                                 <td>{{ entity.numerofactura }}</td>
                                 <td>{{ entity.cambio }}</td>

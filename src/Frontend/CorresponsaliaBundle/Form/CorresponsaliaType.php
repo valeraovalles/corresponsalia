@@ -19,7 +19,7 @@ class CorresponsaliaType extends AbstractType
             ->add('pais',null,array('empty_value' => 'Seleccione...'))
             ->add('tipocorresponsalia',null,array('empty_value' => 'Seleccione...'))
             ->add('tipomoneda',null,array('empty_value' => 'Seleccione...'))
-        ;
+            ;
     }
     
     /**

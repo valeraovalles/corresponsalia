@@ -24,9 +24,9 @@ class Relaciongasto
     private $id;
 
     /**
-     * @var integer
+     * @var decimal
      *
-     * @ORM\Column(name="numerocomprobante", type="decimal", nullable=false).
+     * @ORM\Column(name="numerocomprobante", type="string", nullable=false).
      * @Assert\NotBlank(message="Debe escribir el número de comprobante.").
      * @Assert\Type(type="digit", message="El numero conprobante no puede contener letras.").
      */
@@ -82,7 +82,7 @@ class Relaciongasto
     /**
      * @var float
      *
-     * @ORM\Column(name="montomonnac", type="decimal", precision=20, scale= 3, nullable=false)
+     * @ORM\Column(name="montomonnac", type="decimal", precision=20, scale= 2, nullable=false)
      * @Assert\NotBlank(message="Debe colocar el monto de la moneda nacional.")
      */
     private $montomonnac;
@@ -90,14 +90,14 @@ class Relaciongasto
     /**
      * @var float
      *
-     * @ORM\Column(name="montodolar",  type="decimal", precision=20, scale= 3, nullable=false)
+     * @ORM\Column(name="montodolar",  type="decimal", precision=20, scale= 2, nullable=false)
      */
     private $montodolar;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="cambio",  type="decimal", precision=20, scale= 3, nullable=true)
+     * @ORM\Column(name="cambio",  type="decimal", precision=20, scale= 2, nullable=true)
      */
     private $cambio;
     

@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - REPRESENTANTES{% endblock %}
+
+{% block titulobanner %}
+    REPRESENTANTES
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>DETALLES DEL REPRESENTANTE</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Sueldo:</div>
+            <div class="widgetform">{{ entity.sueldo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">N&uacute;mero de Pasaporte:</div>
+            <div class="widgetform">{{ entity.pasaporte }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Ingreso:</div>
+            <div class="widgetform">{{ entity.fechaingreso|date('Y-m-d') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Correo:</div>
+            <div class="widgetform">{{ entity.correo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tel&eacute;fono:</div>
+            <div class="widgetform">{{ entity.telefono }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Coresponsal&iacute;a:</div>
+            <div class="widgetform">{{ entity.corresponsaliaId }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Cargo:</div>
+            <div class="widgetform">{{ entity.cargoId }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">C&oacute;digo del Contrato:</div>
+            <div class="widgetform">{{ entity.contratoId }}</div>
+        </div>
+    </div>
+    <a class="btn btn-default" href="{{ path('representante') }}">IR AL LISTADO</a>
+    
+<br><br>
+{% endblock %}

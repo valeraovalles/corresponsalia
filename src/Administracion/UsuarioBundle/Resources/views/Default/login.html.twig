@@ -17,6 +17,8 @@
     </script>
 
     <p class="text-info"><marquee scrollamount="3">SE RECOMIENDA EL USO DE CHROME O FIREFOX</marquee></p>
+
+    <h3><b>BIENVENIDOS AL SISTEMA DE CORRESPONSALÍAS</b></h3><br>
     
     {% block mensaje %}
         {% if error %}
@@ -31,18 +33,30 @@
     {% endfor %}
     
 
-    <h3>BIENVENIDOS</h3>
     
 
       <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
-        <h4 class="form-signin-heading">INGRESE SUS DATOS</h4>
-        <input type="text" id="username" name="_username" class="input-block-level"placeholder="Ingrese usuario..." data-placement="right" data-content="Puede ingresar el mismo usuario y clave de su correo Zimbra. Ante cualquier inconveniente comunicarse con la extensión 264/339." title="USUARIO">
-        <input type="password" name="_password" class="input-block-level" placeholder="Ingrese clave...">
-        <button class="btn btn-large btn-primary" type="submit" id="botonsubmit">Ingresar</button>
+        <h4 class="form-signin-heading" style="font-size:14px;">POR FAVOR INGRESE SUS DATOS</h4>
+        <input  type="text" id="username" name="_username" class="form-control" placeholder="Ingrese usuario..." data-placement="right" data-content="Ante cualquier inconveniente, escríbenos a la siguiente dirección: aplicaciones@telesurtv.net" title="USUARIO">
+        <input type="password" name="_password" class="form-control" placeholder="Ingrese clave...">
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonsubmit"
+        {% if navegador=='IExplorer' %}
+            disabled="disabled"
+        {% endif %}
+        >INGRESAR</button>
       </form>
 
     <br>
 
-    <script>$('#username').popover();</script>
+    <script>
+        $('#username').popover();
+
+        {% if navegador=='IExplorer' %}
+            alert(' Esta aplicación no funciona correctamente en internet explorer, por favor ejecútela en otro navegador. El boton de inicio ha sido deshabilitado.')
+        {% endif %}
+
+    </script>
 
 {% endblock %}

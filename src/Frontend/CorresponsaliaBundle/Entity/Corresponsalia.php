@@ -223,7 +223,7 @@ class Corresponsalia
     {
         return $this->responsable;
     }
-    
+
     public function __toString()
     {
         return $this->getNombre().' | '.$this->getPais()->getPais();

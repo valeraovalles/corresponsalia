@@ -7,6 +7,10 @@
        
     <div class="formShow" style="width:80%;">
         <div class="contenedorform">
+            <div class="labelform">Id Periodo:</div>
+            <div class="widgetform">{{ entity.periodorendicion.id }}</div>
+        </div>
+        <div class="contenedorform">
             <div class="labelform">Corresponsalia:</div>
             <div class="widgetform">{{ entity.periodorendicion.corresponsalia.nombre|upper }}</div>
         </div>
@@ -19,10 +23,10 @@
             <div class="widgetform">{{ entity.periodorendicion.tipogasto.descripcion|upper }}</div>
         </div>
         
-        {% if entity.periodorendicion.tipogasto.id==2 %}
+        {% if entity.periodorendicion.descripcionperiodo!='' %}
         <div class="contenedorform">
-            <div class="labelform">Cobertura:</div>
-            <div class="widgetform">{{ entity.periodorendicion.cobertura|upper }}</div>
+            <div class="labelform">Descripción Período:</div>
+            <div class="widgetform">{{ entity.periodorendicion.descripcionperiodo|upper }}</div>
         </div>
         {% endif %}
         

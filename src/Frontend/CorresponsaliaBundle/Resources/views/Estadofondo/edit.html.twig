@@ -30,10 +30,10 @@
                 <div class="widgetform">{{ entity.periodorendicion.tipogasto.descripcion|upper }}</div>
             </div>
 
-            {% if entity.periodorendicion.tipogasto.id==2 %}
+            {% if entity.periodorendicion.descripcionperiodo!='' %}
             <div class="contenedorform">
-                <div class="labelform">Cobertura:</div>
-                <div class="widgetform">{{ entity.periodorendicion.cobertura|upper }}</div>
+                <div class="labelform">Descripción Período:</div>
+                <div class="widgetform">{{ entity.periodorendicion.descripcionperiodo|upper }}</div>
             </div>
             {% endif %}
 
@@ -47,11 +47,19 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">Saldo inicial:</div>
-                <div class="widgetform">{{ form_widget(edit_form.saldoinicial) }}</div>
+
+                <div class="widgetform">{{ entity.saldoinicial }}</div>
+                <div style="display:none">{{ form_widget(edit_form.saldoinicial,{'attr':{'readonly':'readonly'}}) }}</div>
+
+            </div>
+            <div class="alert alert-info">Puede colocar montos + para sumar o - para restar del recurso enviado.</div>
+            <div class="contenedorform">
+                <div class="labelform">Recurso Enviado:</div>
+                <div class="widgetform">{{ entity.recursorecibido }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Recurso enviado:</div>
-                <div class="widgetform">{{ form_widget(edit_form.recursorecibido) }}</div>
+                <div class="labelform">Recurso nuevo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.recursorecibido,{'attr':{'value':'0'}}) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Observación:</div>

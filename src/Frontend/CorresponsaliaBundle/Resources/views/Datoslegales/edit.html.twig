@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - DATOS LEGALES POR CORRESPONSAL&Iacute;A{% endblock %}
+
+{% block titulobanner %}
+    DATOS LEGALES POR CORRESPONSAL&Iacute;A
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>EDITAR DATOS LEGALES</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+        <h3>{{ corresponsalia.nombre }} | {{ corresponsalia.pais }}</h3>
+        <form novalidate method="post" action="{{ path('datoslegales_update',{'id':entity.id, 'correspon':corresponsalia.id}) }}">
+             <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}{{ form_widget(form1._token) }}
+            <div class="formShow" style="width:70%;">
+                <div class="contenedorform">
+                    <div class="labelform">Representante Legal:</div>
+                    <div class="widgetform">{{ form_widget(form1.representante) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Direcci&oacute;n:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccion, { 'attr': {'style': 'width:100%;height:300px;'} }) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Registro:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.registro, { 'attr': {'style': 'width:100%;height:300px;'} }) }}</div>
+                </div>
+            </div>        
+             <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+            <a class="btn btn-default" href="{{ path('datoslegales') }}">IR AL LISTADO</a>
+        </form>
+    <BR>
+{% endblock %}

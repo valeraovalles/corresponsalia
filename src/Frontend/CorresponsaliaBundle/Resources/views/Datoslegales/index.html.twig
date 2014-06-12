@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - DATOS LEGALES POR CORRESPONSAL&Iacute;A{% endblock %}
+
+{% block titulobanner %}
+    DATOS LEGALES POR CORRESPONSAL&Iacute;A
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTADO DE DATOS LEGALES</h1>
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <table id="tablalista" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Corresponsal&iacute;a</th>
+                <th>Pais</th>
+                <th>Tipo de Corresponsalia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('datoslegales_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Datos">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.pais }}</td>
+                <td>{{ entity.tipocorresponsalia }}</td>
+                <td>
+                    <a href="{{ path('datoslegales_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Datos"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('comentario', { 'corresponsalia': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Comentarios Legales"><b class="glyphicon glyphicon-align-justify"></b></a>
+                    <a href="{{ path('documento', { 'corresponsalia': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Documentos"><b class="glyphicon glyphicon-cloud-upload"></b></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br>    
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
+    {% endblock %}

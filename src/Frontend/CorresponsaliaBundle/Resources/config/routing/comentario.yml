@@ -1,0 +1,30 @@
+comentario:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:index" }
+
+comentario_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:show" }
+
+comentario_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:new" }
+
+comentario_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:create" }
+    requirements: { _method: post }
+
+comentario_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:edit" }
+
+comentario_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:update" }
+    requirements: { _method: post|put }
+
+comentario_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Comentario:delete" }
+    requirements: { _method: post|delete }

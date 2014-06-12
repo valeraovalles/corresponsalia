@@ -11,8 +11,11 @@ use Frontend\CorresponsaliaBundle\Form\RelaciongastoType;
 use Administracion\UsuarioBundle\Entity\Usercorresponsalia;
 use Symfony\Component\HttpFoundation\Request;
 
+use Frontend\CorresponsaliaBundle\Resources\Misclases\funciones;
+
 class DefaultController extends Controller
 {
+
     public function Listadorendicion($periodo){
 
         $em = $this->getDoctrine()->getManager();
@@ -131,7 +134,39 @@ class DefaultController extends Controller
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
-        $consulta->execute();
+        //$consulta->execute();
+
+        if($estatus==2){
+/*
+            //CORREO
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Corresponsalia-Revision')     // we configure the title
+            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
+            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:solucion.html.twig',
+                    array('ticket' => $ticket)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);    // then we send the message.
+            //FIN CORREO*/
+        }
+
+        if($estatus==2){
+/*
+            //CORREO
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Corresponsalia-Revision')     // we configure the title
+            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
+            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:solucion.html.twig',
+                    array('ticket' => $ticket)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);    // then we send the message.
+            //FIN CORREO*/
+        }
 
         //devuelto para correción
         if($estatus==3){
@@ -142,35 +177,10 @@ class DefaultController extends Controller
             $consulta->execute();
         }
 
-        //asigono el saldo final al periodo siguiente
+        //asigno el saldo final al periodo siguiente
         if($estatus==4){
-
-            $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
-            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
-
-            $anioac=$periodo->getAnio();
-            $mesac=$periodo->getMes();
-            $tipog=$periodo->getTipogasto()->getId();
-            $sf=$ef[0]->getSaldofinal();
-
-            if($mesac==12){ $messig=1; $anioac=$anioac+1; } 
-            else $messig=$mesac+1;
-
-            $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor and p.tipogasto= :idtipogasto";
-            $query = $em->createQuery($dql);
-            $query->setParameter('anio', $anioac);
-            $query->setParameter('mes', $messig);
-            $query->setParameter('idcor', $periodo->getCorresponsalia()->getId());
-            $query->setParameter('idtipogasto', $tipog);
-            $periodosig = $query->getResult(); 
-
-            if($periodosig){
-
-                $consulta = $em->createQuery('update CorresponsaliaBundle:Estadofondo e set e.saldoinicial= :saldoinicial WHERE e.periodorendicion = :periodo');
-                $consulta->setParameter('periodo', $periodosig[0]->getId());
-                $consulta->setParameter('saldoinicial', $sf);
-                $consulta->execute();    
-            }
+            $f=new Funciones;
+            $f->actualizasaldos($idperiodo,$em);
         }
                
         
@@ -243,6 +253,7 @@ class DefaultController extends Controller
 
         $datos=$request->request->all();
         $datos=$datos['rendicion_relaciongasto'];
+
 
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);

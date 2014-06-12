@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONTRATOS{% endblock %}
+
+{% block titulobanner %}
+    CONTRATOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>EDITAR EL CONTRATO</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate method="post" action="{{ path('contrato_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">codigo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.codigo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fechainicio:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechainicio) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fechafin:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechafin) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">duracion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.duracion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">montobs:</div>
+                <div class="widgetform">{{ form_widget(edit_form.montobs) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">montome:</div>
+                <div class="widgetform">{{ form_widget(edit_form.montome) }}</div>
+            </div>
+        </div>        
+         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('contrato') }}">IR AL LISTADO</a>
+    </form>
+
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+
+      
+{% endblock %}

@@ -37,12 +37,10 @@
                 <div class="labelform">Tipo gasto:</div>
                 <div class="widgetform">{{ periodo.tipogasto.descripcion|upper }}</div>
             </div>
-            {% if periodo.tipogasto.id==2 %}
             <div class="contenedorform">
-                <div class="labelform">Cobertura:</div>
-                <div class="widgetform">{{ periodo.cobertura|upper }}</div>
+                <div class="labelform">Descripción período:</div>
+                <div class="widgetform">{% if periodo.descripcionperiodo is null %}N/A{% else %}{{ periodo.descripcionperiodo|upper }}{% endif %}</div>
             </div>
-            {% endif %}
             <div class="contenedorform">
                 <div class="labelform">País:</div>
                 <div class="widgetform">{{ periodo.corresponsalia.pais.pais|upper }}</div>

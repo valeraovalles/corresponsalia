@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - PERSONAL{% endblock %}
+
+{% block titulobanner %}
+    PERSONAL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>DETALLES DE PERSONAL</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Sueldo:</div>
+            <div class="widgetform">{{ entity.sueldo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">N&uacute;mero de Pasaporte:</div>
+            <div class="widgetform">{{ entity.pasaporte }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Ingreso:</div>
+            <div class="widgetform">{{ entity.fechaingreso|date('Y-m-d') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Correo:</div>
+            <div class="widgetform">{{ entity.correo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tel&eacute;fono:</div>
+            <div class="widgetform">{{ entity.telefono }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Coresponsal&iacute;a:</div>
+            <div class="widgetform">{{ entity.corresponsaliaId }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Cargo:</div>
+            <div class="widgetform">{{ entity.cargoId }}</div>
+        </div>
+        {% if entity.archivo != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Pasaporte:</div>
+                <div class="widgetform">
+                    {% set extension =  entity.archivo|split(".") %}
+
+                    {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                        <a data-toggle="modal" href="#myModal">
+                            <img class="img-rounded" src="{{ asset('uploads/consultoria/') }}{{ entity.archivo }}" width="150px">
+                        </a>
+                    {% else %}
+                        <a href="{{ asset('uploads/consultoria/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <a class="btn btn-default" href="{{ path('personal_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('personal') }}">IR AL LISTADO</a>
+    
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+   
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - CONTRATOS{% endblock %}
+
+{% block titulobanner %}
+    CONTRATOS
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTADO DE CONTRATOS</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table id="tablalista" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Fecha de Inicio</th>
+                <th>Fechafin</th>
+                <th>Montobs</th>
+                <th style="width: 20%;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('contrato_show', { 'id': entity.id }) }}">{{ entity.codigo }}</a></td>
+                <td>{% if entity.fecha_inicio %}{{ entity.fecha_inicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fecha_fin %}{{ entity.fecha_fin|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.monto_bs }}</td>
+                <td>
+                    <a href="{{ path('contrato_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    <br><br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="http://aplicaciones.telesurtv.net/sait/web/app.php/contratos/inicio">PARA EDITAR O CREAR CONTRATOS</a><br>
+    {% endif %}
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
+
+    {% endblock %}

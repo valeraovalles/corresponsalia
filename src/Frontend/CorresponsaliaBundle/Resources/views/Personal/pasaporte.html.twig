@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - PERSONAL{% endblock %}
+
+{% block titulobanner %}
+    PERSONAL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>CREAR PERSONAL</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <form novalidate="novalidate" action="{{ path('personal_pasaportecarga',{'id':entity.id}) }}"method="post">
+        {{ form_widget(form1._token) }}
+        <div class="formShow" style="width:85%;">
+		    <div class="contenedorform">
+		        <div class="labelform">Nombre:</div>
+		        <div class="widgetform">{{ nombre|capitalize }}</div>
+		    </div>
+		    <div class="contenedorform">
+		        <div class="labelform">N&uacute;mero de Pasaporte:</div>
+		        <div class="widgetform">{{ pasaporte }}</div>
+		    </div>
+		    <div class="contenedorform">
+                <div class="labelform">Cargar Pasaporte:</div>
+                <div class="widgetform">{{ form_widget(form1.file) }}</div>
+            </div>
+		</div>
+        <input type="submit" value="CREAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('personal') }}">IR AL LISTADO</a>
+    </form>
+
+{% endblock %}
+

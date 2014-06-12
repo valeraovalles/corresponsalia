@@ -4,15 +4,14 @@ namespace Frontend\CorresponsaliaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Frontend\CorresponsaliaBundle\Entity\Reporte;
+use Frontend\CorresponsaliaBundle\Form\ReporteType;
+
+use Frontend\CorresponsaliaBundle\Entity\Reporteauditoriarendicion;
+use Frontend\CorresponsaliaBundle\Form\ReporteauditoriarendicionType;
+
 class AjaxController extends Controller
 {
-    public function gasfunAction($datos)
-    {
-        echo "sss";
-        die;
-        return $this->render('CorresponsaliaBundle:Ajax:gasfun.html.twig');
-    }
-    
      public function formdescripciongastoAction($idtipo,$data)
     {   
         $em = $this->getDoctrine()->getManager();
@@ -35,5 +34,31 @@ class AjaxController extends Controller
         
         return $this->render('CorresponsaliaBundle:Ajax:formdescripciongasto.html.twig',array('form'=>$form->createView()));
     }
-            
+
+    public function ajaxreporteauefAction($dato,$muestra){
+
+        $entity = new Reporte();
+        $form   = $this->createForm(new ReporteType($dato,$muestra), $entity);
+
+        return $this->render('CorresponsaliaBundle:Ajax:ajaxreporteauef.html.twig', array(
+            'form'=>$form->createView(),
+            'muestra'=>$muestra,
+            'dato'=>$dato
+        ));
+        die;
+    }
+
+    public function ajaxreporterendicionAction($dato,$muestra){
+
+        $entity = new Reporte();
+        $form   = $this->createForm(new ReporteType($dato,$muestra), $entity);
+
+        return $this->render('CorresponsaliaBundle:Ajax:ajaxreporterendicion.html.twig', array(
+            'form'=>$form->createView(),
+            'muestra'=>$muestra,
+            'dato'=>$dato
+        ));
+        die;
+    }
+
 }

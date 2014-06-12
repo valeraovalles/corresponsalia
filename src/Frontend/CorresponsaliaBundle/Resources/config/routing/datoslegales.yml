@@ -1,0 +1,30 @@
+datoslegales:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:index" }
+
+datoslegales_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:show" }
+
+datoslegales_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:new" }
+
+datoslegales_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:create" }
+    requirements: { _method: post }
+
+datoslegales_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:edit" }
+
+datoslegales_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:update" }
+    requirements: { _method: post|put }
+
+datoslegales_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Datoslegales:delete" }
+    requirements: { _method: post|delete }

@@ -13,69 +13,35 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(form.aniodesde) or form_errors(form.aniohasta) or form_errors(form.mesdesde) or form_errors(form.meshasta) or form_errors(form.corresponsalia) or form_errors(form.tipogasto) %}
-    <div class="alert alert-danger errores" style="width:70%;">
-        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(form.corresponsalia) }}</div>
-        <div>{{ form_errors(form.tipogasto) }}</div>
-        <div>{{ form_errors(form.cobertura) }}</div>
-        <div>{{ form_errors(form.anio) }}</div>
-        <div>{{ form_errors(form.mes) }}</div>
-        {% for e in error %}<div><ul><li>{{ e }}</li></ul></div>{% endfor %}
-    </div>
-    {% endif %}
-    
-    <form novalidate method="post" action="{{ path('periodorendicion_create') }}">
+
+    <form novalidate method="post" action="{{ path('corresponsalia_creareporteauef') }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
             <div class="contenedorform">
                 <div class="labelform">Corresponsalía:</div>
-                <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia,{'attr':{'style':'width:250px'}}) }}</div>
             </div>
-            <div class="contenedorform">
-                <div class="labelform">Tipo gasto:</div>
-                <div class="widgetform">{{ form_widget(form.tipogasto) }}</div>
-            </div>
-            <div class="contenedorform" style="display: none;" id="cobertura">
-                <div class="labelform">Cobertura:</div>
-                <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Año:</div>
-                <div class="widgetform"><b>D:</b> {{ form_widget(form.aniodesde,{'attr':{'style':'width:70px'}}) }} | <b>H:</b> {{ form_widget(form.aniohasta,{'attr':{'style':'width:70px'}}) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Mes:</div>
-                <div class="widgetform"><b>D:</b> {{ form_widget(form.mesdesde,{'attr':{'style':'width:70px'}}) }} | <b>H:</b> {{ form_widget(form.meshasta,{'attr':{'style':'width:70px'}}) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Reponsable:</div>
-                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Estatus Periodo:</div>
-                <div class="widgetform">{{ form_widget(form.estatus) }}</div>
-            </div>
+
+            <div id="ajax"></div>
         </div>
 
-        <input type="submit" value="CREAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('periodorendicion') }}">IR AL LISTADO</a>
+        <span id="boton" style="display:none;"><input type="submit" value="GENERAR" class="btn btn-primary"></span>
+
     </form>
+    <br><br><br>
     
     <script type="text/javascript">
         $(document).ready(function () {
-            
-            $('#reporte_tipogasto').focusout(function(){
-                var dato=$("#reporte_tipogasto").val()
-                if(dato[0]==2)
-                    $("#cobertura").show()
-                else
-                    $("#cobertura").hide()
+
+            $('#reporte_corresponsalia').click(function(){
+                var dato = $("#reporte_corresponsalia").val();
+                var ruta = "{{ path('ajaxreporteauef', {'dato': 'variable','muestra': '2'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#ajax').load(ruta);
+                $('#boton').hide();
             });
-            
-            var dato=$("#reporte_tipogasto").val()
-            if(dato[0]==2)
-                    $("#cobertura").show()
+
         });
-     </script>
+    </script>
+    
 {% endblock %}

@@ -1,5 +1,6 @@
 body{
-    background-color       :#efefef;
+    background: url('../images/fondo.jpg');
+    /*background-color       :#efefef;*/
     margin-top             :0;
     font-family            :"Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size              :12px;

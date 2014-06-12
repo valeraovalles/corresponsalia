@@ -13,13 +13,14 @@
 {% block body %}
 {{ parent() }}
 
-{% if form_errors(form.username) or form_errors(form.password) or form_errors(form_perfil.primerNombre) or form_errors(form_perfil.primerApellido) or form_errors(form.rol) %}
+{% if form_errors(form.username) or form_errors(form.password) or form_errors(form_perfil.primerNombre) or form_errors(form_perfil.primerApellido) or form_errors(form_perfil.correo) or form_errors(form.rol) %}
 <div class="alert alert-danger errores" style="width:70%;">
     <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
     <div>{{ form_errors(form.username) }}</div>
     <div>{{ form_errors(form.password) }}</div>
     <div>{{ form_errors(form_perfil.primerNombre) }}</div>
     <div>{{ form_errors(form_perfil.primerApellido) }}</div>
+    <div>{{ form_errors(form_perfil.correo) }}</div>
     <div>{{ form_errors(form.rol) }}</div>
 </div>
 {% endif %}
@@ -57,6 +58,10 @@
             <div class="contenedorform">
                 <div class="labelform">Segundo apellido:</div>
                 <div class="widgetform">{{ form_widget(form_perfil.segundoApellido) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(form_perfil.correo) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Rol:</div>

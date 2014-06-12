@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CORRESPONSALÍA - PERSONAL{% endblock %}
+
+{% block titulobanner %}
+    PERSONAL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>LISTADO DE PERSONAL</h1>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table id="tablalista" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Sueldo</th>
+                <th>Pasaporte</th>
+                <th>Fecha de Ingreso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('personal_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Personal">{{ entity.nombre }}</a></td>
+                <td>{{ entity.sueldo }}</td>
+                <td>{{ entity.pasaporte }}</td>
+                <td>{% if entity.fechaingreso %}{{ entity.fechaingreso|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('personal_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Personal"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('personal_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Editar Personal"></b></a>
+                    {% if entity.archivo == NULL %}
+                        <a href="{{ path('personal_pasaporte', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Cargar Pasaporte"><b class="glyphicon glyphicon-cloud-upload"></b></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+    <a class="btn btn-primary" href="{{ path('personal_new') }}">NUEVO PERSONAL</a><br>
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
+        
+    {% endblock %}
