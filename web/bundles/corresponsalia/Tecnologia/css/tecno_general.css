@@ -1,0 +1,103 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 15, 2014, 11:08:56 AM
+    Author     : ecastro
+*/
+
+.oculto{
+    display: none;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+}
+
+legend.scheduler-border {
+    width:inherit;
+    padding:0 10px; 
+    border-bottom:none;
+    font-size: 14px;
+}
+
+.ui-widget { font-family: Verdana,Arial,sans-serif; font-size: .92em; }
+.ui-datepicker { /*no width*/ padding: .2em .2em 0; }
+.ui-datepicker table {width: 100%; font-size: 0.8em; border-collapse: collapse; margin:0 0 .4em; }
+   
+.table-bordered > thead > tr > th, 
+.table-bordered > tbody > tr > th, 
+.table-bordered > tfoot > tr > th, 
+.table-bordered > thead > tr > td, 
+.table-bordered > tbody > tr > td, 
+.table-bordered > tfoot > tr > td {
+    border-color: #A5D9FF;
+}
+
+.sorting_asc, 
+.sorting_desc, 
+.sorting, 
+.sorting_asc_disabled,
+.sorting_desc_disabled {
+    background-image: none;
+}
+
+.table > thead >tr >th {
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.table > tbody >tr >td {
+    font-size: 13px;
+}
+
+.indentar_texto_tabular {
+    text-indent: 5%;
+}
+
+.table > tbody >tr >td >a.indentar_enlace {
+    text-indent: 45%;
+}
+
+tr.even td.sorting_1 {
+    background-color: white;
+}
+
+tr.even td.sorting_2 {
+    background-color: white;
+}
+
+.ajustar_label {
+    line-height: 20px;
+}
+
+a{
+    outline: none;
+}
+
+a:hover, a:active, a:focus {
+    outline: none;
+}
+
+input.form_input {
+    width: 80% !important;
+}
+
+.etiqueta{
+    font-weight: bold !important;
+}
+
+.label{
+    line-height: 2.5;
+    text-indent: 1%;
+}
+
+.centrar {
+    text-align: center;
+}

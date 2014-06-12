@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>MARCA</h1>{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
+        </div>
+    </div>
+
+    <a class="btn btn-default" href="{{ path('tecnomarca_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('tecnomarca') }}">IR AL LISTADO</a>
+  
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

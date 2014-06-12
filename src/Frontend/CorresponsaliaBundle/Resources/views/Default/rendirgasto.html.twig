@@ -31,6 +31,10 @@
 
     {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
     
+    {% if periodo.justificadevolucion!='' %}
+        <div class="alert alert-warning"><b>Alerta! Justificación de la devolución: </b>{{ periodo.justificadevolucion }}</div>
+    {% endif %}
+
     <form novalidate method="post" action="{{ path('corresponsalia_guardarendicion',{'idperiodo':periodo.id}) }}">  
         {{ form_widget(form._token) }}
         {% include 'CorresponsaliaBundle:Default:_tablarendicion.html.twig' %}

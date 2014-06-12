@@ -46,7 +46,7 @@ class UsercorresponsaliaController extends Controller
      
             //valido
             $em = $this->getDoctrine()->getManager();
-            $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findBy(array('usuario'=>$datos['usuario'],'corresponsalia'=>$datos['corresponsalia']));
+            $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findBy(array('usuario'=>$datos['usuario']));
             if(!empty($usercorresponsalia)){
                 $this->get('session')->getFlashBag()->add('alert', 'El usuario "'.strtoupper($entity->getUsuario()->getPrimerNombre()).'" ya tiene asignada una corresponsalía.');
                 return $this->redirect($this->generateUrl('usercorresponsalia'));

@@ -26,7 +26,12 @@ class ReporteController extends Controller
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
-        $rg = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->findByPeriodorendicion($idperiodo);
+        $parametros['unidadapoyologistico']=$this->container->getParameter('unidadapoyologistico');
+        $parametros['asignaciones']=$this->container->getParameter('asignaciones');
+        $parametros['dirgeneralinformacion']=$this->container->getParameter('dirgeneralinformacion');
+        
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
         $dc=new funciones();
         $ef=$dc->Estadofondo($idperiodo,$em);
@@ -34,7 +39,7 @@ class ReporteController extends Controller
         $lr=$dc->Listadorendicion($periodo,$em);
 
         $mc=new htmlreporte();
-        $info=$mc->excelrendicion($rg[0],$ef,$c,$lr);
+        $info=$mc->excelrendicion($periodo,$ef,$c,$lr,$usuario,$parametros);
         
         //print_r($info);
         //die;

@@ -14,7 +14,33 @@ use Frontend\CorresponsaliaBundle\Form\EstadofondoType;
  */
 class EstadofondoController extends Controller
 {
-    
+
+    public function saldoinicial($idperiodo){
+        $em = $this->getDoctrine()->getManager();
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        $anioac=$periodo->getAnio();
+        $mesac=$periodo->getMes();
+        $idcor=$periodo->getCorresponsalia()->getId();
+        $tipog=$periodo->getTipogasto()->getId();
+
+        if($mesac==1){ $messig=12; $anioac=$anioac-1; } 
+        else $messig=$mesac-1;
+
+        $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.anio= :anio and p.mes= :mes and p.corresponsalia= :idcor and p.tipogasto= :idtipogasto";
+        $query = $em->createQuery($dql);
+        $query->setParameter('anio', $anioac);
+        $query->setParameter('mes', $messig);
+        $query->setParameter('idcor', $idcor);
+        $query->setParameter('idtipogasto', $tipog);
+        $periodoant = $query->getResult(); 
+
+        if($periodoant){
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant);
+            $saldoinicial=$ef[0]->getSaldofinal();
+        }else $saldoinicial=0;
+
+        return $saldoinicial;
+    }
     /**
      * Lists all Estadofondo entities.
      *
@@ -63,10 +89,17 @@ class EstadofondoController extends Controller
             return $this->redirect($this->generateUrl('estadofondo_show', array('id' => $entity->getId())));
         }
 
+
+        //verifico cual es el saldo incial actual
+            $saldoinicial=$this->saldoinicial($idperiodo);
+        //fin    
+
+
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'periodo'=>$periodo,
+            'saldoinicial'=>$saldoinicial
         ));
     }
 
@@ -116,12 +149,17 @@ class EstadofondoController extends Controller
             }
         //fin
 
+        //verifico cual es el saldo incial actual
+            $saldoinicial=$this->saldoinicial($idperiodo);
+        //fin    
+
         $entity = new Estadofondo();
         $form   = $this->createCreateForm($entity,$idperiodo);
         return $this->render('CorresponsaliaBundle:Estadofondo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'periodo'=>$periodo,
+            'saldoinicial'=>$saldoinicial
         ));
     }
 
@@ -199,6 +237,8 @@ class EstadofondoController extends Controller
 
         $entity = $em->getRepository('CorresponsaliaBundle:Estadofondo')->find($id);
 
+        $recursoanterior=$entity->getRecursorecibido();
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Estadofondo entity.');
         }
@@ -210,12 +250,12 @@ class EstadofondoController extends Controller
         if ($editForm->isValid()) {
             
             $data = $editForm->getData();
-       
-            
+
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario=$em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $entity->setResponsable($usuario);
-            $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido())-$entity->getPagos());
+            $entity->setSaldofinal(($data->getSaldoinicial()+$data->getRecursorecibido()+$recursoanterior)-$entity->getPagos());
+            $entity->setRecursorecibido($data->getRecursorecibido()+$recursoanterior);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Registro actualizado exitosamente');

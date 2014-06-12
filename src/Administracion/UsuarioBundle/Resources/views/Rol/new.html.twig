@@ -13,10 +13,11 @@
 {% block body %}
 	{{ parent() }}
 
-{% if form_errors(form.rol) %}
+{% if form_errors(form.rol) or form_errors(form.descripcion) %}
 <div class="alert alert-danger errores" style="width:70%;">
     <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
     <div>{{ form_errors(form.rol) }}</div>
+    <div>{{ form_errors(form.descripcion) }}</div>
 </div>
 {% endif %}
     
@@ -29,6 +30,10 @@
         <div class="contenedorform">
             <div class="labelform">Rol:</div>
             <div class="widgetform">{{ form_widget(form.rol) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
         </div>
      </div>
      <br>

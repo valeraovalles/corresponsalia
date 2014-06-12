@@ -21,20 +21,18 @@
     <br><table id="tablalista" style="width: 97%;" cellpadding="5px">
         <thead>
             <tr>
-                <th>Id</th>
                 <th style="width: 5%">Anio</th>
                 <th style="width: 5%">Mes</th>
-                <th style="width: 30%">Corresponsalía</th>
-                <th>Tipo gasto</th>
-                <th>Cobertura</th>
-                <th>Estatus</th>
-                <th>Actions</th>
+                <th style="width: 24%">Corresponsalía</th>
+                <th style="width: 18%">Tipo gasto</th>
+                <th style="width: 28%">Cobertura</th>
+                <th style="width: 5%">Estatus</th>
+                <th style="width: 15%">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.anio }}</td>
                 <td>{{ entity.mes }}</td>
                 <td>{{ entity.corresponsalia.nombre }}</td>
@@ -59,7 +57,7 @@
                             {% if entity.estatus==1 or entity.estatus==3 %}
                             <a href="{{ path('corresponsalia_rendirgasto', {'idperiodo':entity.id}) }}"><b class="text-warning">RENDIR</b></a>
                             {% else %}
-                            <b>BLOQUEADO</b>
+                            <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
 
                             {% endif %}
                                 
@@ -85,7 +83,7 @@
 
     <br><br><br>
     {% if is_granted('ROLE_RENDICION_ADMIN') %}
-    <a class="btn btn-primary" href="{{ path('periodorendicion_new') }}">NUEVO PERÍODO</a> | 
+    <a class="btn btn-primary" href="{{ path('periodorendicion_new') }}">NUEVO PERÍODO</a>
     <br><br>
     {% endif %}
     

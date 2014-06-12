@@ -57,7 +57,7 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">Saldo inicial:</div>
-                <div class="widgetform">{{ form_widget(form.saldoinicial) }}</div>
+                <div class="widgetform">{{ form_widget(form.saldoinicial,{'attr':{'value':saldoinicial,'readonly':'readonly'}}) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Recurso enviado:</div>

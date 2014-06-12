@@ -1,0 +1,70 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>EQUIPO</h1>{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Categoria:</div>
+            <div class="widgetform">{{ entity.categoria }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Marca:</div>
+            <div class="widgetform">{{ entity.modelo.marca }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Modelo:</div>
+            <div class="widgetform">{{ entity.modelo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Serial Equipo:</div>
+            <div class="widgetform">{{ entity.serialEquipo }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ entity.descripcion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Status:</div>
+            <div class="widgetform">
+                {% if entity.status %}
+                    <span class="label label-success">Activo</span>
+                {% else %}
+                    <span class="label label-danger">Inactivo</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Condicion:</div>
+            <div class="widgetform">{{ entity.condicion.nombre }}</div>
+        </div>
+        {% if entity.observacionCondicion|length > 0 %}
+            <div class="contenedorform">
+             <div class="labelform">Observacion Condicion:</div>
+             <div class="widgetform">{{ entity.observacionCondicion }}</div>
+            </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Fecha Adquisicion:</div>
+            <div class="widgetform">{{ entity.fechaAdquisicion|date('d-m-Y') }}</div>
+        </div>
+    </div>
+   
+    <a class="btn btn-default" href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a> 
+    {% if entity.status %}
+        {% if asignacion == false %}
+            | <a class="btn btn-default" href="{{ path('tecnoasignar_new', { 'id': entity.id }) }}">ASIGNAR</a>
+        {% else %}
+            | <a class="btn btn-default" href="{{ path('tecnoasignar_show', { 'id': entity.id }) }}">VER ASIGNACIÓN</a>
+        {% endif %}
+    {% endif %}
+    <BR><BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    
+
+{% endblock %}

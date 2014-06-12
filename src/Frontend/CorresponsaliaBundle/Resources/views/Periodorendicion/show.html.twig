@@ -40,6 +40,14 @@
             <div class="labelform">Mes:</div>
             <div class="widgetform">{{ entity.mes }}</div>
         </div>
+
+        {% if entity.justificadevolucion  %}
+        <div class="contenedorform">
+            <div class="labelform">Justificación:</div>
+            <div class="widgetform">{{ entity.justificadevolucion }}</div>
+        </div>
+        {% endif %}
+
         <div class="contenedorform">
             <div class="labelform">Estatus:</div>
             <div class="widgetform">
@@ -60,6 +68,7 @@
             <div class="widgetform">{{ entity.observacion }}</div>
         </div>
         {% endif %}
+
     </div>
     
     {% if is_granted('ROLE_RENDICION_ADMIN') %}<a class="btn btn-default" href="{{ path('periodorendicion_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | {% endif %}
