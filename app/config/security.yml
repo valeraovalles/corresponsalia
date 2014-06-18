@@ -34,6 +34,7 @@ security:
         - { path: ^/corresponsalia/inicio, roles: ROLE_USER }
 
         - { path: ^/usuario/cambioclave, roles: ROLE_USER }
+        - { path: ^/usuario/actualizacambioclave, roles: ROLE_USER }
 
         #super admin
         - { path: ^/usuario, roles: ROLE_SUPERADMIN }
