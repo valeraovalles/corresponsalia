@@ -134,23 +134,7 @@ class DefaultController extends Controller
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
-        //$consulta->execute();
-
-        if($estatus==2){
-/*
-            //CORREO
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Corresponsalia-Revision')     // we configure the title
-            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
-            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
-            ->setBody( $this->renderView(
-                    'SitBundle:Correo:solucion.html.twig',
-                    array('ticket' => $ticket)
-                ), 'text/html');
-
-            $this->get('mailer')->send($message);    // then we send the message.
-            //FIN CORREO*/
-        }
+        $consulta->execute();
 
         if($estatus==2){
 /*

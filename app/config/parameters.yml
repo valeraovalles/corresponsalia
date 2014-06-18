@@ -5,8 +5,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: corresponsalia
-    database_user: ecastro
-    database_password: 15975364
+    database_user: postgres
+    database_password: postgres
     
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
