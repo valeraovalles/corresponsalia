@@ -39,11 +39,8 @@
         <div class="labelform">Descripción Periodo:</div>
         <div class="widgetform">{{ form_widget(form.descripcionperiodo) }}</div>
     </div>
-    
 
 {% endif %}
-
-
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -96,7 +93,6 @@
             ruta = ruta.replace("variable", dato);
             $('#descripcionperiodo').load(ruta);
             $('#boton').hide();
-
         });
 
         $('#reporte_meshasta').change(function(){

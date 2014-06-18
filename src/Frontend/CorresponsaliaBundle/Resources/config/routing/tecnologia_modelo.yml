@@ -1,0 +1,30 @@
+tecnomodelo:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:index" }
+
+tecnomodelo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:show" }
+
+tecnomodelo_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:new" }
+
+tecnomodelo_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:create" }
+    requirements: { _method: post }
+
+tecnomodelo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:edit" }
+
+tecnomodelo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:update" }
+    requirements: { _method: post|put }
+
+tecnomodelo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Modelo:delete" }
+    requirements: { _method: post|delete }

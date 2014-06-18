@@ -16,6 +16,7 @@
     <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Corresponsal&iacute;a</th>
                 <th>Pais</th>
                 <th>Tipo de Corresponsalia</th>
@@ -25,12 +26,14 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('datoslegales_show', { 'id': entity.id }) }}">{{ entity.Id }}</a></td>
+                <td><a href="{{ path('datoslegales_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Datos">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }}</td>
                 <td>{{ entity.pais }}</td>
                 <td>{{ entity.tipocorresponsalia }}</td>
                 <td>
-                    <a href="{{ path('datoslegales_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('datoslegales_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    <a href="{{ path('datoslegales_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Datos"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('comentario', { 'corresponsalia': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Comentarios Legales"><b class="glyphicon glyphicon-align-justify"></b></a>
+                    <a href="{{ path('documento', { 'corresponsalia': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Documentos"><b class="glyphicon glyphicon-cloud-upload"></b></a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,0 +1,85 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>BITACORA DE ASIGNACIONES</h1>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .table-bordered > thead > tr > th, 
+        .table-bordered > tbody > tr > th, 
+        .table-bordered > tfoot > tr > th, 
+        .table-bordered > thead > tr > td, 
+        .table-bordered > tbody > tr > td, 
+        .table-bordered > tfoot > tr > td {
+            border-color: #A5D9FF;
+        }
+        
+        .sorting_asc, 
+        .sorting_desc, 
+        .sorting, 
+        .sorting_asc_disabled,
+        .sorting_desc_disabled {
+            background-image: none;
+        }
+        
+        .table > thead >tr >th {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <table id="tablalista" class="table table-bordered table-condensed" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Serialequipo</th>
+                <th>Descripcion</th>
+                <th>Modelo</th>
+                <th>Status</th>
+                <th>Asignacion</th>
+                <th>Corresponsalia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in listEquipo %}
+            <tr>
+                <td>{{ entity.categoria }}</td>
+                <td>{{ entity.serialEquipo }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{{ entity.modelo }}</td>
+                <td>
+                    {% if entity.status %}
+                        <span class="label label-success">&nbsp;Activo&nbsp;&nbsp;</span>
+                    {% else %}
+                        <span class="label label-danger">Inactivo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity|length > 9 %}
+                        {{ entity.statusAsignacion }}
+                    {% endif %}
+                </td>
+                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id_bitacora }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                 </td> 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br><br>
+    <script>
+    var jQuery = jQuery.noConflict();
+    jQuery(document).ready(function(){
+        
+        jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+             "aaSorting": [[0,'desc']]
+         } );
+
+    });
+    </script>
+    {% endblock %}

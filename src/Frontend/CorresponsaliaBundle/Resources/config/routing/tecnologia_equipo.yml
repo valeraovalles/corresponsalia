@@ -1,0 +1,38 @@
+tecnoequipo:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:index" }
+
+tecnoequipo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:show" }
+
+tecnoequipo_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:new" }
+
+tecnoequipo_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:create" }
+    requirements: { _method: post }
+
+tecnoequipo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:edit" }
+
+tecnoequipo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:update" }
+    requirements: { _method: post|put }
+
+tecnoequipo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:delete" }
+    requirements: { _method: post|delete }
+    
+tecnoequipo_select:
+    pattern: /modelo
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:modelo"}
+    
+tecnoequipo_fRetorno:
+    pattern: /fretorno
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:fechaRetorno"}

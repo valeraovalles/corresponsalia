@@ -80,6 +80,7 @@ class PeriodorendicionController extends Controller
             $datos=$request->request->all();
             $datos=$datos['frontend_corresponsaliabundle_periodorendicion'];     
             
+
             //validar que no creen periodos en meses anteriores si en el actual ya existen porque los saldos iniciales se vualven un caldo. Ellos deben tener un orden
             $anio=$datos['anio'];
             $mes=$datos['mes'];
@@ -87,6 +88,7 @@ class PeriodorendicionController extends Controller
             $idcor=$datos['corresponsalia'];
             if($mes==12){$mes=1;$anio=$anio+1;}else $mes=$mes+1;
             $periodosig= $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findBy(array('anio'=>$anio,'mes'=>$mes,'tipogasto'=>$idtg,'corresponsalia'=>$idcor));
+
             if($periodosig){
                 $this->get('session')->getFlashBag()->add('alert', 'No puede crear un periodo con fechas anteriores si ya tiene creado uno con una fecha mas actualizada.');
                 return $this->redirect($this->generateUrl('periodorendicion'));

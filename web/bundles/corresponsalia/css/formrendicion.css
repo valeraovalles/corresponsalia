@@ -1,0 +1,38 @@
+.inicio{
+    text-align: justify;
+    padding: 20px;
+}
+
+.estatusfondo{
+    width: 900px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-family: Verdana;
+}
+
+.estatusfondo th{
+    text-align: center;
+    padding: 5px;
+}
+
+.estatusfondo td{
+    padding: 2px;
+}
+
+.relaciongasto{
+    width: 1098px;
+    font-size: 12px;
+    font-family: Verdana;
+}
+
+.relaciongasto th{
+    padding:5px;
+}
+
+.relaciongasto td{
+    padding: 5px;
+}
+
+.modal-body table{
+    font-size: 12px;
+}

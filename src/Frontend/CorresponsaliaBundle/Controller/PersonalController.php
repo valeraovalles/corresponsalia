@@ -43,13 +43,6 @@ class PersonalController extends Controller
      */
     public function createAction(Request $request)
     {
-
-        $datosform = $request->request->all();
-        $datosform = $datosform['form'];
-
-
-        $contrato_elegido = $datosform['contratos'];
-
         $em = $this->getDoctrine()->getManager();
 
         $entity = new Personal();
@@ -57,44 +50,8 @@ class PersonalController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            if($entity->getCargoId() == 'Representante Legal')
-            { 
-                
-                $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->findAll($entity->getCorresponsaliaId());
-                $cargo = $em->getRepository('CorresponsaliaBundle:Cargo')->findAll($entity->getCargoId());
-
-                $nombre = $entity->getNombre();
-                $sueldo = $entity->getSueldo();
-                $pasaporte = $entity->getPasaporte();
-                $fechaingreso = $entity->getFechaingreso();
-                $correo = $entity->getCorreo();
-                $telefono = $entity->getTelefono();
-                $corresponsaliaId = $corresponsalia[0];
-                $cargoId = $cargo[0];
-                $personalId = $entity->getId();
-
-                $entity1 = new Representante();
-
-                $entity1->setNombre($nombre);
-                $entity1->setSueldo($sueldo);
-                $entity1->setPasaporte($pasaporte);
-                $entity1->setFechaingreso($fechaingreso);
-                $entity1->setCorreo($correo);
-                $entity1->setTelefono($telefono);
-                $entity1->setCorresponsaliaId($corresponsaliaId);
-                $entity1->setCargoId($cargoId);
-                $entity1->setContratoId($contrato_elegido);
-                $entity1->setPersonalId($personalId);
-
-                $em->persist($entity1);
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $entity->setContratoId($contrato_elegido);
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('personal_show', array('id' => $entity->getId())));
         }
 
@@ -134,24 +91,9 @@ class PersonalController extends Controller
         $entity = new Personal();
         $form   = $this->createCreateForm($entity);
 
-        $f=new funciones;
-        $respuesta=$f->Contratoscodigo();
-
-        $contratos = $respuesta[0];
-        $cantidad = $respuesta[1];
-
-        //se crea el formulario, mostrará solo unidades solicitantes
-        $form1 = $this->createFormBuilder()
-                    ->add('contratos', 'choice', array(
-                        'choices'   => $contratos,
-                    ))
-        ->getForm();
-
-
         return $this->render('CorresponsaliaBundle:Personal:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'form1'   => $form1->createView(),
         ));
     }
 
@@ -184,19 +126,6 @@ class PersonalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $f=new funciones;
-        $respuesta=$f->Contratoscodigo();
-
-        $contratos = $respuesta[0];
-        $cantidad = $respuesta[1];
-
-        //se crea el formulario, mostrará solo unidades solicitantes
-        $form1 = $this->createFormBuilder()
-                    ->add('contratos', 'choice', array(
-                        'choices'   => $contratos,
-                    ))
-        ->getForm();
-
         $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
 
         if (!$entity) {
@@ -206,13 +135,10 @@ class PersonalController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-
-
         return $this->render('CorresponsaliaBundle:Personal:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'form1'   => $form1->createView(),
         ));
     }
 
@@ -240,10 +166,6 @@ class PersonalController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $datosform = $request->request->all();
-        $datosform = $datosform['form'];
-        $contrato_elegido = $datosform['contratos'];
-
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
@@ -260,12 +182,11 @@ class PersonalController extends Controller
 
 
         if ($editForm->isValid()) {
-            $entity->setContratoId($contrato_elegido);
             $em->persist($entity);
 
             $em->flush();
 
-            return $this->redirect($this->generateUrl('personal_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('personal_show', array('id' => $id)));
         }
 
         return $this->render('CorresponsaliaBundle:Personal:edit.html.twig', array(
@@ -296,6 +217,84 @@ class PersonalController extends Controller
         }
 
         return $this->redirect($this->generateUrl('personal'));
+    }
+
+    /**
+    * FUNCION PARA CARGAR LOS PASAPORTES AL PERSONAL (FORMULARIO)
+    */
+    public function pasaporteAction($id)
+    {
+        //se crea el formulario, mostrará los representantes
+        $form1 = $this->createFormBuilder()
+                    ->add('file', 'file')
+        ->getForm();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
+
+        if($entity->getArchivo() != NULL)
+        {
+            $entities = $em->getRepository('CorresponsaliaBundle:Personal')->findAll();
+            return $this->render('CorresponsaliaBundle:Personal:index.html.twig', array(
+                'entities' => $entities,
+            ));
+        }else
+        {
+            $nombre = $entity->getNombre();
+            $pasaporte = $entity->getPasaporte();
+            return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
+                'entity'      => $entity,
+                'nombre'      => $nombre,
+                'pasaporte'   => $pasaporte,
+                'form1'       => $form1->createView(),
+            ));
+        }
+ 
+    }
+
+    /**
+    * FUNCION PARA CARGAR LOS PASAPORTES AL PERSONAL
+    */
+    public function pasaportecargaAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
+
+        $datosform = $request->request->all();
+        $datosform = $datosform['form'];
+
+        $file = $datosform['file'];
+
+        if($file != NULL)
+        {
+            $entity->setArchivo($file);
+            $em->persist($entity);
+            $em->flush(); 
+
+            $deleteForm = $this->createDeleteForm($id);
+
+            return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
+                'entity'      => $entity,
+                'delete_form' => $deleteForm->createView(),        ));
+
+        }else
+        {
+            $nombre = $entity->getNombre();
+            $pasaporte = $entity->getPasaporte();
+
+            //se crea el formulario, mostrará los representantes
+            $form1 = $this->createFormBuilder()
+                        ->add('file', 'file')
+            ->getForm();
+
+            return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
+                'entity'      => $entity,
+                'nombre'      => $nombre,
+                'pasaporte'   => $pasaporte,
+                'form1'       => $form1->createView(),
+            ));
+        }
     }
 
     /**

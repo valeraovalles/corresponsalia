@@ -1,0 +1,30 @@
+tecnocategoria:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:index" }
+
+tecnocategoria_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:show" }
+
+tecnocategoria_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:new" }
+
+tecnocategoria_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:create" }
+    requirements: { _method: post }
+
+tecnocategoria_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:edit" }
+
+tecnocategoria_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:update" }
+    requirements: { _method: post|put }
+
+tecnocategoria_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Categoria:delete" }
+    requirements: { _method: post|delete }
