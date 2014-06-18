@@ -17,13 +17,12 @@ class Asignacion
     /**
      * @var integer
      *
-     * @ORM\Id
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo", inversedBy="asignacion")
+     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo")
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
+     * @ORM\Id
      */
     private $id;
     

@@ -45,6 +45,13 @@ class ModeloController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nuevo! ',
+                    'message' => 'Modelo agregado.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnomodelo_show', array('id' => $entity->getId())));
         }
 
@@ -173,6 +180,14 @@ class ModeloController extends Controller
             $entity->setNombre(strtoupper($entity->getNombre()));
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editado!',
+                    'message' => 'Modelo con exito.'
+                )
+            );
+            
             return $this->redirect($this->generateUrl('tecnomodelo_edit', array('id' => $id)));
         }
 
@@ -198,11 +213,19 @@ class ModeloController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Tecnologia\Modelo entity.');
             }
-
+            
+            $nombre = $entity->getNombre();
             $em->remove($entity);
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminado! ',
+                'message' => 'Modelo '.$nombre.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnomodelo'));
     }
 

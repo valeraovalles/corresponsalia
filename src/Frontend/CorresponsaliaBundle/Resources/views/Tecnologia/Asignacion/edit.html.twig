@@ -57,6 +57,18 @@
 
 {% block body -%}
     {{ parent() }}
+    
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
 
     {% if form_errors(edit_form.status) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.fechaAsignacion) or form_errors(edit_form.fechaEstimadaRetorno)%}
     <div class="alert alert-danger errores" style="width:70%;">

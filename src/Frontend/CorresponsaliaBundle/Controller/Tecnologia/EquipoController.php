@@ -133,6 +133,14 @@ class EquipoController extends Controller
                 $em->flush();
             }
             
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva! ',
+                    'message' => 'Marca agregada.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoequipo_show', array('id' => $entity->getId())));
         }
 
@@ -288,6 +296,13 @@ class EquipoController extends Controller
             
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editada!',
+                    'message' => 'Marca con exito.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoequipo_edit', array('id' => $id)));
         }
 
@@ -314,16 +329,18 @@ class EquipoController extends Controller
                 throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
             }
             
-//            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
-//
-//            if ($asignacion) {
-//                throw $this->createNotFoundException('Este Equipo no puede ser eliminado por que se encuentra asignado a una Corresponsalia');
-//            }
-            
+            $descripcion = $entity->getDescripcion();
             $em->remove($entity);
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminado! ',
+                'message' => 'Equipo '.$descripcion.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnoequipo'));
     }
 
@@ -339,7 +356,7 @@ class EquipoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tecnoequipo_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'ELIMINAR'))
             ->getForm()
         ;
     }

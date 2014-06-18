@@ -19,8 +19,8 @@ class EquipoType extends AbstractType
         $propertyPathToModelo = 'modelo';
         
         $builder
-            ->addEventSubscriber(new AddModeloFieldSubscriber($propertyPathToModelo))
             ->addEventSubscriber(new AddMarcaFieldSubscriber($propertyPathToModelo))
+            ->addEventSubscriber(new AddModeloFieldSubscriber($propertyPathToModelo))
         ;
         
         $builder
@@ -30,7 +30,7 @@ class EquipoType extends AbstractType
             ->add('observacionCondicion')
             ->add('fechaAdquisicion', 'date', array('widget' => 'single_text', 'format' => 'dd-MM-y'))
             ->add('categoria', null, array('empty_value' => 'Seleccione'))
-            ->add('condicion')
+            ->add('condicion', null, array('empty_value' => 'Seleccione'))
         ;
     }
     

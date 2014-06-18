@@ -46,6 +46,13 @@ class AsignacionController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva! ',
+                    'message' => 'Asignacion Agregada.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
         }
 
@@ -181,6 +188,13 @@ class AsignacionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editada!',
+                    'message' => 'Asignacion con exito.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoasignar_edit', array('id' => $id)));
         }
 
@@ -207,10 +221,18 @@ class AsignacionController extends Controller
                 throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
             }
 
+            $nombre = $entity->getNombre();
             $em->remove($entity);
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminado! ',
+                'message' => 'Modelo '.$nombre.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnoequipo'));
     }
 
@@ -319,6 +341,14 @@ class AsignacionController extends Controller
             $em->flush();
             $em->persist($asignacion_nueva);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva!',
+                    'message' => 'Re-Asignacion agregada.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $asignacion_nueva->getId())));
         }
 
