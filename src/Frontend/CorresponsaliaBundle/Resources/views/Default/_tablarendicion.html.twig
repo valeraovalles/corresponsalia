@@ -14,14 +14,24 @@
             <th>Nombre/Razón</th>
             <td>{{ form_widget(form.nombrerazonsocial) }}</td>
             <th>Identif. fiscal</th>
-            <td>{{ form_widget(form.identificacionfiscal, {'attr':{'value':'N/A'}}) }}</td>
+            <td>{{ form_widget(form.identificacionfiscal) }}</td>
         </tr>
         <tr>
             <th>Nro. factura</th>
-            <td>{{ form_widget(form.numerofactura, {'attr':{'value':'N/A'}}) }}</td>
+            <td>{{ form_widget(form.numerofactura) }}</td>
             <th>Monto MN.</th>
             <td>{{ form_widget(form.montomonnac) }}</td>
             <th>Dólares</th>
             <td>{{ form_widget(form.montodolar) }}</td>
         </tr>
     </table>
+
+    <script>
+        $(document).ready(function() {
+            if($('#rendicion_relaciongasto_numerofactura').val()=='')
+                $('#rendicion_relaciongasto_numerofactura').val('N/A')
+
+            if($('#rendicion_relaciongasto_identificacionfiscal').val()=='')
+                $('#rendicion_relaciongasto_identificacionfiscal').val('N/A')
+        });
+    </script
