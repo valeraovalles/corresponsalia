@@ -8,7 +8,9 @@
 
 {% block titulomodulo %}
     <h1>REPORTE DE RENDICIÓN</h1>
-    <h4>{{ cor.corresponsalia.nombre }}</h4>
+    {% if cor.corresponsalia.id is defined %}
+        <h4>{{ cor.corresponsalia.nombre }}</h4>
+    {% endif %}
 {% endblock %}
     
 {% block body -%}
