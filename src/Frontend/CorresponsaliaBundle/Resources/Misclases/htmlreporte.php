@@ -324,7 +324,7 @@ class htmlreporte
         <tr>
           <th>CORRESPONSALÍA</th>
           <th>TIPO DE GASTO</th>
-          <th width='20%'>COBERTURA</th>
+          <th width='20%'>DESCRIPCIÓN PERIODO</th>
           <th>ANIO</th>
           <th>MES</th>
           <th>DESCRIPCIÓN GASTO</th>
