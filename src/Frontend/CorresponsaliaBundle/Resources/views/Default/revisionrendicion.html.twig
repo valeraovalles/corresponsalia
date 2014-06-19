@@ -27,6 +27,7 @@
                     <th>Descripcion</th>
                     <th>Nombre/Razón</th>
                     <th>I. Fiscal</th>
+                    <th>Nro Fact.</th>
                     <th>Cambio</th>
                     <th>Dólares.</th>
                     <th>Monto MN.</th>
@@ -40,6 +41,7 @@
                         <td>{{ entity.numerocomprobante }}</td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
                         <td>{{ entity.descripciongasto.descripcion }}</td>
+                        <td>{{ entity.nombrerazonsocial }}</td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
                         <td>{{ entity.cambio }}</td>
