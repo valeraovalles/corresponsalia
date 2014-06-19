@@ -111,8 +111,20 @@ class ReporteController extends Controller
     {    
         $entity = new Reporte();
         $form   = $this->createForm(new ReporteType("","1"), $entity);
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $usercorresponsalia = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findByUsuario($idusuario);
+        $cor=0;
+        if($usercorresponsalia){
+            $cor=$usercorresponsalia[0];
+            
+            
+        }
+
         return $this->render('CorresponsaliaBundle:Reporte:rendicion.html.twig', array(
             'form'=>$form->createView(),
+            'cor'=>$cor
         ));
     }
 
