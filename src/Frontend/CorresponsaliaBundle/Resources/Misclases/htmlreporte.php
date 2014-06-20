@@ -725,7 +725,7 @@ class htmlreporte
                             <th colspan='3'><b>26. ANALISTA ENCARGADO(A):</b> </th>
                             <td colspan='3'></td>
                             <th colspan='3'><b>27. FIRMA:</b> </th>
-                            <td colspan='3'></td>
+                            <td colspan='2'></td>
                        </tr>
                        <tr>
                            <td colspan=6  style='background-color:#cacaca;' align='center'><b>CONFORMADO POR:</b></td>
