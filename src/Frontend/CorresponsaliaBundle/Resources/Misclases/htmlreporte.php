@@ -597,7 +597,6 @@ class htmlreporte
         else
             $tg=strtoupper($periodo->getTipogasto()->getDescripcion());
             
-        
                         
 		$html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />";
 		$html .=" 
@@ -723,7 +722,7 @@ class htmlreporte
                        </tr>
                        <tr>
                             <th colspan='3'><b>26. ANALISTA ENCARGADO(A):</b> </th>
-                            <td colspan='3'></td>
+                            <td colspan='3' align='center'>".strtoupper($periodo->getCorresponsalia()->getAnalistaencargado())."</td>
                             <th colspan='3'><b>27. FIRMA:</b> </th>
                             <td colspan='2'></td>
                        </tr>
