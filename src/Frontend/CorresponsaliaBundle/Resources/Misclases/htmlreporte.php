@@ -722,13 +722,19 @@ class htmlreporte
                            <td colspan=5> </td>
                        </tr>
                        <tr>
+                            <th colspan='3'><b>26. ANALISTA ENCARGADO(A):</b> </th>
+                            <td colspan='3'></td>
+                            <th colspan='3'><b>27. FIRMA:</b> </th>
+                            <td colspan='3'></td>
+                       </tr>
+                       <tr>
                            <td colspan=6  style='background-color:#cacaca;' align='center'><b>CONFORMADO POR:</b></td>
                            <td colspan=5  style='background-color:#cacaca;' align='center'><b>VERIFICADO POR:</b></td>
                        </tr>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>26. UNIDAD DE APOYO LOGÍSTICO</b></td>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>27. ASIGNACIONES</b></td>
-                           <td colspan='2' style='background-color:#dddddd;' align='center'><b>28. DIR. GENERAL DE INFORMACIÓN</b></td>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>29. DIR. DE ADMIN. Y FINANZAS</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>28. UNIDAD DE APOYO LOGÍSTICO</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>30. ASIGNACIONES</b></td>
+                           <td colspan='2' style='background-color:#dddddd;' align='center'><b>32. DIR. GENERAL DE INFORMACIÓN</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>34. DIR. DE ADMIN. Y FINANZAS</b></td>
                        </tr>
                        </tr>
                            <td colspan='3' align='center'>".$parametros['unidadapoyologistico']."</td>
@@ -737,10 +743,10 @@ class htmlreporte
                            <td colspan='3' align='center'> </td>
                        </tr>
                        </tr>
-                           <td colspan='3' align='center'><b>FIRMA</b></td>
-                           <td colspan='3' align='center'><b>FIRMA</b></td>
-                           <td colspan='2' align='center'><b>FIRMA</b></td>
-                           <td colspan='3' align='center'><b>FIRMA</b></td>
+                           <td colspan='3' align='center'><b>29. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>31. FIRMA</b></td>
+                           <td colspan='2' align='center'><b>33. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>35. FIRMA</b></td>
                        </tr>
                        </tr>
                            <td colspan='3'> </td>
@@ -748,6 +754,8 @@ class htmlreporte
                            <td colspan='2'> </td>
                            <td colspan='3'> </td>
                        </tr>
+
+
                 ";
 		return $html;
     }
