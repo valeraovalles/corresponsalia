@@ -37,6 +37,11 @@ class ReporteController extends Controller
         $c=$dc->cambio($idperiodo,$em);
         $lr=$dc->Listadorendicion($periodo,$em);
 
+        if(!$lr){
+            $this->get('session')->getFlashBag()->add('alert', 'No puede generar este excel porque el periodo fue cerrado sin rendiciones.');
+            return $this->redirect($this->generateUrl('periodorendicion'));   
+        }
+
         $mc=new htmlreporte();
         $info=$mc->excelrendicion($periodo,$ef,$c,$lr,$parametros);
         
