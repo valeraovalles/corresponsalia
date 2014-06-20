@@ -12,6 +12,7 @@
                 <th>País</th>
                 <th>Tipo</th>
                 <th>Moneda</th>
+                <th>Analista (E)</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ entity.pais.pais|title }}</td>
                 <td>{{ entity.tipocorresponsalia|title }}</td>
                 <td>{{ entity.tipomoneda.tipomoneda|title }}</td>
+                <td>{{ entity.analistaencargado|title }}</td>
                 <td>
        
                     <a href="{{ path('corresponsalia_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
