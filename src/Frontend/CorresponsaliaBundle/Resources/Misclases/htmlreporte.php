@@ -730,7 +730,7 @@ class htmlreporte
                            <td colspan=6  style='background-color:#cacaca;' align='center'><b>CONFORMADO POR:</b></td>
                            <td colspan=5  style='background-color:#cacaca;' align='center'><b>VERIFICADO POR:</b></td>
                        </tr>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>28. UNIDAD DE APOYO LOGÍSTICO</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>28. UNIDAD DE ADMINISTRACIÓN DE CORRESPONSALÍAS</b></td>
                            <td colspan='3'  style='background-color:#dddddd;' align='center'><b>30. ASIGNACIONES</b></td>
                            <td colspan='2' style='background-color:#dddddd;' align='center'><b>32. DIR. GENERAL DE INFORMACIÓN</b></td>
                            <td colspan='3'  style='background-color:#dddddd;' align='center'><b>34. DIR. DE ADMIN. Y FINANZAS</b></td>
