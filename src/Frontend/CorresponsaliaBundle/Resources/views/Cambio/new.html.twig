@@ -14,6 +14,9 @@
     {{ parent() }}
 
     
+    {% if ef==null %}
+        <div class="alert alert-warning">ESTE PERIODO AÚN NO TIENE UN FONDO ASIGNADO</div>
+    {% endif %}
     
     {% if form_errors(form.montocambiodolar) %}
     <div class="alert alert-danger errores" style="width:50%;">
@@ -47,6 +50,24 @@
                 <div class="labelform">Mes:</div>
                 <div class="widgetform">{{ periodo.mes }}</div>
             </div>
+            {% if ef[0] is defined %}
+                <div class="contenedorform">
+                    <div class="labelform">Saldo inicial:</div>
+                    <div class="widgetform"><span class="label label-info">{% if ef[0].saldoinicial %}{{ ef[0].saldoinicial }}{% else %}No asignado{% endif %}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Recurso enviado:</div>
+                    <div class="widgetform"><span class="label label-info">{{ ef[0].recursorecibido }}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Pagos:</div>
+                    <div class="widgetform"><span class="label label-danger">{{ ef[0].pagos }}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Saldo final:</div>
+                    <div class="widgetform"><span class="label label-warning">{{ ef[0].saldofinal }}</span></div>
+                </div>
+            {% endif %}
             <div class="contenedorform">
                 <div class="labelform">Monto Cambio:</div>
                 <div class="widgetform">{{ form_widget(form.montocambiodolar) }}</div>
@@ -54,7 +75,7 @@
         </div>
     
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
+        <a class="btn btn-def[0]ault" href[0]="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
         
     </form>
 
