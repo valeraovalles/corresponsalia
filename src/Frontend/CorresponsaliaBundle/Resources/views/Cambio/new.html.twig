@@ -13,11 +13,7 @@
 {% block body -%}
     {{ parent() }}
 
-    
-    {% if ef==null %}
-        <div class="alert alert-warning">ESTE PERIODO AÚN NO TIENE UN FONDO ASIGNADO</div>
-    {% endif %}
-    
+   
     {% if form_errors(form.montocambiodolar) %}
     <div class="alert alert-danger errores" style="width:50%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
@@ -75,7 +71,7 @@
         </div>
     
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-def[0]ault" href[0]="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
+        <a class="btn btn-default" href[0]="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
         
     </form>
 

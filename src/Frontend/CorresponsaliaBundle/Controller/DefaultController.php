@@ -185,6 +185,13 @@ class DefaultController extends Controller
         //valido si ya fue asignada una tasa de cambio
         $cambio=  $this->cambio($idperiodo);
         if($cambio==null){
+
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
+            if(!$ef){
+                $this->get('session')->getFlashBag()->add('alert', 'No existe un fondo asignado para este periodo.');
+                return $this->redirect($this->generateUrl('periodorendicion'));
+            }
+
              $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO QUE UTILIZARÁ PARA ESTA RENDICIÓN ANTES DE CONTINUAR.');
              return $this->redirect($this->generateUrl('cambio_new',array('idperiodo'=>$idperiodo)));
         }
