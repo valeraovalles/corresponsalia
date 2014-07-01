@@ -146,7 +146,7 @@ class htmlreporte
 
 
       if(isset($datos['descripcionperiodo'])){
-            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.id in (:idperiodo) order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
+            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x where x.idcorresponsalia in (:idcorresponsalia) and x.idtipogasto in (:idtipogasto) and x.idperiodo in (:idperiodo) order by x.id ASC, x.corresponsalia, x.tipogasto, x.anio ASC, x.mes ASC";
             $query = $em->createQuery($dql);
             $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
             $query->setParameter('idtipogasto', $datos['tipogasto']);
@@ -154,7 +154,7 @@ class htmlreporte
             $result = $query->getResult();
       }
       else{
-            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta order by p.corresponsalia, p.tipogasto, p.anio ASC, p.mes ASC, x.operacion ASC, x.id ASC";
+            $dql = "select x from CorresponsaliaBundle:Auditoriaestadofondo x where x.idcorresponsalia in (:idcorresponsalia) and x.idtipogasto in (:idtipogasto) and x.anio>= :aniodesde and x.anio <= :aniohasta and x.mes>= :mesdesde and x.mes<= :meshasta order by x.id ASC, x.corresponsalia, x.tipogasto, x.anio ASC, x.mes ASC";
             $query = $em->createQuery($dql);
             $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
             $query->setParameter('idtipogasto', $datos['tipogasto']);
@@ -187,15 +187,16 @@ class htmlreporte
 
       $trdetalle="
         <tr>
-          <th width='15%'>CORRESPONSALÍA</th>
+          <th width='10%'>CORRESPONSALÍA</th>
           <th width='10%'>TIPO DE GASTO</th>
-          <th width='20%'>DESCRIPCIÓN</th>
+          <th width='10%'>DESC. PER.</th>
           <th>ANIO</th>
           <th>MES</th>
           <th>SALDO INICIAL</th>
           <th>RECURSO TOTAL</th>
           <th>RECURSO ANTERIOR</th>
           <th>RECURSO NUEVO</th>
+          <th width='10%'>DESC. EF.</th>
           <th>FECHA PROCESO</th>
           <th>HORA PROCESO</th>
           <th>RESPONSABLE</th>
@@ -206,8 +207,8 @@ class htmlreporte
       foreach ($result as $v) {
         $hora=explode(".", $v->getHoraproceso());
 
-        if($v->getPeriodorendicion()->getDescripcionperiodo()!='')
-          $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();
+        if($v->getPeriododesc()!='')
+          $descripcionperiodo=$v->getPeriododesc();
         else $descripcionperiodo='N/A';
 
         if ($cont % 2 != 0) # An odd row 
@@ -217,15 +218,16 @@ class htmlreporte
 
 
         $trdetalle .="<tr style='background-color:".$rowColor."'>
-                        <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
-                        <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$v->getCorresponsalia()."</td>
+                        <td>".$v->getTipogasto()."</td>
                         <td>".$descripcionperiodo."</td>
-                        <td>".$v->getPeriodorendicion()->getAnio()."</td>
-                        <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$v->getAnio()."</td>
+                        <td>".$v->getMes()."</td>
                         <td>".$v->getSaldoinicial()."</td>
                         <td>".$v->getRecursorecibido()."</td>
                         <td>".$v->getRecursoanterior()."</td>
                         <td>".$v->getRecursonuevo()."</td>
+                        <td>".$v->getEstadofondoobs()."</td>
                         <td>".$v->getFechaproceso()->format('d-m-Y')."</td>
                         <td>".$hora[0]."</td>
                         <td>".$v->getResponsable()->getPrimerNombre()." ".$v->getResponsable()->getPrimerApellido()."</td>

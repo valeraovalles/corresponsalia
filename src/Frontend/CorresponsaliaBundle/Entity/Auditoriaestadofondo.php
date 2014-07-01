@@ -23,18 +23,105 @@ class Auditoriaestadofondo
      */
     private $id;
 
-
-    
     /**
-     * @var \Estadofondo
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Estadofondo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtabla", referencedColumnName="id", nullable=false)
-     * })
+     * @ORM\Column(name="idcorresponsalia", type="integer", nullable=false)
      */
-    private $idtabla;
+    private $idcorresponsalia;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="corresponsalia", type="string", nullable=false)
+     */
+    private $corresponsalia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idtipogasto", type="integer", nullable=false)
+     */
+    private $idtipogasto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipogasto", type="string", nullable=false)
+     */
+    private $tipogasto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="periododesc", type="string", nullable=false)
+     */
+    private $periododesc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idperiodo", type="integer", nullable=false)
+     */
+    private $idperiodo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio", type="integer", nullable=false)
+     */
+    private $anio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes", type="integer", nullable=false)
+     */
+    private $mes;
+
+    /**
+     * @var float
+     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=true)
+     * @Assert\NotBlank(message="El saldo inicial no puede estar en blanco.").
+     * 
+     */
+    private $saldoinicial;
+
+    /**
+     * @var float
+     * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
+     */
+    private $recursorecibido;
+
+
+    /**
+     * @var float
+     * @ORM\Column(name="recursoanterior", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
+     */
+    private $recursoanterior;
+
+
+    /**
+     * @var float
+     * @ORM\Column(name="recursonuevo", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
+     */
+    private $recursonuevo;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="fechaproceso", type="date", nullable=false)
+     */
+    private $fechaproceso;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="horaproceso", type="string", nullable=false)
+     */
+    private $horaproceso;
+   
     /**
      * @var \Perfil
      *
@@ -45,94 +132,22 @@ class Auditoriaestadofondo
      */
     private $responsable;
 
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="fechaasignacion", type="datetime", nullable=false)
-     */
-    private $fechaasignacion;
-
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="saldoinicial", type="decimal", precision=20, scale= 2, nullable=true)
-     * @Assert\NotBlank(message="El saldo inicial no puede estar en blanco.").
-     * 
-     */
-    private $saldoinicial;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="recursorecibido", type="decimal", precision=20, scale= 2, nullable=false)
-     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
-     */
-    private $recursorecibido;
-
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="recursoanterior", type="decimal", precision=20, scale= 2, nullable=false)
-     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
-     */
-    private $recursoanterior;
-
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="recursonuevo", type="decimal", precision=20, scale= 2, nullable=false)
-     * @Assert\NotBlank(message="El recurso no puede estar en blanco.").
-     */
-    private $recursonuevo;
-
-
-    /**
-     * @var \Tipogasto
-     *
-     * @ORM\ManyToOne(targetEntity="Periodorendicion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="periodorendicion_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $periodorendicion;
-
      /**
      * @var integer
-     *
-     * @ORM\Column(name="observacion", type="string", nullable=true)
-     * @Assert\NotBlank(message="La obervación no puede estar en blanco.").
-     */
-    private $observacion;
-
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="fechaproceso", type="date", nullable=false)
-     */
-    private $fechaproceso;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="horaproceso", type="string", nullable=false)
-     */
-    private $horaproceso;
-
-     /**
-     * @var integer
-     *
      * @ORM\Column(name="operacion", type="string", nullable=true)
      * @Assert\NotBlank(message="La obervación no puede estar en blanco.").
      */
     private $operacion;
+   
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estadofondoobs", type="string", nullable=false)
+     */
+    private $estadofondoobs;
 
-   
-   
+
+
     /**
      * Get id
      *
@@ -143,79 +158,146 @@ class Auditoriaestadofondo
         return $this->id;
     }
 
+    
     /**
-     * Set idtabla
+     * Set corresponsalia
      *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Estadofondo $Estadofondo
+     * @param float $corresponsalia
      * @return Estadofondo
      */
-    public function setIdtabla(\Frontend\CorresponsaliaBundle\Entity\Estadofondo $idtabla = null)
+    public function setCorresponsalia($corresponsalia)
     {
-        $this->idtabla = $idtabla;
+        $this->corresponsalia = $corresponsalia;
     
         return $this;
     }
 
     /**
-     * Get Estadofondo
+     * Get corresponsalia
      *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Estadofondo 
+     * @return float 
      */
-    public function getIdtabla()
+    public function getCorresponsalia()
     {
-        return $this->idtabla;
-    }
-
-
-    /**
-     * Set responsable
-     *
-     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
-     * @return Operador
-     */
-    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
-    {
-        $this->responsable = $responsable;
-    
-        return $this;
+        return $this->corresponsalia;
     }
 
     /**
-     * Get responsable
+     * Set tipogasto
      *
-     * @return \Administracion\UsuarioBundle\Entity\Perfil 
-     */
-    public function getResponsable()
-    {
-        return $this->responsable;
-    }
-
-
-
-    /**
-     * Set fechaasignacion
-     *
-     * @param integer $fechaasignacion
+     * @param float $tipogasto
      * @return Estadofondo
      */
-    public function setFechaasignacion($fechaasignacion)
+    public function setTipogasto($tipogasto)
     {
-        $this->fechaasignacion = $fechaasignacion;
+        $this->tipogasto = $tipogasto;
     
         return $this;
     }
 
     /**
-     * Get fechaasignacion
+     * Get tipogasto
      *
-     * @return integer 
+     * @return float 
      */
-    public function getFechaasignacion()
+    public function getTipogasto()
     {
-        return $this->fechaasignacion;
+        return $this->tipogasto;
     }
 
+    /**
+     * Set periododesc
+     *
+     * @param float $periododesc
+     * @return Estadofondo
+     */
+    public function setPeriododesc($periododesc)
+    {
+        $this->periododesc = $periododesc;
     
+        return $this;
+    }
+
+    /**
+     * Get periododesc
+     *
+     * @return float 
+     */
+    public function getPeriododesc()
+    {
+        return $this->periododesc;
+    }
+
+    /**
+     * Set estadofondodesc
+     *
+     * @param float $estadofondodesc
+     * @return Estadofondo
+     */
+    public function setEstadofondoobs($estadofondoobs)
+    {
+        $this->estadofondoobs = $estadofondoobs;
+    
+        return $this;
+    }
+
+    /**
+     * Get estadofondodesc
+     *
+     * @return float 
+     */
+    public function getEstadofondoobs()
+    {
+        return $this->estadofondoobs;
+    }
+
+    /**
+     * Set anio
+     *
+     * @param float $anio
+     * @return Estadofondo
+     */
+    public function setAnio($anio)
+    {
+        $this->anio = $anio;
+    
+        return $this;
+    }
+
+    /**
+     * Get anio
+     *
+     * @return float 
+     */
+    public function getAnio()
+    {
+        return $this->anio;
+    }
+
+
+    /**
+     * Set mes
+     *
+     * @param float $mes
+     * @return Estadofondo
+     */
+    public function setMes($mes)
+    {
+        $this->mes = $mes;
+    
+        return $this;
+    }
+
+    /**
+     * Get mes
+     *
+     * @return float 
+     */
+    public function getMes()
+    {
+        return $this->mes;
+    }
+
     /**
      * Set saldoinicial
      *
@@ -314,55 +396,6 @@ class Auditoriaestadofondo
 
 
     
-    /**
-     * Set periodorendicion
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion
-     * @return Relaciongastos
-     */
-    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = null)
-    {
-        $this->periodorendicion = $periodorendicion;
-    
-        return $this;
-    }
-
-    /**
-     * Get periodorendicion
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Periodorendicion 
-     */
-    public function getPeriodorendicion()
-    {
-        return $this->periodorendicion;
-    }
-
-    
-   /**
-     * Set observacion
-     *
-     * @param float $observacion
-     * @return Estadofondo
-     */
-    public function setObservacion($observacion)
-    {
-        $this->observacion = $observacion;
-    
-        return $this;
-    }
-
-    /**
-     * Get observacion
-     *
-     * @return float 
-     */
-    public function getObservacion()
-    {
-        return $this->observacion;
-    }
-    
-
-    
    /**
      * Set fechaproceso
      *
@@ -410,6 +443,32 @@ class Auditoriaestadofondo
     }
 
  
+
+    /**
+     * Set responsable
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
+     * @return Operador
+     */
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Administracion\UsuarioBundle\Entity\Perfil 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+
+
    /**
      * Set horaproceso
      *
@@ -431,5 +490,6 @@ class Auditoriaestadofondo
     public function getOperacion()
     {
         return $this->operacion;
-    }   
+    }  
+
 }

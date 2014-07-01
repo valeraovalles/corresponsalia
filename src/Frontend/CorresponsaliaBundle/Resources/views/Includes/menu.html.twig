@@ -78,14 +78,19 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN')%} 
-            <li><a href="{{ path('corresponsalia_reporteauef') }}">Auditoria Estado Fondo</a></li>
-            <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Total Estado Fondo</a></li>
-          {% endif %}
+
+          
           {% if is_granted('ROLE_SUPERADMIN') %} 
+          <li><a href="{{ path('corresponsalia_reporteauef') }}">Auditoria Estado Fondo</a></li>
             <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Auditoria Rendición</a></li>
           {% endif %}
+
+          {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN')%} 
+            <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Estado Fondo</a></li>
+          {% endif %}
+
           <li><a href="{{ path('corresponsalia_reporterendicion') }}">Rendición</a></li>
+          
           {% if is_granted('ROLE_CONSULTORIA') %}
             <li><a href="#">Personal en Corresponsalías</a></li>
           {% endif %}
