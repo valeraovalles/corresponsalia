@@ -128,6 +128,28 @@ class Relaciongasto
      */
     private $aprobada=true;
     
+
+    /**
+     * @var \Tipomoneda
+     *
+     * @ORM\ManyToOne(targetEntity="Tipomoneda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=true)
+     * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda").
+     */
+    private $tipomoneda;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="observacion", type="string", nullable=true)
+     */
+    private $observacion;
+
+
+
     /**
      * Get id
      *
@@ -162,6 +184,29 @@ class Relaciongasto
     }
 
     /**
+     * Set tipomoneda
+     *
+     * @param integer $tipomoneda
+     * @return Relaciongastos
+     */
+    public function setTipomoneda(\Frontend\CorresponsaliaBundle\Entity\Tipomoneda $tipomoneda = null )
+    {
+        $this->tipomoneda = $tipomoneda;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipomoneda
+     *
+     * @return integer 
+     */
+    public function getTipomoneda()
+    {
+        return $this->tipomoneda;
+    }
+
+    /**
      * Set fechafactura
      *
      * @param \DateTime $fechafactura
@@ -182,6 +227,29 @@ class Relaciongasto
     public function getFechafactura()
     {
         return $this->fechafactura;
+    }
+
+    /**
+     * Set observacion
+     *
+     * @param \DateTime $observacion
+     * @return Relaciongastos
+     */
+    public function setObservacion($observacion)
+    {
+        $this->observacion = $observacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get observacion
+     *
+     * @return \DateTime 
+     */
+    public function getObservacion()
+    {
+        return $this->observacion;
     }
 
     /**

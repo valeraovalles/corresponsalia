@@ -9,22 +9,31 @@
             <td>{{ form_widget(form.fechafactura) }}</td>
         </tr>
         <tr>
-            <th>Cambio</th>
-            <td><input type="text" value="{{ cambio.montocambiodolar }}" id="cambio" name="rendicion_relaciongasto[cambio]" readonly="readonly"></td>
+            <th>Nro. factura</th>
+            <td>{{ form_widget(form.numerofactura) }}</td>
             <th>Nombre/Razón</th>
             <td>{{ form_widget(form.nombrerazonsocial) }}</td>
             <th>Identif. fiscal</th>
             <td>{{ form_widget(form.identificacionfiscal) }}</td>
         </tr>
         <tr>
-            <th>Nro. factura</th>
-            <td>{{ form_widget(form.numerofactura) }}</td>
+            <th>Cambio</th>
+            <td><input type="text" value="{{ cambio.montocambiodolar }}" id="cambio" name="rendicion_relaciongasto[cambio]" readonly="readonly"></td>
             <th>Monto MN.</th>
             <td>{{ form_widget(form.montomonnac) }}</td>
             <th>Dólares</th>
             <td>{{ form_widget(form.montodolar) }}</td>
         </tr>
+        <tr>
+            <th>Moneda</th>
+            <td>{{ cambio.tipomoneda.tipomoneda|title }}</td>
+            <th>Observacion</th>
+            <td colspan="3">{{ form_widget(form.observacion,{'attr':{'style':'width:96%'}}) }}</td>
+        </tr>
     </table>
+
+    {# envio el id de la monega para que se guarde #}
+    <input type="hidden" value="{{ cambio.tipomoneda.id|title }}" name="rendicion_relaciongasto[tipomoneda]">
 
     <script>
         $(document).ready(function() {

@@ -9,7 +9,7 @@
     <h2>{{ periodo.tipogasto.descripcion|upper }}</h2>
     {% if periodo.descripcionperiodo!='' %}<h4><b>DESCRIPCIÓN: '{{ periodo.descripcionperiodo|upper }}'</b></h4>{% endif %}
     <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4>
-    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | <a href="{{ path('cambio',{'idperiodo':periodo.id}) }}">CAMBIO: {{ cambio.montocambiodolar }}</a></h4><br>
+    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | MONEDA: {{ cambio.tipomoneda.tipomoneda|upper }} | <a href="{{ path('cambio',{'idperiodo':periodo.id}) }}">CAMBIO: {{ cambio.montocambiodolar }}</a></h4><br>
 {% endblock %}
     
 {% block body %}
