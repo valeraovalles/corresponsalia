@@ -28,9 +28,10 @@
                     <th>Nombre/Razón</th>
                     <th>I. Fiscal</th>
                     <th>Nro Fact.</th>
+                    <th>Moneda</th>
                     <th>Cambio</th>
-                    <th>Dólares.</th>
                     <th>Monto MN.</th>
+                    <th>Dólares.</th>
                     <th>Acc.</th>
                 </tr>
             </thead>
@@ -44,9 +45,11 @@
                         <td>{{ entity.nombrerazonsocial }}</td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
+                        <td>{{ entity.tipomoneda.tipomoneda }}</td>
                         <td>{{ entity.cambio }}</td>
-                        <td>{{ entity.montodolar }}</td>
                         <td>{{ entity.montomonnac }}</td>
+                        <td>{{ entity.montodolar }}</td>
+                        
                         <td><input value="{{ entity.id }}" name="rendiciones[{{entity.id}}]" type="checkbox" {% if entity.aprobada==false %}checked="checked"{% endif %}></td>
                     </tr>
                     {% if entity.aprobada==false %}{% set oculta=1 %}{% endif %}
