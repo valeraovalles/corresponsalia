@@ -23,27 +23,80 @@ class Auditoriarendicion
      */
     private $id;
 
-    
     /**
-     * @var \Estadofondo
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Relaciongasto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtabla", referencedColumnName="id", nullable=false)
-     * })
+     * @ORM\Column(name="idcorresponsalia", type="integer", nullable=false)
      */
-    private $idtabla;
+    private $idcorresponsalia;
 
     /**
-     * @var \Descripciongasto
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Descripciongasto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="descripciongasto_id", referencedColumnName="id")
-     * })
-     * @Assert\NotBlank(message="Debe seleccionar una descripción de gasto.")  
+     * @ORM\Column(name="corresponsalia", type="string", nullable=false)
      */
+    private $corresponsalia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idtipogasto", type="integer", nullable=false)
+     */
+    private $idtipogasto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipogasto", type="string", nullable=false)
+     */
+    private $tipogasto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="periododesc", type="string", nullable=false)
+     */
+    private $periododesc;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idperiodo", type="integer", nullable=false)
+     */
+    private $idperiodo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio", type="integer", nullable=false)
+     */
+    private $anio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mes", type="integer", nullable=false)
+     */
+    private $mes;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="iddescripciongasto", type="string", nullable=false)
+     */
+
+    private $iddescripciongasto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="descripciongasto", type="string", nullable=false)
+     */
+
     private $descripciongasto;
+
 
     /**
      * @var \Perfil
@@ -115,17 +168,6 @@ class Auditoriarendicion
     private $montodolar;
 
     /**
-     * @var \Tipogasto
-     *
-     * @ORM\ManyToOne(targetEntity="Periodorendicion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="periodorendicion_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $periodorendicion;
-
-
-    /**
      * @var float
      *
      * @ORM\Column(name="cambio",  type="decimal", precision=20, scale= 2, nullable=true)
@@ -164,28 +206,170 @@ class Auditoriarendicion
         return $this->id;
     }
 
-    /**
-     * Set idtabla
+
+   /**
+     * Set corresponsalia
      *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Estadofondo $Estadofondo
+     * @param float $corresponsalia
      * @return Estadofondo
      */
-    public function setIdtabla(\Frontend\CorresponsaliaBundle\Entity\Relaciongasto $idtabla = null)
+    public function setCorresponsalia($corresponsalia)
     {
-        $this->idtabla = $idtabla;
+        $this->corresponsalia = $corresponsalia;
     
         return $this;
     }
 
     /**
-     * Get Estadofondo
+     * Get corresponsalia
      *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Estadofondo 
+     * @return float 
      */
-    public function getIdtabla()
+    public function getCorresponsalia()
     {
-        return $this->idtabla;
+        return $this->corresponsalia;
     }
+
+    /**
+     * Set tipogasto
+     *
+     * @param float $tipogasto
+     * @return Estadofondo
+     */
+    public function setTipogasto($tipogasto)
+    {
+        $this->tipogasto = $tipogasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipogasto
+     *
+     * @return float 
+     */
+    public function getTipogasto()
+    {
+        return $this->tipogasto;
+    }
+
+    /**
+     * Set periododesc
+     *
+     * @param float $periododesc
+     * @return Estadofondo
+     */
+    public function setPeriododesc($periododesc)
+    {
+        $this->periododesc = $periododesc;
+    
+        return $this;
+    }
+
+    /**
+     * Get periododesc
+     *
+     * @return float 
+     */
+    public function getPeriododesc()
+    {
+        return $this->periododesc;
+    }
+
+ /**
+     * Set anio
+     *
+     * @param float $anio
+     * @return Estadofondo
+     */
+    public function setAnio($anio)
+    {
+        $this->anio = $anio;
+    
+        return $this;
+    }
+
+    /**
+     * Get anio
+     *
+     * @return float 
+     */
+    public function getAnio()
+    {
+        return $this->anio;
+    }
+
+
+    /**
+     * Set mes
+     *
+     * @param float $mes
+     * @return Estadofondo
+     */
+    public function setMes($mes)
+    {
+        $this->mes = $mes;
+    
+        return $this;
+    }
+
+    /**
+     * Get mes
+     *
+     * @return float 
+     */
+    public function getMes()
+    {
+        return $this->mes;
+    }
+
+
+    /**
+     * Set descripciongasto
+     *
+     * @param integer $descripciongasto
+     * @return Relaciongastos
+     */
+    public function setDescripciongasto($descripciongasto)
+    {
+        $this->descripciongasto = $descripciongasto;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripciongasto
+     *
+     * @return integer 
+     */
+    public function getDescripciongasto()
+    {
+        return $this->descripciongasto;
+    }
+
+     /**
+     * Set responsable
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
+     * @return Operador
+     */
+    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Administracion\UsuarioBundle\Entity\Perfil 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
 
     /**
      * Set numerocomprobante
@@ -211,76 +395,6 @@ class Auditoriarendicion
     }
 
     /**
-     * Set fechafactura
-     *
-     * @param \DateTime $fechafactura
-     * @return Relaciongastos
-     */
-    public function setFechafactura($fechafactura)
-    {
-        $this->fechafactura = $fechafactura;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechafactura
-     *
-     * @return \DateTime 
-     */
-    public function getFechafactura()
-    {
-        return $this->fechafactura;
-    }
-
-    /**
-     * Set descripciongasto
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto
-     * @return Relaciongastos
-     */
-    public function setDescripciongasto(\Frontend\CorresponsaliaBundle\Entity\Descripciongasto $descripciongasto = null)
-    {
-        $this->descripciongasto = $descripciongasto;
-    
-        return $this;
-    }
-
-    /**
-     * Get descripciongasto
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Descripciongasto 
-     */
-    public function getDescripciongasto()
-    {
-        return $this->descripciongasto;
-    }
-
-
-    /**
-     * Set nombrerazonsocial
-     *
-     * @param string $nombrerazonsocial
-     * @return Relaciongastos
-     */
-    public function setNombrerazonsocial($nombrerazonsocial)
-    {
-        $this->nombrerazonsocial = $nombrerazonsocial;
-    
-        return $this;
-    }
-
-    /**
-     * Get nombrerazonsocial
-     *
-     * @return string 
-     */
-    public function getNombrerazonsocial()
-    {
-        return $this->nombrerazonsocial;
-    }
-
-    /**
      * Set identificacionfiscal
      *
      * @param string $identificacionfiscal
@@ -302,6 +416,7 @@ class Auditoriarendicion
     {
         return $this->identificacionfiscal;
     }
+
 
     /**
      * Set numerofactura
@@ -325,6 +440,7 @@ class Auditoriarendicion
     {
         return $this->numerofactura;
     }
+
 
     /**
      * Set montomonnac
@@ -394,50 +510,52 @@ class Auditoriarendicion
     {
         return $this->cambio;
     }
+
+
     /**
-     * Set periodorendicion
+     * Set fechafactura
      *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion
+     * @param \DateTime $fechafactura
      * @return Relaciongastos
      */
-    public function setPeriodorendicion(\Frontend\CorresponsaliaBundle\Entity\Periodorendicion $periodorendicion = null)
+    public function setFechafactura($fechafactura)
     {
-        $this->periodorendicion = $periodorendicion;
+        $this->fechafactura = $fechafactura;
     
         return $this;
     }
 
     /**
-     * Get periodorendicion
+     * Get fechafactura
      *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Periodorendicion 
+     * @return \DateTime 
      */
-    public function getPeriodorendicion()
+    public function getFechafactura()
     {
-        return $this->periodorendicion;
+        return $this->fechafactura;
     }
-    
-     /**
-     * Set responsable
+
+    /**
+     * Set nombrerazonsocial
      *
-     * @param \Administracion\UsuarioBundle\Entity\Perfil $responsable
-     * @return Operador
+     * @param string $nombrerazonsocial
+     * @return Relaciongastos
      */
-    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
+    public function setNombrerazonsocial($nombrerazonsocial)
     {
-        $this->responsable = $responsable;
+        $this->nombrerazonsocial = $nombrerazonsocial;
     
         return $this;
     }
 
     /**
-     * Get responsable
+     * Get nombrerazonsocial
      *
-     * @return \Administracion\UsuarioBundle\Entity\Perfil 
+     * @return string 
      */
-    public function getResponsable()
+    public function getNombrerazonsocial()
     {
-        return $this->responsable;
+        return $this->nombrerazonsocial;
     }
 
     

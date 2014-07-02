@@ -420,7 +420,7 @@ class htmlreporte
    public function auditoriarendicion($em,$datos){
 
       if(isset($datos['descripcionperiodo'])){
-        $dql = "select x from CorresponsaliaBundle:Auditoriarendicion x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.id in (:idperiodo) and x.descripciongasto in (:iddesgas) order by p.corresponsalia, p.tipogasto,x.descripciongasto, p.anio ASC, p.mes ASC, x.operacion ASC";
+        $dql = "select x from CorresponsaliaBundle:Auditoriarendicion x where x.idcorresponsalia in (:idcorresponsalia) and x.idtipogasto in (:idtipogasto) and x.idperiodo in (:idperiodo) and x.iddescripciongasto in (:iddesgas) order by x.id, x.corresponsalia, x.tipogasto,x.descripciongasto, x.anio ASC, x.mes ASC, x.operacion ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
         $query->setParameter('idtipogasto', $datos['tipogasto']);
@@ -431,7 +431,7 @@ class htmlreporte
 
       else{
 
-        $dql = "select x from CorresponsaliaBundle:Auditoriarendicion x join x.periodorendicion p where p.corresponsalia in (:idcorresponsalia) and p.tipogasto in (:idtipogasto) and p.anio>= :aniodesde and p.anio <= :aniohasta and p.mes>= :mesdesde and p.mes<= :meshasta and x.descripciongasto in (:iddesgas) order by x.idtabla, x.operacion ASC";
+        $dql = "select x from CorresponsaliaBundle:Auditoriarendicion x where x.idcorresponsalia in (:idcorresponsalia) and x.idtipogasto in (:idtipogasto) and x.anio>= :aniodesde and x.anio <= :aniohasta and x.mes>= :mesdesde and x.mes<= :meshasta and x.iddescripciongasto in (:iddesgas) order by x.id, x.operacion ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idcorresponsalia', $datos['corresponsalia']);
         $query->setParameter('idtipogasto', $datos['tipogasto']);
@@ -498,8 +498,8 @@ class htmlreporte
       foreach ($result as $v) {
         $hora=explode(".", $v->getHoraproceso());
 
-        if($v->getPeriodorendicion()->getDescripcionperiodo()!='')
-          $descripcionperiodo=$v->getPeriodorendicion()->getDescripcionperiodo();
+        if($v->getPeriododesc()!='')
+          $descripcionperiodo=$v->getPeriododesc();
         else $descripcionperiodo='N/A';
 
         if ($cont % 2 != 0) # An odd row 
@@ -508,18 +508,18 @@ class htmlreporte
           $rowColor = "white"; 
 
         $trdetalle .="<tr style='background-color:".$rowColor."'>
-                        <td>".$v->getIdtabla()->getId()."</td>
-                        <td>".$v->getPeriodorendicion()->getCorresponsalia()->getNombre()."</td>
-                        <td>".$v->getPeriodorendicion()->getTipogasto()->getDescripcion()."</td>
+                        <td>".$v->getId()."</td>
+                        <td>".$v->getCorresponsalia()."</td>
+                        <td>".$v->getTipogasto()."</td>
                         <td>".$descripcionperiodo."</td>
-                        <td>".$v->getPeriodorendicion()->getAnio()."</td>
-                        <td>".$v->getPeriodorendicion()->getMes()."</td>
+                        <td>".$v->getAnio()."</td>
+                        <td>".$v->getMes()."</td>
                         <td>".$v->getNumerocomprobante()."</td>
                         <td>".$v->getFechafactura()->format('d-m-Y')."</td>
                         <td>".$v->getNombrerazonsocial()."</td>
                         <td>".$v->getIdentificacionfiscal()."</td>
                         <td>".$v->getNumerofactura()."</td>
-                        <td>".$v->getDescripciongasto()->getDescripcion()."</td>
+                        <td>".$v->getDescripciongasto()."</td>
                         <td>".$v->getMontomonnac()."</td>
                         <td>".$v->getMontodolar()."</td>
                         <td>".$v->getCambio()."</td>
@@ -560,10 +560,6 @@ class htmlreporte
             ".$trdetalle."
           </table>
       ";
-
-
-
-
 
       return $html;
 
