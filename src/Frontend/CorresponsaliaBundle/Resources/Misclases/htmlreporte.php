@@ -580,6 +580,7 @@ class htmlreporte
                     <td>".$v->getNombrerazonsocial()."</td> 
                     <td>".$v->getIdentificacionfiscal()."</td> 
                     <td>".$v->getNumerofactura()."</td> 
+                    <td>".$v->getTipomoneda()->getTipomoneda()."</td> 
                     <td>".$v->getCambio()."</td> 
                     <td>".$v->getMontomonnac()."</td> 
                     <td>".$v->getMontodolar()."</td> 
@@ -602,82 +603,82 @@ class htmlreporte
                         <tr>
                             <td rowspan=2 colspan=7 style='font-size:12px;width:500px;' align='center'><b>RELACIÓN DE GASTOS DE LAS SUCURSALES O CORRESPONSALÍAS</b></td>
                             <th colspan=1 style='background-color:#cacaca;text-align:left;'>1. N° Relación: </th>
-                            <td colspan=3></td>
+                            <td colspan=4></td>
                         </tr>
                         <tr>
                             <th colspan=1 style='background-color:#cacaca;text-align:left;'>2. Fecha: </th>
-                            <td colspan=3></td>
+                            <td colspan=4></td>
                         </tr>
                         
 
 
                         <tr>
-                            <th colspan=11  style='background-color:#cacaca;' align='center'>3. TIPO DE GASTO</th>
+                            <th colspan=12  style='background-color:#cacaca;' align='center'>3. TIPO DE GASTO</th>
                         </tr>
                         <tr>
-                            <td colspan=11>".$tg."</td>
+                            <td colspan=12>".$tg."</td>
                         </tr>
                         
 
 
                         <tr>
-                            <th colspan=11  style='background-color:#cacaca;' align='center'>4. CORRESPONSALÍA / 5. PERÍODO</th>
+                            <th colspan=12  style='background-color:#cacaca;' align='center'>4. CORRESPONSALÍA / 5. PERÍODO</th>
                         </tr>
                         <tr>
                             <th colspan=5  style='background-color:#dddddd;' align='center'>NOMBRE</th>
                             <th colspan=2  style='background-color:#dddddd;' align='center'>PAÍS</th>
                             <th  style='background-color:#dddddd;' align='center'>AÑO</th>
                             <th  style='background-color:#dddddd;' align='center'>MES</th>
-                            <th colspan=2  style='background-color:#dddddd;' align='center'>MONEDA</th>
+                            <th colspan=3  style='background-color:#dddddd;' align='center'>MONEDA NAC.</th>
                         </tr>
                         <tr>
                             <td colspan=5>".$periodo->getCorresponsalia()->getNombre()."</td>
                             <td colspan=2>".$periodo->getCorresponsalia()->getPais()->getPais()."</td>
                             <td>".$periodo->getAnio()."</td>
                             <td>".$periodo->getMes()."</td>
-                            <td colspan=2>".$periodo->getCorresponsalia()->getTipomoneda()->getTipomoneda()."</td>
+                            <td colspan=3>".$periodo->getCorresponsalia()->getTipomoneda()->getTipomoneda()."</td>
                         </tr>
 		";
                 
                 $html .="
                         <tr>
-                            <th colspan='11'   style='background-color:#cacaca;' align='center'>ESTADO SITUACIÓN DEL FONDO ENVIADO</th>
+                            <th colspan='12' style='background-color:#cacaca;' align='center'>ESTADO SITUACIÓN DEL FONDO ENVIADO</th>
                         </tr>
                         <tr>
                             <th colspan=4>Descripción</th>
                             <th colspan=2>USD $</th>
-                            <th colspan=2>Moneda nacional</th>
+                            <th colspan=3>Moneda Nacional</th>
                             <th colspan=3>Bs.</th>
                         </tr>
                         <tr>
                             <td colspan=4>6. Saldo inicial</td>
                             <td colspan=2>".$ef['saldoinicial']."</td>
-                            <td colspan=2>".$ef['saldoinicial_mn']."</td>
+                            <td colspan=3>".$ef['saldoinicial_mn']."</td>
                             <td colspan=3>".$ef['saldoinicial_bs']."</td>
                         </tr>
                         <tr>
                             <td colspan=4>7. Recursos recibidos</td>
                             <td colspan=2>".$ef['recursorecibido']."</td>
-                            <td colspan=2>".$ef['recursorecibido_mn']."</td>
+                            <td colspan=3>".$ef['recursorecibido_mn']."</td>
                             <td colspan=3>".$ef['recursorecibido_bs']."</td>
                         </tr>
                         <tr>
                             <td colspan=4>8. Pagos efectuados</td>
                             <td colspan=2>".$ef['pagos']."</td>
-                            <td colspan=2>".$ef['pagos_mn']."</td>
+                            <td colspan=3>".$ef['pagos_mn']."</td>
                             <td colspan=3>".$ef['pagos_bs']."</td>
                         </tr>
                         <tr style='font-weight: bold;'>
                             <td colspan=4>9. Saldo final</td>
                             <td colspan=2>".$ef['saldofinal']."</td>
-                            <td colspan=2>".$ef['saldofinal_mn']."</td>
+                            <td colspan=3>".$ef['saldofinal_mn']."</td>
                             <td colspan=3>".$ef['saldofinal_bs']."</td>
                         </tr>
                 ";
                 
                 $html .="
                         <tr>
-                            <th colspan='11'  style='background-color:#cacaca;' align='center'>10. RELACIÓN DE GASTO</th>
+                            <th colspan='12'  style='background-color:#cacaca;' align='center'>10. RELACIÓN DE GASTO</th>
                         </tr>
                         <tr>
                             <th style='background-color:#dddddd;' align='center'>11. Nro</th>
@@ -686,13 +687,14 @@ class htmlreporte
                             <th style='background-color:#dddddd;' align='center'>15. Razón</th>
                             <th style='background-color:#dddddd;' align='center'>16. I. Fiscal</th>
                             <th style='background-color:#dddddd;' align='center'>17. Nro Factura</th>
-                            <th style='background-color:#dddddd;' align='center'>18. Tasa</th>
-                            <th style='background-color:#dddddd;' align='center'>19. Monto MN.</th>
-                            <th style='background-color:#dddddd;' align='center'>20. Dólares.</th>
+                            <th style='background-color:#dddddd;' align='center'>18. Moneda</th>
+                            <th style='background-color:#dddddd;' align='center'>19. Tasa</th>
+                            <th style='background-color:#dddddd;' align='center'>20. Monto MN.</th>
+                            <th style='background-color:#dddddd;' align='center'>21. Dólares.</th>
                         </tr>
                         ".$listaren."
                         <tr>
-                           <td colspan=9><b>TOTAL</b></td>
+                           <td colspan=10><b>TOTAL</b></td>
                            <td><b>".$totalmn."</b></td>
                            <td><b>".$totald."</b></td>
                        </tr>
@@ -700,55 +702,55 @@ class htmlreporte
                 
                 $html .="
                        <tr>
-                           <td colspan=3  style='background-color:#cacaca;' align='center'><b>21. ELABORADO POR:</b></td>
-                           <td colspan=3  style='background-color:#cacaca;' align='center'><b>22. N° DE IDENTIFICACIÓN</b></td>
-                           <td colspan=5  style='background-color:#cacaca;' align='center'><b>24. N° JEFE DE SUCURSAL O CORRESPONSALÍA</b></td>
+                           <td colspan=3  style='background-color:#cacaca;' align='center'><b>22. ELABORADO POR:</b></td>
+                           <td colspan=3  style='background-color:#cacaca;' align='center'><b>23. N° DE IDENTIFICACIÓN</b></td>
+                           <td colspan=6  style='background-color:#cacaca;' align='center'><b>25. N° JEFE DE SUCURSAL O CORRESPONSALÍA</b></td>
                        </tr>
                        <tr>
                            <td colspan=3 align='center'>".strtoupper($lr[0]->getResponsable()->getPrimerNombre()." ".$lr[0]->getResponsable()->getPrimerApellido())."</td>
                            <td colspan=3 align='center'> </td>
-                           <td colspan=2 align='center'>Apellidos y Nombres: </td>
+                           <td colspan=3 align='center'>Apellidos y Nombres: </td>
                            <td colspan=3 align='center'>Nro Identificación: </td>
                        </tr>
                        <tr>
-                           <td colspan=6  style='background-color:#cacaca;' align='center'><b>23. FIRMA</b></td>
-                           <td colspan=5  style='background-color:#cacaca;' align='center'><b>25. FIRMA</b></td>
+                           <td colspan=6  style='background-color:#cacaca;' align='center'><b>24. FIRMA</b></td>
+                           <td colspan=6  style='background-color:#cacaca;' align='center'><b>26. FIRMA</b></td>
                        </tr>
                        <tr>
                            <td colspan=6> </td>
-                           <td colspan=5> </td>
+                           <td colspan=6> </td>
                        </tr>
                        <tr>
-                            <th colspan='3'><b>26. ANALISTA ENCARGADO(A):</b> </th>
+                            <th colspan='3'><b>27. ANALISTA ENCARGADO(A):</b> </th>
                             <td colspan='3' align='center'>".strtoupper($periodo->getCorresponsalia()->getAnalistaencargado())."</td>
-                            <th colspan='3'><b>27. FIRMA:</b> </th>
-                            <td colspan='2'></td>
+                            <th colspan='3'><b>28. FIRMA:</b> </th>
+                            <td colspan='3'></td>
                        </tr>
                        <tr>
                            <td colspan=6  style='background-color:#cacaca;' align='center'><b>CONFORMADO POR:</b></td>
-                           <td colspan=5  style='background-color:#cacaca;' align='center'><b>VERIFICADO POR:</b></td>
+                           <td colspan=6  style='background-color:#cacaca;' align='center'><b>VERIFICADO POR:</b></td>
                        </tr>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>28. UNIDAD DE ADMINISTRACIÓN DE CORRESPONSALÍAS</b></td>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>30. ASIGNACIONES</b></td>
-                           <td colspan='2' style='background-color:#dddddd;' align='center'><b>32. DIR. GENERAL DE INFORMACIÓN</b></td>
-                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>34. DIR. DE ADMIN. Y FINANZAS</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>29. UNIDAD DE ADMINISTRACIÓN DE CORRESPONSALÍAS</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>31. ASIGNACIONES</b></td>
+                           <td colspan='3' style='background-color:#dddddd;' align='center'><b>33. DIR. GENERAL DE INFORMACIÓN</b></td>
+                           <td colspan='3'  style='background-color:#dddddd;' align='center'><b>35. DIR. DE ADMIN. Y FINANZAS</b></td>
                        </tr>
                        </tr>
                            <td colspan='3' align='center'>".$parametros['unidadapoyologistico']."</td>
                            <td colspan='3' align='center'>".$parametros['asignaciones']."</td>
-                           <td colspan='2' align='center'>".$parametros['dirgeneralinformacion']."</td>
+                           <td colspan='3' align='center'>".$parametros['dirgeneralinformacion']."</td>
                            <td colspan='3' align='center'> </td>
                        </tr>
                        </tr>
-                           <td colspan='3' align='center'><b>29. FIRMA</b></td>
-                           <td colspan='3' align='center'><b>31. FIRMA</b></td>
-                           <td colspan='2' align='center'><b>33. FIRMA</b></td>
-                           <td colspan='3' align='center'><b>35. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>30. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>32. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>34. FIRMA</b></td>
+                           <td colspan='3' align='center'><b>36. FIRMA</b></td>
                        </tr>
                        </tr>
                            <td colspan='3'> </td>
                            <td colspan='3'> </td>
-                           <td colspan='2'> </td>
+                           <td colspan='3'> </td>
                            <td colspan='3'> </td>
                        </tr>
 
