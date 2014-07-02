@@ -58,6 +58,19 @@ class Cambio
      * })
      */
     private $periodorendicion;
+
+        /**
+     * @var \Descripciongasto
+     *
+     * @ORM\ManyToOne(targetEntity="Tipomoneda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=true)
+     * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda.")
+     
+     */
+    private $tipomoneda;
+
     
     /**
      * Get id
@@ -104,6 +117,29 @@ class Cambio
         $this->fechahoraregistro = $fechahoraregistro;
     
         return $this;
+    }
+
+    /**
+     * Set tipomoneda
+     *
+     * @param integer $tipomoneda
+     * @return Relaciongastos
+     */
+    public function setTipomoneda(\Frontend\CorresponsaliaBundle\Entity\Tipomoneda $tipomoneda = null )
+    {
+        $this->tipomoneda = $tipomoneda;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipomoneda
+     *
+     * @return integer 
+     */
+    public function getTipomoneda()
+    {
+        return $this->tipomoneda;
     }
 
     /**

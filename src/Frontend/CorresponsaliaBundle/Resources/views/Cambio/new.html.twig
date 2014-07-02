@@ -14,9 +14,10 @@
     {{ parent() }}
 
    
-    {% if form_errors(form.montocambiodolar) %}
+    {% if form_errors(form.montocambiodolar) or form_errors(form.tipomoneda) %}
     <div class="alert alert-danger errores" style="width:50%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.tipomoneda) }}</div>
         <div>{{ form_errors(form.montocambiodolar) }}</div>
     </div>
     {% endif %}
@@ -25,7 +26,7 @@
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:50%;">
             
-            <div class="alert alert-info">Debe colocar el equivalente de su moneda nacional al dólar</div>
+            <div class="alert alert-info">Debe colocar el equivalente de la moneda seleccionada al dólar</div>
             <div class="contenedorform">
                 <div class="labelform">Corresponsalía:</div>
                 <div class="widgetform">{{ periodo.corresponsalia.nombre|upper }}</div>
@@ -35,7 +36,7 @@
                 <div class="widgetform">{{ periodo.tipogasto.descripcion|upper }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Moneda:</div>
+                <div class="labelform">Moneda Nacional:</div>
                 <div class="widgetform">{{ periodo.corresponsalia.tipomoneda.tipomoneda|upper }}</div>
             </div>
             <div class="contenedorform">
@@ -65,13 +66,17 @@
                 </div>
             {% endif %}
             <div class="contenedorform">
+                <div class="labelform">Moneda:</div>
+                <div class="widgetform">{{ form_widget(form.tipomoneda) }}</div>
+            </div>
+            <div class="contenedorform">
                 <div class="labelform">Monto Cambio:</div>
                 <div class="widgetform">{{ form_widget(form.montocambiodolar) }}</div>
             </div>
         </div>
     
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
-        <a class="btn btn-default" href[0]="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
+        <a class="btn btn-default" href="{{ path('cambio',{'idperiodo':periodo.id}) }}">VER HISTÓRICO</a>
         
     </form>
 
