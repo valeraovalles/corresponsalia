@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Description of Asignacion
@@ -33,6 +34,7 @@ class Asignacion
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una corresponsalia.")
      */
     private $corresponsalia;
     
@@ -47,6 +49,7 @@ class Asignacion
      * @var \Date
      *
      * @ORM\Column(name="fechaAsignacion", type="date")
+     * @Assert\NotBlank(message="Debe ingresar la fecha de asignacion.")
      */
     private $fechaAsignacion;
 
@@ -71,6 +74,7 @@ class Asignacion
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de asignacion.")
      */
     private $status;   
     

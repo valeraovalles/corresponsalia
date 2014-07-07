@@ -40,9 +40,9 @@ class AsignacionController extends Controller
         $entity = new Asignacion(); 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
         
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -56,8 +56,15 @@ class AsignacionController extends Controller
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
             'entity' => $entity,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -89,10 +96,16 @@ class AsignacionController extends Controller
     {
         $entity = new Asignacion();
         $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
 
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
             'entity' => $entity,
-            'equipo_id' => $id,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -138,12 +151,18 @@ class AsignacionController extends Controller
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:edit.html.twig', array(
             'entity'      => $entity,
-            'equipo_id'   => $id,
+            'equipo'   => $equipo,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
