@@ -23,13 +23,14 @@
                 var data = {
                     marca_id: jQuery(this).val()
                 };
-
+                var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
+                $modelo_selector.empty();
+                jQuery('#select2-chosen-3').text('Seleccione');
                 jQuery.ajax({
                     type: 'post',
                     url: '{{ path("tecnoequipo_select") }}',
                     data: data,
                     success: function(data) {
-                        var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
                          $modelo_selector.html('<option value="">Seleccione</option>');
                         for(var i in data){
                             $modelo_selector.append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');

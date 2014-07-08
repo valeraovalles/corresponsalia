@@ -21,14 +21,15 @@
                 var data = {
                     marca_id: jQuery(this).val()
                 };
-
+                var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
+                $modelo_selector.empty();
+                jQuery('#select2-chosen-3').text('Seleccione');
                 jQuery.ajax({
                     type: 'post',
                     url: '{{ path("tecnoequipo_select") }}',
                     data: data,
                     success: function(data) {
-                        var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
-                         $modelo_selector.html('<option>Selecciona</option>');
+                        $modelo_selector.html('<option>Selecciona</option>');
                         for(var i in data){
                             $modelo_selector.append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
                         }
@@ -73,13 +74,13 @@
     {% if form_errors(edit_form.categoria) or form_errors(edit_form.marca) or form_errors(edit_form.modelo) or form_errors(edit_form.serialEquipo) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechaAdquisicion) or form_errors(edit_form.condicion)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(edit_form.categoria) }}</div>
-        <div>{{ form_errors(edit_form.marca) }}</div>
-        <div>{{ form_errors(edit_form.modelo) }}</div>
-        <div>{{ form_errors(edit_form.serialEquipo) }}</div>
-        <div>{{ form_errors(edit_form.descripcion) }}</div>
-        <div>{{ form_errors(edit_form.fechaAdquisicion) }}</div>
-        <div>{{ form_errors(edit_form.condicion) }}</div>
+        <div>1{{ form_errors(edit_form.categoria) }}</div>
+        <div>2{{ form_errors(edit_form.marca) }}</div>
+        <div>3{{ form_errors(edit_form.modelo) }}-</div>
+        <div>4{{ form_errors(edit_form.serialEquipo) }}</div>
+        <div>5{{ form_errors(edit_form.descripcion) }}</div>
+        <div>6{{ form_errors(edit_form.fechaAdquisicion) }}</div>
+        <div>7{{ form_errors(edit_form.condicion) }}</div>
     </div>
     {% endif %} 
     
