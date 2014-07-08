@@ -70,12 +70,19 @@
         </div>
     {% endfor %}
     
-    {% if form_errors(edit_form.serialEquipo)%}
+    {% if form_errors(edit_form.categoria) or form_errors(edit_form.marca) or form_errors(edit_form.modelo) or form_errors(edit_form.serialEquipo) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechaAdquisicion) or form_errors(edit_form.condicion)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.categoria) }}</div>
+        <div>{{ form_errors(edit_form.marca) }}</div>
+        <div>{{ form_errors(edit_form.modelo) }}</div>
         <div>{{ form_errors(edit_form.serialEquipo) }}</div>
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+        <div>{{ form_errors(edit_form.fechaAdquisicion) }}</div>
+        <div>{{ form_errors(edit_form.condicion) }}</div>
     </div>
-    {% endif %}
+    {% endif %} 
+    
     <form novalidate method="post" action="{{ path('tecnoequipo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div id="wrapper-form" class="formShow" style="width:70%;">

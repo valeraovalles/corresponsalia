@@ -217,8 +217,15 @@ class AsignacionController extends Controller
             return $this->redirect($this->generateUrl('tecnoasignar_edit', array('id' => $id)));
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:edit.html.twig', array(
             'entity'      => $entity,
+            'equipo'   => $equipo,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -240,7 +247,7 @@ class AsignacionController extends Controller
                 throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
             }
 
-            $nombre = $entity->getNombre();
+            $nombre = $entity->getCorresponsalia();
             $em->remove($entity);
             $em->flush();
         }
@@ -248,8 +255,8 @@ class AsignacionController extends Controller
         $this->get('session')->getFlashBag()->set(
             'danger',
             array(
-                'title' => 'Eliminado! ',
-                'message' => 'Modelo '.$nombre.'.'
+                'title' => 'Eliminada! ',
+                'message' => 'Asignación del equipo a la corresponsalia '.$nombre.'.'
             )
         );
         return $this->redirect($this->generateUrl('tecnoequipo'));
