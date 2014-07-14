@@ -31,6 +31,8 @@
 
     {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
     
+    {% if rendicion.aprobada==false %}<div class="alert alert-danger"><b>JUSTIFICACIÓN DE LA DEVOLUCIÓN</b><br>{{ rendicion.justificadevolucion }}</div>{% endif %}
+
     <form novalidate method="post" action="{{ path('tipocorresponsalia_actualizarendicion',{'idrendicion':rendicion.id,'idperiodo':periodo.id}) }}">  
         <input type="hidden" name="_method" value="PUT"> {{ form_widget(form._token) }}
         {% include 'CorresponsaliaBundle:Default:_tablarendicion.html.twig' %}

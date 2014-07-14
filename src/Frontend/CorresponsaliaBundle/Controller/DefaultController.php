@@ -85,6 +85,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
+        //genero form de relacion gasto
+        $entity = new Relaciongasto();
+        $form   = $this->createForm(new RelaciongastoType(0), $entity);
+
+
         //consulto si tiene fondo asignado
         $estadofondo=$this->Estadofondo($idperiodo);
         if($estadofondo==null){
@@ -102,6 +107,7 @@ class DefaultController extends Controller
                 "estadofondo"=>$estadofondo,
                 "rendicionlista"=>$rendicionlista,
                 'periodo'=>$periodo,
+                'form'=>$form->createView()
         ));
     }
     
@@ -109,17 +115,19 @@ class DefaultController extends Controller
     {  
         $em = $this->getDoctrine()->getManager();
    
-        $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= true WHERE r.periodorendicion = :periodo and r.aprobada=false');
+        $consulta = $em->createQuery("update CorresponsaliaBundle:Relaciongasto r set r.aprobada= true, r.justificadevolucion=null WHERE r.periodorendicion = :periodo and r.aprobada=false");
         $consulta->setParameter('periodo', $idperiodo);
         $consulta->execute();    
-        
+
         $datos=$request->request->all();
         if(isset($datos['rendiciones'])){
+            $justificacion=$datos['justificacion'];
             $datos=$datos['rendiciones'];
             
             foreach ($datos as $v) {
-                $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= false WHERE r.id = :id');
+                $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= false, r.justificadevolucion= :jd WHERE r.id = :id');
                 $consulta->setParameter('id', $v);
+                $consulta->setParameter('jd', $justificacion[$v]);
                 $consulta->execute();            
             }
         }
