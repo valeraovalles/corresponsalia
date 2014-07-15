@@ -95,19 +95,47 @@
     
     <br>
     <script>    
+
+/*
+        var table = $('#tablalista').DataTable();
+                $('#check_todos').click( function() {
+                    var data = table.$('textarea').serialize();
+                    alert(data);
+                    document.formguardar.submit()
+                    return false;
+                } );
+
+*/
       $(document).ready(function(){
-         $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+
+         var table = $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
               "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
               "aaSorting": [[0,'desc']],
           } );
-      })
+
+           $("#check_todos").click(function(){
+                var a=0;
+                $("input[type=checkbox]:checked").each(function(){
+
+                    var id=$(this).val();
+                    //cada elemento seleccionado
+                    if($("#justf"+id).val()==''){ alert("Ninguna justificación debe quedar en blanco"); a=1;} 
+
+                });
+
+                if(a==0)
+                    document.formguardar.submit()
+                    //var data = $('textarea').serialize();
+                    //alert(data);
+                    //document.formguardar.submit()
+            });
+        });
 
       //valido que escriban una justificacion
         function devolver(){
             if($('#justificadev').val()=="") alert("Debe justificar la devolución.")
             else
             document.formdevolucion.submit()
-
         }
 
         //activo y desactivo la justificacion al presionar check
@@ -121,25 +149,6 @@
                 $("#justf"+id).attr("disabled", "disabled");
             }
         }
-
-
-
- $(document).ready(function(){
-   $("#check_todos").click(function(event){
-        $("input[type=checkbox]:checked").each(function(){
-
-            var id=$(this).val();
-            //cada elemento seleccionado
-                if($("#justf"+id).val()=='') alert("Ninguna justificación debe quedar en blanco")
-            else
-                alert($('.textar').serialize());
-                //document.formguardar.submit()
-
-        });
-   });
- });
-
-
 
    </script>
 {% endblock %}

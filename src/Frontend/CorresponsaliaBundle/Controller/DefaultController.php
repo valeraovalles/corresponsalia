@@ -114,6 +114,7 @@ class DefaultController extends Controller
         $consulta->execute();    
 
         $datos=$request->request->all();
+        print_r($datos);
         if(isset($datos['rendiciones'])){
             $justificacion=$datos['justificacion'];
             $datos=$datos['rendiciones'];
