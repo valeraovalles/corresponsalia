@@ -85,11 +85,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
-        //genero form de relacion gasto
-        $entity = new Relaciongasto();
-        $form   = $this->createForm(new RelaciongastoType(0), $entity);
-
-
         //consulto si tiene fondo asignado
         $estadofondo=$this->Estadofondo($idperiodo);
         if($estadofondo==null){
@@ -107,7 +102,6 @@ class DefaultController extends Controller
                 "estadofondo"=>$estadofondo,
                 "rendicionlista"=>$rendicionlista,
                 'periodo'=>$periodo,
-                'form'=>$form->createView()
         ));
     }
     

@@ -18,11 +18,11 @@
     
     <br><div style="width: 99%;">{% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}</div>
     
-    <form method="post" action="{{ path('corresponsalia_guardarevisionrendicion',{'idperiodo':periodo.id})}}">
+    <form id="formguardar" name="formguardar" method="post" action="{{ path('corresponsalia_guardarevisionrendicion',{'idperiodo':periodo.id})}}">
         <table id="tablalista" style="width: 99%;">
             <thead>
                 <tr>
-                    <th>Nro Comp.</th>
+                    <th>Nro C.</th>
                     <th>F. Factura</th>
                     <th>Descripcion</th>
                     <th>Nombre/Razón</th>
@@ -42,18 +42,18 @@
                     <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
                         <td>{{ entity.numerocomprobante }}</td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                        <td>{{ entity.descripciongasto.descripcion }}</td>
-                        <td>{{ entity.nombrerazonsocial }}</td>
+                        <td><span style="cursor:pointer;" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
+                        <td><span style="cursor:pointer;" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
                         <td>{{ entity.tipomoneda.tipomoneda }}</td>
-                        <td>{{ entity.cambio }}</td>
+                        <td align="center">{{ entity.cambio }}</td>
                         <td>{{ entity.montomonnac }}</td>
                         <td>{{ entity.montodolar }}</td>
                         {% if entity.aprobada==true %}
                             <td><textarea disabled="disabled" name="justificacion[{{ entity.id }}]" id="justf{{ entity.id }}"></textarea></td>
                         {% else %}
-                            <td><textarea name="justificacion[{{ entity.id }}]" id="justf{{ entity.id }}">{{ entity.justificadevolucion }}</textarea></td>
+                            <td><textarea class="textar" name="justificacion[{{ entity.id }}]" id="justf{{ entity.id }}">{{ entity.justificadevolucion }}</textarea></td>
                         {% endif %}
 
                         <td><input id="check{{ entity.id }}" onclick="check({{ entity.id }})" value="{{ entity.id }}" name="rendiciones[{{entity.id}}]" type="checkbox" {% if entity.aprobada==false %}checked="checked"{% endif %}></td>
@@ -65,7 +65,7 @@
             </tbody>
         </table> 
         <br><br><br><br>
-        <input class="btn btn-primary" type="submit" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
+        <input id="check_todos" class="btn btn-primary" type="button" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
     </form>
     
     {% if oculta==0 %}
@@ -121,6 +121,25 @@
                 $("#justf"+id).attr("disabled", "disabled");
             }
         }
+
+
+
+ $(document).ready(function(){
+   $("#check_todos").click(function(event){
+        $("input[type=checkbox]:checked").each(function(){
+
+            var id=$(this).val();
+            //cada elemento seleccionado
+                if($("#justf"+id).val()=='') alert("Ninguna justificación debe quedar en blanco")
+            else
+                alert($('.textar').serialize());
+                //document.formguardar.submit()
+
+        });
+   });
+ });
+
+
 
    </script>
 {% endblock %}
