@@ -64,7 +64,7 @@ class Cambio
      *
      * @ORM\ManyToOne(targetEntity="Tipomoneda")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=false)
      * })
      * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda.")
      

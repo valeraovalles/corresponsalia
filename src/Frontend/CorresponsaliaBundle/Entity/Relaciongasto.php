@@ -134,7 +134,7 @@ class Relaciongasto
      *
      * @ORM\ManyToOne(targetEntity="Tipomoneda")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=false)
      * })
      * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda").
      */
@@ -148,6 +148,12 @@ class Relaciongasto
      */
     private $observacion;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="justificadevolucion", type="string", nullable=true)
+     */
+    private $justificadevolucion;
 
 
     /**
@@ -160,6 +166,29 @@ class Relaciongasto
         return $this->id;
     }
 
+    /**
+     * Set justificadevolucion
+     *
+     * @param string $justificadevolucion
+     * @return Tipocorresponsalia
+     */
+    public function setJustificadevolucion($justificadevolucion)
+    {
+        $this->justificadevolucion = $justificadevolucion;
+    
+        return $this;
+    }
+
+    /**
+     * Get justificadevolucion
+     *
+     * @return string 
+     */
+    public function getJustificadevolucion()
+    {
+        return $this->justificadevolucion;
+    }
+    
     /**
      * Set numerocomprobante
      *
