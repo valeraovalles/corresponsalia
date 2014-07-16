@@ -196,7 +196,7 @@ class funciones
         $query->setMaxResults(1);
         $periodoant = $query->getResult(); 
 
-        if($periodoant){
+        if($periodoant and $periodoant[0]->getEstatus()==4){
             $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($periodoant[0]->getId());
             if($ef) $saldoinicial=$ef[0]->getSaldofinal();
             else{

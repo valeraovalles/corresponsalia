@@ -14,11 +14,6 @@ use Frontend\CorresponsaliaBundle\Form\DocumentoType;
  */
 class DocumentoController extends Controller
 {
-
-    /**
-     * Lists all Documento entities.
-     *
-     */
     public function indexAction($corresponsalia)
     {
         $em = $this->getDoctrine()->getManager();
