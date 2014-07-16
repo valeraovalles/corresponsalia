@@ -152,6 +152,7 @@ class funciones
         $query->setParameter('idco', $idco);
         $query->setParameter('idtg', $idtg);
         $query->setParameter('idp', $idperiodo);
+        $query->setMaxResults(1);
         $periodosig = $query->getResult(); 
 
 
