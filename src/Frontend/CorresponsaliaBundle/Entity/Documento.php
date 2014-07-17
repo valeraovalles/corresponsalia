@@ -45,7 +45,6 @@ class Documento
 
     /**
      * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
-     * @Assert\NotBlank(message="El campo descripcion no puede estar en blanco.").
      *  
      */
     private $file;
@@ -54,7 +53,6 @@ class Documento
      * @var string
      *
      * @ORM\Column(name="archivo", type="string", length=500, nullable=true)
-     * @Assert\NotBlank(message="El campo descripcion no puede estar en blanco.").
      */
     private $archivo;
     

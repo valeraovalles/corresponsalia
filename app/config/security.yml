@@ -59,10 +59,10 @@ security:
         - { path: ^/corresponsalia/rendirgasto, roles: ROLE_RENDICION_CORRESPONSALIA }
 
 
-    #ROLES DE MODULO DE PERSONAL
-        - { path: ^/corresponsalia/personal,     roles: [ROLE_SUPERADMIN, ROLE_PERSONAL]}
-        - { path: ^/corresponsalia/cargo,        roles: [ROLE_SUPERADMIN, ROLE_PERSONAL]}
-    #ROLES DE MODULO DE CORRESPONSALIA (DATOS, COMENTARIOS Y DOCUMENTOS)
+        #ROLES DE MODULO DE PERSONAL
+        - { path: ^/corresponsalia/personal,     roles: [ROLE_SUPERADMIN, ROLE_PERSONAL, ROLE_RENDICION_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/cargo,        roles: [ROLE_SUPERADMIN]}
+        #ROLES DE MODULO DE CORRESPONSALIA (DATOS, COMENTARIOS Y DOCUMENTOS)
         - { path: ^/corresponsalia/datoslegales, roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/comentarios,  roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/documentos,   roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
