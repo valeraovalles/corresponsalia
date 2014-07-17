@@ -55,6 +55,9 @@ class RelaciongastoType extends AbstractType
             ->add('periodorendicion')
             ->add('responsable')
             ->add('cambio')
+            ->add('justificadevolucion','textarea')
+            ->add('observacion','textarea')
+            ->add('tipomoneda',null,array('empty_value'=>'Seleccione...'))
         ;
     }
     

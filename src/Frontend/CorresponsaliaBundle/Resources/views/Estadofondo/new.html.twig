@@ -55,7 +55,8 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">Saldo inicial:</div>
-                <div class="widgetform">{{ form_widget(form.saldoinicial,{'attr':{'value':saldoinicial,'readonly':'readonly'}}) }}</div>
+                <div class="widgetform">{{saldoinicial}}&nbsp;&nbsp;{% if saldoinicial==0 %}<span class="label label-info">Aún no se ha cerrado el período anterior</span>{% endif %}</div>
+                <div style="display:none">{{ form_widget(form.saldoinicial,{'attr':{'value':saldoinicial,'readonly':'readonly'}}) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Recurso enviado:</div>

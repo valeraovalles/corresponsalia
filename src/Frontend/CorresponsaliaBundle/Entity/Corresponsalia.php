@@ -65,6 +65,15 @@ class Corresponsalia
      */
     private $tipomoneda;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="analistaencargado", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo analista encargado(a) no puede estar en blanco.").
+     */
+    private $analistaencargado;
+
+
      /**
      * @var \Perfil
      *
@@ -74,6 +83,7 @@ class Corresponsalia
      * })
      */
     private $responsable;
+
 
     /**
      * Get id
@@ -107,6 +117,30 @@ class Corresponsalia
     {
         return $this->nombre;
     }
+
+    /**
+     * Set analistaencargado
+     *
+     * @param string $analistaencargado
+     * @return Corresponsalia
+     */
+    public function setAnalistaencargado($analistaencargado)
+    {
+        $this->analistaencargado = $analistaencargado;
+    
+        return $this;
+    }
+
+    /**
+     * Get analistaencargado
+     *
+     * @return string 
+     */
+    public function getAnalistaencargado()
+    {
+        return $this->analistaencargado;
+    }
+
 
     /**
      * Set paisId

@@ -9,7 +9,7 @@
     <h2>EDITAR {{ periodo.tipogasto.descripcion|upper }}</h2>
     {% if periodo.descripcionperiodo!='' %}<h4><b>DESCRIPCIÓN: '{{ periodo.descripcionperiodo|upper }}'</b></h4>{% endif %}
     <h4>CORRESPONSALÍA: {{ periodo.corresponsalia.nombre|upper }}</h4>
-    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
+    <h4>PAÍS: {{ periodo.corresponsalia.pais.pais|upper }} | AÑO: {{ periodo.anio }} | MES: {{ periodo.mes }} | MONEDA: {{ cambio.tipomoneda.tipomoneda|upper }} | CAMBIO: {{ cambio.montocambiodolar }}</h4><br>
 {% endblock %}
     
 {% block body %}
@@ -31,6 +31,8 @@
 
     {% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}
     
+    {% if rendicion.aprobada==false %}<div class="alert alert-danger"><b>JUSTIFICACIÓN DE LA DEVOLUCIÓN</b><br>{{ rendicion.justificadevolucion }}</div>{% endif %}
+
     <form novalidate method="post" action="{{ path('tipocorresponsalia_actualizarendicion',{'idrendicion':rendicion.id,'idperiodo':periodo.id}) }}">  
         <input type="hidden" name="_method" value="PUT"> {{ form_widget(form._token) }}
         {% include 'CorresponsaliaBundle:Default:_tablarendicion.html.twig' %}

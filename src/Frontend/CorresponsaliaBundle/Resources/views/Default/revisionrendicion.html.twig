@@ -18,18 +18,21 @@
     
     <br><div style="width: 99%;">{% include 'CorresponsaliaBundle:Default:_estatusfondo.html.twig' %}</div>
     
-    <form method="post" action="{{ path('corresponsalia_guardarevisionrendicion',{'idperiodo':periodo.id})}}">
+    <form id="formguardar" name="formguardar" method="post" action="{{ path('corresponsalia_guardarevisionrendicion',{'idperiodo':periodo.id})}}">
         <table id="tablalista" style="width: 99%;">
             <thead>
                 <tr>
-                    <th>Nro Comp.</th>
+                    <th>Nro C.</th>
                     <th>F. Factura</th>
                     <th>Descripcion</th>
                     <th>Nombre/Razón</th>
                     <th>I. Fiscal</th>
+                    <th>Nro Fact.</th>
+                    <th>Moneda</th>
                     <th>Cambio</th>
-                    <th>Dólares.</th>
                     <th>Monto MN.</th>
+                    <th>Dólares.</th>
+                    <th>Justificación</th>
                     <th>Acc.</th>
                 </tr>
             </thead>
@@ -39,13 +42,22 @@
                     <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
                         <td>{{ entity.numerocomprobante }}</td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                        <td>{{ entity.descripciongasto.descripcion }}</td>
+                        <td><span style="cursor:pointer;" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
+                        <td><span style="cursor:pointer;" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
-                        <td>{{ entity.cambio }}</td>
-                        <td>{{ entity.montodolar }}</td>
+                        <td>{{ entity.tipomoneda.tipomoneda }}</td>
+                        <td align="center">{{ entity.cambio }}</td>
                         <td>{{ entity.montomonnac }}</td>
-                        <td><input value="{{ entity.id }}" name="rendiciones[{{entity.id}}]" type="checkbox" {% if entity.aprobada==false %}checked="checked"{% endif %}></td>
+                        <td>{{ entity.montodolar }}</td>
+                        {% if entity.aprobada==true %}
+                            <td><textarea disabled="disabled" name="justificacion[{{ entity.id }}]" id="justf{{ entity.id }}"></textarea></td>
+                        {% else %}
+                            <td><textarea class="textar" name="justificacion[{{ entity.id }}]" id="justf{{ entity.id }}">{{ entity.justificadevolucion }}</textarea></td>
+                        {% endif %}
+
+                        <td><input id="check{{ entity.id }}" onclick="check({{ entity.id }})" value="{{ entity.id }}" name="rendiciones[{{entity.id}}]" type="checkbox" {% if entity.aprobada==false %}checked="checked"{% endif %}></td>
+
                     </tr>
                     {% if entity.aprobada==false %}{% set oculta=1 %}{% endif %}
             {% endfor %}
@@ -53,7 +65,7 @@
             </tbody>
         </table> 
         <br><br><br><br>
-        <input class="btn btn-primary" type="submit" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
+        <input id="check_todos" class="btn btn-primary" type="button" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
     </form>
     
     {% if oculta==0 %}
@@ -64,8 +76,8 @@
         {% if oculta==1 %}
             <form name="formdevolucion" novalidate method="post" action="{{ path('corresponsalia_estatusrendicion',{'idperiodo':periodo.id,'estatus':3 }) }}" onsubmit="return confirm('¿Está seguro que desea devolver esta rendición para su corrección? Recuerde actualizar las rediciones que se deben corregir antes de devolver la rendición!!');">  
                
-               <textarea name="justificadev" placeholder="Describa el error" id="justificadev"></textarea><br>
-               <input type="button" onclick="devolver()" value="DEVOLVER PARA CORRECCIÓN" class="btn btn-danger">
+               <textarea name="justificadev" placeholder="Describa una justificación general" id="justificadev"></textarea><br>
+               <input type="submit" value="DEVOLVER PARA CORRECCIÓN" class="btn btn-danger">
 
             </form> 
         {% endif %}
@@ -83,19 +95,60 @@
     
     <br>
     <script>    
+
+/*
+        var table = $('#tablalista').DataTable();
+                $('#check_todos').click( function() {
+                    var data = table.$('textarea').serialize();
+                    alert(data);
+                    document.formguardar.submit()
+                    return false;
+                } );
+
+*/
       $(document).ready(function(){
-         $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+
+         var table = $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
               "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
               "aaSorting": [[0,'desc']],
           } );
 
+           $("#check_todos").click(function(){
+                var a=0;
+                $("input[type=checkbox]:checked").each(function(){
 
-      })
+                    var id=$(this).val();
+                    //cada elemento seleccionado
+                    if($("#justf"+id).val()==''){ alert("Ninguna justificación debe quedar en blanco"); a=1;} 
+
+                });
+
+                if(a==0)
+                    document.formguardar.submit()
+                    //var data = $('textarea').serialize();
+                    //alert(data);
+                    //document.formguardar.submit()
+            });
+        });
+
+      //valido que escriban una justificacion
         function devolver(){
             if($('#justificadev').val()=="") alert("Debe justificar la devolución.")
             else
             document.formdevolucion.submit()
-
         }
+
+        //activo y desactivo la justificacion al presionar check
+        function check(id){
+
+            if($("#check"+id).is(":checked")==true){
+                $("#justf"+id).removeAttr("disabled", "disabled");
+                $( "#justf"+id ).focus();
+            } else{
+                $("#justf"+id).val("")
+                $("#justf"+id).attr("disabled", "disabled");
+            }
+        }
+
    </script>
 {% endblock %}

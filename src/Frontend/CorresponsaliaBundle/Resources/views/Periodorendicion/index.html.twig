@@ -61,7 +61,7 @@
                             {% else %}
                             {#<a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>#}
 
-                            <b>N/A</b>
+                            <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
 
                             {% endif %}
                                 

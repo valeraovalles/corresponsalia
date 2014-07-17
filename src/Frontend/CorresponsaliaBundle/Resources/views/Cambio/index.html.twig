@@ -26,6 +26,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Moneda</th>
                 <th>Monto</th>
                 <th>Fecha registro</th>
                 <th>Responsable</th>
@@ -36,6 +37,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.id }}</td>
+                <td>{{ entity.tipomoneda.tipomoneda }}</td>
                 <td>{{ entity.montocambiodolar }}</td>
                 <td>{{ entity.fechahoraregistro|date('d-m-Y G:i:s') }}</td>
                 <td>{{ entity.responsable.primerNombre|title }} {{ entity.responsable.primerApellido|title }}</td>

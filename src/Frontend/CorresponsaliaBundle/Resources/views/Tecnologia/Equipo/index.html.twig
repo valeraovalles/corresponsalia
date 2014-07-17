@@ -1,0 +1,137 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>LISTADO DE EQUIPO</h1>{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery( ".datepicker" ).datepicker();
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    <table id="tablalista" class="table table-bordered table-condensed" style="width: 98.7%;">
+        <thead>
+            <tr>
+                <th style="width: 11%;">Categoria</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th style="width: 17%;">Descripción</th>
+                <th style="width: 60px;">Status</th>
+                <th>Asignacion</th>
+                <th>Corresponsalia</th>
+                <th style="width: 13%;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in listEquipo %}
+            <tr>
+                <td>{{ entity.categoria }}</td>
+                <td>{{ entity.modelo.marca }}</td>
+                <td>{{ entity.modelo }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td class="centrar">
+                    {% if entity.status %}
+                        <span class="label label-success">&nbsp;ACTIVO&nbsp;&nbsp;</span>
+                    {% else %}
+                        <span class="label label-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity|length > 9 %}
+                        {{ entity.statusAsignacion.nombre|capitalize }}
+                    {% endif %}
+                </td>
+                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |
+                    {% if entity.status %}
+                        {% if entity|length > 9 %}
+                            {% if entity.statusAsignacion == "prestamo" %}
+                            <a href=""><span class="label label-primary etiqueta" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></a>
+                            {% else %}
+                                <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><span class="label label-primary etiqueta">REASIGNAR</span></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><span class="label label-primary etiqueta">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></a>
+                        {% endif %}
+                    {% endif %}
+                 </td> 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </br></br><a class="btn btn-primary" href="{{ path('tecnoequipo_new') }}">NUEVO EQUIPO</a></br></br>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">RETORNO DE EQUIPO</h4>
+          </div>
+          <div class="modal-body">
+            <form id="form_fecha" class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="fechaRetorno" class="col-sm-4 control-label">Fecha Retorno:</label>
+              <div class="col-sm-6">
+                <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
+              </div>
+            </div>
+            <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+            <button type="button" class="btn btn-primary" id="guardar"/>GUARDAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+    var jQuery = jQuery.noConflict();
+    jQuery(document).ready(function(){
+        
+        jQuery('.prestamo').on('mouseover', function() {
+            var id = jQuery(this).data('id');
+            jQuery("#select_equipo_id").val(id);
+        });
+        
+        jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+             "aaSorting": [[0,'desc']]
+         } );
+
+        jQuery("#guardar").click(function(e){
+            e.preventDefault();
+            var data = {
+                fecha: jQuery("#fechaRetorno").val(),
+                id: jQuery("#select_equipo_id").val()
+            };
+            jQuery.ajax({
+                type: 'post',
+                url: '{{ path("tecnoequipo_fRetorno") }}',
+                data: data,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+        });
+
+    });
+    </script>
+    {% endblock %}

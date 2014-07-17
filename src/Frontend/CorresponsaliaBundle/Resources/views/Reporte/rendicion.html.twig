@@ -8,6 +8,9 @@
 
 {% block titulomodulo %}
     <h1>REPORTE DE RENDICIÓN</h1>
+    {% if cor.corresponsalia.id is defined %}
+        <h4>{{ cor.corresponsalia.nombre }}</h4>
+    {% endif %}
 {% endblock %}
     
 {% block body -%}
@@ -16,7 +19,7 @@
     <form novalidate method="post" action="{{ path('corresponsalia_creareporterendicion') }}">
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:70%;">
-            <div class="contenedorform">
+            <div class="contenedorform" id="corresponsalia">
                 <div class="labelform">Corresponsalía:</div>
                 <div class="widgetform">{{ form_widget(form.corresponsalia,{'attr':{'style':'width:250px'}}) }}</div>
             </div>
@@ -29,9 +32,24 @@
     </form>
     <br><br><br>
     
+    {# con esta javascript oculto el form de corresponsalia y llamo al tipo de gasto #}
+    {% if cor.corresponsalia.id is defined %}
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#corresponsalia').hide()
+                $("#reporte_corresponsalia option[value= "+ {{ cor.corresponsalia.id }} +"]").attr("selected",true);
+                var dato = $("#reporte_corresponsalia").val();
+                var ruta = "{{ path('ajaxreporterendicion', {'dato': 'variable','muestra': '2'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#ajax').load(ruta);
+            });
+        </script>
+    {% endif %}
+
+
     <script type="text/javascript">
         $(document).ready(function () {
-
             $('#reporte_corresponsalia').click(function(){
                 var dato = $("#reporte_corresponsalia").val();
                 var ruta = "{{ path('ajaxreporterendicion', {'dato': 'variable','muestra': '2'}) }}";

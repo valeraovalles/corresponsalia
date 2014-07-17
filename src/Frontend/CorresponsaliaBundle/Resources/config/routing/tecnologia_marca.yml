@@ -1,0 +1,30 @@
+tecnomarca:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:index" }
+
+tecnomarca_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:show" }
+
+tecnomarca_new:
+    pattern:  /new
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:new" }
+
+tecnomarca_create:
+    pattern:  /create
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:create" }
+    requirements: { _method: post }
+
+tecnomarca_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:edit" }
+
+tecnomarca_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:update" }
+    requirements: { _method: post|put }
+
+tecnomarca_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Marca:delete" }
+    requirements: { _method: post|delete }

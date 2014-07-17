@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}  
+    <h1>NUEVA MARCA</h1>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(form.nombre)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>
+    </div>
+    {% endif %}
+
+    <form novalidate method="post" action="{{ path('tecnomarca_create') }}">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:70%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre, {'attr': {'class': 'strtoupper'} } ) }}</div>
+            </div>
+        </div>
+        
+        <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnomarca') }}">IR AL LISTADO</a>
+    </form>
+{% endblock %}
+

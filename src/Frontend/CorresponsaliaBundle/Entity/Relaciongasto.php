@@ -28,7 +28,7 @@ class Relaciongasto
      *
      * @ORM\Column(name="numerocomprobante", type="string", nullable=false).
      * @Assert\NotBlank(message="Debe escribir el número de comprobante.").
-     * @Assert\Type(type="digit", message="El numero conprobante no puede contener letras.").
+     * @Assert\Type(type="digit", message="El numero comprobante no puede contener letras.").
      */
     private $numerocomprobante;
 
@@ -128,6 +128,34 @@ class Relaciongasto
      */
     private $aprobada=true;
     
+
+    /**
+     * @var \Tipomoneda
+     *
+     * @ORM\ManyToOne(targetEntity="Tipomoneda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipomoneda_id", referencedColumnName="id", nullable=false)
+     * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de moneda").
+     */
+    private $tipomoneda;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="observacion", type="string", nullable=true)
+     */
+    private $observacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="justificadevolucion", type="string", nullable=true)
+     */
+    private $justificadevolucion;
+
+
     /**
      * Get id
      *
@@ -138,6 +166,29 @@ class Relaciongasto
         return $this->id;
     }
 
+    /**
+     * Set justificadevolucion
+     *
+     * @param string $justificadevolucion
+     * @return Tipocorresponsalia
+     */
+    public function setJustificadevolucion($justificadevolucion)
+    {
+        $this->justificadevolucion = $justificadevolucion;
+    
+        return $this;
+    }
+
+    /**
+     * Get justificadevolucion
+     *
+     * @return string 
+     */
+    public function getJustificadevolucion()
+    {
+        return $this->justificadevolucion;
+    }
+    
     /**
      * Set numerocomprobante
      *
@@ -162,6 +213,29 @@ class Relaciongasto
     }
 
     /**
+     * Set tipomoneda
+     *
+     * @param integer $tipomoneda
+     * @return Relaciongastos
+     */
+    public function setTipomoneda(\Frontend\CorresponsaliaBundle\Entity\Tipomoneda $tipomoneda = null )
+    {
+        $this->tipomoneda = $tipomoneda;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipomoneda
+     *
+     * @return integer 
+     */
+    public function getTipomoneda()
+    {
+        return $this->tipomoneda;
+    }
+
+    /**
      * Set fechafactura
      *
      * @param \DateTime $fechafactura
@@ -182,6 +256,29 @@ class Relaciongasto
     public function getFechafactura()
     {
         return $this->fechafactura;
+    }
+
+    /**
+     * Set observacion
+     *
+     * @param \DateTime $observacion
+     * @return Relaciongastos
+     */
+    public function setObservacion($observacion)
+    {
+        $this->observacion = $observacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get observacion
+     *
+     * @return \DateTime 
+     */
+    public function getObservacion()
+    {
+        return $this->observacion;
     }
 
     /**

@@ -109,17 +109,20 @@ class DefaultController extends Controller
     {  
         $em = $this->getDoctrine()->getManager();
    
-        $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= true WHERE r.periodorendicion = :periodo and r.aprobada=false');
+        $consulta = $em->createQuery("update CorresponsaliaBundle:Relaciongasto r set r.aprobada= true, r.justificadevolucion=null WHERE r.periodorendicion = :periodo and r.aprobada=false");
         $consulta->setParameter('periodo', $idperiodo);
         $consulta->execute();    
-        
+
         $datos=$request->request->all();
+        print_r($datos);
         if(isset($datos['rendiciones'])){
+            $justificacion=$datos['justificacion'];
             $datos=$datos['rendiciones'];
             
             foreach ($datos as $v) {
-                $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= false WHERE r.id = :id');
+                $consulta = $em->createQuery('update CorresponsaliaBundle:Relaciongasto r set r.aprobada= false, r.justificadevolucion= :jd WHERE r.id = :id');
                 $consulta->setParameter('id', $v);
+                $consulta->setParameter('jd', $justificacion[$v]);
                 $consulta->execute();            
             }
         }
@@ -134,23 +137,7 @@ class DefaultController extends Controller
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
-        //$consulta->execute();
-
-        if($estatus==2){
-/*
-            //CORREO
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Corresponsalia-Revision')     // we configure the title
-            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
-            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
-            ->setBody( $this->renderView(
-                    'SitBundle:Correo:solucion.html.twig',
-                    array('ticket' => $ticket)
-                ), 'text/html');
-
-            $this->get('mailer')->send($message);    // then we send the message.
-            //FIN CORREO*/
-        }
+        $consulta->execute();
 
         if($estatus==2){
 /*
@@ -201,6 +188,13 @@ class DefaultController extends Controller
         //valido si ya fue asignada una tasa de cambio
         $cambio=  $this->cambio($idperiodo);
         if($cambio==null){
+
+            $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
+            if(!$ef){
+                $this->get('session')->getFlashBag()->add('alert', 'No existe un fondo asignado para este periodo.');
+                return $this->redirect($this->generateUrl('periodorendicion'));
+            }
+
              $this->get('session')->getFlashBag()->add('alert', 'DEBE INDICAR LA TASA DE CAMBIO QUE UTILIZARÁ PARA ESTA RENDICIÓN ANTES DE CONTINUAR.');
              return $this->redirect($this->generateUrl('cambio_new',array('idperiodo'=>$idperiodo)));
         }

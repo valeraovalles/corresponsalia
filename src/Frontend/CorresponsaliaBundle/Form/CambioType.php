@@ -20,6 +20,7 @@ class CambioType extends AbstractType
                 'currency'=>'USD'
                 ))
             ->add('periodorendicion')
+            ->add('tipomoneda',null,array('empty_value'=>'Seleccione...'))
         ;
     }
     

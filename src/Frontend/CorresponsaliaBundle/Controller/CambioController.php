@@ -96,12 +96,16 @@ class CambioController extends Controller
         $entity = new Cambio();
         $form   = $this->createCreateForm($entity,$idperiodo);
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
-        
+
+        $ef = $em->getRepository('CorresponsaliaBundle:Estadofondo')->findByPeriodorendicion($idperiodo);
+
         return $this->render('CorresponsaliaBundle:Cambio:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'periodo'=>$periodo
+            'periodo'=>$periodo,
+            'ef'=>$ef
         ));
+
         
     }
 

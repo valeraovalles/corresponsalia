@@ -13,11 +13,11 @@
 {% block body -%}
     {{ parent() }}
 
-    
-    
-    {% if form_errors(form.montocambiodolar) %}
+   
+    {% if form_errors(form.montocambiodolar) or form_errors(form.tipomoneda) %}
     <div class="alert alert-danger errores" style="width:50%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.tipomoneda) }}</div>
         <div>{{ form_errors(form.montocambiodolar) }}</div>
     </div>
     {% endif %}
@@ -26,7 +26,7 @@
         {{ form_widget(form._token) }}
         <div class="formShow" style="width:50%;">
             
-            <div class="alert alert-info">Debe colocar el equivalente de su moneda nacional al dólar</div>
+            <div class="alert alert-info">Debe colocar el equivalente de la moneda seleccionada al dólar</div>
             <div class="contenedorform">
                 <div class="labelform">Corresponsalía:</div>
                 <div class="widgetform">{{ periodo.corresponsalia.nombre|upper }}</div>
@@ -36,7 +36,7 @@
                 <div class="widgetform">{{ periodo.tipogasto.descripcion|upper }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Moneda:</div>
+                <div class="labelform">Moneda Nacional:</div>
                 <div class="widgetform">{{ periodo.corresponsalia.tipomoneda.tipomoneda|upper }}</div>
             </div>
             <div class="contenedorform">
@@ -46,6 +46,28 @@
             <div class="contenedorform">
                 <div class="labelform">Mes:</div>
                 <div class="widgetform">{{ periodo.mes }}</div>
+            </div>
+            {% if ef[0] is defined %}
+                <div class="contenedorform">
+                    <div class="labelform">Saldo inicial:</div>
+                    <div class="widgetform"><span class="label label-info">{% if ef[0].saldoinicial %}{{ ef[0].saldoinicial }}{% else %}No asignado{% endif %}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Recurso enviado:</div>
+                    <div class="widgetform"><span class="label label-info">{{ ef[0].recursorecibido }}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Pagos:</div>
+                    <div class="widgetform"><span class="label label-danger">{{ ef[0].pagos }}</span></div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Saldo final:</div>
+                    <div class="widgetform"><span class="label label-warning">{{ ef[0].saldofinal }}</span></div>
+                </div>
+            {% endif %}
+            <div class="contenedorform">
+                <div class="labelform">Moneda:</div>
+                <div class="widgetform">{{ form_widget(form.tipomoneda) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Monto Cambio:</div>

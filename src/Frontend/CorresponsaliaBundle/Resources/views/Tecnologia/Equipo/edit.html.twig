@@ -1,0 +1,127 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>EDITAR EQUIPO</h1>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 200px !important;
+        }
+    </style>
+{% endblock %}  
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(function(){
+            jQuery("#tecnologia_equipo_marca").change(function(){
+                var data = {
+                    marca_id: jQuery(this).val()
+                };
+
+                jQuery.ajax({
+                    type: 'post',
+                    url: '{{ path("tecnoequipo_select") }}',
+                    data: data,
+                    success: function(data) {
+                        var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
+                         $modelo_selector.html('<option>Selecciona</option>');
+                        for(var i in data){
+                            $modelo_selector.append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+        
+        jQuery(function() {
+            jQuery( ".datepicker" ).datepicker({
+                showOn: "button",
+                buttonImage: "{{ asset('images/calendario/calendar.png') }}",
+                buttonImageOnly: true
+            });
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(edit_form.serialEquipo)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.serialEquipo) }}</div>
+    </div>
+    {% endif %}
+    <form novalidate method="post" action="{{ path('tecnoequipo_update',{'id':entity.id}) }}">
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+         <div id="wrapper-form" class="formShow" style="width:70%;">
+             <div class="contenedorform">
+                <div class="labelform">Categoria:</div>
+                <div class="widgetform">{{ form_widget(edit_form.categoria, {'attr': {'class': 'autocomplete_select'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Marca:</div>
+                <div class="widgetform">{{ form_widget(edit_form.marca, {'attr': {'class': 'autocomplete_select'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">modelo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.modelo, {'attr': {'class': 'autocomplete_select'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">serial Equipo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.serialEquipo, {'attr': {'class': 'strtoupper'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">descripcion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion, {'attr': {'class': 'strtoupper'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">fecha Adquisicion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechaAdquisicion, { 'attr': {'class': 'datepicker'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Condicion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.condicion, {'attr': {'class': 'autocomplete_select'} }) }}</div>
+            </div>
+            {% if entity.observacionCondicion|length > 0 %}
+                <div id="observcondicion" class="contenedorform">
+                    <div class="labelform">observacion Condicion:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.observacionCondicion) }}</div>
+                </div>
+            {% endif %}
+            {% if entity.status %}
+                {% if asignacion == false %}
+                    <i>Este equipo aun no esta asignado a ninguna corresponsalia</i>
+                {% endif %}
+            {% else %}
+                <i>Este equipo esta inactivo</i>
+            {% endif %}
+         </div>
+        <input type="submit" value="EDITAR" class="btn btn-primary"> | 
+        <a class="btn btn-default" href="{{ path('tecnoequipo_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
+        <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
+        {% if entity.status %}
+            {% if asignacion == true %}
+                | <a class="btn btn-default" href="{{ path('tecnoasignar_edit', { 'id': entity.id }) }}">EDITAR ASIGNACIÓN</a>
+            {% endif %}
+        {% endif %}
+    </form>
+
+    <BR>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}
