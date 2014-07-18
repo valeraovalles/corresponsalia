@@ -71,8 +71,8 @@
                     <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |
                     {% if entity.status %}
                         {% if entity|length > 9 %}
-                            {% if entity.statusAsignacion == "prestamo" %}
-                            <a href=""><span class="label label-primary etiqueta" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></a>
+                            {% if entity.statusAsignacion|lower == "prestamo" %}
+                            <a href=""><span class="label label-primary etiqueta prestamo" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></a>
                             {% else %}
                                 <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><span class="label label-primary etiqueta">REASIGNAR</span></a>
                             {% endif %}
@@ -99,9 +99,9 @@
             <form id="form_fecha" class="form-horizontal" role="form">
             <div class="form-group">
               <label for="fechaRetorno" class="col-sm-4 control-label">Fecha Retorno:</label>
-              <div class="col-sm-6">
-                <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
-              </div>
+                <div class="col-sm-6">
+                  <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
+                </div>
             </div>
             <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
             </form>
@@ -122,28 +122,28 @@
         jQuery('.prestamo').on('mouseover', function() {
             var id = jQuery(this).data('id');
             jQuery("#select_equipo_id").val(id);
+            alert(id);
         });
-        
-        jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-             "aaSorting": [[0,'desc']]
-         } );
 
-        jQuery("#guardar").click(function(e){
-            e.preventDefault();
-            var data = {
+        jQuery("#guardar").click(function(){
+            var datos = {
                 fecha: jQuery("#fechaRetorno").val(),
                 id: jQuery("#select_equipo_id").val()
             };
             jQuery.ajax({
                 type: 'post',
                 url: '{{ path("tecnoequipo_fRetorno") }}',
-                data: data,
-                success: function(data) {
-                    alert(data);
+                data: datos,
+                success: function(response) {
+                    alert(response);
                 }
             });
         });
+        
+        jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+             "aaSorting": [[0,'desc']]
+         } );
 
     });
     </script>

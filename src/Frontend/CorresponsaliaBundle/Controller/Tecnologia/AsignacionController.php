@@ -211,7 +211,7 @@ class AsignacionController extends Controller
                 'success',
                 array(
                     'title' => 'Editada!',
-                    'message' => 'Asignacion con exito.'
+                    'message' => 'Re-Asignacion con exito.'
                 )
             );
             return $this->redirect($this->generateUrl('tecnoasignar_edit', array('id' => $id)));
@@ -297,8 +297,8 @@ class AsignacionController extends Controller
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
         
-        $equipo_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
-        if (!$equipo_actual) {
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
+        if (!$equipo) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
 
@@ -308,7 +308,7 @@ class AsignacionController extends Controller
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:reasignar.html.twig', array(
             'entity' => $asignar_nuevo,
             'asignar_actual' => $asignar_actual,
-            'equipo_actual' => $equipo_actual,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -342,27 +342,32 @@ class AsignacionController extends Controller
         $form = $this->createCreateForm($asignacion_nueva);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
-            /*
-             * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
-             * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
-             * GUARDAR ASIGNACION ACTUAL EN BITACORA
-             * ELIMINAR ASIGNACION ACTUAL EN ASIGNACION
-             * GUARDAR NUEVA ASIGNACION EN ASIGNACION
-             * 
-             */
+        
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($asignacion_nueva->getId());
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
+        }
+        /*
+         * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
+         * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
+         * GUARDAR ASIGNACION ACTUAL EN BITACORA
+         * ELIMINAR ASIGNACION ACTUAL EN ASIGNACION
+         * GUARDAR NUEVA ASIGNACION EN ASIGNACION
+         * 
+         */
 
-            $asignacion_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
-            $bitacora = new Bitacora();
-            $bitacora->setEquipoId($asignacion_nueva->getId());
-            $bitacora->setCorresponsalia($asignacion_actual->getCorresponsalia());
-            $bitacora->setFechaAsignacion($asignacion_actual->getFechaAsignacion());
-            $bitacora->setFechaEstimadaRetorno($asignacion_actual->getFechaEstimadaRetorno());
-            $bitacora->setFechaRetorno($asignacion_actual->getFechaRetorno());
-            $bitacora->setResponsable($asignacion_actual->getResponsable());
-            $bitacora->setStatus($asignacion_actual->getStatus());            
+        $asignar_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
+        $bitacora = new Bitacora();
+        $bitacora->setEquipoId($asignacion_nueva->getId());
+        $bitacora->setCorresponsalia($asignar_actual->getCorresponsalia());
+        $bitacora->setFechaAsignacion($asignar_actual->getFechaAsignacion());
+        $bitacora->setFechaEstimadaRetorno($asignar_actual->getFechaEstimadaRetorno());
+        $bitacora->setFechaRetorno($asignar_actual->getFechaRetorno());
+        $bitacora->setResponsable($asignar_actual->getResponsable());
+        $bitacora->setStatus($asignar_actual->getStatus());            
             
         if ($form->isValid()) {
-            $em->remove($asignacion_actual);
+            $em->remove($asignar_actual);
             $em->persist($bitacora);
             $em->flush();
             $em->persist($asignacion_nueva);
@@ -378,8 +383,10 @@ class AsignacionController extends Controller
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $asignacion_nueva->getId())));
         }
 
-        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
+        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:reasignar.html.twig', array(
             'entity' => $asignacion_nueva,
+            'asignar_actual' => $asignar_actual,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }

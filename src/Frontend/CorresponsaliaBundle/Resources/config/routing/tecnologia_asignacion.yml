@@ -34,5 +34,5 @@ tecnoasignar_reasignar:
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:reasignar" }
     
 tecnoasignar_Rcreate:
-    pattern:  /Rcreate
+    pattern:  /rcreate
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asignacion:Rcreate" }
