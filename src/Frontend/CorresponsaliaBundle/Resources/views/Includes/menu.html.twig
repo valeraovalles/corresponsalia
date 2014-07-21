@@ -91,11 +91,11 @@
             <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Estado Fondo</a></li>
           {% endif %}
 
+          {% if not is_granted('ROLE_CONSULTORIA') %}
           <li><a href="{{ path('corresponsalia_reporterendicion') }}">Rendición</a></li>
-          
-          {% if is_granted('ROLE_CONSULTORIA') %}
-            <li><a href="#">Personal en Corresponsalías</a></li>
           {% endif %}
+          
+          
         </ul>        
       </li>
       

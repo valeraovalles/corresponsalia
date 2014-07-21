@@ -1,12 +1,13 @@
 # This file is auto-generated during the composer instal
 parameters:
+
     database_driver: pdo_pgsql
     database_host: 127.0.0.1
     database_port: null
     database_name: corresponsalia
     database_user: postgres
-    database_password: 123456
-
+    database_password: postgres
+    
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
     mailer_user: aplicaciones@telesurtv.net
