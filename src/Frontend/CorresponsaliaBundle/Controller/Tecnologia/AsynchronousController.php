@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
+use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo;
 
 /**
  * Description of ModeloExtraController
@@ -39,26 +40,32 @@ class AsynchronousController extends Controller {
         $consulta->execute();
         
         print_r($equipo_id);
-        $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->findById($equipo_id);
+        $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($equipo_id);
         if (!$asignacion) {
             throw $this->createNotFoundException(
                 'No asignacion found for id '.$equipo_id
             );
         }
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($equipo_id);
+        if (!$equipo) {
+            throw $this->createNotFoundException(
+                'No equipo found for id '.$equipo_id
+            );
+        }
         $bitacora = new Bitacora();
-        echo $asignacion;
+        echo $asignacion->getCorresponsalia();
+        $bitacora->setSerialEquipo($equipo->getSerialEquipo());
+        $bitacora->setDescripcion($equipo->getDescripcion());
         $bitacora->setCorresponsalia($asignacion->getCorresponsalia());
         $bitacora->setFechaAsignacion($asignacion->getFechaAsignacion());
-        $bitacora->setFechaEstimadaRetorno($asignacion->getFechaEstimadaRetorno());
         $bitacora->setFechaRetorno($asignacion->getFechaRetorno());
         $bitacora->setResponsable($asignacion->getResponsable());
-        $bitacora->setStatus($asignacion->getStatus());
         
         $em->persist($bitacora);
         $em->remove($asignacion);
         $em->flush();
         
-        return true;
+        return "listo";
     }
 }
 

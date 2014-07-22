@@ -25,25 +25,55 @@ class Bitacora
     private $id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="equipo_id", type="integer", nullable=false)
-     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo")
-     * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="serialequipo", type="string", nullable=false)
+     * 
      */
-    private $equipoId;
+    private $serialEquipo;
 
     /**
-     * @var | Tecnologia.StatusAsignacion
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=false)
      * 
-     * @ORM\ManyToOne(targetEntity="StatusAsignacion")
-     * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="status_id", referencedColumnName="id")
-     * })
      */
-    private $status;
+    private $descripcion;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="observacioncondicion", type="text", nullable=true)
+     */
+    private $observacionCondicion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fechaadquisicion", type="date", nullable=true)
+     */
+    private $fechaAdquisicion;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="categoria", type="text", nullable=true)
+     */
+    private $categoria;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="condicion", type="string", nullable=true)
+     */
+    private $condicion;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="modelo", type="string", nullable=true)
+     */
+    private $modelo;
 
     /**
      * @var string
@@ -55,33 +85,24 @@ class Bitacora
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_asignacion", type="date", nullable=true)
+     * @ORM\Column(name="fechaasignacion", type="date", nullable=true)
      */
     private $fechaAsignacion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_estimada_retorno", type="date", nullable=true)
-     */
-    private $fechaEstimadaRetorno;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha_retorno", type="date", nullable=true)
+     * @ORM\Column(name="fecharetorno", type="date", nullable=true)
      */
     private $fechaRetorno;
 
     /**
-     * @var | Rendicion.Corresponsalia
+     * @var string
      * 
-     * @ORM\ManyToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Corresponsalia")
-     * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="corresponsalia", type="string", nullable=true)
      */
     private $corresponsalia;
+
 
     /**
      * Get id
@@ -94,26 +115,164 @@ class Bitacora
     }
 
     /**
-     * Set equipoId
+     * Set serialEquipo
      *
-     * @param integer $equipoId
+     * @param string $serialEquipo
      * @return Bitacora
      */
-    public function setEquipoId($equipoId)
+    public function setSerialEquipo($serialEquipo)
     {
-        $this->equipoId = $equipoId;
+        $this->serialEquipo = $serialEquipo;
     
         return $this;
     }
 
     /**
-     * Get equipoId
+     * Get serialEquipo
      *
-     * @return integer 
+     * @return string 
      */
-    public function getEquipoId()
+    public function getSerialEquipo()
     {
-        return $this->equipoId;
+        return $this->serialEquipo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Bitacora
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set observacionCondicion
+     *
+     * @param string $observacionCondicion
+     * @return Bitacora
+     */
+    public function setObservacionCondicion($observacionCondicion)
+    {
+        $this->observacionCondicion = $observacionCondicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get observacionCondicion
+     *
+     * @return string 
+     */
+    public function getObservacionCondicion()
+    {
+        return $this->observacionCondicion;
+    }
+
+    /**
+     * Set fechaAdquisicion
+     *
+     * @param \DateTime $fechaAdquisicion
+     * @return Bitacora
+     */
+    public function setFechaAdquisicion($fechaAdquisicion)
+    {
+        $this->fechaAdquisicion = $fechaAdquisicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechaAdquisicion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaAdquisicion()
+    {
+        return $this->fechaAdquisicion;
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param string $categoria
+     * @return Bitacora
+     */
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return string 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set condicion
+     *
+     * @param string $condicion
+     * @return Bitacora
+     */
+    public function setCondicion($condicion)
+    {
+        $this->condicion = $condicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get condicion
+     *
+     * @return string 
+     */
+    public function getCondicion()
+    {
+        return $this->condicion;
+    }
+
+    /**
+     * Set modelo
+     *
+     * @param string $modelo
+     * @return Bitacora
+     */
+    public function setModelo($modelo)
+    {
+        $this->modelo = $modelo;
+    
+        return $this;
+    }
+
+    /**
+     * Get modelo
+     *
+     * @return string 
+     */
+    public function getModelo()
+    {
+        return $this->modelo;
     }
 
     /**
@@ -163,29 +322,6 @@ class Bitacora
     }
 
     /**
-     * Set fechaEstimadaRetorno
-     *
-     * @param \DateTime $fechaEstimadaRetorno
-     * @return Bitacora
-     */
-    public function setFechaEstimadaRetorno($fechaEstimadaRetorno)
-    {
-        $this->fechaEstimadaRetorno = $fechaEstimadaRetorno;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechaEstimadaRetorno
-     *
-     * @return \DateTime 
-     */
-    public function getFechaEstimadaRetorno()
-    {
-        return $this->fechaEstimadaRetorno;
-    }
-
-    /**
      * Set fechaRetorno
      *
      * @param \DateTime $fechaRetorno
@@ -209,35 +345,12 @@ class Bitacora
     }
 
     /**
-     * Set statusId
-     *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $statusId
-     * @return Bitacora
-     */
-    public function setStatus(\Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion $status = null)
-    {
-        $this->status = $status;
-    
-        return $this;
-    }
-
-    /**
-     * Get statusId
-     *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Tecnologia\StatusAsignacion 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set corresponsalia
      *
-     * @param \Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia
+     * @param string $corresponsalia
      * @return Bitacora
      */
-    public function setCorresponsalia(\Frontend\CorresponsaliaBundle\Entity\Corresponsalia $corresponsalia = null)
+    public function setCorresponsalia($corresponsalia)
     {
         $this->corresponsalia = $corresponsalia;
     
@@ -247,7 +360,7 @@ class Bitacora
     /**
      * Get corresponsalia
      *
-     * @return \Frontend\CorresponsaliaBundle\Entity\Corresponsalia 
+     * @return string 
      */
     public function getCorresponsalia()
     {

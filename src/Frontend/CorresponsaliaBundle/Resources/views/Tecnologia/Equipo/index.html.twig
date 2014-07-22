@@ -122,7 +122,6 @@
         jQuery('.prestamo').on('mouseover', function() {
             var id = jQuery(this).data('id');
             jQuery("#select_equipo_id").val(id);
-            alert(id);
         });
 
         jQuery("#guardar").click(function(){
@@ -132,7 +131,7 @@
             };
             jQuery.ajax({
                 type: 'post',
-                url: '{{ path("tecnoequipo_fRetorno") }}',
+                url: '{{ path("tecnoequipo_fretorno") }}',
                 data: datos,
                 success: function(response) {
                     alert(response);
