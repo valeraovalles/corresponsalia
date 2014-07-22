@@ -133,7 +133,7 @@ class htmlreporte
           <table width='100%'>
             ".$trdetalle."
 
-            <tr style='background-color:yellow;'><th colspan=6>TOTALES</th><th>".$totalsi."</th><th>".$totalrr."</th><th>".$totalpag."</th><th></th></tr>
+            <tr style='background-color:yellow;'><th colspan=6>TOTALES</th><th></th><th>".$totalrr."</th><th>".$totalpag."</th><th></th></tr>
           </table>
 
 
