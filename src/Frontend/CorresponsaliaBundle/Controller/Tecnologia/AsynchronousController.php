@@ -30,16 +30,11 @@ class AsynchronousController extends Controller {
     
     public function fechaRetornoAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora');
         $fechaRetorno = $request->request->get('fecha');
         $equipo_id = $request->request->get('id');
-        $em = $this->getDoctrine()->getManager();
-
-        $consulta = $em->createQuery('update CorresponsaliaBundle:Tecnologia\Asignacion a set a.fechaRetorno= :fecha WHERE a.id = :equipo_id');
-        $consulta->setParameter('equipo_id', $equipo_id);
-        $consulta->setParameter('fecha', $fechaRetorno);
-        $consulta->execute();
-        
-        print_r($equipo_id);
+        $repository->cierreAsignacion($em, $equipo_id, $fechaRetorno);
         $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($equipo_id);
         if (!$asignacion) {
             throw $this->createNotFoundException(
@@ -52,20 +47,34 @@ class AsynchronousController extends Controller {
                 'No equipo found for id '.$equipo_id
             );
         }
-        $bitacora = new Bitacora();
-        echo $asignacion->getCorresponsalia();
-        $bitacora->setSerialEquipo($equipo->getSerialEquipo());
-        $bitacora->setDescripcion($equipo->getDescripcion());
-        $bitacora->setCorresponsalia($asignacion->getCorresponsalia());
-        $bitacora->setFechaAsignacion($asignacion->getFechaAsignacion());
-        $bitacora->setFechaRetorno($asignacion->getFechaRetorno());
-        $bitacora->setResponsable($asignacion->getResponsable());
         
-        $em->persist($bitacora);
-        $em->remove($asignacion);
-        $em->flush();
+        $array = array(
+            "flags" => "<div class='alert alert-{status} fade in'>"
+                    . "<button class='close' type='button' data-dismiss='alert'>×</button>"
+                    . "<strong>{resaltado}</strong>{mensaje}"
+                    . "</div>",
+            "bar" => "foo",
+        );
         
-        return "listo";
+        try {
+            $repository->registroBitacora($em, $equipo, $asignacion);
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Exito ! ',
+                    'message' => '........'
+                )
+            );
+            
+        } catch(\Exception $e){
+            $this->get('session')->getFlashBag()->set(
+                'danger',
+                array(
+                    'title' => 'Lo siento error! ',
+                    'message' => 'Contacte a la Unidad de Aplicaciones '.$e->getMessage().'.'
+                )
+            );
+       }
     }
 }
 

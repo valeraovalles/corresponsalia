@@ -41,15 +41,15 @@ class Asignacion
     /**
      * @var string
      * 
-     * @ORM\Column(name="responsable", type="text", nullable=true)
+     * @ORM\Column(name="responsable", type="string", nullable=false)
+     * @Assert\NotBlank(message="Debe ingresar el nombre completo del responsable del equipo.")
      */
     private $responsable;
     
     /**
      * @var \Date
      *
-     * @ORM\Column(name="fechaAsignacion", type="date")
-     * @Assert\NotBlank(message="Debe ingresar la fecha de asignacion.")
+     * @ORM\Column(name="fechaAsignacion", type="date", nullable=true)
      */
     private $fechaAsignacion;
 

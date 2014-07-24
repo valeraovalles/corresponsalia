@@ -10,6 +10,12 @@
         .select2-container .select2-choice > .select2-chosen {
             min-width: 200px !important;
         }
+        /*widget*/
+        .ui-widget { font-family: Verdana,Arial,sans-serif; font-size: .9em !important; }
+
+        /*datepicket*/
+        .ui-datepicker { /*no width*/ padding: .2em .2em 0 !important; }
+        .ui-datepicker table {width: 100% !important; font-size: 0.8em !important; border-collapse: collapse !important; margin:0 0 .4em !important; }
     </style>
 {% endblock %}  
 
@@ -74,15 +80,16 @@
     {% if form_errors(edit_form.categoria) or form_errors(edit_form.marca) or form_errors(edit_form.modelo) or form_errors(edit_form.serialEquipo) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechaAdquisicion) or form_errors(edit_form.condicion)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>1{{ form_errors(edit_form.categoria) }}</div>
-        <div>2{{ form_errors(edit_form.marca) }}</div>
-        <div>3{{ form_errors(edit_form.modelo) }}-</div>
-        <div>4{{ form_errors(edit_form.serialEquipo) }}</div>
-        <div>5{{ form_errors(edit_form.descripcion) }}</div>
-        <div>6{{ form_errors(edit_form.fechaAdquisicion) }}</div>
-        <div>7{{ form_errors(edit_form.condicion) }}</div>
+        <div>{{ form_errors(edit_form.categoria) }}</div>
+        <div>{{ form_errors(edit_form.marca) }}</div>
+        <div>{{ form_errors(edit_form.modelo) }}</div>
+        <div>{{ form_errors(edit_form.serialEquipo) }}</div>
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+        <div>{{ form_errors(edit_form.fechaAdquisicion) }}</div>
+        <div>{{ form_errors(edit_form.condicion) }}</div>
     </div>
-    {% endif %} 
+    {% endif %}
+    
     
     <form novalidate method="post" action="{{ path('tecnoequipo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
@@ -125,7 +132,7 @@
                 {% if asignacion == false %}
                     <i>Este equipo aun no esta asignado a ninguna corresponsalia</i>
                 {% endif %}
-            {% else %}
+            {% elseif entity.status == false and entity.condicion=='MALO'%}
                 <i>Este equipo esta inactivo</i>
             {% endif %}
          </div>

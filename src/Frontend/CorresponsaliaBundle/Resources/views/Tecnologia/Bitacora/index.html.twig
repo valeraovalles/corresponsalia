@@ -44,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in listEquipo %}
+        {% for entity in entities %}
             <tr>
                 <td>{{ entity.categoria }}</td>
                 <td>{{ entity.serialEquipo }}</td>
@@ -64,7 +64,7 @@
                 </td>
                 <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id_bitacora }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                  </td> 
             </tr>
         {% endfor %}

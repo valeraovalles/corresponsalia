@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author ecastro
  *
  * @ORM\Table(name="tecnologia.bitacora")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository\BitacoraRepository")
  */
 class Bitacora 
 {
@@ -23,6 +23,14 @@ class Bitacora
      * @ORM\SequenceGenerator(sequenceName="tecnologia.bitacora_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idequipo", type="integer", nullable=false)
+     * 
+     */
+    private $idEquipo;
 
     /**
      * @var string
@@ -102,6 +110,13 @@ class Bitacora
      * @ORM\Column(name="corresponsalia", type="string", nullable=true)
      */
     private $corresponsalia;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="boolean", nullable=true)
+     */
+    private $status;
 
 
     /**
@@ -365,5 +380,51 @@ class Bitacora
     public function getCorresponsalia()
     {
         return $this->corresponsalia;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Bitacora
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set idEquipo
+     *
+     * @param integer $idEquipo
+     * @return Bitacora
+     */
+    public function setIdEquipo($idEquipo)
+    {
+        $this->idEquipo = $idEquipo;
+    
+        return $this;
+    }
+
+    /**
+     * Get idEquipo
+     *
+     * @return integer 
+     */
+    public function getIdEquipo()
+    {
+        return $this->idEquipo;
     }
 }

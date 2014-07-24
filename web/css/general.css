@@ -28,6 +28,10 @@ line-height            :20px;
         font-family: Georgia;
 }
 
+.container{
+    box-shadow: 0px 2px 0px 2px #999;
+}
+
 #contenedor{
 background-color       :white;
 width                  :1100px;
