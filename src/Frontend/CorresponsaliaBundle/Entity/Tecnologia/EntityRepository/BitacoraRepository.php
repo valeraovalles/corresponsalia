@@ -15,7 +15,7 @@ class BitacoraRepository extends EntityRepository{
     
     public function registroBitacora($em, $equipo, $asignacion){
         $bitacora = new Bitacora(); 
-        $bitacora->getIdEquipo($equipo->getId());
+        $bitacora->setIdEquipo($equipo->getId());
         $bitacora->setStatus($equipo->getStatus());
         $bitacora->setModelo($equipo->getModelo());
         $bitacora->setCondicion($equipo->getCondicion());

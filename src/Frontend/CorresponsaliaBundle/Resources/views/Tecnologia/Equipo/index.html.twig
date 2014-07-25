@@ -143,19 +143,38 @@
                 fecha: jQuery("#fechaRetorno").val(),
                 id: jQuery("#select_equipo_id").val()
             };
+            var flags;
             jQuery.ajax({
                 type: 'post',
                 url: '{{ path("tecnoequipo_fretorno") }}',
                 data: datos,
                 success: function(response) {
-                    alert(response.flags);
+                    alert(response);
+                    flags = flagsBag('success', 'Proceso Exitoso', 'Se guardaron los datos de retorno con exito..!');
                     jQuery('#myModal').modal('hide');
-                    jQuery("#flag").html(response.flags);
-                    jQuery( "tr#entity"+response.id ).effect( 'highlight', 3000, callback );
+                    jQuery("#flag").html(flags);
+                    jQuery( "tr#entity"+datos.id ).effect( 'highlight', 3000, callback );
+                },
+                error: function( jqXHR, textStatus, errorThrown){
+                    //alert(jqXHR.responseText);
+                    var $error = 'Lo sentimos '+textStatus+' '+errorThrown+'..!';
+                    flags = flagsBag('danger', $error, 'Contacte a la Unidad de Aplicaciones y Desarrollo');
+                    jQuery('#myModal').modal('hide');
+                    jQuery("#flag").html(flags);
+                    jQuery( "tr#entity"+datos.id ).effect( 'highlight', 3000, callback );
+                    //alert(textStatus);
+                    //alert(errorThrown);
                 }
             });
             
-             
+             // callback function to bring a hidden box back
+                function flagsBag(status, resaltado, mensaje) {
+                    var $flag = "<div class='alert alert-"+status+" fade in'>"
+                                + "<button class='close' type='button' data-dismiss='alert'>×</button>"
+                                + "<strong>"+resaltado+"</strong>"+mensaje
+                                + "</div>";
+                        return $flag;
+                };
 
                 // callback function to bring a hidden box back
                 function callback() {

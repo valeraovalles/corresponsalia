@@ -48,43 +48,13 @@ class AsynchronousController extends Controller {
             );
         }
         
-        $rpt = array(
-            "flags" => "<div class='alert alert-{status} fade in'>"
-                    . "<button class='close' type='button' data-dismiss='alert'>×</button>"
-                    . "<strong>{resaltado}</strong>{mensaje}"
-                    . "</div>",
-            "response" => "false",
-            "id" => $equipo_id,
-        );
-        
         try {
             $repository->registroBitacora($em, $equipo, $asignacion);
-            $status = "success";
-            $resaltado = "Exito..!";
-            $mensaje = "Registro guardado en Bitacora.";
-            $data = array('status'=> $status,
-                        'resaltado'=> $resaltado,
-                        'mensaje'=> $mensaje
-                    );
-            foreach ($data as $clave=>$valor) {
-                $rpt['flags'] = str_replace('{'.$clave.'}', $valor, $rpt['flags']);
-            }
-            $rpt['response'] = true;
-            
-        } catch(\Exception $e){
-            $status = "danger";
-            $resaltado = "Lo siento error!";
-            $mensaje = "Contacte a la Unidad de Aplicaciones.";
-            $data = array('status'=> $status,
-                        'resaltado'=> $resaltado,
-                        'mensaje'=> $mensaje
-                    );
-            foreach ($data as $clave=>$valor) {
-                $rpt['flags'] = str_replace('{'.$clave.'}', $valor, $rpt['flags']);
-            }
+            $msj = "Valor";
+        } catch(\ErrorException $e){
+            $msj = $e->getMessage();
        }
-       
-       return new JsonResponse($rpt);
+       return $msj;
     }
 }
 
