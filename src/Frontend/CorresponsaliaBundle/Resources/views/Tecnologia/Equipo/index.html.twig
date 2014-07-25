@@ -56,7 +56,7 @@
         </thead>
         <tbody>
         {% for entity in listEquipo %}
-            <tr>
+            <tr id="entity{{ entity.id }}">
                 <td>{{ entity.categoria }}</td>
                 <td>{{ entity.modelo.marca }}</td>
                 <td>{{ entity.modelo }}</td>
@@ -148,11 +148,22 @@
                 url: '{{ path("tecnoequipo_fretorno") }}',
                 data: datos,
                 success: function(response) {
-                    alert("Hola");
+                    alert(response.flags);
                     jQuery('#myModal').modal('hide');
-                    jQuery("#flag").html(response);
+                    jQuery("#flag").html(response.flags);
+                    jQuery( "tr#entity"+response.id ).effect( 'highlight', 3000, callback );
                 }
             });
+            
+             
+
+                // callback function to bring a hidden box back
+                function callback() {
+                setTimeout(function() {
+                jQuery( "#effect" ).removeAttr( "style" ).hide().fadeIn();
+                }, 1000 );
+                };
+
         });
         
         jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA

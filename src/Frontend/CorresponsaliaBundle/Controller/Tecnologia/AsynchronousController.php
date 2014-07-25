@@ -48,33 +48,43 @@ class AsynchronousController extends Controller {
             );
         }
         
-        $array = array(
+        $rpt = array(
             "flags" => "<div class='alert alert-{status} fade in'>"
                     . "<button class='close' type='button' data-dismiss='alert'>×</button>"
                     . "<strong>{resaltado}</strong>{mensaje}"
                     . "</div>",
-            "bar" => "foo",
+            "response" => "false",
+            "id" => $equipo_id,
         );
         
         try {
             $repository->registroBitacora($em, $equipo, $asignacion);
-            $this->get('session')->getFlashBag()->set(
-                'success',
-                array(
-                    'title' => 'Exito ! ',
-                    'message' => '........'
-                )
-            );
+            $status = "success";
+            $resaltado = "Exito..!";
+            $mensaje = "Registro guardado en Bitacora.";
+            $data = array('status'=> $status,
+                        'resaltado'=> $resaltado,
+                        'mensaje'=> $mensaje
+                    );
+            foreach ($data as $clave=>$valor) {
+                $rpt['flags'] = str_replace('{'.$clave.'}', $valor, $rpt['flags']);
+            }
+            $rpt['response'] = true;
             
         } catch(\Exception $e){
-            $this->get('session')->getFlashBag()->set(
-                'danger',
-                array(
-                    'title' => 'Lo siento error! ',
-                    'message' => 'Contacte a la Unidad de Aplicaciones '.$e->getMessage().'.'
-                )
-            );
+            $status = "danger";
+            $resaltado = "Lo siento error!";
+            $mensaje = "Contacte a la Unidad de Aplicaciones.";
+            $data = array('status'=> $status,
+                        'resaltado'=> $resaltado,
+                        'mensaje'=> $mensaje
+                    );
+            foreach ($data as $clave=>$valor) {
+                $rpt['flags'] = str_replace('{'.$clave.'}', $valor, $rpt['flags']);
+            }
        }
+       
+       return new JsonResponse($rpt);
     }
 }
 
