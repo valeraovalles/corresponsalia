@@ -198,7 +198,7 @@ class DefaultController extends Controller
             $message = \Swift_Message::newInstance()   
             ->setSubject('Corresponsalia-Correccion')  
             ->setFrom("aplicaciones@telesurtv.net")     // we configure the sender
-            ->setTo(array('jvalera@telesurtv.net'))   
+            ->setTo($correo)   
             ->setBody( $this->renderView(
                     'CorresponsaliaBundle:Default:correoestatus.html.twig',
                     array('estatus' => $estatus,'periodo' => $periodo,'usuario'=>$usuario)
