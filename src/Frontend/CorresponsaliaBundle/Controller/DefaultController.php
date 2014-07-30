@@ -133,38 +133,81 @@ class DefaultController extends Controller
     }
     public function estatusrendicionAction(Request $request, $idperiodo,$estatus)
     {  
+        #1 nuevo, 2 enviado revisión, 3 devuelto corrección y 4 cerrado
+        
+        //ACTUALIZO AL ESTATUS NUEVO
         $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
-        $consulta->execute();
+        //$consulta->execute();
 
+        //ARMO LA LISTA DE CORREO
+        $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+        $idcor=$periodo->getCorresponsalia()->getId();
+        $correo=array('slozada@telesurtv.net','obruno@telesurtv.net','jvalera@telesurtv.net');
+
+        //usuario actual
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
+        
+
+        //ENVIADO PARA REVISIÓN
         if($estatus==2){
-/*
-            //CORREO
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Corresponsalia-Revision')     // we configure the title
-            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
-            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
+            
+            if($idcor==2) #MEXICO
+                $correo[]='yrodriguez@telesurtv.net';
+
+            else if($idcor==4) #PERÚ
+                $correo[]='yotero@telesurtv.net';
+
+            else if($idcor==4) #WASHINTON
+                $correo[]='amolina@telesurtv.net';
+        
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Corresponsalia-Revision')  
+            ->setFrom("aplicaciones@telesurtv.net")     // we configure the sender
+            ->setTo($correo)   
             ->setBody( $this->renderView(
-                    'SitBundle:Correo:solucion.html.twig',
-                    array('ticket' => $ticket)
+                    'CorresponsaliaBundle:Default:correoestatus.html.twig',
+                    array('estatus' => $estatus,'periodo' => $periodo,'usuario'=>$usuario)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);    // then we send the message.
-            //FIN CORREO*/
+            $this->get('mailer')->send($message);   
         }
 
         //devuelto para correción
         if($estatus==3){
+            
+            if($idcor==2){ #MEXICO
+                $correo[]='agarcia@telesurtv.net'; $correo[]='lili.telesur.mexico@hotmail.com';}
+
+            else if($idcor==4){ #PERÚ
+                $correo[]='visausti@telesurtv.net';}
+
+            else if($idcor==4){ #WASHINTON
+                $correo[]='jorge.gestoso@gtnnews.com';$correo[]='caroline.guichard@gtnnews.com';}
+            
             $datos=$request->request->all();
             $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.justificadevolucion= :justificadev WHERE p.id = :id');
             $consulta->setParameter('id', $idperiodo);
             $consulta->setParameter('justificadev', $datos['justificadev']);
             $consulta->execute();
+            
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Corresponsalia-Correccion')  
+            ->setFrom("aplicaciones@telesurtv.net")     // we configure the sender
+            ->setTo(array('jvalera@telesurtv.net'))   
+            ->setBody( $this->renderView(
+                    'CorresponsaliaBundle:Default:correoestatus.html.twig',
+                    array('estatus' => $estatus,'periodo' => $periodo,'usuario'=>$usuario)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);   
         }
 
-        //asigno el saldo final al periodo siguiente
+        //CERRADO //asigno el saldo final al periodo siguiente
         if($estatus==4){
             $f=new Funciones;
             $f->actualizasaldos($idperiodo,$em);

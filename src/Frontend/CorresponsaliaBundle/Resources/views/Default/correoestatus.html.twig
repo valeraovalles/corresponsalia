@@ -1,0 +1,60 @@
+<div style="heigth:100%" align="center">
+{% if estatus==2 %}
+    
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: #E82C0C;color:white;">NUEVA RENDICIÓN ENVIADA PARA SU REVISIÓN</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right">PAÍS: </th>
+            <td>{{ periodo.corresponsalia.pais.pais|upper }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">CORRESPONSALÍA: </th>
+            <td>{{ periodo.corresponsalia.nombre|upper}}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">AÑO</th>
+            <td>{{ periodo.anio }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">MES</th>
+            <td>{{ periodo.mes }}</td>
+        </tr>
+        <tr>
+            <th align="right">ENVIADA POR: </th>
+            <td>{{ usuario.primerNombre|upper }} {{ usuario.primerApellido|upper }}</td>
+        </tr>
+    </table>
+    
+{% elseif estatus==3 %}
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: #9E0000;color:white;">RENDICIÓN DEVUELTA PARA CORRECCIÓN</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right">PAÍS: </th>
+            <td>{{ periodo.corresponsalia.pais.pais|upper }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">CORRESPONSALÍA: </th>
+            <td>{{ periodo.corresponsalia.nombre|upper}}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">AÑO</th>
+            <td>{{ periodo.anio }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">MES</th>
+            <td>{{ periodo.mes }}</td>
+        </tr>
+        <tr>
+            <th align="right">DEVUELTA POR: </th>
+            <td>{{ usuario.primerNombre|upper }} {{ usuario.primerApellido|upper }}</td>
+        </tr>
+    </table>
+    
+{% endif %}
+</div>
