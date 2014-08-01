@@ -162,7 +162,7 @@ class DefaultController extends Controller
             else if($idcor==4) #PERÚ
                 $correo[]='yotero@telesurtv.net';
 
-            else if($idcor==4) #WASHINTON
+            else if($idcor==5) #WASHINTON
                 $correo[]='amolina@telesurtv.net';
         
             $message = \Swift_Message::newInstance()   
@@ -186,7 +186,7 @@ class DefaultController extends Controller
             else if($idcor==4){ #PERÚ
                 $correo[]='visausti@telesurtv.net';}
 
-            else if($idcor==4){ #WASHINTON
+            else if($idcor==5){ #WASHINTON
                 $correo[]='jorge.gestoso@gtnnews.com';$correo[]='caroline.guichard@gtnnews.com';}
             
             $datos=$request->request->all();

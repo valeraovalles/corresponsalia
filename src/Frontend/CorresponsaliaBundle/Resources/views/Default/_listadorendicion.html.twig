@@ -31,8 +31,8 @@
                                 <td>{{ entity.id }}</td>
                                 <td>{{ entity.numerocomprobante }}</td>
                                 <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                                <td>{{ entity.descripciongasto.descripcion }}</td>
-                                <td>{{ entity.nombrerazonsocial }}</td>
+                                <td><span style="cursor:pointer;" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0, 15) }}...</span></td>
+                                <td><span style="cursor:pointer;" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0, 15) }}...</span></td>
                                 <td>{{ entity.identificacionfiscal }}</td>
                                 <td>{{ entity.numerofactura }}</td>
                                 <td>{{ entity.tipomoneda.tipomoneda|upper }}</td>
