@@ -4,7 +4,6 @@ namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository;
 
 use Doctrine\ORM\EntityRepository;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo;
 
 /**
  * Description of BitacoraRepository

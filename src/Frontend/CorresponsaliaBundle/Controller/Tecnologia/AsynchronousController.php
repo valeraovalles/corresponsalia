@@ -4,11 +4,7 @@ namespace Frontend\CorresponsaliaBundle\Controller\Tecnologia;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Description of ModeloExtraController
@@ -47,14 +43,17 @@ class AsynchronousController extends Controller {
                 'No equipo found for id '.$equipo_id
             );
         }
-        
+        $utilidades = $this->get('tecnologia.prueba');
+        $utilidades->retornar();
         try {
             $repository->registroBitacora($em, $equipo, $asignacion);
-            $msj = "Valor";
-        } catch(\ErrorException $e){
+            $msj = "Se guardaron los datos de retorno del equipo con exito..!";
+        } catch(\LogicException $e){
             $msj = $e->getMessage();
-       }
-       return $msj;
+        }catch(\ErrorException $ex){
+            $msj = $ex->getMessage();
+        }
+       return new Response($msj);
     }
 }
 

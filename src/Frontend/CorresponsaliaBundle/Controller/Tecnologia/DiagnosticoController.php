@@ -3,7 +3,6 @@
 namespace Frontend\CorresponsaliaBundle\Controller\Tecnologia;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Description of DiagnosticoController

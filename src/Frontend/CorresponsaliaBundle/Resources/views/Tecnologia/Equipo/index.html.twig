@@ -20,6 +20,28 @@
             font-size: 10px;
             min-width: 80px;
         }
+        td.sorting_1{
+            background-color: transparent !important;
+        }
+        .bs-callout-info {
+            border-left-color: #5bc0de !important;
+        }
+        .bs-callout {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            border-color: #eee;
+            border-image: none;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px 1px 1px 5px;
+            margin: 20px 0;
+            padding: 20px;
+        }
+        #Cargando{
+            display: none;
+        }
     </style>
 {% endblock %}
 
@@ -74,24 +96,21 @@
                     {% endif %}
                 </td>
                 <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
-                <td>
+                <td id="acciones{{ entity.id }}">
                     <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a> |
                     {% if entity.status %}
                         {% if entity|length > 9 %}
-                            {% if entity.statusAsignacion|lower == "prestamo" %}
-                            <button type="button" class="btn btn-default btn-xs etiqueta prestamo" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">PRESTAMO</button>
+                            {% if entity.statusAsignacion|lower == "prestamo" or entity.statusAsignacion|lower == "cobertura" %}
+                            <button id="retorno{{ entity.id }}" type="button" class="btn btn-default btn-xs etiqueta prestamo" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">RETORNO</button>
                             <!--<a href=""><span class="label label-primary etiqueta prestamo" data-id="{#--entity.id--#}" data-toggle="modal" data-target="#myModal">&nbsp;PRESTAMO&nbsp;</span></a>-->
-                            {% elseif entity.statusAsignacion|lower == "cobertura" %}
-                                <!--<a href="{#{ path('tecnoasignar_reasignar', {'id':entity.id}) }#}"><span class="label label-primary etiqueta">REASIGNAR</span></a>-->
-                                <button type="button" class="btn btn-default btn-xs etiqueta prestamo" data-id="{{entity.id}}" data-toggle="modal" data-target="#myModal">COBERTURA</button>
                             {% else %}
                                 <!--<a href="{#{ path('tecnoasignar_reasignar', {'id':entity.id}) }#}"><span class="label label-primary etiqueta">REASIGNAR</span></a>-->
                                 <a href="{{ path('tecnoasignar_reasignar', {'id':entity.id}) }}"><span class="btn btn-default btn-xs etiqueta prestamo">REASIGNAR</span></a>
                             {% endif %}
                         {% else %}
                             <!--<a href="{#{-- path('tecnoasignar_new', {'id':entity.id}) }--#}"><span class="label label-primary etiqueta">&nbsp;&nbsp;ASIGNAR&nbsp;&nbsp;&nbsp;</span></a>-->
-                            <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><span class="btn btn-default btn-xs etiqueta prestamo">ASIGNAR</span></a>
+                                <a href="{{ path('tecnoasignar_new', {'id':entity.id}) }}"><span class="btn btn-default btn-xs etiqueta prestamo">ASIGNAR</span></a>
                         {% endif %}
                     {% endif %}
                  </td> 
@@ -119,6 +138,9 @@
             </div>
             <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
             </form>
+                <div class="bs-callout bs-callout-info" id="cargando">
+                    <p class="text-info">Cargando...</p><img src="{{ asset('bundles/corresponsalia/Tecnologia/images/cargando.gif') }}" class="img-responsive" alt="Responsive image">
+                </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
@@ -143,27 +165,40 @@
                 fecha: jQuery("#fechaRetorno").val(),
                 id: jQuery("#select_equipo_id").val()
             };
+            var indicador = {
+                color: ''
+            };
             var flags;
             jQuery.ajax({
                 type: 'post',
                 url: '{{ path("tecnoequipo_fretorno") }}',
                 data: datos,
-                success: function(response) {
-                    alert(response);
-                    flags = flagsBag('success', 'Proceso Exitoso', 'Se guardaron los datos de retorno con exito..!');
-                    jQuery('#myModal').modal('hide');
-                    jQuery("#flag").html(flags);
-                    jQuery( "tr#entity"+datos.id ).effect( 'highlight', 3000, callback );
+                dataType: "html",
+                beforeSend: function(){
+                    jQuery('#cargando').css('display', 'block');
+                },
+                success: function(data, textStatus) {
+                    jQuery('#cargando').css('display', 'none');
+                    flags = flagsBag(textStatus, ' Proceso Exitoso..! ', data);
+                    indicador.color = null;
                 },
                 error: function( jqXHR, textStatus, errorThrown){
-                    //alert(jqXHR.responseText);
+                    jQuery('#cargando').css('display', 'none');
                     var $error = 'Lo sentimos '+textStatus+' '+errorThrown+'..!';
-                    flags = flagsBag('danger', $error, 'Contacte a la Unidad de Aplicaciones y Desarrollo');
-                    jQuery('#myModal').modal('hide');
+                    flags = flagsBag('danger', $error, ' Contacte a la Unidad de Aplicaciones y Desarrollo');
+                    indicador.color = '#DF6161';
+                },
+                complete: function( ){
+                   jQuery("#retorno"+datos.id).remove();
+                   jQuery('#myModal').modal('hide');
+                    var strings = '{{ path('tecnoasignar_new', {'id': '1'}) }}';
+                    strings = strings.replace("1", datos.id);
+                    var boton = "<a id='dinamic"+datos.id+"' href='"+strings+"'>"
+                                +"<span class='btn btn-default btn-xs etiqueta prestamo'>ASIGNAR</span>"
+                                +"</a>";
+                    jQuery(boton).appendTo("#acciones"+datos.id);
                     jQuery("#flag").html(flags);
-                    jQuery( "tr#entity"+datos.id ).effect( 'highlight', 3000, callback );
-                    //alert(textStatus);
-                    //alert(errorThrown);
+                    jQuery( "tr#entity"+datos.id ).effect( 'highlight', indicador, 3500, callback );
                 }
             });
             
@@ -175,19 +210,21 @@
                                 + "</div>";
                         return $flag;
                 };
+                
+                
 
                 // callback function to bring a hidden box back
                 function callback() {
-                setTimeout(function() {
-                jQuery( "#effect" ).removeAttr( "style" ).hide().fadeIn();
-                }, 1000 );
+                    setTimeout(function() {
+                    jQuery( "#effect" ).removeAttr( "style" ).hide().fadeIn();
+                    }, 1000 );
                 };
 
         });
         
         jQuery('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
              "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-             "aaSorting": [[0,'desc']]
+             "aaSorting": [[3,'desc']]
          } );
 
     });
