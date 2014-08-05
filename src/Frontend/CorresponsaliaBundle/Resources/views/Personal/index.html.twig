@@ -29,7 +29,7 @@
                 <td><a href="{{ path('personal_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Personal">{{ entity.nombre }}</a></td>
                 <td>{{ entity.sueldo }}</td>
                 <td>{{ entity.pasaporte }}</td>
-                <td>{% if entity.fechaingreso %}{{ entity.fechaingreso|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fechaingreso %}{{ entity.fechaingreso|date('d/m/Y') }}{% endif %}</td>
                 <td>
                     <a href="{{ path('personal_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Personal"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a href="{{ path('personal_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Editar Personal"></b></a>

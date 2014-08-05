@@ -30,7 +30,20 @@
             </div>
             <div class="contenedorform">
                 <div class="labelform">fechaingreso:</div>
-                <div class="widgetform">{{ form_widget(edit_form.fechaingreso) }}</div>
+                <div class="widgetform">
+                    {{ form_widget(edit_form.fechaingreso, {'attr':{'class':'fecha'}})}}
+                    <script>
+                      $(function() {
+                        $( ".fecha" ).datepicker({
+                          changeMonth: true,
+                          changeYear: true,
+                          dateFormat: "dd/mm/yy",
+                        });
+                      });
+                    </script>
+
+
+                </div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">correo:</div>
