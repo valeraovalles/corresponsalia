@@ -20,7 +20,7 @@ class PersonalType extends AbstractType
             ->add('pasaporte')
             ->add('fechaingreso', 'date',array(
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-y'))
+                    'format' => 'dd-MM-yyyy'))
             ->add('correo')
             ->add('telefono')
             ->add('corresponsaliaId')
