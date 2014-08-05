@@ -34,36 +34,40 @@ class Personal
     /**
      * @var float
      *
-     * @ORM\Column(name="sueldo", type="decimal", precision=20, scale= 2, nullable=true)
-     * 
+     * @ORM\Column(name="sueldo", type="decimal", precision=20, scale= 2, nullable=false)
+     * @Assert\NotBlank(message="El campo sueldo no puede estar en blanco.").
      */
     private $sueldo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pasaporte", type="string", nullable=true)
+     * @ORM\Column(name="pasaporte", type="string", nullable=false)
+     * @Assert\NotBlank(message="El campo pasaporte no puede estar en blanco.").
      */
     private $pasaporte;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="correo", type="string", nullable=true)
+     * @ORM\Column(name="correo", type="string", nullable=false)
+     * @Assert\NotBlank(message="El campo correo no puede estar en blanco.").
      */
     private $correo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", nullable=true)
+     * @ORM\Column(name="telefono", type="string", nullable=false)
+     * @Assert\NotBlank(message="El campo telefono no puede estar en blanco.").
      */
     private $telefono;
 
     /**
      * @var \Date
      *
-     * @ORM\Column(name="fechaingreso", type="date", nullable=true)
+     * @ORM\Column(name="fechaingreso", type="date", nullable=false)
+     * @Assert\NotBlank(message="El campo fecha de ingreso no puede estar en blanco.").
      */
     private $fechaingreso;
 

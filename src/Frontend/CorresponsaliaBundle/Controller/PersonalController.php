@@ -53,12 +53,15 @@ class PersonalController extends Controller
             $em->persist($entity);
             $em->flush();
             return $this->redirect($this->generateUrl('personal_show', array('id' => $entity->getId())));
-        }
-
-        return $this->render('CorresponsaliaBundle:Personal:new.html.twig', array(
+        }else
+        {
+            //$this->get('session')->getFlashBag()->add('alert', 'Debe llenar los campos obligatorios');
+            return $this->render('CorresponsaliaBundle:Personal:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
+        }
+        
     }
 
     /**
