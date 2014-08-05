@@ -292,6 +292,13 @@ class PeriodorendicionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            //elimino los cambios
+            $consulta = $em->createQuery('DELETE CorresponsaliaBundle:Cambio c 
+                                          WHERE c.periodorendicion = :id');
+            $consulta->setParameter('id', $id);
+            $consulta->execute();
+            
+            
             $entity = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($id);
 
             if (!$entity) {
