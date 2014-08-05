@@ -12,6 +12,19 @@
     
 {% block body -%}
     {{ parent() }}
+    {% if form_errors(form.nombre) or form_errors(form.sueldo) or form_errors(form.pasaporte) or form_errors(form.fechaingreso) or form_errors(form.correo) or form_errors(form.telefono) or form_errors(form.corresponsaliaId) or form_errors(form.cargoId)%}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>        
+        <div>{{ form_errors(form.sueldo) }}</div>
+        <div>{{ form_errors(form.pasaporte) }}</div>
+        <div>{{ form_errors(form.fechaingreso) }}</div>
+        <div>{{ form_errors(form.correo) }}</div>
+        <div>{{ form_errors(form.telefono) }}</div>
+        <div>{{ form_errors(form.corresponsaliaId) }}</div>
+        <div>{{ form_errors(form.cargoId) }}</div>        
+    </div>
+    {% endif %}
 
     <form novalidate="novalidate" action="{{ path('personal_create') }}"method="post" {{ form_enctype(form) }} >
         {{ form_widget(form._token) }}
