@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/app/config/config.yml</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Services/Tecnologia/ManagerBitacoraService.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Services/Util/FechaService.php</file>
+            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/EntityRepository/ModeloRepository.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Resources/views/Tecnologia/Equipo/index.html.twig</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/DependencyInjection/prueba.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/EntityRepository/BitacoraRepository.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Controller/Tecnologia/BitacoraController.php</file>
             <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Controller/Tecnologia/AsynchronousController.php</file>
-            <file>file:/home/ecastro/composer/Telesur/corresponsalia/src/Frontend/CorresponsaliaBundle/Entity/Tecnologia/Bitacora.php</file>
         </group>
     </open-files>
 </project-private>

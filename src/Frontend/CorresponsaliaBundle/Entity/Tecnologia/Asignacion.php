@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author ecastro
  * 
  * @ORM\Table(name="tecnologia.asignacion")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository\AsignacionRepository")
  */
 class Asignacion 
 {
