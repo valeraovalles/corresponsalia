@@ -427,22 +427,5 @@ class Bitacora
     {
         return $this->idEquipo;
     }
-    
-    function __construct($id, $idEquipo, $serialEquipo, $descripcion, $observacionCondicion, $fechaAdquisicion, $categoria, $condicion, $modelo, $responsable, \DateTime $fechaAsignacion, \DateTime $fechaRetorno, $corresponsalia, $status) {
-        $this->id = $id;
-        $this->idEquipo = $idEquipo;
-        $this->serialEquipo = $serialEquipo;
-        $this->descripcion = $descripcion;
-        $this->observacionCondicion = $observacionCondicion;
-        $this->fechaAdquisicion = $fechaAdquisicion;
-        $this->categoria = $categoria;
-        $this->condicion = $condicion;
-        $this->modelo = $modelo;
-        $this->responsable = $responsable;
-        $this->fechaAsignacion = $fechaAsignacion;
-        $this->fechaRetorno = $fechaRetorno;
-        $this->corresponsalia = $corresponsalia;
-        $this->status = $status;
-    }
 
 }

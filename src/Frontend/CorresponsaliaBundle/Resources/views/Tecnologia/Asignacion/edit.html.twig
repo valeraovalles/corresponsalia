@@ -111,6 +111,10 @@
                 <div class="labelform">fechaAsignacion:</div>
                 <div class="widgetform">{{ form_widget(edit_form.fechaAsignacion, { 'attr': {'class': 'datepicker'} }) }}</div>
             </div>
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+            </div>
             {% if entity.fechaEstimadaRetorno|length > 0 %}
                 <div id="fechaEstimadaRetorno" class="contenedorform">
                     <div class="labelform">fecha Estimada Retorno:</div>

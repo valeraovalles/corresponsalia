@@ -30,32 +30,9 @@ class ManagerBitacoraService {
         $this->em = $em;
     }
     
-    public function registroBitacora($equipo_id){
-        $this->asignacion = $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($equipo_id);
-        if (!$this->asignacion) {
-            throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
-        }
-        $this->equipo = $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($equipo_id);
-        if (!$this->equipo) {
-            throw new \Exception('Unable to find Tecnologia\Equipo entity.');
-        }
-        $this->configRegitraBitacora();
-        $this->em->remove($this->asignacion);
-        $this->em->flush();
-    }
-    
-    public function cierreAsignacion($equipo_id, $fechaRetorno) {
-        try {
-            $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->actualizarAsignacion($equipo_id, $fechaRetorno);
-            $this->response = true;
-        } catch (\LogicException $ex) {
-            $this->response = false;
-        echo $ex->getMessage();
-        }
-        return $this->response;
-    }
-    
-    public function configRegitraBitacora() {
+    public function registroBitacora($asignacion, $equipo){
+        $this->asignacion = $asignacion;
+        $this->equipo = $equipo;
         $this->bitacora->setIdEquipo($this->equipo->getId());
         $this->bitacora->setStatus($this->equipo->getStatus());
         $this->bitacora->setModelo($this->equipo->getModelo());
@@ -69,6 +46,18 @@ class ManagerBitacoraService {
         $this->bitacora->setFechaRetorno($this->asignacion->getFechaRetorno());
         $this->bitacora->setResponsable($this->asignacion->getResponsable());
         $this->em->persist($this->bitacora);
+        $this->em->flush();
+    }
+    
+    public function cierreAsignacion($equipo_id, $fechaRetorno) {
+        try {
+            $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->actualizarAsignacion($equipo_id, $fechaRetorno);
+            $this->response = true;
+        } catch (\LogicException $ex) {
+            $this->response = false;
+        echo $ex->getMessage();
+        }
+        return $this->response;
     }
     
 }

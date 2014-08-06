@@ -53,6 +53,16 @@ class AsignacionController extends Controller
                     'message' => 'Asignacion Agregada.'
                 )
             );
+            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($entity->getId());
+            if (!$asignacion) {
+                throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
+            }
+            $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+            if (!$equipo) {
+                throw new \Exception('Unable to find Tecnologia\Equipo entity.');
+            }
+            $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($asignacion, $equipo);
+            
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
         }
 

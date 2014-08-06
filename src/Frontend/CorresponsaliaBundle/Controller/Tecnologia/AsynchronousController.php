@@ -52,7 +52,17 @@ class AsynchronousController extends Controller {
         $updateAsignacion = $managerBitacora->cierreAsignacion($equipo_id, $fechaRetorno);
         if ($updateAsignacion) {
             try {
-                $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($equipo_id);
+                $asignacion = $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($equipo_id);
+                if (!$asignacion) {
+                    throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
+                }
+                $equipo = $this->em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($equipo_id);
+                if (!$equipo) {
+                    throw new \Exception('Unable to find Tecnologia\Equipo entity.');
+                }
+                $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($asignacion, $equipo);
+                $this->em->remove($this->asignacion);
+                $this->em->flush();
                 $response['rpt'] = 0;
                 $response['msj'] = 'Se guardaron los datos de retorno del equipo con exito..!';
             } catch (\LogicException $exc) {
