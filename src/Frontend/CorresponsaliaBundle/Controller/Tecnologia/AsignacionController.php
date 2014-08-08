@@ -8,8 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
 use Frontend\CorresponsaliaBundle\Form\Tecnologia\AsignacionType;
 
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
-
 /**
  * Tecnologia\Asignacion controller.
  *
@@ -221,9 +219,40 @@ class AsignacionController extends Controller
                 'success',
                 array(
                     'title' => 'Editada!',
-                    'message' => 'Re-Asignacion con exito.'
+                    'message' => 'Asignacion con exito.'
                 )
             );
+            
+            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($entity->getId());
+            if (!$asignacion) {
+                throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
+            }
+            $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+            if (!$equipo) {
+                throw new \Exception('Unable to find Tecnologia\Equipo entity.');
+            }
+            
+            $arrayBitacora = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->ultimaBitacoraIdEquipo($id);
+            $bitacora = $arrayBitacora[0];
+            
+            $bitacora->setIdEquipo($equipo->getId());
+            $bitacora->setStatus($equipo->getStatus());
+            $bitacora->setModelo($equipo->getModelo());
+            $bitacora->setCondicion($equipo->getCondicion());
+            $bitacora->setCategoria($equipo->getCategoria());
+            $bitacora->setObservacionCondicion($equipo->getObservacionCondicion());        
+            $bitacora->setSerialEquipo($equipo->getSerialEquipo());
+            $bitacora->setDescripcion($equipo->getDescripcion());
+            
+            $bitacora->setCorresponsalia($asignacion->getCorresponsalia());
+            $bitacora->setFechaAsignacion($asignacion->getFechaAsignacion());
+            $bitacora->setFechaRetorno($asignacion->getFechaRetorno());
+            $bitacora->setResponsable($asignacion->getResponsable());
+            $bitacora->setTipoAsignacion($asignacion->getStatus()->getNombre());
+            $em->persist($bitacora);
+            $em->flush();
+            
+            
             return $this->redirect($this->generateUrl('tecnoasignar_edit', array('id' => $id)));
         }
 
@@ -354,6 +383,7 @@ class AsignacionController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($asignacion_nueva->getId());
+        
         if (!$equipo) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
@@ -365,20 +395,14 @@ class AsignacionController extends Controller
          * GUARDAR NUEVA ASIGNACION EN ASIGNACION
          * 
          */
-
-        $asignar_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
-        $bitacora = new Bitacora();
-        $bitacora->setEquipoId($asignacion_nueva->getId());
-        $bitacora->setCorresponsalia($asignar_actual->getCorresponsalia());
-        $bitacora->setFechaAsignacion($asignar_actual->getFechaAsignacion());
-        $bitacora->setFechaEstimadaRetorno($asignar_actual->getFechaEstimadaRetorno());
-        $bitacora->setFechaRetorno($asignar_actual->getFechaRetorno());
-        $bitacora->setResponsable($asignar_actual->getResponsable());
-        $bitacora->setStatus($asignar_actual->getStatus());            
-            
+        
+         $asignar_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());  
+         
         if ($form->isValid()) {
+                 
+            
+            $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($asignacion_nueva, $equipo);
             $em->remove($asignar_actual);
-            $em->persist($bitacora);
             $em->flush();
             $em->persist($asignacion_nueva);
             $em->flush();

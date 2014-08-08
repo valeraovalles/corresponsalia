@@ -45,6 +45,7 @@ class ManagerBitacoraService {
         $this->bitacora->setFechaAsignacion($this->asignacion->getFechaAsignacion());
         $this->bitacora->setFechaRetorno($this->asignacion->getFechaRetorno());
         $this->bitacora->setResponsable($this->asignacion->getResponsable());
+        $this->bitacora->setTipoAsignacion($this->asignacion->getStatus()->getNombre());
         $this->em->persist($this->bitacora);
         $this->em->flush();
     }
@@ -58,6 +59,26 @@ class ManagerBitacoraService {
         echo $ex->getMessage();
         }
         return $this->response;
+    }
+    
+    public function actualizarBitacora($bitacora, $asignacion, $equipo){
+        $this->asignacion = $asignacion;
+        $this->equipo = $equipo;
+        $this->bitacora = $bitacora;
+        $this->bitacora->setIdEquipo($this->equipo->getId());
+        $this->bitacora->setStatus($this->equipo->getStatus());
+        $this->bitacora->setModelo($this->equipo->getModelo());
+        $this->bitacora->setCondicion($this->equipo->getCondicion());
+        $this->bitacora->setCategoria($this->equipo->getCategoria());
+        $this->bitacora->setObservacionCondicion($this->equipo->getObservacionCondicion());        
+        $this->bitacora->setSerialEquipo($this->equipo->getSerialEquipo());
+        $this->bitacora->setDescripcion($this->equipo->getDescripcion());
+        $this->bitacora->setCorresponsalia($this->asignacion->getCorresponsalia());
+        $this->bitacora->setFechaAsignacion($this->asignacion->getFechaAsignacion());
+        $this->bitacora->setFechaRetorno($this->asignacion->getFechaRetorno());
+        $this->bitacora->setResponsable($this->asignacion->getResponsable());
+        $this->em->persist($this->bitacora);
+        $this->em->flush();
     }
     
 }

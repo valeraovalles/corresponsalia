@@ -159,6 +159,10 @@
                 <div class="labelform">fechaAsignacion:</div>
                 <div class="widgetform">{{ form_widget(form.fechaAsignacion, { 'attr': {'class': 'parent'} }) }}</div>
             </div>
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+            </div>
         </div>
             <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo.id }}" />
         <input type="submit" value="REASIGNAR" class="btn btn-primary"> | 

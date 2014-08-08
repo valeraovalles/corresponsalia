@@ -14,12 +14,13 @@ use Doctrine\ORM\EntityRepository;
  * @author ecastro
  */
 class AsignacionRepository extends EntityRepository{
-    //put your code here
-     public function actualizarAsignacion($equipo_id, $fechaRetorno){
+
+    public function actualizarAsignacion($equipo_id, $fechaRetorno){
         $consulta = $this->getEntityManager()->createQuery('update CorresponsaliaBundle:Tecnologia\Asignacion a set a.fechaRetorno= :fecha WHERE a.id = :equipo_id');
         $consulta->setParameter('equipo_id', $equipo_id);
         $consulta->setParameter('fecha', $fechaRetorno);
         $consulta->execute();     
         return $consulta;
     }
+    
 }

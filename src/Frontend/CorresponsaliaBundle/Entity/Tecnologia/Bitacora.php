@@ -72,6 +72,13 @@ class Bitacora
     /**
      * @var string
      * 
+     * @ORM\Column(name="tipoasignacion", type="text", nullable=true)
+     */
+    private $tipoAsignacion;
+    
+    /**
+     * @var string
+     * 
      * @ORM\Column(name="condicion", type="string", nullable=true)
      */
     private $condicion;
@@ -174,7 +181,30 @@ class Bitacora
     {
         return $this->descripcion;
     }
+    
+    /**
+     * Set tipoAsignacion
+     *
+     * @param string $tipoasignacion
+     * @return Bitacora
+     */
+    public function setTipoAsignacion($tipoasignacion)
+    {
+        $this->tipoAsignacion = $tipoasignacion;
+    
+        return $this;
+    }
 
+    /**
+     * Get tipoAsignacion
+     *
+     * @return string 
+     */
+    public function getTipoAsignacion()
+    {
+        return $this->tipoAsignacion;
+    }
+    
     /**
      * Set observacionCondicion
      *
@@ -428,4 +458,5 @@ class Bitacora
         return $this->idEquipo;
     }
 
+    
 }
