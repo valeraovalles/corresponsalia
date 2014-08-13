@@ -134,9 +134,18 @@ class DefaultController extends Controller
     public function estatusrendicionAction(Request $request, $idperiodo,$estatus)
     {  
         #1 nuevo, 2 enviado revisión, 3 devuelto corrección y 4 cerrado
-        
-        //ACTUALIZO AL ESTATUS NUEVO
         $em = $this->getDoctrine()->getManager();
+        
+        //verifico antes de enviar para revision tenga al menos una rendicion
+        if($estatus==2){
+            $rg = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->findByPeriodorendicion($idperiodo);
+            if(!$rg){
+                $this->get('session')->getFlashBag()->add('alert', 'No puede cerrar este período si no posee al menos 1 rendición.');
+                return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$idperiodo)));   
+            }
+        }
+
+        //ACTUALIZO AL ESTATUS NUEVO
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
@@ -153,7 +162,7 @@ class DefaultController extends Controller
         
         
 
-        //ENVIADO PARA REVISIÓN
+        //ENVIADO PARA REVISIÓN, ENVÍO LOS CORREOS RESPECTIVOS
         if($estatus==2){
             
             if($idcor==2) #MEXICO
@@ -209,6 +218,7 @@ class DefaultController extends Controller
 
         //CERRADO //asigno el saldo final al periodo siguiente
         if($estatus==4){
+            
             $f=new Funciones;
             $f->actualizasaldos($idperiodo,$em);
         }
