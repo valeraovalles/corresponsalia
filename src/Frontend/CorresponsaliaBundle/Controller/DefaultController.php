@@ -404,6 +404,7 @@ class DefaultController extends Controller
     
     public function actualizarendicionAction(Request $request, $idrendicion,$idperiodo)
     {
+        
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
@@ -413,6 +414,7 @@ class DefaultController extends Controller
         $idcor=$periodo->getCorresponsalia()->getId();
         
         $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->find($idrendicion);
+        $justificadevolucion=$rendicion->getJustificadevolucion();
         
         if (!$rendicion) {
             throw $this->createNotFoundException('Unable to find Relaciongasto entity.');
@@ -432,6 +434,7 @@ class DefaultController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $rendicion->setResponsable($usuario);
+            $rendicion->setJustificadevolucion($justificadevolucion);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Se ha editado la rendicion exitosamente.');
