@@ -42,8 +42,8 @@
                     <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
                         <td>{{ entity.numerocomprobante }}</td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
-                        <td><span style="cursor:pointer;" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
-                        <td><span style="cursor:pointer;" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
+                        <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
+                        <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
                         <td>{{ entity.tipomoneda.tipomoneda }}</td>
@@ -67,6 +67,8 @@
         <br><br><br><br>
         <input id="check_todos" class="btn btn-primary" type="button" value="GUARDAR RENDICIONES PARA CORRECCIÓN">
     </form>
+                
+
     
     {% if oculta==0 %}
         <div style="width: 420px;">
@@ -94,7 +96,11 @@
     
     
     <br>
+    <button id="xxx" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+
     <script>    
+        
+        $('span').tooltip()
 
 /*
         var table = $('#tablalista').DataTable();
