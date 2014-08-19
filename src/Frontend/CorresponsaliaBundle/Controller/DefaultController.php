@@ -173,6 +173,9 @@ class DefaultController extends Controller
 
             else if($idcor==5) #WASHINTON
                 $correo[]='amolina@telesurtv.net';
+            
+            else if($idcor==8) #nicaragua
+                $correo[]='lcastillo@telesurtv.net';
         
             $message = \Swift_Message::newInstance()   
             ->setSubject('Corresponsalia-Revision')  
@@ -197,6 +200,9 @@ class DefaultController extends Controller
 
             else if($idcor==5){ #WASHINTON
                 $correo[]='jorge.gestoso@gtnnews.com';$correo[]='caroline.guichard@gtnnews.com';}
+                
+            else if($idcor==8){ #NICARAGUA
+                $correo[]='mjdh27@gmail.com';$correo[]='celsoen281972@hotmail.es';}
             
             $datos=$request->request->all();
             $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.justificadevolucion= :justificadev WHERE p.id = :id');
