@@ -13,6 +13,15 @@
 {% block body -%}
     {{ parent() }}
 
+    {% if form_errors(edit_form.file) or form_errors(edit_form.descripcion) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.file) }}</div>         
+    </div>
+    {% endif %}
+
+
+
     <form novalidate method="post" action="{{ path('documento_update',{'id':entity.id}) }}">
     	<input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
     	<div class="formShow" style="width:70%;">

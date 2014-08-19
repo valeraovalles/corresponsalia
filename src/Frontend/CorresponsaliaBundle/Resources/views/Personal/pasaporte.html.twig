@@ -13,8 +13,8 @@
 {% block body -%}
     {{ parent() }}
 
-    <form novalidate="novalidate" action="{{ path('personal_pasaportecarga',{'id':entity.id}) }}"method="post">
-        {{ form_widget(form1._token) }}
+    <form novalidate method="post" action="{{ path('personal_pasaportecarga',{'id':entity.id}) }}" {{ form_enctype(edit_form) }}>
+         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
         <div class="formShow" style="width:85%;">
 		    <div class="contenedorform">
 		        <div class="labelform">Nombre:</div>
@@ -26,9 +26,50 @@
 		    </div>
 		    <div class="contenedorform">
                 <div class="labelform">Cargar Pasaporte:</div>
-                <div class="widgetform">{{ form_widget(form1.file) }}</div>
+                <div class="widgetform">{{ form_widget(edit_form.file) }}</div>
             </div>
-		</div>
+
+
+
+
+            
+            <div style="display:none;">
+                <div class="contenedorform">
+                    <div class="labelform">nombre:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">sueldo:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.sueldo) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">pasaporte:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.pasaporte) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">fechaingreso:</div>
+                    <div class="widgetform">
+                        {{ form_widget(edit_form.fechaingreso, {'attr':{'class':'fecha'}})}}
+                    </div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">correo:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.correo) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">telefono:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Corresponsal&iacute;a:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.corresponsaliaId) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Cargo:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.cargoId) }}</div>
+                </div>
+		    </div>
+        </div>
         <input type="submit" value="CREAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('personal') }}">IR AL LISTADO</a>
     </form>

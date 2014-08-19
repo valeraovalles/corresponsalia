@@ -50,14 +50,13 @@
             <div class="contenedorform">
                 <div class="labelform">Pasaporte:</div>
                 <div class="widgetform">
-                    {% set extension =  entity.archivo|split(".") %}
 
-                    {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                    {% if extension=='jpg' or extension=='jpeg' or extension=='png' or extension=='gif'  %}
                         <a data-toggle="modal" href="#myModal">
-                            <img class="img-rounded" src="{{ asset('uploads/consultoria/') }}{{ entity.archivo }}" width="150px">
+                            <img class="img-rounded" src="{{ ruta }}" width="150px">
                         </a>
                     {% else %}
-                        <a href="{{ asset('uploads/consultoria/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                        <a href="{{ asset('uploads/personal/ {{ ruta }}' ) }}">DESCARGA ARCHIVO {{ extension|upper }}</a>
                     {% endif %}
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace Frontend\CorresponsaliaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File;
 
 use Frontend\CorresponsaliaBundle\Entity\Personal;
 use Frontend\CorresponsaliaBundle\Entity\Representante;
@@ -12,9 +13,6 @@ use Frontend\CorresponsaliaBundle\Entity\Cargo;
 use Frontend\CorresponsaliaBundle\Entity\Contrato;
 
 use Frontend\CorresponsaliaBundle\Form\PersonalType;
-
-use Frontend\CorresponsaliaBundle\Resources\Misclases\funciones;
-
 
 /**
  * Personal controller.
@@ -116,9 +114,30 @@ class PersonalController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+        $archivo = $entity->getArchivo();
+
+        if($archivo != NULL)
+        {
+            $filee = explode('.', $archivo);
+            $extension = $filee[1];
+            $nombre1 = $filee[0];        
+
+            $archivo = $nombre1;
+            $ruta = "/corresponsalia/web/uploads/personal/".$archivo.".".$extension;  
+
+            return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
+                'entity'      => $entity,
+                'extension'   => $extension,
+                'archivo'     => $archivo,
+                'ruta'        => $ruta,
+                'delete_form' => $deleteForm->createView(),        ));
+        }else
+        {
+            return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
+                'entity'      => $entity,
+                'delete_form' => $deleteForm->createView(),        ));
+        }
+
     }
 
     /**
@@ -173,8 +192,9 @@ class PersonalController extends Controller
 
         $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
 
-        $cargo_anterior = $entity->getCargoId();
-        
+        $cargo_anterior = $entity->getCargoId();        
+        $archivo = $entity->getArchivo();
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Personal entity.');
         }
@@ -185,6 +205,8 @@ class PersonalController extends Controller
 
 
         if ($editForm->isValid()) {
+            $entity->setArchivo($archivo);
+            //die;
             $em->persist($entity);
 
             $em->flush();
@@ -227,14 +249,14 @@ class PersonalController extends Controller
     */
     public function pasaporteAction($id)
     {
-        //se crea el formulario, mostrará los representantes
-        $form1 = $this->createFormBuilder()
-                    ->add('file', 'file')
-        ->getForm();
 
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Personal entity.');
+        }
 
         if($entity->getArchivo() != NULL)
         {
@@ -246,14 +268,18 @@ class PersonalController extends Controller
         {
             $nombre = $entity->getNombre();
             $pasaporte = $entity->getPasaporte();
+
+            $editForm = $this->createEditForm($entity);
+            $deleteForm = $this->createDeleteForm($id);
+
             return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
                 'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),                
+                'delete_form' => $deleteForm->createView(),
                 'nombre'      => $nombre,
                 'pasaporte'   => $pasaporte,
-                'form1'       => $form1->createView(),
             ));
         }
- 
     }
 
     /**
@@ -263,40 +289,87 @@ class PersonalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CorresponsaliaBundle:Personal')->find($id);
-
-        $datosform = $request->request->all();
-        $datosform = $datosform['form'];
-
-        $file = $datosform['file'];
-
-        if($file != NULL)
+        
+        if (!$entity) 
         {
-            $entity->setArchivo($file);
+            throw $this->createNotFoundException('Unable to find Personal entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+        
+        $nombre_c = $entity->getNombre();
+        $pasaporte = $entity->getPasaporte();
+
+        if($editForm['file']->getData())
+        {
+            $file=$editForm['file']->getData();
+
+            $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+            $extension = $file->guessExtension();
+            $nombre=$file->getClientOriginalName();
+            $nombre=explode(".", $nombre);
+            $nombre1=$nombre[0];
+
+            //valido tamaño
+            if ($tamaño>2000) 
+            {
+                $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),                
+                'delete_form' => $deleteForm->createView(),
+                'nombre'      => $nombre_c,
+                'pasaporte'   => $pasaporte,
+                ));
+            }
+            $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+            
+            //valido las extensiones
+            if (!array_search($extension,$extensiones)) 
+            {
+                $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
+
+                return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),                
+                'delete_form' => $deleteForm->createView(),
+                'nombre'      => $nombre_c,
+                'pasaporte'   => $pasaporte,
+            )); 
+            }
+
+            $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre1));
+
+            if($file->move('uploads/personal/',$id.'_'.\date("Gis").'.'.$extension) )
+            {
+                $entity->setArchivo($id.'_'.\date("Gis").'.'.$extension);
+            }
             $em->persist($entity);
             $em->flush(); 
 
-            $deleteForm = $this->createDeleteForm($id);
-
+            
+            $archivo = $id.'_'.\date("Gis");
+            $ruta = "/corresponsalia/web/uploads/personal/".$id.'_'.\date("Gis").".".$extension;    
+       
             return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
                 'entity'      => $entity,
+                'extension'   => $extension,
+                'archivo'     => $archivo,
+                'ruta'        => $ruta,
                 'delete_form' => $deleteForm->createView(),        ));
 
         }else
-        {
-            $nombre = $entity->getNombre();
-            $pasaporte = $entity->getPasaporte();
-
-            //se crea el formulario, mostrará los representantes
-            $form1 = $this->createFormBuilder()
-                        ->add('file', 'file')
-            ->getForm();
-
+        { 
             return $this->render('CorresponsaliaBundle:Personal:pasaporte.html.twig', array(
                 'entity'      => $entity,
-                'nombre'      => $nombre,
+                'edit_form'   => $editForm->createView(),                
+                'delete_form' => $deleteForm->createView(),
+                'nombre'      => $nombre_c,
                 'pasaporte'   => $pasaporte,
-                'form1'       => $form1->createView(),
-            ));
+            ));                              
         }
     }
 

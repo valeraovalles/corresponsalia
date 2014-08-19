@@ -81,6 +81,8 @@ class DocumentoController extends Controller
 
                     return $this->render('CorresponsaliaBundle:Documento:new.html.twig', array(
                         'entity' => $entity,
+                        'corresponsalia'    => $corresponsalia,
+                        'nombre_c'      => $nombre_c,
                         'form'   => $form->createView(),
                     ));
 
@@ -92,6 +94,8 @@ class DocumentoController extends Controller
 
                     return $this->render('CorresponsaliaBundle:Documento:new.html.twig', array(
                         'entity' => $entity,
+                        'corresponsalia'    => $corresponsalia,
+                        'nombre_c'      => $nombre_c,
                         'form'   => $form->createView(),
                     ));
                 }
@@ -251,7 +255,7 @@ class DocumentoController extends Controller
 
         $corres = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($corresponsalia);
 
-
+        $nombre_c = $corres->getNombre()." | ".$corres->getPais();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Documento entity.');
         }
@@ -268,12 +272,16 @@ class DocumentoController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('documento_show', array('id' => $id,
                                                                               'corresponsalia'  => $corresponsalia,
+                                                                              'nombre_c'    => $nombre_c,  
                                                                                 )));
             
         }
         return $this->render('CorresponsaliaBundle:Documento:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
+            'nombre_c'    => $nombre_c, 
+            'archivo'       => $archivo,
+            'corresponsalia'=> $corresponsalia,
             'delete_form' => $deleteForm->createView(),
         ));
     }
