@@ -134,9 +134,18 @@ class DefaultController extends Controller
     public function estatusrendicionAction(Request $request, $idperiodo,$estatus)
     {  
         #1 nuevo, 2 enviado revisión, 3 devuelto corrección y 4 cerrado
-        
-        //ACTUALIZO AL ESTATUS NUEVO
         $em = $this->getDoctrine()->getManager();
+        
+        //verifico antes de enviar para revision tenga al menos una rendicion
+        if($estatus==2){
+            $rg = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->findByPeriodorendicion($idperiodo);
+            if(!$rg){
+                $this->get('session')->getFlashBag()->add('alert', 'No puede cerrar este período si no posee al menos 1 rendición.');
+                return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$idperiodo)));   
+            }
+        }
+
+        //ACTUALIZO AL ESTATUS NUEVO
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
         $consulta->setParameter('id', $idperiodo);
         $consulta->setParameter('estatus', $estatus);
@@ -153,7 +162,7 @@ class DefaultController extends Controller
         
         
 
-        //ENVIADO PARA REVISIÓN
+        //ENVIADO PARA REVISIÓN, ENVÍO LOS CORREOS RESPECTIVOS
         if($estatus==2){
             
             if($idcor==2) #MEXICO
@@ -164,6 +173,9 @@ class DefaultController extends Controller
 
             else if($idcor==5) #WASHINTON
                 $correo[]='amolina@telesurtv.net';
+            
+            else if($idcor==8) #nicaragua
+                $correo[]='lcastillo@telesurtv.net';
         
             $message = \Swift_Message::newInstance()   
             ->setSubject('Corresponsalia-Revision')  
@@ -188,6 +200,9 @@ class DefaultController extends Controller
 
             else if($idcor==5){ #WASHINTON
                 $correo[]='jorge.gestoso@gtnnews.com';$correo[]='caroline.guichard@gtnnews.com';}
+                
+            else if($idcor==8){ #NICARAGUA
+                $correo[]='mjdh27@gmail.com';$correo[]='celsoen281972@hotmail.es';}
             
             $datos=$request->request->all();
             $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.justificadevolucion= :justificadev WHERE p.id = :id');
@@ -209,6 +224,7 @@ class DefaultController extends Controller
 
         //CERRADO //asigno el saldo final al periodo siguiente
         if($estatus==4){
+            
             $f=new Funciones;
             $f->actualizasaldos($idperiodo,$em);
         }
@@ -394,6 +410,7 @@ class DefaultController extends Controller
     
     public function actualizarendicionAction(Request $request, $idrendicion,$idperiodo)
     {
+        
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
         
@@ -403,6 +420,7 @@ class DefaultController extends Controller
         $idcor=$periodo->getCorresponsalia()->getId();
         
         $rendicion = $em->getRepository('CorresponsaliaBundle:Relaciongasto')->find($idrendicion);
+        $justificadevolucion=$rendicion->getJustificadevolucion();
         
         if (!$rendicion) {
             throw $this->createNotFoundException('Unable to find Relaciongasto entity.');
@@ -422,6 +440,7 @@ class DefaultController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $rendicion->setResponsable($usuario);
+            $rendicion->setJustificadevolucion($justificadevolucion);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('notice', 'Se ha editado la rendicion exitosamente.');
