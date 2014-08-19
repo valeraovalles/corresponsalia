@@ -101,52 +101,75 @@ class EquipoController extends Controller
         $form = $this->createCreateForm($entity);
         
         $form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
         
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $condicion = $entity->getCondicion()->getNombre();
-            if($condicion == "MALO" or $condicion == "REGULAR"){
-                $entity->setStatus(FALSE);
-            }else{
-                $entity->setStatus(TRUE);
-            }
-            
-            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
-            $entity->setSerialEquipo(strtoupper($entity->getSerialEquipo()));
-            $entity->setObservacionCondicion(strtoupper($entity->getObservacionCondicion()));
-            $entity->setDescripcion(strtoupper($entity->getDescripcion()));
-            $em->persist($entity);
-            $em->flush();
-            
+        $equipoResult = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->findOneBySerialEquipo($entity->getSerialEquipo());
+      
+        if (!$equipoResult) {
             if ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
-                // el usuario tiene el role 'ROLE_TECNO_CORRESPONSALIA'
-                $asignacion = new Asignacion();
-                $usuario = $this->get('security.context')->getToken()->getUser();
-                $userCorresp = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findOneByUsuario($usuario->getId());
-                $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($userCorresp->getCorresponsalia()->getId());
-                $asignacion->setCorresponsalia($corresponsalia);
-                $asignacion->setFechaAsignacion(new \DateTime);
-                $status = $em->getRepository('CorresponsaliaBundle:Tecnologia\StatusAsignacion')->findOneByNombre("permanente");
-                $asignacion->setStatus($status);
-                $asignacion->setId($entity->getId());
-                $em->persist($asignacion);
-                $em->flush();
+                $responsable = $request->request->get('responsable');
+                $distintRole = ($responsable == '') ? FALSE : TRUE ;
+            }else {
+                $distintRole = TRUE;
             }
-            
-            
+            if ($distintRole) {
+                if ($form->isValid()) {
+                    $condicion = $entity->getCondicion()->getNombre();
+                    if($condicion == "MALO" or $condicion == "REGULAR"){
+                        $entity->setStatus(FALSE);
+                    }else {
+                        $entity->setStatus(TRUE);
+                    }
+                    
+                    $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+                    $entity->setSerialEquipo(strtoupper($entity->getSerialEquipo()));
+                    $entity->setObservacionCondicion(strtoupper($entity->getObservacionCondicion()));
+                    $entity->setDescripcion(strtoupper($entity->getDescripcion()));
+                    $em->persist($entity);
+                    $em->flush();
+                    
+                    if ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
+                        // el usuario tiene el role 'ROLE_TECNO_CORRESPONSALIA'
+                        $asignacion = new Asignacion();
+                        $usuario = $this->get('security.context')->getToken()->getUser();
+                        $userCorresp = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findOneByUsuario($usuario->getId());
+                        $corresponsalia = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->find($userCorresp->getCorresponsalia()->getId());
+                        $asignacion->setCorresponsalia($corresponsalia);
+                        $asignacion->setFechaAsignacion(new \DateTime);
+                        $status = $em->getRepository('CorresponsaliaBundle:Tecnologia\StatusAsignacion')->findOneByNombre("Permanente");
+                        $asignacion->setStatus($status);
+                        $asignacion->setId($entity->getId());
+                        $asignacion->setResponsable($responsable);
+                        $em->persist($asignacion);
+                        $em->flush();
+                    }
+                    
+                    
+                    $this->get('session')->getFlashBag()->set(
+                        'success',
+                        array(
+                            'title' => 'Nuevo! ',
+                            'message' => 'Equipo agregado.'
+                        )
+                    );
+                    return $this->redirect($this->generateUrl('tecnoequipo_show', array('id' => $entity->getId())));
+                }
+            }
+        }else {
             $this->get('session')->getFlashBag()->set(
-                'success',
-                array(
-                    'title' => 'Nueva! ',
-                    'message' => 'Marca agregada.'
-                )
-            );
-            return $this->redirect($this->generateUrl('tecnoequipo_show', array('id' => $entity->getId())));
+                    'danger',
+                    array(
+                        'title' => 'Error! ',
+                        'message' => 'Ya existe un equipo con el mismo serial.'
+                    )
+                );
         }
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error_responsable' => $distintRole,
         ));
     }
 
@@ -178,9 +201,11 @@ class EquipoController extends Controller
         $entity = new Equipo();
         $form   = $this->createCreateForm($entity);
 
+        $retVal = FALSE ;
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'error_responsable' => $retVal,
         ));
     }
 
@@ -299,8 +324,8 @@ class EquipoController extends Controller
             $this->get('session')->getFlashBag()->set(
                 'success',
                 array(
-                    'title' => 'Editada!',
-                    'message' => 'Marca con exito.'
+                    'title' => 'Editado!',
+                    'message' => 'Equipo con exito.'
                 )
             );
             return $this->redirect($this->generateUrl('tecnoequipo_edit', array('id' => $id)));

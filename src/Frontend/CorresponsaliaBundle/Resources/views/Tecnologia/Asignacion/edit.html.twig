@@ -86,13 +86,14 @@
         </div>
     {% endfor %}
 
-    {% if form_errors(edit_form.status) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.fechaAsignacion) or form_errors(edit_form.fechaEstimadaRetorno)%}
+    {% if form_errors(edit_form.status) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.fechaAsignacion) or form_errors(edit_form.fechaEstimadaRetorno) or form_errors(edit_form.responsable)  %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.status) }}</div>
         <div>{{ form_errors(edit_form.corresponsalia) }}</div>
         <div>{{ form_errors(edit_form.fechaAsignacion) }}</div>
         <div>{{ form_errors(edit_form.fechaEstimadaRetorno) }}</div>
+        <div>{{ form_errors(edit_form.responsable) }}</div>
     </div>
     {% endif %}
     

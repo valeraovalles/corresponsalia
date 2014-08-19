@@ -2,6 +2,17 @@
 
 {% block titulomodulo %}<h1>ASIGNACION EQUIPO - CORRESPONSALIA</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        table .thead_suplente {
+            text-align: center;
+            font-size: 14px !important;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
     
@@ -19,12 +30,12 @@
     
     <div class="formShow" style="width:80%;">
         <table class='table table-condensed table-bordered table-striped'>
-            <caption>Datos Generales del Equipo</caption>
+            <caption><h4>Datos Generales del Equipo</h4></caption>
             <tr>
-              <td><strong>categoria</strong></td>
-              <td><strong>Modelo</strong></td>
-              <td><strong>Serial</strong></td>
-              <td><strong>Descripcion</strong></td>
+              <td class="thead_suplente">Categoria</td>
+              <td class="thead_suplente">Modelo</td>
+              <td class="thead_suplente">Serial</td>
+              <td class="thead_suplente">Descripcion</td>
             </tr>
             <tr>
               <td>{{ equipo.categoria }}</td>
@@ -46,18 +57,18 @@
             <div class="widgetform">{{ entity.responsable }}</div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">fecha Asignacion:</div>
+            <div class="labelform">Fecha Asignacion:</div>
             <div class="widgetform">{{ entity.fechaAsignacion|date('d-m-Y') }}</div>
         </div>
         {% if entity.fechaEstimadaRetorno|length > 0 %}
             <div class="contenedorform">
-                <div class="labelform">fecha Estimada Retorno:</div>
+                <div class="labelform">Fecha Estimada Retorno:</div>
                 <div class="widgetform">{{ entity.fechaEstimadaRetorno|date('d-m-Y') }}</div>
             </div>
         {% endif %}
         {% if entity.fechaRetorno|length > 0 %}
             <div class="contenedorform">
-                <div class="labelform">fecha Retorno:</div>
+                <div class="labelform">Fecha Retorno:</div>
                 <div class="widgetform">{{ entity.fechaRetorno|date('d-m-Y') }}</div>
             </div>
         {% endif %}

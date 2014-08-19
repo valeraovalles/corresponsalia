@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : ecastro
 */
 
+
 .oculto{
     display: none;
 }
@@ -23,6 +24,10 @@ legend.scheduler-border {
     padding:0 10px; 
     border-bottom:none;
     font-size: 14px;
+}
+
+.table > thead >tr >th {
+    font-size: 14px !important;
 }
 
 .ui-widget { font-family: Verdana,Arial,sans-serif; font-size: .92em; }

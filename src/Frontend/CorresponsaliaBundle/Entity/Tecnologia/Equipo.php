@@ -69,7 +69,7 @@ class Equipo
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      * })
-     @Assert\NotBlank(message="Debe seleccionar una categoria.")
+     * @Assert\NotBlank(message="Debe seleccionar una categoria.")
      */
     private $categoria;
     

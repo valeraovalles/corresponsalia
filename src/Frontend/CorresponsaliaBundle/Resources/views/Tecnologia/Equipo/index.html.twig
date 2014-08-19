@@ -72,6 +72,7 @@
                 <th>Serial</th>
                 <th style="width: 17%;">Descripción</th>
                 <th style="width: 60px;">Status</th>
+                <th>Tipo</th>
                 <th>Corresponsalia</th>
                 <th style="width: 13%;">Acciones</th>
             </tr>
@@ -93,7 +94,12 @@
                         <span class="label label-danger">Inactivo</span>
                     {% endif %}
                 </td>
-                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
+                <td>
+                    {% if entity|length > 9 %}
+                        {{ entity.statusAsignacion }}
+                    {% endif %}
+                </td>
+                <td>{% if entity|length > 9 %}<span id="corresponsalia{{ entity.id }}">{{ entity.corresponsalia.nombre }}</span>{% endif %}</td>
                 <td id="acciones{{ entity.id }}">
                     <a href="{{ path('tecnoequipo_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Visualizar"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a href="{{ path('tecnoequipo_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Modificar"><b class="glyphicon glyphicon-edit"></b></a> |
@@ -130,11 +136,11 @@
             <div id="alert-modal" class="alert alert-danger">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
             </div>
-            <form id="form_fecha" class="form-horizontal" role="form">
+            <form novalidate id="form_fecha" class="form-horizontal" role="form">
             <div class="form-group">
               <label for="fechaRetorno" class="col-sm-4 control-label">Fecha Retorno:</label>
                 <div class="col-sm-6">
-                  <input name="fechaRetorno" type="date" class="form-control datepicker" id="fechaRetorno">
+                  <input name="fechaRetorno" type="text" class="form-control datepicker" id="fechaRetorno">
                 </div>
             </div>
             <input type="hidden" id="select_equipo_id" name="select_equipo_id" />
@@ -213,6 +219,7 @@
                                      +"<span class='btn btn-default btn-xs etiqueta prestamo'>ASIGNAR</span>"
                                      +"</a>";
                          jQuery(boton).appendTo("#acciones"+datos.id);
+                         jQuery('#corresponsalia'+datos.id).text('');
                          jQuery("#flag").html(flags);
                          jQuery( "tr#entity"+datos.id ).effect( 'highlight', indicador, 3500, callback );
                    }

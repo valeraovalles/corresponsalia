@@ -576,3 +576,31 @@ descripciongasto_delete:
     pattern:  /descripciongasto/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Descripciongasto:delete" }
     requirements: { _method: post|delete }
+
+#-------------------------------------------------------------------------------------
+#----------------------------MODULO DE TECNOLOGIA-------------------------------------
+#-------------------------------------------------------------------------------------
+
+CorresponsaliaBundle_tecnocategoria:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_categoria.yml"
+        prefix:   /tecnocategoria
+
+CorresponsaliaBundle_tecnomarca:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_marca.yml"
+        prefix:   /tecnomarca
+
+CorresponsaliaBundle_tecnoequipo:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_equipo.yml"
+        prefix:   /tecnoequipo
+
+CorresponsaliaBundle_tecnoasignar:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_asignacion.yml"
+        prefix:   /tecnoasignar
+
+CorresponsaliaBundle_tecnomodelo:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_modelo.yml"
+        prefix:   /tecnomodelo
+
+CorresponsaliaBundle_tecnobitacora:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_bitacora.yml"
+        prefix:   /tecnobitacora

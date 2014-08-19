@@ -130,10 +130,14 @@
             {% endif %}
             {% if entity.status %}
                 {% if asignacion == false %}
-                    <i>Este equipo aun no esta asignado a ninguna corresponsalia</i>
+                <div class="alert alert-info">
+                  <b>Este equipo aun no esta asignado a ninguna corresponsalia</b>
+                </div>
                 {% endif %}
             {% elseif entity.status == false and entity.condicion=='MALO'%}
-                <i>Este equipo esta inactivo</i>
+                <div class="alert alert-danger">
+                    <b>Este equipo esta inactivo</b>
+                </div>
             {% endif %}
          </div>
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
@@ -146,7 +150,7 @@
         {% endif %}
     </form>
 
-    <BR>
+    </br>
     {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
         {{ form_errors(delete_form) }}
         {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}

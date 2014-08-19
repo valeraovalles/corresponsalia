@@ -67,3 +67,11 @@ security:
         - { path: ^/corresponsalia/comentarios,  roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/documentos,   roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
 
+        #--MODULO DE TECNOLOGIA
+        - { path: ^/corresponsalia/tecnocategoria,  roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/tecnomarca,      roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/tecnoequipo,     roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/tecnoasignar,    roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/tecnomodelo,     roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+        - { path: ^/corresponsalia/tecnobitacora,   roles: [ROLE_SUPERADMIN, ROLE_TECNO_ADMIN, ROLE_TECNO_CORRESPONSALIA]}
+

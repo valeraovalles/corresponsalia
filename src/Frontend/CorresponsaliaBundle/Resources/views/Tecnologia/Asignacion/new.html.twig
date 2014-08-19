@@ -6,12 +6,16 @@
     {{ parent() }}
     <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
     <style type="text/css">
         .select2-container .select2-choice > .select2-chosen {
             min-width: 200px !important;
         }
         #s2id_tecnologia_asignacion_corresponsalia{
             width: 400px !important;
+        }
+        #contenedor{
+            min-height: 600px !important;
         }
     </style>
 {% endblock %} 

@@ -117,12 +117,12 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(form.status) or form_errors(form.corresponsalia) or form_errors(form.fechaAsignacion) %}
+    {% if form_errors(form.status) or form_errors(form.corresponsalia) or form_errors(form.responsable) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.status) }}</div>
         <div>{{ form_errors(form.corresponsalia) }}</div>
-        <div>{{ form_errors(form.fechaAsignacion) }}</div>
+        <div>{{ form_errors(form.responsable) }}</div>
     </div>
     {% endif %}
     
@@ -133,16 +133,16 @@
                 <legend>ASIGNACION ACTUAL</legend>
                 <tr>
                     <td class="sombra_td"><strong></br>Descripcion del Equipo</strong></td>
-                    <td>Categoria: {{ equipo.categoria }} </br> 
-                      Modelo: {{ equipo.modelo }} </br>
-                      Serial: {{ equipo.serialEquipo }}
+                    <td><strong>Categoria:</strong> {{ equipo.categoria }} </br> 
+                        <strong>Modelo:</strong> {{ equipo.modelo }} </br>
+                        <strong>Serial:</strong> {{ equipo.serialEquipo }}
                   </td>
                 </tr>
                 <tr>
                   <td class="sombra_td"><strong></br>Asignacion Actual</strong></td>
-                  <td>Tipo de Asignacion: {{ asignar_actual.status }} </br> 
-                      Corresponsalia: {{ asignar_actual.corresponsalia }} </br>
-                      Fecha Asignacion: {{ asignar_actual.fechaAsignacion|date('d-m-Y') }}
+                  <td><strong>Tipo de Asignacion:</strong> {{ asignar_actual.status }} </br> 
+                      <strong>Corresponsalia:</strong> {{ asignar_actual.corresponsalia }} </br>
+                      <strong>Fecha Asignacion:</strong> {{ asignar_actual.fechaAsignacion|date('d-m-Y') }}
                   </td>
                 </tr>
             </table>
@@ -156,7 +156,7 @@
                 <div class="widgetform">{{ form_widget(form.corresponsalia, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">fechaAsignacion:</div>
+                <div class="labelform">Fecha Asignacion:</div>
                 <div class="widgetform">{{ form_widget(form.fechaAsignacion, { 'attr': {'class': 'parent'} }) }}</div>
             </div>
             <div class="contenedorform">

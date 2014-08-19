@@ -12,6 +12,8 @@
         .select2-container .select2-choice > .select2-chosen {
             min-width: 200px !important;
         }
+
+        
     </style>
 {% endblock %}  
 
@@ -60,7 +62,19 @@
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(form.categoria) or form_errors(form.marca) or form_errors(form.modelo) or form_errors(form.serialEquipo) or form_errors(form.descripcion) or form_errors(form.fechaAdquisicion) or form_errors(form.condicion)%}
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% set role = is_granted('ROLE_TECNO_CORRESPONSALIA') %}
+    {% if form_errors(form.categoria) or form_errors(form.marca) or form_errors(form.modelo) or form_errors(form.serialEquipo) or form_errors(form.descripcion) or form_errors(form.fechaAdquisicion) or form_errors(form.condicion) or (role and error_responsable == false) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.categoria) }}</div>
@@ -70,6 +84,11 @@
         <div>{{ form_errors(form.descripcion) }}</div>
         <div>{{ form_errors(form.fechaAdquisicion) }}</div>
         <div>{{ form_errors(form.condicion) }}</div>
+        {% if role %}
+            {% if error_responsable == false %}
+                <div><ul><li>Debe agregar el responsable del equipo.</li></ul></div>
+            {% endif %}
+        {% endif %}
     </div>
     {% endif %}
 
@@ -104,6 +123,14 @@
                 <div class="labelform">Condicion:</div>
                 <div class="widgetform">{{ form_widget(form.condicion, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
+            {% if role %}
+                <div class="contenedorform">
+                    <div class="labelform">Responsable:</div>
+                    <div class="widgetform">
+                        <input id="tecnologia_asignacion_responsable" type="text" required="required" name="responsable">
+                    </div>
+                </div>
+            {% endif %}
         </div>
         
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
