@@ -119,11 +119,9 @@ class PersonalController extends Controller
         if($archivo != NULL)
         {
             $filee = explode('.', $archivo);
-            $extension = $filee[1];
-            $nombre1 = $filee[0];        
+            $extension = $filee[1];    
 
-            $archivo = $nombre1;
-            $ruta = "/corresponsalia/web/uploads/personal/".$archivo.".".$extension;  
+            $ruta = "/corresponsalia/web/uploads/personal/".$id.".".$extension;  
 
             return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
                 'entity'      => $entity,
@@ -343,21 +341,19 @@ class PersonalController extends Controller
 
             $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre1));
 
-            if($file->move('uploads/personal/',$id.'_'.\date("Gis").'.'.$extension) )
+            if($file->move('uploads/personal/',$id.".".$extension) )
             {
-                $entity->setArchivo($id.'_'.\date("Gis").'.'.$extension);
+                $entity->setArchivo($id.".".$extension);
             }
             $em->persist($entity);
             $em->flush(); 
 
-            
-            $archivo = $id.'_'.\date("Gis");
-            $ruta = "/corresponsalia/web/uploads/personal/".$id.'_'.\date("Gis").".".$extension;    
+            $ruta = "uploads/personal/".$id.".".$extension;    
        
             return $this->render('CorresponsaliaBundle:Personal:show.html.twig', array(
                 'entity'      => $entity,
                 'extension'   => $extension,
-                'archivo'     => $archivo,
+                'archivo'     => $id,
                 'ruta'        => $ruta,
                 'delete_form' => $deleteForm->createView(),        ));
 

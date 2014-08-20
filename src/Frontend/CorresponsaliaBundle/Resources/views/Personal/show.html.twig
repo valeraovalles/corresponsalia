@@ -50,13 +50,12 @@
             <div class="contenedorform">
                 <div class="labelform">Pasaporte:</div>
                 <div class="widgetform">
-
                     {% if extension=='jpg' or extension=='jpeg' or extension=='png' or extension=='gif'  %}
-                        <a data-toggle="modal" href="#myModal">
-                            <img class="img-rounded" src="{{ ruta }}" width="150px">
+                        <a data-toggle="modal" href="#">
+                            <img class="img-rounded" src="{{ asset(ruta) }}" width="150px">
                         </a>
                     {% else %}
-                        <a href="{{ asset('uploads/personal/ {{ ruta }}' ) }}">DESCARGA ARCHIVO {{ extension|upper }}</a>
+                        <a href="{{ asset(ruta) }}">DESCARGA ARCHIVO {{ extension|upper }}</a>
                     {% endif %}
                 </div>
             </div>
