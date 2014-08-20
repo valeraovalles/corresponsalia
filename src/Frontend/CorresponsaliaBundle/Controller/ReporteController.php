@@ -193,4 +193,9 @@ class ReporteController extends Controller
         $mpdf->Output("reporte".".pdf","D");
         exit;   
     }
+
+    public function reportepersonalAction()
+    {
+        die;
+    }
 }

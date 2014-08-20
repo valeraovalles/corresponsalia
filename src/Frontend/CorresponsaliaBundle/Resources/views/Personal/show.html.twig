@@ -52,7 +52,7 @@
                 <div class="widgetform">
                     {% if extension=='jpg' or extension=='jpeg' or extension=='png' or extension=='gif'  %}
                         <a data-toggle="modal" href="#">
-                            <img class="img-rounded" src="{{ asset(ruta) }}" width="150px">
+                            <img class="img-rounded" src="{{ asset('uploads/personal/') }}{{ entity.id }}.{{extension}}" width="150px">
                         </a>
                     {% else %}
                         <a href="{{ asset(ruta) }}">DESCARGA ARCHIVO {{ extension|upper }}</a>
