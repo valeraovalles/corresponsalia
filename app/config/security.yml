@@ -67,4 +67,5 @@ security:
         - { path: ^/corresponsalia/datoslegales, roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/comentarios,  roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/documentos,   roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
+        - { path: ^/corresponsalia/documento/edit, roles: ROLE_SUPERADMIN}
 

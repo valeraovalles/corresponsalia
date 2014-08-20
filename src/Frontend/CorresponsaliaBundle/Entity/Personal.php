@@ -326,7 +326,7 @@ class Personal
      * Set archivo
      *
      * @param string $archivo
-     * @return Personal
+     * @return Ticket
      */
     public function setArchivo($archivo)
     {

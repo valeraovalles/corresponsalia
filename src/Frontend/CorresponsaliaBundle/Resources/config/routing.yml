@@ -531,7 +531,7 @@ documento_create:
     requirements: { _method: post }
 
 documento_edit:
-    pattern:  /documento/{id}/edit
+    pattern:  /documento/edit/{id}
     defaults: { _controller: "CorresponsaliaBundle:Documento:edit" }
 
 documento_update:

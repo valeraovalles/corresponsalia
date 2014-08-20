@@ -30,7 +30,6 @@
                 <td>{{ entity.file }}</td>
                 <td>
                     <a href="{{ path('documento_show', { 'id': entity.id, 'corresponsalia': corresponsalia }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Documento"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('documento_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Editar Documento"></b></a>
                 </td>
             </tr>
         {% endfor %}
