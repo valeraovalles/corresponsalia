@@ -42,7 +42,7 @@
             {% for entity in rendicionlista %}
                     <tr {% if entity.aprobada==false %} style="background-color: yellow;"{% endif %}>
                         <td>{{ entity.id}}</td>
-                        <td> {{entity.numerocomprobante }} </td>
+                        <td> {{ entity.numerocomprobante }} </td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
                         <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
                         <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
