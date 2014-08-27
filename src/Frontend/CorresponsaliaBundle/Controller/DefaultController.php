@@ -144,6 +144,33 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl('corresponsalia_rendirgasto',array('idperiodo'=>$idperiodo)));   
             }
         }
+        
+        //verifico que cierre el periodo anterior antes de cerrar el actual
+        if($estatus==4){
+            
+            //obtengo datos del periodo
+            $periodoactual = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->find($idperiodo);
+            $anio=$periodoactual->getAnio();
+            $mes=$periodoactual->getMes();
+            $idco=$periodoactual->getCorresponsalia()->getId();
+            $idtg=$periodoactual->getTipogasto()->getId();
+
+            //busco el periodo anterior
+            $dql   = "SELECT p FROM CorresponsaliaBundle:Periodorendicion p where p.corresponsalia= :idco and p.tipogasto= :idtg  and p.id< :idp order by p.id DESC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idco', $idco);
+            $query->setParameter('idtg', $idtg);
+            $query->setParameter('idp', $idperiodo);
+            $query->setMaxResults(1);
+            $periodoant= $query->getResult(); 
+            
+            if(isset($periodoant[0])){
+                if($periodoant[0]->getEstatus()!=4){
+                    $this->get('session')->getFlashBag()->add('alert', 'No puede cerrar este periodo porque el anterior no esta cerrado.');
+                    return $this->redirect($this->generateUrl('corresponsalia_revisionrendicion',array('idperiodo'=>$idperiodo)));    
+                }
+            }
+        }
 
         //ACTUALIZO AL ESTATUS NUEVO
         $consulta = $em->createQuery('update CorresponsaliaBundle:Periodorendicion p set p.estatus= :estatus WHERE p.id = :id');
