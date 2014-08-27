@@ -759,8 +759,6 @@ class htmlreporte
 
                 ";
                 
-                echo $html;
-                die;
 		return $html;
     }
 }
