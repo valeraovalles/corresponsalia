@@ -201,7 +201,7 @@ class EquipoController extends Controller
         $entity = new Equipo();
         $form   = $this->createCreateForm($entity);
 
-        $retVal = FALSE ;
+        $retVal = TRUE;
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),

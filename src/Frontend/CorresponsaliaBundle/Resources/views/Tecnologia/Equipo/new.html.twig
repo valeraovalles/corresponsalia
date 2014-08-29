@@ -73,6 +73,7 @@
             {% endif %}
         </div>
     {% endfor %}
+    
     {% set role = is_granted('ROLE_TECNO_CORRESPONSALIA') %}
     {% if form_errors(form.categoria) or form_errors(form.marca) or form_errors(form.modelo) or form_errors(form.serialEquipo) or form_errors(form.descripcion) or form_errors(form.fechaAdquisicion) or form_errors(form.condicion) or (role and error_responsable == false) %}
     <div class="alert alert-danger errores" style="width:70%;">
