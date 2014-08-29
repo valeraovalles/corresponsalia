@@ -8,3 +8,6 @@ tecnobitacora_show:
 
 
 
+diagnostico:
+    pattern: /usuario/error
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Diagnostico:error" }

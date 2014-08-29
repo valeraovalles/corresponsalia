@@ -44,7 +44,15 @@ class MarcaController extends Controller
             $entity->setNombre(strtolower($entity->getNombre()));
             $em->persist($entity);
             $em->flush();
-
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva! ',
+                    'message' => 'Marca agregada.'
+                )
+            );
+            
             return $this->redirect($this->generateUrl('tecnomarca_show', array('id' => $entity->getId())));
         }
 
@@ -172,7 +180,14 @@ class MarcaController extends Controller
         if ($editForm->isValid()) {
             $entity->setNombre(strtolower($entity->getNombre()));
             $em->flush();
-
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editada!',
+                    'message' => 'Marca con exito.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnomarca_edit', array('id' => $id)));
         }
 
@@ -199,10 +214,19 @@ class MarcaController extends Controller
                 throw $this->createNotFoundException('Unable to find Tecnologia\Marca entity.');
             }
 
+            $nombre = $entity->getNombre();
+            
             $em->remove($entity);
             $em->flush();
         }
-
+        
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminada! ',
+                'message' => 'Marca '.$nombre.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnomarca'));
     }
 

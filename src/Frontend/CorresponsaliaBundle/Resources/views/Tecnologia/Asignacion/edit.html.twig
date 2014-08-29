@@ -2,6 +2,20 @@
 
 {% block titulomodulo %}<h1>EDITAR ASIGNACIÓN</h1>{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 200px !important;
+        }
+        #s2id_tecnologia_asignacion_corresponsalia{
+            width: 400px !important;
+        }
+    </style>
+{% endblock %} 
+
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -48,23 +62,38 @@
     </script>
     <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
-{% endblock %}
+
 
 {% block body -%}
     {{ parent() }}
+    
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
 
-    {% if form_errors(edit_form.status) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.fechaAsignacion) or form_errors(edit_form.fechaEstimadaRetorno)%}
+    {% if form_errors(edit_form.status) or form_errors(edit_form.corresponsalia) or form_errors(edit_form.fechaAsignacion) or form_errors(edit_form.fechaEstimadaRetorno) or form_errors(edit_form.responsable)  %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>Categoria: {{ form_errors(edit_form.status) }}</div>
-        <div>Marca: {{ form_errors(edit_form.corresponsalia) }}</div>
-        <div>Modelo: {{ form_errors(edit_form.fechaAsignacion) }}</div>
-        <div>Serial: {{ form_errors(edit_form.fechaEstimadaRetorno) }}</div>
+        <div>{{ form_errors(edit_form.status) }}</div>
+        <div>{{ form_errors(edit_form.corresponsalia) }}</div>
+        <div>{{ form_errors(edit_form.fechaAsignacion) }}</div>
+        <div>{{ form_errors(edit_form.fechaEstimadaRetorno) }}</div>
+        <div>{{ form_errors(edit_form.responsable) }}</div>
     </div>
     {% endif %}
     
@@ -73,15 +102,19 @@
          <div id="wrapper-form" class="formShow" style="width:70%;">
              <div class="contenedorform">
                 <div class="labelform">Tipo de Asignacion:</div>
-                <div class="widgetform">{{ form_widget(edit_form.status) }}</div>
+                <div class="widgetform">{{ form_widget(edit_form.status, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Corresponsalia:</div>
-                <div class="widgetform">{{ form_widget(edit_form.corresponsalia) }}</div>
+                <div class="widgetform">{{ form_widget(edit_form.corresponsalia, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">fechaAsignacion:</div>
                 <div class="widgetform">{{ form_widget(edit_form.fechaAsignacion, { 'attr': {'class': 'datepicker'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(edit_form.responsable) }}</div>
             </div>
             {% if entity.fechaEstimadaRetorno|length > 0 %}
                 <div id="fechaEstimadaRetorno" class="contenedorform">
@@ -90,7 +123,7 @@
                 </div>
             {% endif %}
          </div>
-         <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo_id }}" />
+         <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo.id }}" />
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('tecnoasignar_show',{'id':entity.id}) }}">IR A CONSULTA</a> | 
         <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>

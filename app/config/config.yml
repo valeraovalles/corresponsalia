@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: '@CorresponsaliaBundle/Resources/config/parameters.yml' }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -90,3 +91,7 @@ swiftmailer:
     port:      %mailer_port%
     spool:     { type: memory }
     disable_delivery:  true
+
+services:
+    tecnologia.prueba:
+        class:        Frontend\CorresponsaliaBundle\DependencyInjection\prueba

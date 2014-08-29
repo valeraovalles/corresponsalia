@@ -27,6 +27,8 @@ class Equipo
      * @var string
      *
      * @ORM\Column(name="serialequipo", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="El campo serial no puede estar vacio.")
+     * @Assert\Length(min = "3", minMessage = "El serial debe tener al menos {{ limit }} caracteres de longitud")
      */
     private $serialEquipo;
 
@@ -34,7 +36,7 @@ class Equipo
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text", nullable=false)
-     * @Assert\NotBlank(message="El campo nombre de categoria no puede estar vacio.")
+     * @Assert\NotBlank(message="El campo descripcion no puede estar vacio.")
      * 
      */
     private $descripcion;
@@ -67,6 +69,7 @@ class Equipo
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una categoria.")
      */
     private $categoria;
     
@@ -77,6 +80,7 @@ class Equipo
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="condicion_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar la condicion del equipo.")
      */
     private $condicion;
     
@@ -87,6 +91,7 @@ class Equipo
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="modelo_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar el modelo del equipo.")
      */
     private $modelo;
     
