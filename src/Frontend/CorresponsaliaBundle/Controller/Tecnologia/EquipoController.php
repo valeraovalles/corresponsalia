@@ -52,8 +52,7 @@ class EquipoController extends Controller
                 }
                 $indice++;
             }
-        }
-        elseif ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
+        } elseif ($this->get('security.context')->isGranted('ROLE_TECNO_CORRESPONSALIA')) {
             // el usuario tiene el role 'ROLE_TECNO_CORRESPONSALIA'
             $usuario = $this->get('security.context')->getToken()->getUser();
             $userCorresp = $em->getRepository('UsuarioBundle:Usercorresponsalia')->findOneByUsuario($usuario->getId());
@@ -201,7 +200,7 @@ class EquipoController extends Controller
         $entity = new Equipo();
         $form   = $this->createCreateForm($entity);
 
-        $retVal = FALSE ;
+        $retVal = TRUE ;
         return $this->render('CorresponsaliaBundle:Tecnologia/Equipo:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -353,17 +352,30 @@ class EquipoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
             }
-            
+
+            $asign = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+
             $descripcion = $entity->getDescripcion();
+            $label = 'success';
+            $title = 'Eliminado! ';
+            $message = 'Equipo '.$descripcion.'.';
+
+            $asign = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($id);
+
+            if (!$asign) {
+                throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
+            }
+
+            $em->remove($asign);
             $em->remove($entity);
             $em->flush();
         }
 
         $this->get('session')->getFlashBag()->set(
-            'danger',
+             $label,
             array(
-                'title' => 'Eliminado! ',
-                'message' => 'Equipo '.$descripcion.'.'
+                'title' => $title,
+                'message' => $message
             )
         );
         return $this->redirect($this->generateUrl('tecnoequipo'));

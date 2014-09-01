@@ -28,11 +28,15 @@ tecnoequipo_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Equipo:delete" }
     requirements: { _method: post|delete }
-    
+
 tecnoequipo_select:
     pattern: /modelo
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:modelo"}
-    
+
 tecnoequipo_fretorno:
     pattern: /fretorno
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:fechaRetorno"}
+
+ayuda_tecno:
+    pattern: /ayuda_tecno
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:ayuda"}

@@ -1,0 +1,202 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>Manual de Usuario</h1>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+    <style type="text/css">
+
+        ul.nav-bar .active:after {
+            top: 100%;
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(136, 183, 213, 0);
+            border-top-color: #428BCA;
+            border-width: 10px;
+            margin-left: -10px;
+        }
+
+        .centrar {
+            margin: 0 auto;
+            width: 85%;
+        }
+
+        div.well {
+            margin-top: 15px;
+        }
+
+        .page-header {
+            margin:0;
+            text-align: left;
+        }
+
+
+        .nav-justified {
+            background-color: #F5F5F5;
+        }
+
+        .nav-justified > li > a {
+            background-color: #E5E5E5;
+            background-repeat: repeat-x;
+            color: #777;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding-bottom: 15px;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .nav-justified > .active > a, 
+        .nav-justified > .active > a:hover, 
+        .nav-justified > .active > a:focus {
+            background-color: #428BCA;
+            background-image: none;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;
+            color: #FFF;
+        }
+
+        @media (min-width: 768px) {
+            .nav-justified {
+                max-height: 52px;
+            }
+            .nav-justified > li > a {
+                border-left: 1px solid #fff;
+                border-right: 1px solid #e5e5e5;
+            }
+            .nav-justified > li:first-child > a {
+                border-left: 0 none;
+                border-radius: 5px 0 0 5px;
+            }
+            .nav-justified > li:last-child > a {
+                border-radius: 0 5px 5px 0;
+                border-right: 0 none;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .masthead, .marketing, .footer {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        .nav > li > a:hover, .nav > li > a:focus {
+            background-color: #428BCA;
+            color: #FFF;
+        }
+
+        .arrow_box:after, .arrow_box:before { 
+            left: 100%; 
+            top: 50%; 
+            border: solid transparent; 
+            content: " "; 
+            height: 0; 
+            width: 0; 
+            position: absolute; 
+            pointer-events: none; 
+        } 
+
+        .arrow_box:after { 
+            border-color: rgba(136, 183, 213, 0); 
+            border-left-color: #428BCA; 
+            border-width: 10px; 
+            margin-top: -10px;
+        } 
+        
+        #column-left {
+            float: left;
+            position: fixed;
+            min-height: 225px;
+            overflow: hidden;
+            text-align: center;
+            width: 200px;
+        }
+        #central {
+            float: right;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="centrar">
+        <div class="row">
+            <div class="">
+                <ul class="nav nav-bar nav-justified">
+                    <li class=""><a href="#">Categoria</a></li>
+                    <li class=""><a href="#">Bitacora</a></li>
+                    <li class="active"><a href="#">Equipo</a></li>
+                    <li class=""><a href="#">Marca</a></li>
+                    <li class=""><a href="#">Modelo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row well">
+            <div id="column-left" class="col-md-3" style="padding-top: 80px;">
+                <div class="list-group">
+                    <a href="#" class="arrow_box list-group-item active">Crear</a>
+                    <a href="#" class="list-group-item">Editar</a>
+                    <a href="#" class="list-group-item">Visualizar</a>
+                    <a href="#" class="list-group-item">Eliminar</a>
+                </div>
+            </div>
+            <div id="central" class="col-md-9 page-header" >
+                <h2>Gestion de Categoria</h2>
+                <div>
+                    shaskasjkhakhskahshakshaksh
+                </div>
+                <div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div><div>
+                    shaskasjkhakhskahshakshaksh
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
