@@ -10,6 +10,12 @@
         .select2-container .select2-choice > .select2-chosen {
             min-width: 200px !important;
         }
+        /*widget*/
+        .ui-widget { font-family: Verdana,Arial,sans-serif; font-size: .9em !important; }
+
+        /*datepicket*/
+        .ui-datepicker { /*no width*/ padding: .2em .2em 0 !important; }
+        .ui-datepicker table {width: 100% !important; font-size: 0.8em !important; border-collapse: collapse !important; margin:0 0 .4em !important; }
     </style>
 {% endblock %}  
 
@@ -21,14 +27,15 @@
                 var data = {
                     marca_id: jQuery(this).val()
                 };
-
+                var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
+                $modelo_selector.empty();
+                jQuery('#select2-chosen-3').text('Seleccione');
                 jQuery.ajax({
                     type: 'post',
                     url: '{{ path("tecnoequipo_select") }}',
                     data: data,
                     success: function(data) {
-                        var $modelo_selector = jQuery('#tecnologia_equipo_modelo');
-                         $modelo_selector.html('<option>Selecciona</option>');
+                        $modelo_selector.html('<option>Selecciona</option>');
                         for(var i in data){
                             $modelo_selector.append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
                         }
@@ -58,12 +65,32 @@
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(edit_form.serialEquipo)%}
+    {% for type, flashMessage in app.session.flashbag.all() %}
+        <div class="alert alert-{{ type }} fade in">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            {% if flashMessage.title is defined %}
+            <strong>{{ flashMessage.title }}</strong>
+            {{ flashMessage.message }}
+            {% else %}
+            {{ type }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    
+    {% if form_errors(edit_form.categoria) or form_errors(edit_form.marca) or form_errors(edit_form.modelo) or form_errors(edit_form.serialEquipo) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechaAdquisicion) or form_errors(edit_form.condicion)%}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.categoria) }}</div>
+        <div>{{ form_errors(edit_form.marca) }}</div>
+        <div>{{ form_errors(edit_form.modelo) }}</div>
         <div>{{ form_errors(edit_form.serialEquipo) }}</div>
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+        <div>{{ form_errors(edit_form.fechaAdquisicion) }}</div>
+        <div>{{ form_errors(edit_form.condicion) }}</div>
     </div>
     {% endif %}
+    
+    
     <form novalidate method="post" action="{{ path('tecnoequipo_update',{'id':entity.id}) }}">
          <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
          <div id="wrapper-form" class="formShow" style="width:70%;">
@@ -103,10 +130,14 @@
             {% endif %}
             {% if entity.status %}
                 {% if asignacion == false %}
-                    <i>Este equipo aun no esta asignado a ninguna corresponsalia</i>
+                <div class="alert alert-info">
+                  <b>Este equipo aun no esta asignado a ninguna corresponsalia</b>
+                </div>
                 {% endif %}
-            {% else %}
-                <i>Este equipo esta inactivo</i>
+            {% elseif entity.status == false and entity.condicion=='MALO'%}
+                <div class="alert alert-danger">
+                    <b>Este equipo esta inactivo</b>
+                </div>
             {% endif %}
          </div>
         <input type="submit" value="EDITAR" class="btn btn-primary"> | 
@@ -119,7 +150,7 @@
         {% endif %}
     </form>
 
-    <BR>
+    </br>
     {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
         {{ form_errors(delete_form) }}
         {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}

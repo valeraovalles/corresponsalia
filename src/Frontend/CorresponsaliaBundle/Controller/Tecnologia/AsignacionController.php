@@ -8,8 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion;
 use Frontend\CorresponsaliaBundle\Form\Tecnologia\AsignacionType;
 
-use Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora;
-
 /**
  * Tecnologia\Asignacion controller.
  *
@@ -40,17 +38,41 @@ class AsignacionController extends Controller
         $entity = new Asignacion(); 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
         
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva! ',
+                    'message' => 'Asignacion Agregada.'
+                )
+            );
+            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($entity->getId());
+            if (!$asignacion) {
+                throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
+            }
+            $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+            if (!$equipo) {
+                throw new \Exception('Unable to find Tecnologia\Equipo entity.');
+            }
+            $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($asignacion, $equipo);
+            
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $entity->getId())));
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
             'entity' => $entity,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -82,10 +104,16 @@ class AsignacionController extends Controller
     {
         $entity = new Asignacion();
         $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
 
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
             'entity' => $entity,
-            'equipo_id' => $id,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -131,12 +159,18 @@ class AsignacionController extends Controller
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:edit.html.twig', array(
             'entity'      => $entity,
-            'equipo_id'   => $id,
+            'equipo'   => $equipo,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -181,11 +215,56 @@ class AsignacionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Editada!',
+                    'message' => 'Asignacion con exito.'
+                )
+            );
+            
+            $asignacion = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($entity->getId());
+            if (!$asignacion) {
+                throw new \Exception('Unable to find Tecnologia\Asignacion entity.');
+            }
+            $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+            if (!$equipo) {
+                throw new \Exception('Unable to find Tecnologia\Equipo entity.');
+            }
+            
+            $arrayBitacora = $em->getRepository('CorresponsaliaBundle:Tecnologia\Bitacora')->ultimaBitacoraIdEquipo($id);
+            $bitacora = $arrayBitacora[0];
+            
+            $bitacora->setIdEquipo($equipo->getId());
+            $bitacora->setStatus($equipo->getStatus());
+            $bitacora->setModelo($equipo->getModelo());
+            $bitacora->setCondicion($equipo->getCondicion());
+            $bitacora->setCategoria($equipo->getCategoria());
+            $bitacora->setObservacionCondicion($equipo->getObservacionCondicion());        
+            $bitacora->setSerialEquipo($equipo->getSerialEquipo());
+            $bitacora->setDescripcion($equipo->getDescripcion());
+            
+            $bitacora->setCorresponsalia($asignacion->getCorresponsalia());
+            $bitacora->setFechaAsignacion($asignacion->getFechaAsignacion());
+            $bitacora->setFechaRetorno($asignacion->getFechaRetorno());
+            $bitacora->setResponsable($asignacion->getResponsable());
+            $bitacora->setTipoAsignacion($asignacion->getStatus()->getNombre());
+            $em->persist($bitacora);
+            $em->flush();
+            
+            
             return $this->redirect($this->generateUrl('tecnoasignar_edit', array('id' => $id)));
         }
 
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($entity->getId());
+
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Equipo entity.');
+        }
+        
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:edit.html.twig', array(
             'entity'      => $entity,
+            'equipo'   => $equipo,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -207,10 +286,18 @@ class AsignacionController extends Controller
                 throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
             }
 
+            $nombre = $entity->getCorresponsalia();
             $em->remove($entity);
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->set(
+            'danger',
+            array(
+                'title' => 'Eliminada! ',
+                'message' => 'Asignación del equipo a la corresponsalia '.$nombre.'.'
+            )
+        );
         return $this->redirect($this->generateUrl('tecnoequipo'));
     }
 
@@ -249,8 +336,8 @@ class AsignacionController extends Controller
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
         
-        $equipo_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
-        if (!$equipo_actual) {
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($id);
+        if (!$equipo) {
             throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
         }
 
@@ -260,7 +347,7 @@ class AsignacionController extends Controller
         return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:reasignar.html.twig', array(
             'entity' => $asignar_nuevo,
             'asignar_actual' => $asignar_actual,
-            'equipo_actual' => $equipo_actual,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }
@@ -294,36 +381,46 @@ class AsignacionController extends Controller
         $form = $this->createCreateForm($asignacion_nueva);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
-            /*
-             * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
-             * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
-             * GUARDAR ASIGNACION ACTUAL EN BITACORA
-             * ELIMINAR ASIGNACION ACTUAL EN ASIGNACION
-             * GUARDAR NUEVA ASIGNACION EN ASIGNACION
-             * 
-             */
-
-            $asignacion_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());
-            $bitacora = new Bitacora();
-            $bitacora->setEquipoId($asignacion_nueva->getId());
-            $bitacora->setCorresponsalia($asignacion_actual->getCorresponsalia());
-            $bitacora->setFechaAsignacion($asignacion_actual->getFechaAsignacion());
-            $bitacora->setFechaEstimadaRetorno($asignacion_actual->getFechaEstimadaRetorno());
-            $bitacora->setFechaRetorno($asignacion_actual->getFechaRetorno());
-            $bitacora->setResponsable($asignacion_actual->getResponsable());
-            $bitacora->setStatus($asignacion_actual->getStatus());            
-            
+        
+        $equipo = $em->getRepository('CorresponsaliaBundle:Tecnologia\Equipo')->find($asignacion_nueva->getId());
+        
+        if (!$equipo) {
+            throw $this->createNotFoundException('Unable to find Tecnologia\Asignacion entity.');
+        }
+        /*
+         * REFENCIAR EL EQUIPO_ID = $ENTITY->getID()
+         * BUSCAR LA ENTIDAD ASIGNACION ACTUAL
+         * GUARDAR ASIGNACION ACTUAL EN BITACORA
+         * ELIMINAR ASIGNACION ACTUAL EN ASIGNACION
+         * GUARDAR NUEVA ASIGNACION EN ASIGNACION
+         * 
+         */
+        
+         $asignar_actual = $em->getRepository('CorresponsaliaBundle:Tecnologia\Asignacion')->find($asignacion_nueva->getId());  
+         
         if ($form->isValid()) {
-            $em->remove($asignacion_actual);
-            $em->persist($bitacora);
+                 
+            
+            $this->get('corresponsalia.tecnologia.manager.bitacora')->registroBitacora($asignacion_nueva, $equipo);
+            $em->remove($asignar_actual);
             $em->flush();
             $em->persist($asignacion_nueva);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->set(
+                'success',
+                array(
+                    'title' => 'Nueva!',
+                    'message' => 'Re-Asignacion agregada.'
+                )
+            );
             return $this->redirect($this->generateUrl('tecnoasignar_show', array('id' => $asignacion_nueva->getId())));
         }
 
-        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:new.html.twig', array(
+        return $this->render('CorresponsaliaBundle:Tecnologia/Asignacion:reasignar.html.twig', array(
             'entity' => $asignacion_nueva,
+            'asignar_actual' => $asignar_actual,
+            'equipo' => $equipo,
             'form'   => $form->createView(),
         ));
     }

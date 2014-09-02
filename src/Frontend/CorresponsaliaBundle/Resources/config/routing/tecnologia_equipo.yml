@@ -33,6 +33,6 @@ tecnoequipo_select:
     pattern: /modelo
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:modelo"}
     
-tecnoequipo_fRetorno:
+tecnoequipo_fretorno:
     pattern: /fretorno
     defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Asynchronous:fechaRetorno"}

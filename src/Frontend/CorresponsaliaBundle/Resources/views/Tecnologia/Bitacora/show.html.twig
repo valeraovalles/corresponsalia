@@ -14,40 +14,34 @@
               <td><strong>Descripcion</strong></td>
             </tr>
             <tr>
-              <td>{{ equipo.categoria }}</td>
-              <td>{{ equipo.modelo }}</td>
-              <td>{{ equipo.serialEquipo }}</td>
-              <td>{{ equipo.descripcion }}</td>
+              <td>{{ entity.categoria }}</td>
+              <td>{{ entity.modelo }}</td>
+              <td>{{ entity.idequipo }}</td>
+              <td>{{ entity.descripcion }}</td>
             </tr>
         </table>
         <div class="contenedorform">
             <div class="labelform">Tipo de Asignacion:</div>
-            <div class="widgetform">{{ asignacion.status }}</div>
+            <div class="widgetform">{{ entity.tipoAsignacion }}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Corresponsalia:</div>
-            <div class="widgetform">{{ asignacion.corresponsalia }}</div>
+            <div class="widgetform">{{ entity.corresponsalia }}</div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Responsable:</div>
-            <div class="widgetform">{{ asignacion.responsable }}aaaaa</div>
+            <div class="widgetform">{{ entity.responsable }}</div>
         </div>
+        {% if entity.fechaAsignacion|length > 0 %}
+            <div class="contenedorform">
+                <div class="labelform">Fecha Asignacion:</div>
+                <div class="widgetform">{{ entity.fechaAsignacion|date('d-m-Y') }}</div>
+            </div>
+        {% endif %}
         <div class="contenedorform">
-            <div class="labelform">fecha Asignacion:</div>
-            <div class="widgetform">{{ asignacion.fechaAsignacion|date('d-m-Y') }}</div>
+            <div class="labelform">Fecha Retorno:</div>
+            <div class="widgetform">{{ entity.fechaRetorno|date('d-m-Y') }}</div>
         </div>
-        {% if asignacion.fechaEstimadaRetorno|length > 0 %}
-            <div class="contenedorform">
-                <div class="labelform">fecha Estimada Retorno:</div>
-                <div class="widgetform">{{ asignacion.fechaEstimadaRetorno|date('d-m-Y') }}</div>
-            </div>
-        {% endif %}
-        {% if asignacion.fechaRetorno|length > 0 %}
-            <div class="contenedorform">
-                <div class="labelform">fecha Retorno:</div>
-                <div class="widgetform">{{ asignacion.fechaRetorno|date('d-m-Y') }}</div>
-            </div>
-        {% endif %}
     </div>
     
     <a class="btn btn-default" href="{{ path('tecnobitacora') }}">IR AL LISTADO</a> 

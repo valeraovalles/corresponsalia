@@ -16,7 +16,7 @@ class ModeloType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('marca')
+            ->add('marca', null, array('empty_value' => 'Seleccione'))
         ;
     }
     

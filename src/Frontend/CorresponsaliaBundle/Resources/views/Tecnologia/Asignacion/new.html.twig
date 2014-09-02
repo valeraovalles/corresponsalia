@@ -1,10 +1,35 @@
 {% extends '::base.html.twig' %}
 
 {% block titulomodulo %}<h1>ASIGNAR EQUIPO - CORRESPONSALIA</h1>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+    <style type="text/css">
+        .select2-container .select2-choice > .select2-chosen {
+            min-width: 200px !important;
+        }
+        #s2id_tecnologia_asignacion_corresponsalia{
+            width: 400px !important;
+        }
+        #contenedor{
+            min-height: 600px !important;
+        }
+    </style>
+{% endblock %} 
+
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/effects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/libs/select2/select2.min.js') }}"></script>
     <script type="text/javascript">
-    $.noConflict();
+        jQuery(document).ready(function() { jQuery(".autocomplete_select").select2(); });
+    </script>
+    <script type="text/javascript">
     jQuery(document).ready(function () {
         
         jQuery(document).on({
@@ -51,11 +76,17 @@
         });
 
         jQuery("#tecnologia_asignacion_status").change(function(){
+            saluda();
+        });
+        
+         
+
+        var saluda = function(){
             var valor = jQuery( "option:contains('Venezuela')" ).val();
             var texto = jQuery( "option:contains('Venezuela')" ).text();
             var selector_option = jQuery("#tecnologia_asignacion_corresponsalia option[value="+ valor +"]");
             var $status_id = jQuery("#tecnologia_asignacion_status :selected").text();
-            if($status_id === "PRESTAMO" || $status_id === "COBERTURA"){
+            if($status_id === "Prestamo" || $status_id === "Cobertura"){
                 if (!jQuery('#fechaEstimadaRetorno').length) {
                     var html= '<div class="contenedorform" id="fechaEstimadaRetorno">'+
                         '<div class="labelform">fechaEstimadaRetorno:</div>'+
@@ -81,28 +112,24 @@
                 jQuery('#fechaEstimadaRetorno').remove();
                 jQuery('#tecnologia_corresp').remove();
             }
-        });
+        };
+
+        saluda();
+
+
     });
     </script>
-    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/Jdatepicker.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/corresponsalia/Tecnologia/js/equipo_new.js') }}"></script>
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bundles/corresponsalia/Tecnologia/css/equipo.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(form.status) or form_errors(form.corresponsalia) or form_errors(form.fechaAsignacion) or form_errors(form.fechaEstimadaRetorno)%}
+    {% if form_errors(form.status) or form_errors(form.corresponsalia) or form_errors(form.responsable) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>Categoria: {{ form_errors(form.status) }}</div>
-        <div>Marca: {{ form_errors(form.corresponsalia) }}</div>
-        <div>Modelo: {{ form_errors(form.fechaAsignacion) }}</div>
-        <div>Serial: {{ form_errors(form.fechaEstimadaRetorno) }}</div>
+        <div>{{ form_errors(form.status) }}</div>
+        <div>{{ form_errors(form.corresponsalia) }}</div>
+        <div>{{ form_errors(form.responsable) }}</div>
     </div>
     {% endif %}
     
@@ -111,18 +138,22 @@
         <div id="wrapper-form" class="formShow" style="width:70%;">
              <div class="contenedorform">
                 <div class="labelform">Tipo de Asignacion:</div>
-                <div class="widgetform">{{ form_widget(form.status) }}</div>
+                <div class="widgetform">{{ form_widget(form.status, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Corresponsalia:</div>
-                <div class="widgetform">{{ form_widget(form.corresponsalia) }}</div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia, {'attr': {'class': 'autocomplete_select'} }) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">fechaAsignacion:</div>
-                <div class="widgetform">{{ form_widget(form.fechaAsignacion, { 'attr': {'class': 'parent'} }) }}</div>
+                <div class="labelform">Fecha Asignacion:</div>
+                <div class="widgetform">{{ form_widget(form.fechaAsignacion, {'attr': {'class': 'parent'} }) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
             </div>
          </div>
-            <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo_id }}" />
+            <input type="hidden" id="tecnologia_asignacion_id" name="tecnologia_asignacion[id]" value="{{ equipo.id }}" />
         <input type="submit" value="GUARDAR" class="btn btn-primary"> | 
         <a class="btn btn-default" href="{{ path('tecnoequipo') }}">IR AL LISTADO</a>
     </form>

@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
     <style type="text/css">
         .table-bordered > thead > tr > th, 
         .table-bordered > tbody > tr > th, 
@@ -40,11 +41,11 @@
                 <th>Status</th>
                 <th>Asignacion</th>
                 <th>Corresponsalia</th>
-                <th>Acciones</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in listEquipo %}
+        {% for entity in entities %}
             <tr>
                 <td>{{ entity.categoria }}</td>
                 <td>{{ entity.serialEquipo }}</td>
@@ -57,14 +58,10 @@
                         <span class="label label-danger">Inactivo</span>
                     {% endif %}
                 </td>
+                <td>{{ entity.tipoAsignacion }}</td>
+                <td>{{ entity.corresponsalia }}</td>
                 <td>
-                    {% if entity|length > 9 %}
-                        {{ entity.statusAsignacion }}
-                    {% endif %}
-                </td>
-                <td>{% if entity|length > 9 %}{{ entity.corresponsalia.nombre }}{% endif %}</td>
-                <td>
-                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id_bitacora }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    <a href="{{ path('tecnobitacora_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                  </td> 
             </tr>
         {% endfor %}

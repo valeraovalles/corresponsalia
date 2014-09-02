@@ -71,6 +71,10 @@ class AddModeloFieldSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
 
         $marca_id = array_key_exists('marca', $data) ? $data['marca'] : null;
+        
+        if( $marca_id == '' ){
+            $marca_id = NULL;
+        }
 
         $this->addModeloForm($form, $marca_id);
     }

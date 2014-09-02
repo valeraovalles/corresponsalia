@@ -1,0 +1,18 @@
+# Configuración global de los servicios de la aplicación
+# Este archivo se importa desde app/config/config.yml
+services:
+    corresponsalia.tecnologia.bitacora:
+        class: Frontend\CorresponsaliaBundle\Entity\Tecnologia\Bitacora
+        
+    corresponsalia.tecnologia.equipo:
+        class: Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo
+        
+    corresponsalia.tecnologia.asignacion:
+        class: Frontend\CorresponsaliaBundle\Entity\Tecnologia\Asignacion
+            
+    corresponsalia.tecnologia.manager.bitacora:
+        class: Frontend\CorresponsaliaBundle\Services\Tecnologia\ManagerBitacoraService
+        arguments: [@corresponsalia.tecnologia.bitacora, @doctrine.orm.entity_manager, @corresponsalia.tecnologia.equipo, @corresponsalia.tecnologia.asignacion]
+        
+    corresponsalia.util.fecha:
+        class: Frontend\CorresponsaliaBundle\Services\Util\FechaService

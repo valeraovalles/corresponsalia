@@ -3,6 +3,7 @@
 namespace Frontend\CorresponsaliaBundle\Entity\Tecnologia;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Description of Asignacion
@@ -10,20 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  * @author ecastro
  * 
  * @ORM\Table(name="tecnologia.asignacion")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Frontend\CorresponsaliaBundle\Entity\Tecnologia\EntityRepository\AsignacionRepository")
  */
 class Asignacion 
 {
     /**
      * @var integer
      *
-     * @ORM\Id
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo", inversedBy="asignacion")
+     * @ORM\OneToOne(targetEntity="Frontend\CorresponsaliaBundle\Entity\Tecnologia\Equipo")
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
+     * @ORM\Id
      */
     private $id;
     
@@ -34,20 +34,22 @@ class Asignacion
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="corresponsalia_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar una corresponsalia.")
      */
     private $corresponsalia;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="responsable", type="text", nullable=true)
+     * @ORM\Column(name="responsable", type="string", nullable=false)
+     * @Assert\NotBlank(message="Debe ingresar el nombre completo del responsable del equipo.")
      */
     private $responsable;
     
     /**
      * @var \Date
      *
-     * @ORM\Column(name="fechaAsignacion", type="date")
+     * @ORM\Column(name="fechaAsignacion", type="date", nullable=true)
      */
     private $fechaAsignacion;
 
@@ -72,6 +74,7 @@ class Asignacion
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar un tipo de asignacion.")
      */
     private $status;   
     
@@ -236,5 +239,9 @@ class Asignacion
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __toString() {
+        return $this->responsable;
     }
 }

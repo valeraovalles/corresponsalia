@@ -38,19 +38,15 @@ class Modelo {
     private $nombre;
     
     /**
-     * @var | Tecnologia.Marca
+     * @var | Marca
      * 
      * @ORM\ManyToOne(targetEntity="Marca")
      * @ORM\JoinColumns({
      *      @ORM\JoinColumn(name="marca_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Debe seleccionar la marca correspondiente.")
      */
     private $marca;
-
-    public function __toString() {
-        return ucfirst($this->nombre);
-    }
-
 
     /**
      * Get id
@@ -106,5 +102,17 @@ class Modelo {
     public function getMarca()
     {
         return $this->marca;
+    }
+    
+     public function __toString() {
+        return ucfirst($this->nombre);
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->marca = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
