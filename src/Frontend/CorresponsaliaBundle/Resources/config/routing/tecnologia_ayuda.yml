@@ -1,0 +1,23 @@
+tecnoayuda:
+    pattern:  /
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayuda" }
+
+tecnoayuda_categoria:
+    pattern:  /ayuda_categoria
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayudaCategoria" }
+
+tecnoayuda_bitacora:
+    pattern:  /ayuda_bitacora
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayudaBitacora" }
+
+tecnoayuda_equipo:
+    pattern:  /ayuda_equipo
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayudaEquipo" }
+
+tecnoayuda_marca:
+    pattern:  /ayuda_marca
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayudaMarca" }
+
+tecnoayuda_modelo:
+    pattern:  /ayuda_modelo
+    defaults: { _controller: "CorresponsaliaBundle:Tecnologia\Ayuda:ayudaModelo" }

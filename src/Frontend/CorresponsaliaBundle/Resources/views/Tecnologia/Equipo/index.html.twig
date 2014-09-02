@@ -96,7 +96,7 @@
                 </td>
                 <td>
                     {% if entity|length > 9 %}
-                        {{ entity.statusAsignacion }}
+                        <span id="statusAsignacion{{ entity.id }}">{{ entity.statusAsignacion }}</span>
                     {% endif %}
                 </td>
                 <td>{% if entity|length > 9 %}<span id="corresponsalia{{ entity.id }}">{{ entity.corresponsalia.nombre }}</span>{% endif %}</td>
@@ -220,6 +220,7 @@
                                      +"</a>";
                          jQuery(boton).appendTo("#acciones"+datos.id);
                          jQuery('#corresponsalia'+datos.id).text('');
+                         jQuery('#statusAsignacion'+datos.id).text('');
                          jQuery("#flag").html(flags);
                          jQuery( "tr#entity"+datos.id ).effect( 'highlight', indicador, 3500, callback );
                    }

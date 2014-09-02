@@ -604,3 +604,7 @@ CorresponsaliaBundle_tecnomodelo:
 CorresponsaliaBundle_tecnobitacora:
         resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_bitacora.yml"
         prefix:   /tecnobitacora
+
+CorresponsaliaBundle_tecnoayuda:
+        resource: "@CorresponsaliaBundle/Resources/config/routing/tecnologia_ayuda.yml"
+        prefix:   /tecnoayuda

@@ -44,7 +44,6 @@
         .nav-justified > li > a {
             background-color: #E5E5E5;
             background-repeat: repeat-x;
-            color: #777;
             font-weight: bold;
             margin-bottom: 0;
             padding-bottom: 15px;
@@ -52,9 +51,18 @@
             text-align: center;
         }
 
+        .nav-justified > li > a > span {
+            background-color: #E5E5E5;
+            background-repeat: repeat-x;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding-bottom: 2px;
+        }
+
         .nav-justified > .active > a, 
         .nav-justified > .active > a:hover, 
-        .nav-justified > .active > a:focus {
+        .nav-justified > .active > a:focus,
+        .nav-justified > .active > a:hover span {
             background-color: #428BCA;
             background-image: none;
             box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;
@@ -85,7 +93,9 @@
             }
         }
 
-        .nav > li > a:hover, .nav > li > a:focus {
+        .nav > li > a:hover, 
+        .nav > li > a:focus,
+        .nav > li > a:hover span{
             background-color: #428BCA;
             color: #FFF;
         }
@@ -110,16 +120,31 @@
         
         #column-left {
             float: left;
-            position: fixed;
-            min-height: 225px;
+            position: static;
             overflow: hidden;
             text-align: center;
-            width: 200px;
+            padding-top: 80px;
         }
         #central {
             float: right;
         }
+        .menu-fijo {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        div ul li a span .glyphicon:empty {
+            width: 100%;
+        }
 
+        .glyphicon {
+            line-height: normal;
+        }
+        .divisor-contenidor {
+            margin-bottom: 25px;
+            text-align: justify;
+            letter-spacing: normal;
+        }
     </style>
 {% endblock %}
 
@@ -129,74 +154,81 @@
         <div class="row">
             <div class="">
                 <ul class="nav nav-bar nav-justified">
-                    <li class=""><a href="#">Categoria</a></li>
-                    <li class=""><a href="#">Bitacora</a></li>
-                    <li class="active"><a href="#">Equipo</a></li>
-                    <li class=""><a href="#">Marca</a></li>
-                    <li class=""><a href="#">Modelo</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda') }}"><span class="glyphicon glyphicon-book"></span></a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_categoria') }}">Categoria</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_bitacora') }}">Bitacora</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_equipo') }}">Equipo</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_marca') }}">Marca</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_modelo') }}">Modelo</a></li>
                 </ul>
             </div>
         </div>
         <div class="row well">
-            <div id="column-left" class="col-md-3" style="padding-top: 80px;">
-                <div class="list-group">
-                    <a href="#" class="arrow_box list-group-item active">Crear</a>
-                    <a href="#" class="list-group-item">Editar</a>
-                    <a href="#" class="list-group-item">Visualizar</a>
-                    <a href="#" class="list-group-item">Eliminar</a>
-                </div>
-            </div>
-            <div id="central" class="col-md-9 page-header" >
-                <h2>Gestion de Categoria</h2>
-                <div>
-                    shaskasjkhakhskahshakshaksh
-                </div>
-                <div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div><div>
-                    shaskasjkhakhskahshakshaksh
-                </div>
-            </div>
+            {% block contenedor %}
+                {% block left %}{% endblock %}    
+                {% block rigth %}
+                    <div id="central" class="col-md-12 page-header" >
+                        {% block titulo %}
+                            <h2>Manual de Uso</h2>
+                        {% endblock %}
+                        {% block contenido %}
+                            <h3>Contenido:</h3>
+                            <div>
+                                <ol>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Categoria</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Bitacora</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Equipo</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Marca</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Modelo</li>
+                                </ol>
+                                <p>
+                                    Mediante este manual el usuario podra manejar completamente el modulo de Tecnologia del Sistema de Corresponsalia.
+                                    Cualquier duda que se presente que no este reflejada la solucion en este manual poden comunicarse con:
+                                    <address>
+                                        Escrito por: <a href="mailto:aplicaciones@telesurtv.net">Unidad de Aplicaciones y Desarrollo.</a>.<br/>
+                                        Extension: 264 / 339<br>
+                                        Caracas, Venezuela
+                                    </address> 
+                                </p>
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            {% endblock %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            linkInterno = $('a[href^="#"]');
+            linkInterno.on('click',function(e) {
+                e.preventDefault();
+                $('a').removeClass('active');
+                $('a').removeClass('arrow_box');
+                var href = $(this).attr('href');
+                $(this).addClass('active');
+                $(this).addClass('arrow_box');
+                $('html, body').animate({ scrollTop : $( href ).offset().top }, 'slow', 'easeInOutExpo');
+            });
+        });
+
+        $(document).ready(function() {
+          var menu = $('#menu');
+          var contenedor = $('#column-left');
+          var menu_offset = menu.offset();
+          // Cada vez que se haga scroll en la página
+          // haremos un chequeo del estado del menú
+          // y lo vamos a alternar entre 'fixed' y 'static'.
+          $(window).on('scroll', function() {
+            if($(window).scrollTop() > menu_offset.top) {
+              menu.addClass('menu-fijo');
+            } else {
+              menu.removeClass('menu-fijo');
+            }
+          });
+        });
+    </script>
 {% endblock %}

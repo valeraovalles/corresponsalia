@@ -1,0 +1,33 @@
+{% extends 'CorresponsaliaBundle:Tecnologia/Ayuda:index.html.twig' %}
+
+{% block contenedor %}
+    {% block left %}
+        <div id="column-left" class="col-md-3">
+            <div id="menu-contenedor" class="list-group navbar-static-top">
+                <ul id="menu">
+                    <li><a href="#a" class="arrow_box list-group-item active">Crear</a></li>
+                    <li><a href="#b" class="list-group-item">Editar</a></li>
+                    <li><a href="#c" class="list-group-item">Visualizar</a></li>
+                    <li><a href="#d" class="list-group-item">Eliminar</a></li>
+                </ul>
+            </div>
+        </div>
+    {% endblock %}    
+    {% block rigth %}
+        <div id="central" class="col-md-9 page-header" >
+            {% block titulo %}
+                <h1>Gestion de Bitacora</h1>
+            {% endblock %}
+            {% block contenido %}
+                <div id="">
+                	Como visualizar la bitácora de un equipo
+					Sigue estos pasos para visualizar la bitácora de un equipo:
+					1. Ubique el menú Tecnología y seleccione la opción Bitácora.
+					2. Busque el equipo deseado mediante el filtro “Buscar” en la parte superior izquierda.
+					3. Una vez encontrado el equipo puede visualizar la bitácora de este.
+					4. Además presionando el icono “” puede visualizar más detalle de la asignación.
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
