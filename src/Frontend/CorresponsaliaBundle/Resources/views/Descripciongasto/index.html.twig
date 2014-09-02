@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th width="60%">Descripcion</th>
                 <th width="20%">Tipo</th>
+                <th width="20%">Partida</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td><a href="{{ path('descripciongasto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.tipogasto.descripcion }}</td>
+                <td>{{ entity.partida }}</td>
                 <td>
                     <a href="{{ path('descripciongasto_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
                     <a href="{{ path('descripciongasto_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
