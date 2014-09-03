@@ -3,55 +3,63 @@
 {% block contenedor %}
     {% block left %}
         <div id="column-left" class="col-md-3">
-            <div id="menu-contenedor" class="list-group navbar-static-top">
-                <ul id="menu">
-                    <li><a href="#a" class="arrow_box list-group-item active">Crear</a></li>
-                    <li><a href="#b" class="list-group-item">Editar</a></li>
-                    <li><a href="#c" class="list-group-item">Visualizar</a></li>
-                    <li><a href="#d" class="list-group-item">Eliminar</a></li>
-                </ul>
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
             </div>
         </div>
     {% endblock %}    
     {% block rigth %}
         <div id="central" class="col-md-9 page-header" >
             {% block titulo %}
-                <h1>Gestion de Modelo</h1>
+            <div class="page-header" id="arriba">
+			 	<h2>Gestion de Categoria</h2>
+			</div>
             {% endblock %}
             {% block contenido %}
-                <div id="">
-                	Cómo crear un nuevo modelo.
-					Sigue estos pasos para crear un nuevo modelo:
-					1. Ubique el menú Tecnología y seleccione la opción Modelo
-					2. Presione el botón Nuevo Modelo
-					3. Seleccione la marca a la que pertenece el nuevo modelo.
-					4. Introduzca el nombre del nuevo modelo
-					5. Presione Guardar y espere que aparezca el mensaje “Nuevo! Modelo agregado.”
+                <div class="divisor-contenidor" >
+                	<h3 id="crear">¿Cómo crear un nuevo modelo.?</h3>
+					<h4>Sigue estos pasos para crear un nuevo modelo:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Modelo</li>
+						<li>2. Presione el botón Nuevo Modelo</li>
+						<li>3. Seleccione la marca a la que pertenece el nuevo modelo.</li>
+						<li>4. Introduzca el nombre del nuevo modelo</li>
+						<li>5. Presione Guardar y espere que aparezca el mensaje “Nuevo! Modelo agregado.”</li>
+					</ol>
                 </div>
-                <div id="">
-                	Cómo editar un modelo.
-					Sigue estos pasos para editar un modelo:
-					1. Ubique el menú Tecnología y seleccione la opción Modelo
-					2. Busque el modelo a modificar mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.
-					4. Realice las modificaciones deseadas.
-					5. Presione Guardar y espere que aparezca el mensaje “Editado! Modelo con éxito.”
+                <div class="divisor-contenidor">
+	                	<h3 id="editar">¿Cómo editar un modelo.?</h3>
+						<h4>Sigue estos pasos para editar un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo</li>
+							<li>2. Busque el modelo a modificar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Realice las modificaciones deseadas.</li>
+							<li>5. Presione Guardar y espere que aparezca el mensaje “Editado! Modelo con éxito.”</li>
+						</ol>
                 </div>
-                <div id="">
-                	Cómo visualizar la información detallada de un modelo.
-					Sigue estos pasos para visualizar detalles de un modelo:
-					1. Ubique el menú Tecnología y seleccione la opción Modelo.
-					2. Busque el modelo a visualizar mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.
+                <div class="divisor-contenidor">
+	                	<h3 id="ver">¿Cómo visualizar la información detallada de un modelo.?</h3>
+						<h4>Sigue estos pasos para visualizar detalles de un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo.</li>
+							<li>2. Busque el modelo a visualizar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+						</ol>
                 </div>
-                <div id="">
-                	Cómo eliminar un modelo.
-					Sigue estos pasos para eliminar un modelo:
-					1. Ubique el menú Tecnología y seleccione la opción Modelo.
-					2. Busque el modelo mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.
-					4. Presione el botón y confirme si está seguro de querer eliminar el modelo.
-					5. Espere que aparezca el mensaje “Eliminado! Modelo «Descripción del modelo»”.
+                <div class="divisor-contenidor">
+	                	<h3 id="eliminar">¿Cómo eliminar un modelo.?</h3>
+						<h4>Sigue estos pasos para eliminar un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo.</li>
+							<li>2. Busque el modelo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Presione el botón y confirme si está seguro de querer eliminar el modelo.</li>
+							<li>5. Espere que aparezca el mensaje “Eliminado! Modelo «Descripción del modelo»”.</li>
+						</ol>
                 </div>
             {% endblock %}
         </div>

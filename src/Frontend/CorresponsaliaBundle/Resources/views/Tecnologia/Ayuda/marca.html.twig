@@ -3,54 +3,62 @@
 {% block contenedor %}
     {% block left %}
         <div id="column-left" class="col-md-3">
-            <div id="menu-contenedor" class="list-group navbar-static-top">
-                <ul id="menu">
-                    <li><a href="#a" class="arrow_box list-group-item active">Crear</a></li>
-                    <li><a href="#b" class="list-group-item">Editar</a></li>
-                    <li><a href="#c" class="list-group-item">Visualizar</a></li>
-                    <li><a href="#d" class="list-group-item">Eliminar</a></li>
-                </ul>
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
             </div>
         </div>
     {% endblock %}    
     {% block rigth %}
         <div id="central" class="col-md-9 page-header" >
             {% block titulo %}
-                <h1>Gestion de Marca</h1>
+            <div class="page-header" id="arriba">
+			 	<h2>Gestion de Marca</h2>
+			</div>
             {% endblock %}
             {% block contenido %}
-                <div id="">
-                	Cómo crear una nueva marca.
-					Sigue estos pasos para crear una nueva marca:
-					1. Ubique el menú Tecnología y seleccione la opción Marca
-					2. Presione el botón Nueva Marca
-					3. Introduzca el nombre de la nueva marca
-					4. Presione Guardar y espere que aparezca el mensaje “Nueva! Marca agregada.”
+                <div class="divisor-contenidor" >
+                	<h3 id="crear">¿Cómo crear una nueva marca.?</h3>
+					<h4>Sigue estos pasos para crear una nueva marca:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Marca</li>
+						<li>2. Presione el botón Nueva Marca</li>
+						<li>3. Introduzca el nombre de la nueva marca</li>
+						<li>4. Presione Guardar y espere que aparezca el mensaje “Nueva! Marca agregada.”</li>
+					</ol>
                 </div>
-                <div id="">
-                	Cómo editar una marca.
-					Sigue estos pasos para editar una marca:
-					1. Ubique el menú Tecnología y seleccione la opción Marca
-					2. Busque la Marca a modificar mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.
-					4. Realice las modificaciones al nombre de la marca.
-					5. Presione Guardar y espere que aparezca el mensaje “Editada! Marca con éxito.”
+                <div class="divisor-contenidor">
+                	<h3 id="editar">¿Cómo editar una marca.?</h3>
+					<h4>Sigue estos pasos para editar una marca:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Marca</li>
+						<li>2. Busque la Marca a modificar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+						<li>3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.</li>
+						<li>4. Realice las modificaciones al nombre de la marca.</li>
+						<li>5. Presione Guardar y espere que aparezca el mensaje “Editada! Marca con éxito.”</li>
+					</ol>
                 </div>
-                <div id="">
-                	Cómo visualizar la información detallada de una marca.
-					Sigue estos pasos para visualizar detalles de una marca:
-					1. Ubique el menú Tecnología y seleccione la opción Marca.
-					2. Busque la marca a visualizar mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.
+                <div class="divisor-contenidor">
+                	<h3 id="ver">¿Cómo visualizar la información detallada de una marca.?</h3>
+					<h4>Sigue estos pasos para visualizar detalles de una marca:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Marca.</li>
+						<li>2. Busque la marca a visualizar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+						<li>3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.</li>
+					</ol>
                 </div>
-                <div id="">
-                	Cómo eliminar una marca.
-					Sigue estos pasos para eliminar una marca:
-					1. Ubique el menú Tecnología y seleccione la opción Marca.
-					2. Busque la marca mediante el filtro “Buscar” en la parte superior izquierda.
-					3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.
-					4. Presione el botón y confirme si está seguro de querer eliminar la marca.
-					5. Espere que aparezca el mensaje “Eliminada! Marca «Descripción de la marca»”.
+                <div class="divisor-contenidor">
+                	<h3 id="eliminar">¿Cómo eliminar una marca.?</h3>
+					<h4>Sigue estos pasos para eliminar una marca:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Marca.</li>
+						<li>2. Busque la marca mediante el filtro “Buscar” en la parte superior izquierda.</li>
+						<li>3. Una vez encontrada la marca presione el icono “” ubicada a la izquierda del nombre.</li>
+						<li>4. Presione el botón y confirme si está seguro de querer eliminar la marca.</li>
+						<li>5. Espere que aparezca el mensaje “Eliminada! Marca «Descripción de la marca»”.</li>
+					</ol>
                 </div>
             {% endblock %}
         </div>

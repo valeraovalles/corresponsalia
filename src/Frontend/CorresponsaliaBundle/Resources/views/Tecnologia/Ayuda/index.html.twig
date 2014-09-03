@@ -117,7 +117,7 @@
             border-width: 10px; 
             margin-top: -10px;
         } 
-        
+
         #column-left {
             float: left;
             position: static;
@@ -128,15 +128,10 @@
         #central {
             float: right;
         }
-        .menu-fijo {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
         div ul li a span .glyphicon:empty {
             width: 100%;
         }
-
+        
         .glyphicon {
             line-height: normal;
         }
@@ -145,6 +140,11 @@
             text-align: justify;
             letter-spacing: normal;
         }
+
+        a.list-group-item:active, a.list-group-item:focus {
+            background-color: #FFF !important;
+        }
+
     </style>
 {% endblock %}
 
@@ -169,7 +169,9 @@
                 {% block rigth %}
                     <div id="central" class="col-md-12 page-header" >
                         {% block titulo %}
-                            <h2>Manual de Uso</h2>
+                            <div class="page-header" id="arriba">
+                                <h2>Manual de Usuario</h2>
+                            </div>
                         {% endblock %}
                         {% block contenido %}
                             <h3>Contenido:</h3>
@@ -195,6 +197,7 @@
                     </div>
                 {% endblock %}
             {% endblock %}
+            <div class="row"><div class="col-md-12"><a href="#arriba">Ir Arriba</a></div></div>
         </div>
     </div>
 {% endblock %}
@@ -206,29 +209,9 @@
             linkInterno = $('a[href^="#"]');
             linkInterno.on('click',function(e) {
                 e.preventDefault();
-                $('a').removeClass('active');
-                $('a').removeClass('arrow_box');
                 var href = $(this).attr('href');
-                $(this).addClass('active');
-                $(this).addClass('arrow_box');
                 $('html, body').animate({ scrollTop : $( href ).offset().top }, 'slow', 'easeInOutExpo');
             });
-        });
-
-        $(document).ready(function() {
-          var menu = $('#menu');
-          var contenedor = $('#column-left');
-          var menu_offset = menu.offset();
-          // Cada vez que se haga scroll en la página
-          // haremos un chequeo del estado del menú
-          // y lo vamos a alternar entre 'fixed' y 'static'.
-          $(window).on('scroll', function() {
-            if($(window).scrollTop() > menu_offset.top) {
-              menu.addClass('menu-fijo');
-            } else {
-              menu.removeClass('menu-fijo');
-            }
-          });
         });
     </script>
 {% endblock %}

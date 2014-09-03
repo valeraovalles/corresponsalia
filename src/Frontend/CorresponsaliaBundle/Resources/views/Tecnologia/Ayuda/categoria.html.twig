@@ -3,26 +3,24 @@
 {% block contenedor %}
     {% block left %}
         <div id="column-left" class="col-md-3">
-            <div id="menu" class="list-group navbar-static-top">
-                <ul>
-                    <li><a href="#crear" class="arrow_box list-group-item active">Crear</a></li>
-                    <li><a href="#editar" class="list-group-item">Editar</a></li>
-                    <li><a href="#ver" class="list-group-item">Visualizar</a></li>
-                    <li><a href="#eliminar" class="list-group-item">Eliminar</a></li>
-                </ul>
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
             </div>
         </div>
     {% endblock %}    
     {% block rigth %}
         <div id="central" class="col-md-9 page-header" >
             {% block titulo %}
-            <div class="page-header">
+            <div class="page-header" id="arriba">
 			 	<h2>Gestion de Categoria</h2>
 			</div>
             {% endblock %}
             {% block contenido %}
                 <div class="divisor-contenidor" >
-                	<h3 id="crear">¿Cómo crear una nueva categoría?</h3><div class="status"></div>
+                	<h3 id="crear">¿Cómo crear una nueva categoría?</h3>
 					<h4>Sigue estos pasos para crear una nueva categoría:</h4>
 					<ol>
 						<li>1. Ubique el menú Tecnología y seleccione la opción Categoría</li>
