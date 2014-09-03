@@ -91,6 +91,11 @@ class AsynchronousController extends Controller {
         }
         return new JsonResponse($response);
     }
+
+    public function ayudaAction()
+    {
+        return $this->render('CorresponsaliaBundle:Tecnologia/Ayuda:index.html.twig'); 
+    }
     
     
 }

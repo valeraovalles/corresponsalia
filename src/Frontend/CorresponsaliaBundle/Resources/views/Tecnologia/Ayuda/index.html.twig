@@ -1,0 +1,217 @@
+{% extends '::base.html.twig' %}
+
+{% block titulomodulo %}<h1>Manual de Usuario</h1>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/corresponsalia/Tecnologia/css/tecno_general.css') }}"/>
+    <style type="text/css">
+
+        ul.nav-bar .active:after {
+            top: 100%;
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(136, 183, 213, 0);
+            border-top-color: #428BCA;
+            border-width: 10px;
+            margin-left: -10px;
+        }
+
+        .centrar {
+            margin: 0 auto;
+            width: 85%;
+        }
+
+        div.well {
+            margin-top: 15px;
+        }
+
+        .page-header {
+            margin:0;
+            text-align: left;
+        }
+
+
+        .nav-justified {
+            background-color: #F5F5F5;
+        }
+
+        .nav-justified > li > a {
+            background-color: #E5E5E5;
+            background-repeat: repeat-x;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding-bottom: 15px;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .nav-justified > li > a > span {
+            background-color: #E5E5E5;
+            background-repeat: repeat-x;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding-bottom: 2px;
+        }
+
+        .nav-justified > .active > a, 
+        .nav-justified > .active > a:hover, 
+        .nav-justified > .active > a:focus,
+        .nav-justified > .active > a:hover span {
+            background-color: #428BCA;
+            background-image: none;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;
+            color: #FFF;
+        }
+
+        @media (min-width: 768px) {
+            .nav-justified {
+                max-height: 52px;
+            }
+            .nav-justified > li > a {
+                border-left: 1px solid #fff;
+                border-right: 1px solid #e5e5e5;
+            }
+            .nav-justified > li:first-child > a {
+                border-left: 0 none;
+                border-radius: 5px 0 0 5px;
+            }
+            .nav-justified > li:last-child > a {
+                border-radius: 0 5px 5px 0;
+                border-right: 0 none;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .masthead, .marketing, .footer {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        .nav > li > a:hover, 
+        .nav > li > a:focus,
+        .nav > li > a:hover span{
+            background-color: #428BCA;
+            color: #FFF;
+        }
+
+        .arrow_box:after, .arrow_box:before { 
+            left: 100%; 
+            top: 50%; 
+            border: solid transparent; 
+            content: " "; 
+            height: 0; 
+            width: 0; 
+            position: absolute; 
+            pointer-events: none; 
+        } 
+
+        .arrow_box:after { 
+            border-color: rgba(136, 183, 213, 0); 
+            border-left-color: #428BCA; 
+            border-width: 10px; 
+            margin-top: -10px;
+        } 
+
+        #column-left {
+            float: left;
+            position: static;
+            overflow: hidden;
+            text-align: center;
+            padding-top: 80px;
+        }
+        #central {
+            float: right;
+        }
+        div ul li a span .glyphicon:empty {
+            width: 100%;
+        }
+        
+        .glyphicon {
+            line-height: normal;
+        }
+        .divisor-contenidor {
+            margin-bottom: 25px;
+            text-align: justify;
+            letter-spacing: normal;
+        }
+
+        a.list-group-item:active, a.list-group-item:focus {
+            background-color: #FFF !important;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="centrar">
+        <div class="row">
+            <div class="">
+                <ul class="nav nav-bar nav-justified">
+                    <li class=""><a href="{{ path('tecnoayuda') }}"><span class="glyphicon glyphicon-book"></span></a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_categoria') }}">Categoria</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_bitacora') }}">Bitacora</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_equipo') }}">Equipo</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_marca') }}">Marca</a></li>
+                    <li class=""><a href="{{ path('tecnoayuda_modelo') }}">Modelo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row well">
+            {% block contenedor %}
+                {% block left %}{% endblock %}    
+                {% block rigth %}
+                    <div id="central" class="col-md-12 page-header" >
+                        {% block titulo %}
+                            <div class="page-header" id="arriba">
+                                <h2>Manual de Usuario</h2>
+                            </div>
+                        {% endblock %}
+                        {% block contenido %}
+                            <h3>Contenido:</h3>
+                            <div>
+                                <ol>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Categoria</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Bitacora</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Equipo</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Marca</li>
+                                    <li><span class="glyphicon glyphicon-ok"></span>  Gestion de Modelo</li>
+                                </ol>
+                                <p>
+                                    Mediante este manual el usuario podra manejar completamente el modulo de Tecnologia del Sistema de Corresponsalia.
+                                    Cualquier duda que se presente que no este reflejada la solucion en este manual poden comunicarse con:
+                                    <address>
+                                        Escrito por: <a href="mailto:aplicaciones@telesurtv.net">Unidad de Aplicaciones y Desarrollo.</a>.<br/>
+                                        Extension: 264 / 339<br>
+                                        Caracas, Venezuela
+                                    </address> 
+                                </p>
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            {% endblock %}
+            <div class="row"><div class="col-md-12"><a href="#arriba">Ir Arriba</a></div></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            linkInterno = $('a[href^="#"]');
+            linkInterno.on('click',function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                $('html, body').animate({ scrollTop : $( href ).offset().top }, 'slow', 'easeInOutExpo');
+            });
+        });
+    </script>
+{% endblock %}

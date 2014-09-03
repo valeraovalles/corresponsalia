@@ -1,0 +1,66 @@
+{% extends 'CorresponsaliaBundle:Tecnologia/Ayuda:index.html.twig' %}
+
+{% block contenedor %}
+    {% block left %}
+        <div id="column-left" class="col-md-3">
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
+            </div>
+        </div>
+    {% endblock %}    
+    {% block rigth %}
+        <div id="central" class="col-md-9 page-header" >
+            {% block titulo %}
+            <div class="page-header" id="arriba">
+			 	<h2>Gestion de Categoria</h2>
+			</div>
+            {% endblock %}
+            {% block contenido %}
+                <div class="divisor-contenidor" >
+                	<h3 id="crear">¿Cómo crear una nueva categoría?</h3>
+					<h4>Sigue estos pasos para crear una nueva categoría:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Categoría</li>
+						<li>2. Presione el botón Nueva Categoría</li>
+						<li>3. Introduzca el nombre de la nueva categoría</li>
+						<li>4. Presione Guardar y espere que aparezca el mensaje “Nueva! Categoría agregada.”</li>
+					</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="editar">¿Cómo editar una categoría.?</h3>
+						<h4>Sigue estos pasos para editar una categoría:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Categoría.</li>
+							<li>2. Busque la categoría a modificar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrada la categoría presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Realice las modificaciones al nombre de la categoría.</li>
+							<li>5. Presione Guardar y espere que aparezca el mensaje “Editada! Categoría con éxito.”</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="ver">¿Cómo visualizar la información detallada de una categoría.?</h3>
+						<h4>Sigue estos pasos para visualizar detalles de una categoría:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Categoría.</li>
+							<li>2. Busque la categoría a visualizar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrada la categoría presione el icono “” ubicada a la izquierda del nombre.</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="eliminar">¿Cómo eliminar una categoría.?</h3>
+						<h4>Sigue estos pasos para eliminar una categoría:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Categoría.</li>
+							<li>2. Busque la categoría mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrada la categoría presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Presione el botón “” y confirme si está seguro de querer eliminar la categoría.</li>
+							<li>5. Espere que aparezca el mensaje “Eliminada! Categoría «Descripción de la categoría»”.</li>
+						</ol>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

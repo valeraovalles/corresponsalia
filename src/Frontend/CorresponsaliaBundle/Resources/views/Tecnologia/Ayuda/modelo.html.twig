@@ -1,0 +1,67 @@
+{% extends 'CorresponsaliaBundle:Tecnologia/Ayuda:index.html.twig' %}
+
+{% block contenedor %}
+    {% block left %}
+        <div id="column-left" class="col-md-3">
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
+            </div>
+        </div>
+    {% endblock %}    
+    {% block rigth %}
+        <div id="central" class="col-md-9 page-header" >
+            {% block titulo %}
+            <div class="page-header" id="arriba">
+			 	<h2>Gestion de Categoria</h2>
+			</div>
+            {% endblock %}
+            {% block contenido %}
+                <div class="divisor-contenidor" >
+                	<h3 id="crear">¿Cómo crear un nuevo modelo.?</h3>
+					<h4>Sigue estos pasos para crear un nuevo modelo:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Modelo</li>
+						<li>2. Presione el botón Nuevo Modelo</li>
+						<li>3. Seleccione la marca a la que pertenece el nuevo modelo.</li>
+						<li>4. Introduzca el nombre del nuevo modelo</li>
+						<li>5. Presione Guardar y espere que aparezca el mensaje “Nuevo! Modelo agregado.”</li>
+					</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="editar">¿Cómo editar un modelo.?</h3>
+						<h4>Sigue estos pasos para editar un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo</li>
+							<li>2. Busque el modelo a modificar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Realice las modificaciones deseadas.</li>
+							<li>5. Presione Guardar y espere que aparezca el mensaje “Editado! Modelo con éxito.”</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="ver">¿Cómo visualizar la información detallada de un modelo.?</h3>
+						<h4>Sigue estos pasos para visualizar detalles de un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo.</li>
+							<li>2. Busque el modelo a visualizar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="eliminar">¿Cómo eliminar un modelo.?</h3>
+						<h4>Sigue estos pasos para eliminar un modelo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Modelo.</li>
+							<li>2. Busque el modelo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el modelo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Presione el botón y confirme si está seguro de querer eliminar el modelo.</li>
+							<li>5. Espere que aparezca el mensaje “Eliminado! Modelo «Descripción del modelo»”.</li>
+						</ol>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

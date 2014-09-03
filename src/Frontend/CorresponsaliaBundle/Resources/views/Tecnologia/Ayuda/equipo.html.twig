@@ -1,0 +1,117 @@
+{% extends 'CorresponsaliaBundle:Tecnologia/Ayuda:index.html.twig' %}
+
+{% block contenedor %}
+    {% block left %}
+        <div id="column-left" class="col-md-3">
+            <div class="list-group">
+                <a href="#crear" class="list-group-item">Crear</a>
+                <a href="#editar" class="list-group-item">Editar</a>
+                <a href="#ver" class="list-group-item">Visualizar</a>
+                <a href="#eliminar" class="list-group-item">Eliminar</a>
+                <a href="#asignar" class="list-group-item">Asignar</a>
+				<a href="#reasignar" class="list-group-item">ReAsignar</a>
+				<a href="#retornar" class="list-group-item">Retornar</a>
+				<a href="#desasignar" class="list-group-item">Desasignar</a>
+            </div>
+        </div>
+    {% endblock %}    
+    {% block rigth %}
+        <div id="central" class="col-md-9 page-header" >
+            {% block titulo %}
+            <div class="page-header" id="arriba">
+			 	<h2>Gestion de Categoria</h2>
+			</div>
+            {% endblock %}
+            {% block contenido %}
+                <div class="divisor-contenidor" >
+                	<h3 id="crear">¿Cómo crear un nuevo equipo.?</h3>
+					<h4>Sigue estos pasos para crear un nuevo equipo:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Equipo</li>
+						<li>2. Presione el botón Nuevo Equipo</li>
+						<li>3. Complete los datos solicitados.</li>
+						<li>4. Presione Guardar y espere que aparezca el mensaje “Nuevo! Equipo agregado.”</li>
+					</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="editar">¿Cómo editar un equipo.?</h3>
+						<h4>Sigue estos pasos para editar un equipo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo</li>
+							<li>2. Busque el equipo a modificar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Realice las modificaciones deseadas.</li>
+							<li>5. Presione Guardar y espere que aparezca el mensaje “Editado! Equipo con éxito.”</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="ver">¿Cómo visualizar la información detallada de un equipo.?</h3>
+						<h4>Sigue estos pasos para visualizar detalles de un equipo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+							<li>2. Busque el equipo a visualizar mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda.</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="eliminar">¿Cómo eliminar un equipo.?</h3>
+						<h4>Sigue estos pasos para eliminar un equipo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+							<li>2. Busque el equipo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Presione el botón y confirme si está seguro de querer eliminar el equipo.</li>
+							<li>5. Espere que aparezca el mensaje “Eliminado! Equipo «Descripción del equipo»”.</li>
+						</ol>
+						<a href="#arriba">Ir Arriba</a>
+                </div>
+                <div class="divisor-contenidor" >
+                	<h3 id="asignar">¿Cómo asignar un equipo a una corresponsalía.?</h3><div class="status"></div>
+					<h4>Sigue estos pasos para asignar un equipo a una corresponsalía:</h4>
+					<ol>
+						<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+						<li>2. Busque el equipo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+						<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+						<li>4. Complete los datos solicitados</li>
+						<li>5. Presione Asignar y espere que aparezca el mensaje “Nueva! Asignación Agregada.”</li>
+					</ol>
+					<a href="#arriba">Ir Arriba</a>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="reasignar">¿Cómo re-asignar un equipo a una corresponsalía.?</h3>
+						<h4>Sigue estos pasos para re-asignar un equipo a una corresponsalía:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+							<li>2. Busque el equipo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Complete los datos solicitados</li>
+							<li>5. Presione Reasignar y espere que aparezca el mensaje “Nueva! Re-Asignacion agregada.”</li>
+						</ol>
+						<a href="#arriba">Ir Arriba</a>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="retornar">¿Cómo retornar un equipo.?</h3>
+						<h4>Sigue estos pasos para retornar un equipo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+							<li>2. Busque el equipo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Complete los datos solicitados</li>
+							<li>5. Presione Guardar y espere que aparezca el mensaje “Proceso Exitoso..! Se guardaron los datos de retorno del equipo con éxito..!”</li>
+						</ol>
+                </div>
+                <div class="divisor-contenidor">
+	                	<h3 id="desasignar">¿Cómo eliminar una asignación de equipo.?</h3>
+						<h4>Sigue estos pasos para eliminar una asignación un equipo:</h4>
+						<ol>
+							<li>1. Ubique el menú Tecnología y seleccione la opción Equipo.</li>
+							<li>2. Busque el equipo mediante el filtro “Buscar” en la parte superior izquierda.</li>
+							<li>3. Una vez encontrado el equipo presione el icono “” ubicada a la izquierda del nombre.</li>
+							<li>4. Presione el botón </li>
+							<li>5. Presione el botón y espere que aparezca el mensaje “Eliminado! Asignación de Equipo «Descripción de corresponsalía»”.</li>
+						</ol>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
