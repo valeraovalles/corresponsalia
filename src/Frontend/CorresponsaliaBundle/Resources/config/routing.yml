@@ -334,42 +334,42 @@ cobertura_delete:
 
 #PERSONAL
 personal:
-    pattern:  /personal
+    pattern:  /personal/consulta
     defaults: { _controller: "CorresponsaliaBundle:Personal:index" }
 
 personal_show:
-    pattern:  /personal/{id}/show
+    pattern:  /personal/consulta/{id}
     defaults: { _controller: "CorresponsaliaBundle:Personal:show" }
 
 personal_new:
-    pattern:  /personal/new
+    pattern:  /personal/e/new
     defaults: { _controller: "CorresponsaliaBundle:Personal:new" }
 
 personal_create:
-    pattern:  /personal/create
+    pattern:  /personal/e/create
     defaults: { _controller: "CorresponsaliaBundle:Personal:create" }
     requirements: { _method: post }
 
 personal_edit:
-    pattern:  /personal/{id}/edit
+    pattern:  /personal/e/{id}/edit
     defaults: { _controller: "CorresponsaliaBundle:Personal:edit" }
 
 personal_update:
-    pattern:  /personal/{id}/update
+    pattern:  /personal/e/{id}/update
     defaults: { _controller: "CorresponsaliaBundle:Personal:update" }
     requirements: { _method: post|put }
 
 personal_delete:
-    pattern:  /personal/{id}/delete
+    pattern:  /personal/e/{id}/delete
     defaults: { _controller: "CorresponsaliaBundle:Personal:delete" }
     requirements: { _method: post|delete }
 
 personal_pasaporte:
-    pattern: /personal/{id}/pasaporte
+    pattern: /personal/e/{id}/pasaporte
     defaults: { _controller: "CorresponsaliaBundle:Personal:pasaporte"}
 
 personal_pasaportecarga:
-    pattern:  /personal/{id}/pasaportecarga
+    pattern:  /personal/e/{id}/pasaportecarga
     defaults: { _controller: "CorresponsaliaBundle:Personal:pasaportecarga" }
     requirements: { _method: post|put }
 
