@@ -13,9 +13,9 @@ class reportepersonal
 		            	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><link href='/corresponsalia/web/bundles/corresponsalia/css/auditoriaestadofondo.css' rel='stylesheet' type='text/css' />
 		        		<table width='1000px'>
 		        			<tr>
-								<td width='50px' class='imagen'><img src='/corresponsalia/web/images/logo.jpg' height='150px'></td>
+								<td width='50px' class='imagen'><img src='images/logo.jpg' height='150px'></td>
 								<td class='titulo' align='center' valing='middle' colspan='8'>LISTADO DE PERSONAL EN CORRESPONSALÍA <br> ".$seleccionadas[$i]['nombre']."
-								</td>
+								</td>							
 							</tr>
 		        		</table>";
 
