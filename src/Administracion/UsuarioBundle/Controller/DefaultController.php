@@ -20,14 +20,13 @@ class DefaultController extends Controller
 
         $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
+        $entity = $em->getRepository('AdministracionBundle:Perfil')->find($IdUsuario);
 
-        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$entity)
+        return $this->render('AdministracionBundle:Default:index.html.twig', array('usuario'=>$entity)
         );
     }
     public function loginAction()
     {
-
         $navegador=$this->ObtenerNavegador($_SERVER['HTTP_USER_AGENT']);
         $navegador=explode(" ", $navegador);
 

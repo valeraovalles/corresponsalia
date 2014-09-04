@@ -380,6 +380,10 @@ reporteconsultoria:
 reportepersonal:
     pattern: /personal/reportepersonal
     defaults: { _controller: "CorresponsaliaBundle:Reporte:reportepersonal"}
+generareportepersonal:
+    pattern: /personal/reportepersonal/generar
+    defaults: { _controller: "CorresponsaliaBundle:Reporte:generareportepersonal"}
+
 
 #CARGO
 cargo:
