@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+ 
+{% block title %}CORRESPONSALÍA - REPORTES{% endblock %}
+
+{% block titulobanner %}
+    REPORTE DE PERSONAL
+{% endblock %}
+
+{% block titulomodulo %}
+    <h1>REPORTE DE PERSONAL</h1>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+
+    <form novalidate action="{{ path('generareportepersonal') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div>{{ form_errors(form.todas) }}</div>
+                <div class="labelform">Selección de Corresponsalías:</div>
+                <div class="widgetform">{{ form_widget(form.todas) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div>{{ form_errors(form.corresponsalia) }}</div>
+                <div class="labelform"></div>
+                <div class="widgetform">{{ form_widget(form.corresponsalia, { 'attr': {'style': 'width:100%;height:210px;'} }) }}</div>
+            </div>            
+        </div>
+
+        <input id="botonx" type="submit" value="GENERAR REPORTE" class="btn btn-primary">
+
+    </form>
+{% endblock -%}

@@ -758,4 +758,9 @@ class htmlreporte
                 ";
 		return $html;
     }
+
+    public function personal($idcorresponsalia)
+    {
+      die;
+    }
 }

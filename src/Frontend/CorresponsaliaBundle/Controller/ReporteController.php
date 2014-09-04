@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityRepository;
 
 use Frontend\CorresponsaliaBundle\Resources\Misclases\htmlreporte;
+use Frontend\CorresponsaliaBundle\Resources\Misclases\reportepersonal;
 use Frontend\CorresponsaliaBundle\Resources\Misclases\funciones;
 
 use Frontend\CorresponsaliaBundle\Entity\Reporte;
@@ -194,8 +195,129 @@ class ReporteController extends Controller
         exit;   
     }
 
+    public function formulariorp()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->findAll();
+        $todas= array('1'=> 'SELECCION');
+
+        $form = $this->createFormBuilder()
+                ->add('corresponsalia', 'choice', array(
+                    'choices'   => $entities,
+                    'expanded'=>false, 
+                    'multiple'=>true,
+                    'empty_value' => 'Todas',
+                ))
+               ->add('todas', 'choice', array( 
+                     'choices'  => $todas, 
+                     'expanded'=>true, 
+                     'multiple'=>false,
+                     'empty_value' => 'TODAS',
+                ))
+               ->getForm();
+    return $form;
+    }
+
+
+
+
     public function reportepersonalAction()
     {
-        die;
+        $form = $this->formulariorp();
+        return $this->render('CorresponsaliaBundle:Reporte:personalindex.html.twig',array('form'=>$form->createView()));
+    }
+
+    public function generareportepersonalAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // obtengo los datos del formulario
+        $datosform = $request->request->all();
+        $datosform = $datosform['form'];
+
+        $todas = $datosform['todas'];
+        $entities = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->findAll();
+        $cont = 0;
+        $alert=0;
+        if($todas == 1)
+        {   if(!empty($datosform['corresponsalia']))
+            {
+                foreach ($datosform['corresponsalia'] as $key) 
+                {           
+                    $corresponsalias[$cont] = $key;                
+                    $cont ++;
+                }
+            }else
+            {
+                $alert = 1;
+            }
+            
+        }else
+        {
+            foreach ($entities as $key => $value) {
+                $corresponsalias[$cont] = $cont;
+                $cont++; 
+            }
+        }
+        if($alert == 0)
+        {
+            $cont1 = 0;
+            for ($i=0; $i <$cont ; $i++) 
+            { 
+                $seleccionadas[$i]['id'] = $entities[$corresponsalias[$i]]->getId();            
+                $seleccionadas[$i]['nombre'] = $entities[$corresponsalias[$i]]->getNombre()." | ".$entities[$corresponsalias[$i]]->getPais();
+                
+                $personass[$i] = $em->getRepository('CorresponsaliaBundle:Personal')->findByCorresponsaliaId($seleccionadas[$i]['id']);
+                
+                if(!empty($personass[$i]))
+                {
+                    $j = 0;
+                    foreach ($personass[$i] as $key) 
+                    {
+
+                
+                
+                        $personal[$i][$j]['nombre']= $key->getNombre();
+                        $personal[$i][$j]['pasaporte']= $key->getPasaporte();
+                        $personal[$i][$j]['correo']= $key->getCorreo();
+                        $personal[$i][$j]['telefono']= $key->getTelefono();
+                        $personal[$i][$j]['cargo']= $key->getCargoId()->getDescripcion();
+                        $personal[$i][$j]['sueldo']= $key->getSueldo();
+                        $personal[$i][$j]['fechaingreso']= $key->getFechaingreso();
+
+
+                        $j++;
+                    }
+
+                    //die;
+                }else
+                {
+                    $personal[$i] = false;
+                    $cont1++;
+                }
+                //echo "<br><br><br>";
+            }   
+            if($cont == $cont1)
+            {
+                $form = $this->formulariorp();                
+                $this->get('session')->getFlashBag()->add('alert', 'No existen datos de personal en las corresponsalias seleccionadas');
+                return $this->render('CorresponsaliaBundle:Reporte:personalindex.html.twig',array('form'=>$form->createView()));
+            }else
+            {
+                $html=new reportepersonal;
+                $html=$html->personal($em,$seleccionadas, $personal, $cont);
+
+                $html=$html;
+                $this->pdf($html,'v','reporterendicion');
+            }
+        }else
+        {
+            $form = $this->formulariorp();                
+            $this->get('session')->getFlashBag()->add('alert', 'ERROR: Debe seleccionar como mínimo una corresponsalía');
+
+            return $this->render('CorresponsaliaBundle:Reporte:personalindex.html.twig',array('form'=>$form->createView()));
+
+        }
     }
 }
