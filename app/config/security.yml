@@ -61,9 +61,11 @@ security:
 
 
         #ROLES DE MODULO DE PERSONAL
-        - { path: ^/corresponsalia/personal,     roles: [ROLE_SUPERADMIN, ROLE_PERSONAL]}
-        - { path: ^/corresponsalia/cargo,        roles: [ROLE_SUPERADMIN]}
-        #ROLES DE MODULO DE CORRESPONSALIA (DATOS, COMENTARIOS Y DOCUMENTOS)
+        - { path: ^/corresponsalia/personal/consulta, roles: [ROLE_SUPERADMIN, ROLE_PERSONAL, ROLE_PERSONAL_CONSULTA]}
+        - { path: ^/corresponsalia/personal/e, roles: [ROLE_SUPERADMIN, ROLE_PERSONAL]}
+        - { path: ^/corresponsalia/cargo,        roles: [ROLE_SUPERADMIN, ROLE_PERSONAL]}
+
+        #ROLES DE MODULO DE CONSULTORIA (DATOS, COMENTARIOS Y DOCUMENTOS)
         - { path: ^/corresponsalia/datoslegales, roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/comentarios,  roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
         - { path: ^/corresponsalia/documentos,   roles: [ROLE_SUPERADMIN,ROLE_CONSULTORIA]}
