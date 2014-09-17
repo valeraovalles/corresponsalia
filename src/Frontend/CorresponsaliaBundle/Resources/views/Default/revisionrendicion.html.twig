@@ -26,6 +26,7 @@
                     <th>Nro C.</th>
                     <th>F. Factura</th>
                     <th>Descripcion</th>
+                    <th>Observación</th>
                     <th>Nombre/Razón</th>
                     <th>I. Fiscal</th>
                     <th>Nro Fact.</th>
@@ -45,6 +46,7 @@
                         <td> {{ entity.numerocomprobante }} </td>
                         <td>{{ entity.fechafactura|date('d-m-Y') }}</td>
                         <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripciongasto.descripcion}}">{{ entity.descripciongasto.descripcion|slice(0,10) }}...</span></td>
+                        <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.observacion}}">{{ entity.observacion|slice(0,10) }}{% if entity.observacion!=null%}...{% endif %}</span></td>
                         <td><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nombrerazonsocial}}">{{ entity.nombrerazonsocial|slice(0,10) }}...</span></td>
                         <td>{{ entity.identificacionfiscal }}</td>
                         <td>{{ entity.numerofactura }}</td>
