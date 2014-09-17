@@ -76,7 +76,6 @@
       </li>
       {% endif %}
       
-      {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_RENDICION_ADMIN')  or  is_granted('ROLE_CONSULTA') and (not is_granted('ROLE_CONSULTORIA')) %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -93,10 +92,11 @@
 
               <li><a href="{{ path('corresponsalia_reporterendicion') }}">Rendición</a></li>
 
+            {% if is_granted('ROLE_RENDICION_ADMIN')  or is_granted('ROLE_CONSULTA')%}
               <li> <a href="{{ path('reportepersonal') }}">Personal</a></li>
+            {% endif %}
           </ul>        
         </li>
-      {% endif %}
 
       {% if is_granted('ROLE_TECNO_ADMIN') or is_granted('ROLE_TECNO_CORRESPONSALIA') %}
       <li class="dropdown">

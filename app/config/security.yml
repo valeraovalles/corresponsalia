@@ -41,14 +41,14 @@ security:
         - { path: ^/corresponsalia/reporte/aurendicion, roles: ROLE_SUPERADMIN }
 
         #combinados
-        - { path: ^/corresponsalia/periodorendicion, roles: ROLE_RENDICION_ADMIN, roles: ROLE_RENDICION_CORRESPONSALIA, roles: ROLE_CONSULTA }
+        - { path: ^/corresponsalia/periodorendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA, ROLE_CONSULTA] }
         - { path: ^/corresponsalia/reporte/rendicion, roles: [ROLE_RENDICION_ADMIN, ROLE_RENDICION_CORRESPONSALIA,ROLE_SUPERADMIN,ROLE_CONSULTA] }
         - { path: ^/corresponsalia/reporte/auef, roles: [ROLE_RENDICION_ADMIN,ROLE_SUPERADMIN] }
 
         
 
         #administrador
-        - { path: ^/corresponsalia/descripciongasto, roles: ROLE_RENDICION_ADMIN, roles: ROLE_CONSULTA }
+        - { path: ^/corresponsalia/descripciongasto, roles: [ROLE_RENDICION_ADMIN, ROLE_CONSULTA] }
         - { path: ^/corresponsalia/tipomoneda, roles: ROLE_RENDICION_ADMIN }
         - { path: ^/corresponsalia/tipocorresponsalia, roles: ROLE_RENDICION_ADMIN }
         - { path: ^/corresponsalia/corresponsalia, roles: ROLE_RENDICION_ADMIN }
