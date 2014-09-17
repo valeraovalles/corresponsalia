@@ -24,17 +24,21 @@
                 <td>{{ entity.partida }}</td>
                 <td>
                     <a href="{{ path('descripciongasto_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                    {% if not is_granted('ROLE_CONSULTA') %}
                     <a href="{{ path('descripciongasto_edit', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-edit"></b></a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-
+            {% if not is_granted('ROLE_CONSULTA') %}
             <br><br><br><a class="btn btn-default" href="{{ path('descripciongasto_new') }}">
                 CREAR NUEVA DESCRIPCIÓN
-            </a><br><br>
+            </a>
+            {% endif %}
+            <br><br>
 
     <script>
         $(document).ready(function(){

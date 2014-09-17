@@ -44,7 +44,7 @@ class PeriodorendicionController extends Controller
             $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findByCorresponsalia($idcor);
         }
         
-        else if(!isset($usercorresponsalia[0]) and $this->get('security.context')->isGranted('ROLE_RENDICION_ADMIN')){
+        else if(!isset($usercorresponsalia[0]) and ($this->get('security.context')->isGranted('ROLE_RENDICION_ADMIN') or $this->get('security.context')->isGranted('ROLE_CONSULTA'))){
             $entities = $em->getRepository('CorresponsaliaBundle:Periodorendicion')->findAll();
         }
         

@@ -77,6 +77,13 @@
                                 <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
                             {% endif %}
                         {% endif %}
+                        
+                        {% if is_granted('ROLE_CONSULTA') %}
+                            <a href="{{ path('periodorendicion_show', { 'id': entity.id }) }}"><b class="glyphicon glyphicon-eye-open"></b></a>
+                            {% if entity.estatus==4 %}
+                                <a href="{{ path('reporte_excelrendicion',{'idperiodo':entity.id}) }}"><img width="25px;" src="{{ asset('images/excel.png') }}"></a>
+                            {% endif %}
+                        {% endif %}
 
                     
                 </td>

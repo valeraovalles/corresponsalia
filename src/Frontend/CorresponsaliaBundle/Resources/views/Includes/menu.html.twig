@@ -31,7 +31,7 @@
       </li>
       {% endif %}
       
-      {% if is_granted('ROLE_RENDICION_ADMIN') %}
+      {% if is_granted('ROLE_RENDICION_ADMIN')%}
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMINISTRAR <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -76,7 +76,7 @@
       </li>
       {% endif %}
       
-      {% if not is_granted('ROLE_CONSULTORIA') %}
+      {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_RENDICION_ADMIN')  or  is_granted('ROLE_CONSULTA') and (not is_granted('ROLE_CONSULTORIA')) %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -87,7 +87,7 @@
               <li><a href="{{ path('corresponsalia_reporteaurendicion') }}">Auditoria Rendición</a></li>
             {% endif %}
 
-            {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN')%} 
+            {% if is_granted('ROLE_RENDICION_ADMIN') or is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_CONSULTA')%} 
               <li><a href="{{ path('corresponsalia_reporteeftotal') }}">Estado Fondo</a></li>
             {% endif %}
 
@@ -110,39 +110,21 @@
         </ul>
       </li>
       {% endif %}
-      {#<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">REPORTES <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="{{ path('reporte_auditoriaestadofondo') }}">Auditoria Estado Fondo</a></li>
-          <li><a href="#">Auditoria Rendición</a></li>
-
-          {% if is_granted('ROLE_CONSULTORIA') %}
-            <li><a href="{{ path('reporteconsultoria') }}">Personal en Corresponsalías</a></li>
-          {% endif %}
-        </ul>        
-      </li>
-
-        </ul>
-      </li>#}
-
       
-      {#
+      
+      {% if is_granted('ROLE_CONSULTA')%}
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">TECNOLOGÍA <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTAR <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="{{ path('corresponsalia_tasacambio') }}">Tasa de cambio</a></li>
+          <li><a href="{{ path('descripciongasto') }}">Descripción de gastos</a></li>
+          <li><a href="{{ path('periodorendicion') }}">Asignar fondo</a></li>
+          <li><a href="{{ path('datoslegales') }}">Datos Legales por Corresponsalía</a></li>
           <li class="divider"></li>
-          <li><a href="{{ path('periodorendicion') }}">Rendir gastos</a></li>
         </ul>
       </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTORÍA <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="{{ path('corresponsalia_tasacambio') }}">Rendicion</a></li>
-        </ul>
-      </li>
-        #}
-    </ul>
+      {% endif %}
+          
+     </ul>
     <ul class="nav navbar-nav navbar-right">
     {% if is_granted('ROLE_TECNO_ADMIN') or is_granted('ROLE_TECNO_CORRESPONSALIA') %}
       <li><a href="{{ path('tecnoayuda') }}">AYUDA</a></li>

@@ -25,15 +25,18 @@
         <a class="btn btn-default" href="{{ path('descripciongasto') }}">
             Volver a la lista
         </a>
-
+        {% if not is_granted('ROLE_CONSULTA') %}
         <a class="btn btn-default" href="{{ path('descripciongasto_edit', { 'id': entity.id }) }}">
             Editar
         </a>
-
+        {% endif %}
+           
     <BR><BR>
+    {% if not is_granted('ROLE_CONSULTA') %}
     {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
         {{ form_errors(delete_form) }}
         {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
     {{ form_end(delete_form) }}
+    {% endif %}
     
 {% endblock %}

@@ -67,6 +67,9 @@ router script using <info>--router</info> option:
 
   <info>%command.full_name% --router=app/config/router.php</info>
 
+Specifing a router script is required when the used environment is not "dev" or
+"prod".
+
 See also: http://www.php.net/manual/en/features.commandline.webserver.php
 EOF
             )
@@ -78,6 +81,14 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $documentRoot = $input->getOption('docroot');
+
+        if (!is_dir($documentRoot)) {
+            $output->writeln(sprintf('<error>The given document root directory "%s" does not exist</error>', $documentRoot));
+
+            return 1;
+        }
+
         $env = $this->getContainer()->getParameter('kernel.environment');
 
         if ('prod' === $env) {
@@ -90,10 +101,10 @@ EOF
             ->locateResource(sprintf('@FrameworkBundle/Resources/config/router_%s.php', $env))
         ;
 
-        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
+        $output->writeln(sprintf("Server running on <info>http://%s</info>\n", $input->getArgument('address')));
 
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address'), $router));
-        $builder->setWorkingDirectory($input->getOption('docroot'));
+        $builder->setWorkingDirectory($documentRoot);
         $builder->setTimeout(null);
         $builder->getProcess()->run(function ($type, $buffer) use ($output) {
             if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {

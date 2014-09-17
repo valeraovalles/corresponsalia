@@ -30,14 +30,17 @@
                 <td style="width:100px;">{{ entity.comentario }}</td>
                 <td>
                     <a href="{{ path('comentario_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Comentario"><b class="glyphicon glyphicon-eye-open"></b></a>
-                    <a href="{{ path('comentario_edit', { 'id': entity.id, 'corresponsalia':corresponsalia }) }}" data-toggle="tooltip" data-placement="top" title="Editar Comentario"><b class="glyphicon glyphicon-edit"></b></a>
+                    {% if not is_granted('ROLE_CONSULTA')%}<a href="{{ path('comentario_edit', { 'id': entity.id, 'corresponsalia':corresponsalia }) }}" data-toggle="tooltip" data-placement="top" title="Editar Comentario"><b class="glyphicon glyphicon-edit"></b></a>{% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+        
     <br><br><br>
+    {% if not is_granted('ROLE_CONSULTA')%}
     <a class="btn btn-primary" href="{{ path('comentario_new', {'corresponsalia': corresponsalia}) }}">NUEVO COMENTARIO</a> ||| <a class="btn btn-primary" href="{{ path('datoslegales') }}">IR A DATOS LEGALES</a><br>
+    {% endif %}
     <script>
         $(document).ready(function(){
             $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
