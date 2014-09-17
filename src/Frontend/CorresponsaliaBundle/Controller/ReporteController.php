@@ -201,10 +201,17 @@ class ReporteController extends Controller
 
         $entities = $em->getRepository('CorresponsaliaBundle:Corresponsalia')->findAll();
         $todas= array('1'=> 'SELECCION');
+        
+        $cor=array();
+        foreach ($entities as $c) {
+            
+            $cor[]=$c->getNombre().' | '.$c->getPais()->getPais();
+            
+        }
 
         $form = $this->createFormBuilder()
                 ->add('corresponsalia', 'choice', array(
-                    'choices'   => $entities,
+                    'choices'   => $cor,
                     'expanded'=>false, 
                     'multiple'=>true,
                     'empty_value' => 'Todas',

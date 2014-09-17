@@ -38,6 +38,6 @@
             </div>
         </div>
     </div>  
-    <a class="btn btn-primary" href="{{ path('documento',{'corresponsalia':corresponsalia}) }}">IR AL HISTORIAL</a> | <a class= "btn btn-primary" href="{{ path('documento_edit', { 'id': entity.id, 'corresponsalia': corresponsalia }) }}">EDITAR DOCUMENTO</a>
+    <a class="btn btn-primary" href="{{ path('documento',{'corresponsalia':corresponsalia}) }}">IR AL HISTORIAL</a>{% if not is_granted('ROLE_CONSULTA')%} | <a class= "btn btn-primary" href="{{ path('documento_edit', { 'id': entity.id, 'corresponsalia': corresponsalia }) }}">EDITAR DOCUMENTO</a>{% endif %}
     <BR><BR>    
 {% endblock %}

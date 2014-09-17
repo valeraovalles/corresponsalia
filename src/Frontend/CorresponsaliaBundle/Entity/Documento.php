@@ -45,6 +45,7 @@ class Documento
 
     /**
      * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     * @Assert\NotBlank(message="Debe cargar un archivo.").
      *  
      */
     private $file;

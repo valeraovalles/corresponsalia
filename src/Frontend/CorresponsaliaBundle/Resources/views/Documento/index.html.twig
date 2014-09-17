@@ -36,7 +36,9 @@
         </tbody>
     </table>
     <br><br><br>
+    {% if not is_granted('ROLE_CONSULTA')%}
     <a class="btn btn-primary" href="{{ path('documento_new', {'corresponsalia': corresponsalia}) }}">NUEVO DOCUMENTO</a> ||| <a class="btn btn-primary" href="{{ path('datoslegales') }}">IR A DATOS LEGALES</a><br>
+    {% endif %}
     <script>
         $(document).ready(function(){
             $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
