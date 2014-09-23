@@ -9,16 +9,6 @@
             <script src="{{ asset('js/datatable.js') }}"></script>
             <script src="{{ asset('libs/bootstrap3/js/bootstrap.min.js') }}"></script> 
 
-        {% endblock %}
-
-        {% block stylesheets %}
-            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
-
-            <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/> 
-            <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap.min.css') }}">
-            <link href="{{ asset('css/jqueryui.css') }}" rel="stylesheet" type="text/css" />
-            
             <!-- Piwik -->
             <script type="text/javascript">
               var _paq = _paq || [];
@@ -34,6 +24,15 @@
             </script>
             <noscript><p><img src="http://10.10.4.237/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
             <!-- End Piwik Code -->
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/> 
+            <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap.min.css') }}">
+            <link href="{{ asset('css/jqueryui.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
     </head>
 
