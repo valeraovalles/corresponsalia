@@ -151,7 +151,7 @@ class Relaciongasto
     /**
      * @var string
      *
-     * @ORM\Column(name="justificadevolucion", type="string", nullable=true)
+     * @ORM\Column(name="justificadevolucion", type="text", nullable=true)
      */
     private $justificadevolucion;
 
