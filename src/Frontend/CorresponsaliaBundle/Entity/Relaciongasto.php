@@ -144,7 +144,7 @@ class Relaciongasto
     /**
      * @var string
      *
-     * @ORM\Column(name="observacion", type="string", nullable=true)
+     * @ORM\Column(name="observacion", type="text", nullable=true)
      */
     private $observacion;
 
